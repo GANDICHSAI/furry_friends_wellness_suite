@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package CustomerUI;
+package Views.storeManagement;
 
 /**
  *
- * @author A
+ * @author chait
  */
-public class SelectService extends javax.swing.JPanel {
+public class typeOfService extends javax.swing.JPanel {
 
     /**
-     * Creates new form SelectService
+     * Creates new form typeOfService
      */
-    public SelectService() {
+    public typeOfService() {
         initComponents();
     }
 
@@ -37,7 +37,6 @@ public class SelectService extends javax.swing.JPanel {
         choosePkgComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 0, 0));
-        setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,7 +92,7 @@ public class SelectService extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(choosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -127,7 +126,7 @@ public class SelectService extends javax.swing.JPanel {
                     .addComponent(jLabel6))
                 .addGap(57, 57, 57)
                 .addComponent(saveAndViewSummaryButton)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

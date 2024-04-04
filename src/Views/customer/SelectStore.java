@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package CustomerUI;
+package Views.customer;
 
 /**
  *
@@ -105,9 +105,9 @@ public class SelectStore extends javax.swing.JPanel {
                     .addComponent(postalCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(searchByPostalCodeButton)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(49, 49, 49)
                 .addComponent(nextToPetButton)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
