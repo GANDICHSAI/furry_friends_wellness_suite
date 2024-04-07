@@ -21,11 +21,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
-              <Component id="bookComplete" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -36,6 +31,14 @@
                       <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                       <Component id="viewAppTitleLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="261" max="-2" attributes="0"/>
+                      <Component id="bookComplete" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
@@ -44,13 +47,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="viewAppTitleLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="65" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="209" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="bookComplete" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,12 +82,15 @@
         <Component class="javax.swing.JTable" name="viewAppLabel">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
+              <Table columnCount="8" rowCount="4">
+                <Column editable="true" title="CUSTOMER ID" type="java.lang.Object"/>
                 <Column editable="true" title="STORE NAME" type="java.lang.Object"/>
-                <Column editable="true" title="PET NAME" type="java.lang.Object"/>
-                <Column editable="true" title="SERVICE" type="java.lang.Object"/>
+                <Column editable="true" title="SERVICE TYPE" type="java.lang.Object"/>
+                <Column editable="true" title="PET ID" type="java.lang.Object"/>
+                <Column editable="true" title="APPOINTMENT ID" type="java.lang.Object"/>
                 <Column editable="true" title="DATE" type="java.lang.Object"/>
                 <Column editable="true" title="STATUS" type="java.lang.Object"/>
+                <Column editable="true" title="RATING" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
@@ -92,6 +100,11 @@
     <Component class="javax.swing.JButton" name="bookComplete">
       <Properties>
         <Property name="text" type="java.lang.String" value="COMPLETE BOOKING"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="BACK"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -32,6 +32,7 @@ public class MainPage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,9 +40,14 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        appointmentButton.setText("BOOK AN APPOINTMENT");
+        appointmentButton.setText("STORE PORTAL");
 
-        jButton1.setText("ABOUT US");
+        jButton1.setText("LOG-IN/SIGNUP AS CUSTOMER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -53,9 +59,9 @@ public class MainPage extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addComponent(jButton1)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(appointmentButton)
+                .addComponent(appointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(164, Short.MAX_VALUE)
@@ -79,6 +85,13 @@ public class MainPage extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new java.awt.CardLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("WELCOME TO FURRY FRIEND WELLNESS CENTER");
+        jPanel2.add(jLabel2, "card2");
+
         jSplitPane1.setBottomComponent(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,6 +107,10 @@ public class MainPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +151,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton appointmentButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
