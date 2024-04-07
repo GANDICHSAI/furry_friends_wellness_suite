@@ -26,19 +26,67 @@ public class reviewClientAppointment extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        submitAppointment = new javax.swing.JButton();
+        viewAppTitleLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        smReviewAppointmentTable = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(0, 0, 0));
+
+        submitAppointment.setText("COMPLETE BOOKING");
+
+        viewAppTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        viewAppTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        viewAppTitleLabel.setText("PLEASE REVIEW YOUR APPOINTMENT");
+
+        smReviewAppointmentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "STORE NAME", "PET NAME", "SERVICE", "DATE", "STATUS"
+            }
+        ));
+        jScrollPane1.setViewportView(smReviewAppointmentTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(viewAppTitleLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addComponent(submitAppointment)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(viewAppTitleLabel)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(submitAppointment)
+                .addContainerGap(317, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable smReviewAppointmentTable;
+    private javax.swing.JButton submitAppointment;
+    private javax.swing.JLabel viewAppTitleLabel;
     // End of variables declaration//GEN-END:variables
 }

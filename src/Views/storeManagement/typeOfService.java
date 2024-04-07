@@ -32,9 +32,9 @@ public class typeOfService extends javax.swing.JPanel {
         pck2lb = new javax.swing.JLabel();
         pkg3lb = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        saveAndViewSummaryButton = new javax.swing.JButton();
+        smSaveAndViewSummaryButton = new javax.swing.JButton();
         chooseDatelb = new javax.swing.JLabel();
-        choosePkgComboBox = new javax.swing.JComboBox<>();
+        smChoosePkgComboBox = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -65,14 +65,14 @@ public class typeOfService extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("PLACEHOLDER FOR JCAL");
 
-        saveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
+        smSaveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
 
         chooseDatelb.setBackground(new java.awt.Color(255, 255, 255));
         chooseDatelb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         chooseDatelb.setForeground(new java.awt.Color(255, 255, 255));
         chooseDatelb.setText("CHOOSE APPOINTMENT DATE");
 
-        choosePkgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PACKAGE 1", "PACKAGE 2", "PACKAGE 3" }));
+        smChoosePkgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PACKAGE 1", "PACKAGE 2", "PACKAGE 3" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,7 +90,7 @@ public class typeOfService extends javax.swing.JPanel {
                             .addComponent(chooseDatelb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(choosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
                 .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -102,7 +102,7 @@ public class typeOfService extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(saveAndViewSummaryButton)
+                .addComponent(smSaveAndViewSummaryButton)
                 .addGap(260, 260, 260))
         );
         layout.setVerticalGroup(
@@ -119,13 +119,13 @@ public class typeOfService extends javax.swing.JPanel {
                 .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(choosePkglb)
-                    .addComponent(choosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseDatelb)
                     .addComponent(jLabel6))
                 .addGap(57, 57, 57)
-                .addComponent(saveAndViewSummaryButton)
+                .addComponent(smSaveAndViewSummaryButton)
                 .addContainerGap(206, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -133,13 +133,13 @@ public class typeOfService extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chooseDatelb;
-    private javax.swing.JComboBox<String> choosePkgComboBox;
     private javax.swing.JLabel choosePkglb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel pck1label;
     private javax.swing.JLabel pck2lb;
     private javax.swing.JLabel pkg3lb;
-    private javax.swing.JButton saveAndViewSummaryButton;
+    private javax.swing.JComboBox<String> smChoosePkgComboBox;
+    private javax.swing.JButton smSaveAndViewSummaryButton;
     // End of variables declaration//GEN-END:variables
 }
