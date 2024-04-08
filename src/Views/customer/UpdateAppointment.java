@@ -49,13 +49,13 @@ public class UpdateAppointment extends javax.swing.JPanel {
 
         AppSumTableCRUD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET ID", "APPOINTMENT ID", "DATE", "STATUS", "RATING"
+                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS", "RATING"
             }
         ));
         jScrollPane1.setViewportView(AppSumTableCRUD);

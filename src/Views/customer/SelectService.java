@@ -32,15 +32,12 @@ public class SelectService extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        pck1label = new javax.swing.JLabel();
-        choosePkglb = new javax.swing.JLabel();
-        pck2lb = new javax.swing.JLabel();
-        pkg3lb = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         saveAndViewSummaryButton = new javax.swing.JButton();
         chooseDatelb = new javax.swing.JLabel();
-        choosePkgComboBox = new javax.swing.JComboBox<>();
         backToProfileCreationButton = new javax.swing.JButton();
+        table = new javax.swing.JScrollPane();
+        ServiceTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -48,26 +45,6 @@ public class SelectService extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SELECT SERVICE PACKAGE");
-
-        pck1label.setBackground(new java.awt.Color(255, 255, 255));
-        pck1label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pck1label.setForeground(new java.awt.Color(255, 255, 255));
-        pck1label.setText("PACKAGE 1: BATH AND FULL HAIRCUT  -- $50");
-
-        choosePkglb.setBackground(new java.awt.Color(255, 255, 255));
-        choosePkglb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        choosePkglb.setForeground(new java.awt.Color(255, 255, 255));
-        choosePkglb.setText("CHOOSE YOUR SERVICE PACKAGE");
-
-        pck2lb.setBackground(new java.awt.Color(255, 255, 255));
-        pck2lb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pck2lb.setForeground(new java.awt.Color(255, 255, 255));
-        pck2lb.setText("PACKAGE 2: BATH AND BRUSH              -- $30");
-
-        pkg3lb.setBackground(new java.awt.Color(255, 255, 255));
-        pkg3lb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pkg3lb.setForeground(new java.awt.Color(255, 255, 255));
-        pkg3lb.setText("PACKAGE 3: BATH ONLY                          -- $25");
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("PLACEHOLDER FOR JCAL");
@@ -84,8 +61,6 @@ public class SelectService extends javax.swing.JPanel {
         chooseDatelb.setForeground(new java.awt.Color(255, 255, 255));
         chooseDatelb.setText("CHOOSE APPOINTMENT DATE");
 
-        choosePkgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PACKAGE 1", "PACKAGE 2", "PACKAGE 3" }));
-
         backToProfileCreationButton.setText("BACK TO PROFILE CREATION");
         backToProfileCreationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,38 +68,49 @@ public class SelectService extends javax.swing.JPanel {
             }
         });
 
+        ServiceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Service ID", "Name", "Price"
+            }
+        ));
+        table.setViewportView(ServiceTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(choosePkglb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chooseDatelb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(choosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(86, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(backToProfileCreationButton)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pck1label, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-                    .addComponent(pck2lb, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pkg3lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(saveAndViewSummaryButton)
-                .addGap(260, 260, 260))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(backToProfileCreationButton)
-                .addGap(18, 18, 18))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addComponent(chooseDatelb)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(saveAndViewSummaryButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,23 +120,15 @@ public class SelectService extends javax.swing.JPanel {
                 .addComponent(backToProfileCreationButton)
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addComponent(pck1label)
+                .addGap(50, 50, 50)
+                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(chooseDatelb)
                 .addGap(29, 29, 29)
-                .addComponent(pck2lb)
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(pkg3lb)
-                .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(choosePkglb)
-                    .addComponent(choosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseDatelb)
-                    .addComponent(jLabel6))
-                .addGap(57, 57, 57)
                 .addComponent(saveAndViewSummaryButton)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,15 +152,12 @@ public class SelectService extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ServiceTable;
     private javax.swing.JButton backToProfileCreationButton;
     private javax.swing.JLabel chooseDatelb;
-    private javax.swing.JComboBox<String> choosePkgComboBox;
-    private javax.swing.JLabel choosePkglb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel pck1label;
-    private javax.swing.JLabel pck2lb;
-    private javax.swing.JLabel pkg3lb;
     private javax.swing.JButton saveAndViewSummaryButton;
+    private javax.swing.JScrollPane table;
     // End of variables declaration//GEN-END:variables
 }
