@@ -4,8 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
 <<<<<<< Updated upstream
         <group>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/customer/BookAppPage.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/ManageCIM.java</file>
             <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/ManageStoreServices.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/ManageSystemAdmin.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/MainPage.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/AdminMenu.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Models/StoreEmployee.java</file>
             <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/ManageStoreEmployee.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/CreateCredentials.java</file>
             <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/ManageStores.java</file>
         </group>
 =======

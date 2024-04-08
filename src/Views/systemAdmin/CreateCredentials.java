@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Views.systemAdmin;
 
@@ -8,10 +8,10 @@ package Views.systemAdmin;
  *
  * @author hanee
  */
-public class CreateCredentials extends javax.swing.JFrame {
+public class CreateCredentials extends javax.swing.JPanel {
 
     /**
-     * Creates new form CreateEmployeesManagers
+     * Creates new form NewJPanel
      */
     public CreateCredentials() {
         initComponents();
@@ -26,220 +26,196 @@ public class CreateCredentials extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        heading = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        nameInput = new javax.swing.JTextField();
-        emailLabel = new javax.swing.JLabel();
-        emailInput = new javax.swing.JTextField();
-        passwordLabel = new javax.swing.JLabel();
-        passwordInput = new javax.swing.JPasswordField();
-        credentialsTypeLabel = new javax.swing.JLabel();
-        credentialsTypeDropdown = new javax.swing.JComboBox<>();
-        storeLabel = new javax.swing.JLabel();
-        storeDropdown = new javax.swing.JComboBox<>();
-        requirementText = new javax.swing.JLabel();
-        createAccountBtn = new javax.swing.JButton();
-        backToMenuBtn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        heading1 = new javax.swing.JLabel();
+        nameLabel1 = new javax.swing.JLabel();
+        nameInput1 = new javax.swing.JTextField();
+        emailLabel1 = new javax.swing.JLabel();
+        emailInput1 = new javax.swing.JTextField();
+        passwordLabel1 = new javax.swing.JLabel();
+        passwordInput1 = new javax.swing.JPasswordField();
+        credentialsTypeLabel1 = new javax.swing.JLabel();
+        credentialsTypeDropdown1 = new javax.swing.JComboBox<>();
+        storeLabel1 = new javax.swing.JLabel();
+        storeDropdown1 = new javax.swing.JComboBox<>();
+        requirementText1 = new javax.swing.JLabel();
+        createAccountBtn1 = new javax.swing.JButton();
+        backToMenuBtn1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        heading1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        heading1.setForeground(new java.awt.Color(255, 255, 255));
+        heading1.setText("Create Credentials");
 
-        heading.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        heading.setForeground(new java.awt.Color(255, 255, 255));
-        heading.setText("Create Credentials");
+        nameLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        nameLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        nameLabel1.setText("Name");
 
-        nameLabel.setBackground(new java.awt.Color(255, 255, 255));
-        nameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        nameLabel.setText("Name");
-
-        nameInput.addActionListener(new java.awt.event.ActionListener() {
+        nameInput1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameInputActionPerformed(evt);
+                nameInput1ActionPerformed(evt);
             }
         });
 
-        emailLabel.setBackground(new java.awt.Color(255, 255, 255));
-        emailLabel.setForeground(new java.awt.Color(255, 255, 255));
-        emailLabel.setText("Email");
+        emailLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        emailLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        emailLabel1.setText("Email");
 
-        emailInput.addActionListener(new java.awt.event.ActionListener() {
+        emailInput1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailInputActionPerformed(evt);
+                emailInput1ActionPerformed(evt);
             }
         });
 
-        passwordLabel.setBackground(new java.awt.Color(255, 255, 255));
-        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
-        passwordLabel.setText("Password");
+        passwordLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        passwordLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        passwordLabel1.setText("Password");
 
-        credentialsTypeLabel.setBackground(new java.awt.Color(255, 255, 255));
-        credentialsTypeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        credentialsTypeLabel.setText("Credential Type");
+        credentialsTypeLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        credentialsTypeLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        credentialsTypeLabel1.setText("Credential Type");
 
-        credentialsTypeDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        credentialsTypeDropdown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        storeLabel.setBackground(new java.awt.Color(255, 255, 255));
-        storeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        storeLabel.setText("Store Location");
+        storeLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        storeLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        storeLabel1.setText("Store Location");
 
-        storeDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        storeDropdown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        requirementText.setBackground(new java.awt.Color(255, 255, 255));
-        requirementText.setForeground(new java.awt.Color(255, 255, 255));
-        requirementText.setText("(Only for Store Employee)");
+        requirementText1.setBackground(new java.awt.Color(255, 255, 255));
+        requirementText1.setForeground(new java.awt.Color(255, 255, 255));
+        requirementText1.setText("(Only for Store Employee)");
 
-        createAccountBtn.setText("Create Account");
+        createAccountBtn1.setText("Create Account");
 
-        backToMenuBtn.setText("Back to admin menu");
+        backToMenuBtn1.setText("Back to admin menu");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(heading)
+                .addComponent(heading1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(backToMenuBtn)
+                .addComponent(backToMenuBtn1)
                 .addGap(22, 22, 22))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createAccountBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(270, 270, 270))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(232, 232, 232)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emailLabel)
-                    .addComponent(passwordLabel)
-                    .addComponent(nameLabel)
-                    .addComponent(storeLabel)
-                    .addComponent(credentialsTypeLabel))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emailLabel1)
+                    .addComponent(passwordLabel1)
+                    .addComponent(nameLabel1)
+                    .addComponent(storeLabel1)
+                    .addComponent(credentialsTypeLabel1))
                 .addGap(35, 35, 35)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(storeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(requirementText))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(credentialsTypeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(emailInput)
-                                .addComponent(passwordInput, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(storeDropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(requirementText1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(credentialsTypeDropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(emailInput1)
+                                .addComponent(passwordInput1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(nameInput1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(101, 101, 101))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backToMenuBtn)
-                    .addComponent(heading))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backToMenuBtn1)
+                    .addComponent(heading1))
                 .addGap(107, 107, 107)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(emailLabel)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(emailLabel1)
                         .addGap(25, 25, 25)
-                        .addComponent(passwordLabel))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameLabel))
+                        .addComponent(passwordLabel1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(emailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emailInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(passwordInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(credentialsTypeLabel)
-                    .addComponent(credentialsTypeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(credentialsTypeLabel1)
+                    .addComponent(credentialsTypeDropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(storeLabel)
-                    .addComponent(storeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(requirementText))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(storeLabel1)
+                    .addComponent(storeDropdown1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(requirementText1))
                 .addGap(47, 47, 47)
-                .addComponent(createAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(createAccountBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
+    private void nameInput1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInput1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameInputActionPerformed
+    }//GEN-LAST:event_nameInput1ActionPerformed
 
-    private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
+    private void emailInput1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInput1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailInputActionPerformed
+    }//GEN-LAST:event_emailInput1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateCredentials.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateCredentials().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToMenuBtn;
+    private javax.swing.JButton backToMenuBtn1;
     private javax.swing.JButton createAccountBtn;
+    private javax.swing.JButton createAccountBtn1;
     private javax.swing.JComboBox<String> credentialsTypeDropdown;
+    private javax.swing.JComboBox<String> credentialsTypeDropdown1;
     private javax.swing.JLabel credentialsTypeLabel;
+    private javax.swing.JLabel credentialsTypeLabel1;
     private javax.swing.JTextField emailInput;
+    private javax.swing.JTextField emailInput1;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel emailLabel1;
     private javax.swing.JLabel heading;
+    private javax.swing.JLabel heading1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField nameInput;
+    private javax.swing.JTextField nameInput1;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel nameLabel1;
     private javax.swing.JPasswordField passwordInput;
+    private javax.swing.JPasswordField passwordInput1;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JLabel passwordLabel1;
     private javax.swing.JLabel requirementText;
+    private javax.swing.JLabel requirementText1;
     private javax.swing.JComboBox<String> storeDropdown;
+    private javax.swing.JComboBox<String> storeDropdown1;
     private javax.swing.JLabel storeLabel;
+    private javax.swing.JLabel storeLabel1;
     // End of variables declaration//GEN-END:variables
 }

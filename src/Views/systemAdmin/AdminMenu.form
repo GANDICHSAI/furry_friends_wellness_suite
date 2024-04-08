@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
-  </Properties>
-  <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
-  </SyntheticProperties>
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -23,17 +16,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -43,25 +36,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="149" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="createCredentialsBtn" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
-                              <Component id="manageStoreServicesBtn" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
-                              <Component id="manageStoreEmpBtn" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="createCredentialsBtn2" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="manageStoreServicesBtn2" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="manageStoreEmpBtn2" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="manageSystemAdminBtn" min="-2" pref="196" max="-2" attributes="0"/>
-                              <Component id="manageCIMBtn" min="-2" pref="196" max="-2" attributes="0"/>
-                              <Component id="manageStoreBtn" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="manageSystemAdminBtn2" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="manageCIMBtn2" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              <Component id="manageStoreBtn2" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="title" min="-2" max="-2" attributes="0"/>
+                          <Component id="title2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -72,29 +65,22 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                  <Component id="title" min="-2" max="-2" attributes="0"/>
+                  <Component id="title2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="manageStoreBtn2" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="manageSystemAdminBtn" min="-2" pref="38" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="manageCIMBtn" min="-2" pref="38" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="createCredentialsBtn2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="manageSystemAdminBtn2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="manageStoreBtn" min="-2" pref="38" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="createCredentialsBtn" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="manageStoreEmpBtn2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="manageCIMBtn2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="manageStoreEmpBtn" min="-2" pref="38" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="manageStoreServicesBtn" min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="manageStoreServicesBtn2" min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="148" max="32767" attributes="0"/>
@@ -103,7 +89,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="title">
+        <Component class="javax.swing.JLabel" name="title2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
@@ -114,41 +100,41 @@
             <Property name="text" type="java.lang.String" value="Admin Menu"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="createCredentialsBtn">
+        <Component class="javax.swing.JButton" name="createCredentialsBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Create Credentials"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createCredentialsBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createCredentialsBtn2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="manageStoreEmpBtn">
+        <Component class="javax.swing.JButton" name="manageStoreEmpBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Store Employees"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="manageStoreServicesBtn">
+        <Component class="javax.swing.JButton" name="manageStoreServicesBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Store Services"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="manageSystemAdminBtn">
+        <Component class="javax.swing.JButton" name="manageSystemAdminBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage System Admin"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageSystemAdminBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageSystemAdminBtn2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="manageCIMBtn">
+        <Component class="javax.swing.JButton" name="manageCIMBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage CIM"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageCIMBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageCIMBtn2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="manageStoreBtn">
+        <Component class="javax.swing.JButton" name="manageStoreBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Store "/>
           </Properties>
