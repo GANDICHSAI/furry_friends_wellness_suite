@@ -4,6 +4,9 @@
  */
 package Views.systemAdmin;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author hanee
@@ -13,7 +16,8 @@ public class CreateCredentials extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
-    public CreateCredentials() {
+    JPanel bottomPanel;
+    public CreateCredentials(JPanel bottomPanel) {
         initComponents();
     }
 
@@ -40,7 +44,7 @@ public class CreateCredentials extends javax.swing.JPanel {
         storeDropdown1 = new javax.swing.JComboBox<>();
         requirementText1 = new javax.swing.JLabel();
         createAccountBtn1 = new javax.swing.JButton();
-        backToMenuBtn1 = new javax.swing.JButton();
+        backToMenuBtn = new javax.swing.JButton();
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -90,7 +94,12 @@ public class CreateCredentials extends javax.swing.JPanel {
 
         createAccountBtn1.setText("Create Account");
 
-        backToMenuBtn1.setText("Back to admin menu");
+        backToMenuBtn.setText("Back to admin menu");
+        backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToMenuBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -100,7 +109,7 @@ public class CreateCredentials extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addComponent(heading1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(backToMenuBtn1)
+                .addComponent(backToMenuBtn)
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,8 +144,8 @@ public class CreateCredentials extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backToMenuBtn1)
-                    .addComponent(heading1))
+                    .addComponent(heading1)
+                    .addComponent(backToMenuBtn))
                 .addGap(107, 107, 107)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -185,37 +194,31 @@ public class CreateCredentials extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailInput1ActionPerformed
 
+    private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
+        // TODO add your handling code here:
+
+        AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+        bottomPanel.add(adminMenuObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backToMenuBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToMenuBtn;
-    private javax.swing.JButton backToMenuBtn1;
-    private javax.swing.JButton createAccountBtn;
     private javax.swing.JButton createAccountBtn1;
-    private javax.swing.JComboBox<String> credentialsTypeDropdown;
     private javax.swing.JComboBox<String> credentialsTypeDropdown1;
-    private javax.swing.JLabel credentialsTypeLabel;
     private javax.swing.JLabel credentialsTypeLabel1;
-    private javax.swing.JTextField emailInput;
     private javax.swing.JTextField emailInput1;
-    private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel emailLabel1;
-    private javax.swing.JLabel heading;
     private javax.swing.JLabel heading1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField nameInput;
     private javax.swing.JTextField nameInput1;
-    private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameLabel1;
-    private javax.swing.JPasswordField passwordInput;
     private javax.swing.JPasswordField passwordInput1;
-    private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordLabel1;
-    private javax.swing.JLabel requirementText;
     private javax.swing.JLabel requirementText1;
-    private javax.swing.JComboBox<String> storeDropdown;
     private javax.swing.JComboBox<String> storeDropdown1;
-    private javax.swing.JLabel storeLabel;
     private javax.swing.JLabel storeLabel1;
     // End of variables declaration//GEN-END:variables
 }

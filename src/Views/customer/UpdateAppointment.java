@@ -1,5 +1,6 @@
 package Views.customer;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /*
@@ -38,6 +39,7 @@ public class UpdateAppointment extends javax.swing.JPanel {
         editApp = new javax.swing.JButton();
         saveApp = new javax.swing.JButton();
         deleteAPP = new javax.swing.JButton();
+        backToHomeButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -64,6 +66,13 @@ public class UpdateAppointment extends javax.swing.JPanel {
 
         deleteAPP.setText("CANCEL APPOINTMENT");
 
+        backToHomeButton.setText("BACK TO HOME");
+        backToHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToHomeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,13 +93,20 @@ public class UpdateAppointment extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(appCRUDTitleLabel)
-                .addGap(106, 106, 106))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(appCRUDTitleLabel)
+                        .addGap(106, 106, 106))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(backToHomeButton)
+                        .addGap(23, 23, 23))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(21, 21, 21)
+                .addComponent(backToHomeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(appCRUDTitleLabel)
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,10 +119,20 @@ public class UpdateAppointment extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
+        // TODO add your handling code here:
+        
+        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
+        bottomPanel.add(customerLandingPageObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backToHomeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AppSumTableCRUD;
     private javax.swing.JLabel appCRUDTitleLabel;
+    private javax.swing.JButton backToHomeButton;
     private javax.swing.JButton deleteAPP;
     private javax.swing.JButton editApp;
     private javax.swing.JScrollPane jScrollPane1;

@@ -4,6 +4,7 @@
  */
 package Views.storeManagement;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -33,6 +34,7 @@ public class ClientInformationManager extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         smNewAppointment = new javax.swing.JButton();
         smViewAppointments = new javax.swing.JButton();
+        smLogOutButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -48,6 +50,18 @@ public class ClientInformationManager extends javax.swing.JPanel {
         });
 
         smViewAppointments.setText("VIEW EXISTING APPOINTMENTS");
+        smViewAppointments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smViewAppointmentsActionPerformed(evt);
+            }
+        });
+
+        smLogOutButton.setText("LOGOUT");
+        smLogOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smLogOutButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -63,12 +77,17 @@ public class ClientInformationManager extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(312, 312, 312))))
+                        .addGap(312, 312, 312))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(smLogOutButton)
+                        .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(28, 28, 28)
+                .addComponent(smLogOutButton)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(90, 90, 90)
                 .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -80,11 +99,36 @@ public class ClientInformationManager extends javax.swing.JPanel {
 
     private void smNewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smNewAppointmentActionPerformed
         // TODO add your handling code here:
+        
+        NewAppointment newAppointmentObj = new NewAppointment(bottomPanel);
+        bottomPanel.add(newAppointmentObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
     }//GEN-LAST:event_smNewAppointmentActionPerformed
+
+    private void smViewAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smViewAppointmentsActionPerformed
+        // TODO add your handling code here:
+        
+        ClientAppointments clientAppointmentsObj = new ClientAppointments(bottomPanel);
+        bottomPanel.add(clientAppointmentsObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smViewAppointmentsActionPerformed
+
+    private void smLogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smLogOutButtonActionPerformed
+        // TODO add your handling code here:
+
+        StoreManagementLogin storeManagementLogin = new StoreManagementLogin(bottomPanel);
+        bottomPanel.add(storeManagementLogin);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smLogOutButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton smLogOutButton;
     private javax.swing.JButton smNewAppointment;
     private javax.swing.JButton smViewAppointments;
     // End of variables declaration//GEN-END:variables

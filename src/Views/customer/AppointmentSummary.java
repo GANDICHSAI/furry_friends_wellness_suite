@@ -4,6 +4,8 @@
  */
 package Views.customer;
 
+import Views.systemAdmin.AdminMenu;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -36,7 +38,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         viewAppLabel = new javax.swing.JTable();
         bookComplete = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        backToServiceOptions = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -59,7 +61,12 @@ public class AppointmentSummary extends javax.swing.JPanel {
 
         bookComplete.setText("COMPLETE BOOKING");
 
-        jButton1.setText("BACK");
+        backToServiceOptions.setText("BACK TO SERVICE OPTIONS");
+        backToServiceOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToServiceOptionsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -73,18 +80,19 @@ public class AppointmentSummary extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(261, 261, 261)
                         .addComponent(bookComplete))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(backToServiceOptions)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
+                .addComponent(backToServiceOptions)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewAppTitleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,10 +102,19 @@ public class AppointmentSummary extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToServiceOptionsActionPerformed
+        // TODO add your handling code here:
+        
+        SelectService selectService = new SelectService(bottomPanel);
+        bottomPanel.add(selectService);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backToServiceOptionsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backToServiceOptions;
     private javax.swing.JButton bookComplete;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable viewAppLabel;
     private javax.swing.JLabel viewAppTitleLabel;

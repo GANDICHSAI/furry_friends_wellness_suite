@@ -47,6 +47,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
         petColTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         saveToSelectServiceButton = new javax.swing.JButton();
+        backToStoreSelectionButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -105,6 +106,13 @@ public class CreatePetProfile extends javax.swing.JPanel {
             }
         });
 
+        backToStoreSelectionButton.setText("BACK TO STORE SELECTION");
+        backToStoreSelectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToStoreSelectionButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,11 +156,17 @@ public class CreatePetProfile extends javax.swing.JPanel {
                                     .addComponent(saveToSelectServiceButton)
                                     .addGap(19, 19, 19))))))
                 .addGap(0, 210, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backToStoreSelectionButton)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(28, 28, 28)
+                .addComponent(backToStoreSelectionButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(petTitleLabel)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,8 +209,18 @@ public class CreatePetProfile extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_saveToSelectServiceButtonActionPerformed
 
+    private void backToStoreSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToStoreSelectionButtonActionPerformed
+        // TODO add your handling code here:
+
+        SelectStore selectStore = new SelectStore(bottomPanel);
+        bottomPanel.add(selectStore);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backToStoreSelectionButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backToStoreSelectionButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton catRadioButton;
     private javax.swing.JRadioButton dogRadioButton;

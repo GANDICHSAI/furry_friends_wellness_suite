@@ -4,6 +4,9 @@
  */
 package Views.systemAdmin;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author hanee
@@ -13,8 +16,10 @@ public class AdminMenu extends javax.swing.JPanel {
     /**
      * Creates new form Test
      */
-    public AdminMenu() {
+    JPanel bottomPanel;
+    public AdminMenu(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -49,8 +54,18 @@ public class AdminMenu extends javax.swing.JPanel {
         });
 
         manageStoreEmpBtn2.setText("Manage Store Employees");
+        manageStoreEmpBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageStoreEmpBtn2ActionPerformed(evt);
+            }
+        });
 
         manageStoreServicesBtn2.setText("Manage Store Services");
+        manageStoreServicesBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageStoreServicesBtn2ActionPerformed(evt);
+            }
+        });
 
         manageSystemAdminBtn2.setText("Manage System Admin");
         manageSystemAdminBtn2.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +82,11 @@ public class AdminMenu extends javax.swing.JPanel {
         });
 
         manageStoreBtn2.setText("Manage Store ");
+        manageStoreBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageStoreBtn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -125,41 +145,69 @@ public class AdminMenu extends javax.swing.JPanel {
 
     private void createCredentialsBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCredentialsBtn2ActionPerformed
         // TODO add your handling code here:
+        
+        
+        CreateCredentials createCredentialsObj = new CreateCredentials(bottomPanel);
+        bottomPanel.add(createCredentialsObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_createCredentialsBtn2ActionPerformed
 
     private void manageSystemAdminBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageSystemAdminBtn2ActionPerformed
         // TODO add your handling code here:
+        
+        ManageSystemAdmin manageSystemAdminObj = new ManageSystemAdmin(bottomPanel);
+        bottomPanel.add(manageSystemAdminObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
     }//GEN-LAST:event_manageSystemAdminBtn2ActionPerformed
 
     private void manageCIMBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCIMBtn2ActionPerformed
         // TODO add your handling code here:
+        
+        ManageCIM manageCIMObj = new ManageCIM(bottomPanel);
+        bottomPanel.add(manageCIMObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_manageCIMBtn2ActionPerformed
+
+    private void manageStoreEmpBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStoreEmpBtn2ActionPerformed
+        // TODO add your handling code here:
+        
+        ManageStoreEmployee manageStoreEmployeeObj = new ManageStoreEmployee(bottomPanel);
+        bottomPanel.add(manageStoreEmployeeObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_manageStoreEmpBtn2ActionPerformed
+
+    private void manageStoreServicesBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStoreServicesBtn2ActionPerformed
+        // TODO add your handling code here:
+        
+        ManageStoreServices managerStoreServicesObj = new ManageStoreServices(bottomPanel);
+        bottomPanel.add(managerStoreServicesObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_manageStoreServicesBtn2ActionPerformed
+
+    private void manageStoreBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStoreBtn2ActionPerformed
+        // TODO add your handling code here:
+        
+        ManageStores manageStoresObj = new ManageStores(bottomPanel);
+        bottomPanel.add(manageStoresObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_manageStoreBtn2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createCredentialsBtn;
-    private javax.swing.JButton createCredentialsBtn1;
     private javax.swing.JButton createCredentialsBtn2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton manageCIMBtn;
-    private javax.swing.JButton manageCIMBtn1;
     private javax.swing.JButton manageCIMBtn2;
-    private javax.swing.JButton manageStoreBtn;
-    private javax.swing.JButton manageStoreBtn1;
     private javax.swing.JButton manageStoreBtn2;
-    private javax.swing.JButton manageStoreEmpBtn;
-    private javax.swing.JButton manageStoreEmpBtn1;
     private javax.swing.JButton manageStoreEmpBtn2;
-    private javax.swing.JButton manageStoreServicesBtn;
-    private javax.swing.JButton manageStoreServicesBtn1;
     private javax.swing.JButton manageStoreServicesBtn2;
-    private javax.swing.JButton manageSystemAdminBtn;
-    private javax.swing.JButton manageSystemAdminBtn1;
     private javax.swing.JButton manageSystemAdminBtn2;
-    private javax.swing.JLabel title;
-    private javax.swing.JLabel title1;
     private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
 }

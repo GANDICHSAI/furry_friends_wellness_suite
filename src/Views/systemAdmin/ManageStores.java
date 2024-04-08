@@ -4,6 +4,9 @@
  */
 package Views.systemAdmin;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author hanee
@@ -13,8 +16,10 @@ public class ManageStores extends javax.swing.JPanel {
     /**
      * Creates new form ManageStoress
      */
-    public ManageStores() {
+    JPanel bottomPanel;
+    public ManageStores(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -170,6 +175,11 @@ public class ManageStores extends javax.swing.JPanel {
 
     private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
         // TODO add your handling code here:
+        
+        AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+        bottomPanel.add(adminMenuObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_backToMenuBtnActionPerformed
 
 

@@ -4,6 +4,9 @@
  */
 package Views.storeManagement;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author chait
@@ -13,8 +16,10 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     /**
      * Creates new form reviewClientAppointment
      */
-    public ReviewClientAppointment() {
+    JPanel bottomPanel;
+    public ReviewClientAppointment(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -30,6 +35,7 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         viewAppTitleLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         smReviewAppointmentTable = new javax.swing.JTable();
+        smBackToServiceOptions = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -52,6 +58,13 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(smReviewAppointmentTable);
 
+        smBackToServiceOptions.setText("BACK TO SERVICE OPTIONS");
+        smBackToServiceOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smBackToServiceOptionsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,11 +81,17 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
                         .addGap(276, 276, 276)
                         .addComponent(submitAppointment)))
                 .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(smBackToServiceOptions)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(23, 23, 23)
+                .addComponent(smBackToServiceOptions)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewAppTitleLabel)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -82,9 +101,19 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void smBackToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToServiceOptionsActionPerformed
+        // TODO add your handling code here:
+
+        TypeOfService typeOfService = new TypeOfService(bottomPanel);
+        bottomPanel.add(typeOfService);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smBackToServiceOptionsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton smBackToServiceOptions;
     private javax.swing.JTable smReviewAppointmentTable;
     private javax.swing.JButton submitAppointment;
     private javax.swing.JLabel viewAppTitleLabel;

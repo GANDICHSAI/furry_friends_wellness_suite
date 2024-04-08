@@ -4,6 +4,9 @@
  */
 package Views.systemAdmin;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author hanee
@@ -13,8 +16,10 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
     /**
      * Creates new form ManageStoreEmployeee
      */
-    public ManageStoreEmployee() {
+    JPanel bottomPanel;
+    public ManageStoreEmployee(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -110,6 +115,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         saveChangesBtn.setText("Save Changes");
 
         backToMenuBtn.setText("Back to admin menu");
+        backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToMenuBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,6 +218,15 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
     private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailInputActionPerformed
+
+    private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
+        // TODO add your handling code here:
+        
+        AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+        bottomPanel.add(adminMenuObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backToMenuBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

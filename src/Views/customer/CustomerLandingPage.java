@@ -36,6 +36,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
         checkAppHistoryButton = new javax.swing.JButton();
         updateAppButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        logOutButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -70,14 +71,17 @@ public class CustomerLandingPage extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("reuse app summary page");
 
+        logOutButton.setText("LOGOUT");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(custLandingTitleLabel)
-                .addGap(173, 173, 173))
             .addGroup(layout.createSequentialGroup()
                 .addGap(204, 204, 204)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -87,11 +91,22 @@ public class CustomerLandingPage extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addContainerGap(56, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(custLandingTitleLabel)
+                        .addGap(173, 173, 173))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(logOutButton)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(23, 23, 23)
+                .addComponent(logOutButton)
+                .addGap(18, 18, 18)
                 .addComponent(custLandingTitleLabel)
                 .addGap(108, 108, 108)
                 .addComponent(bookAppButton)
@@ -133,12 +148,22 @@ public class CustomerLandingPage extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_bookAppButtonActionPerformed
 
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        // TODO add your handling code here:
+
+        BookAppPage bookAppPageObj = new BookAppPage(bottomPanel);
+        bottomPanel.add(bookAppPageObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_logOutButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookAppButton;
     private javax.swing.JButton checkAppHistoryButton;
     private javax.swing.JLabel custLandingTitleLabel;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton logOutButton;
     private javax.swing.JButton updateAppButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,9 @@
  */
 package Views.storeManagement;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author chait
@@ -13,8 +16,10 @@ public class TypeOfService extends javax.swing.JPanel {
     /**
      * Creates new form typeOfService
      */
-    public TypeOfService() {
+    JPanel bottomPanel;
+    public TypeOfService(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -35,6 +40,7 @@ public class TypeOfService extends javax.swing.JPanel {
         smSaveAndViewSummaryButton = new javax.swing.JButton();
         chooseDatelb = new javax.swing.JLabel();
         smChoosePkgComboBox = new javax.swing.JComboBox<>();
+        smBackToProfileCreationButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -66,6 +72,11 @@ public class TypeOfService extends javax.swing.JPanel {
         jLabel6.setText("PLACEHOLDER FOR JCAL");
 
         smSaveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
+        smSaveAndViewSummaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smSaveAndViewSummaryButtonActionPerformed(evt);
+            }
+        });
 
         chooseDatelb.setBackground(new java.awt.Color(255, 255, 255));
         chooseDatelb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -73,6 +84,13 @@ public class TypeOfService extends javax.swing.JPanel {
         chooseDatelb.setText("CHOOSE APPOINTMENT DATE");
 
         smChoosePkgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PACKAGE 1", "PACKAGE 2", "PACKAGE 3" }));
+
+        smBackToProfileCreationButton.setText("BACK TO PROFILE CREATION");
+        smBackToProfileCreationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smBackToProfileCreationButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,8 +104,8 @@ public class TypeOfService extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(choosePkglb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chooseDatelb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chooseDatelb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(choosePkglb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -104,11 +122,17 @@ public class TypeOfService extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(smSaveAndViewSummaryButton)
                 .addGap(260, 260, 260))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(smBackToProfileCreationButton)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(21, 21, 21)
+                .addComponent(smBackToProfileCreationButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(53, 53, 53)
                 .addComponent(pck1label)
@@ -118,8 +142,8 @@ public class TypeOfService extends javax.swing.JPanel {
                 .addComponent(pkg3lb)
                 .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(choosePkglb)
-                    .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(choosePkglb))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseDatelb)
@@ -130,6 +154,24 @@ public class TypeOfService extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void smSaveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSaveAndViewSummaryButtonActionPerformed
+        // TODO add your handling code here:
+        
+        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel);
+        bottomPanel.add(reviewClientAppointmentObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smSaveAndViewSummaryButtonActionPerformed
+
+    private void smBackToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToProfileCreationButtonActionPerformed
+        // TODO add your handling code here:
+        
+        NewAppointment newAppointment = new NewAppointment(bottomPanel);
+        bottomPanel.add(newAppointment);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smBackToProfileCreationButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel chooseDatelb;
@@ -139,6 +181,7 @@ public class TypeOfService extends javax.swing.JPanel {
     private javax.swing.JLabel pck1label;
     private javax.swing.JLabel pck2lb;
     private javax.swing.JLabel pkg3lb;
+    private javax.swing.JButton smBackToProfileCreationButton;
     private javax.swing.JComboBox<String> smChoosePkgComboBox;
     private javax.swing.JButton smSaveAndViewSummaryButton;
     // End of variables declaration//GEN-END:variables

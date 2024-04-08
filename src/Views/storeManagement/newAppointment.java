@@ -4,6 +4,9 @@
  */
 package Views.storeManagement;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author chait
@@ -13,8 +16,10 @@ public class NewAppointment extends javax.swing.JPanel {
     /**
      * Creates new form newAppointment
      */
-    public NewAppointment() {
+    JPanel bottomPanel;
+    public NewAppointment(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -48,6 +53,7 @@ public class NewAppointment extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        smBackToHomeButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -60,6 +66,11 @@ public class NewAppointment extends javax.swing.JPanel {
         jLabel6.setText("AGE");
 
         smSavePetToSelectServiceButton.setText("SAVE AND SELECT SERVICE");
+        smSavePetToSelectServiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smSavePetToSelectServiceButtonActionPerformed(evt);
+            }
+        });
 
         petNameLable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         petNameLable.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,6 +119,13 @@ public class NewAppointment extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("LAST NAME");
+
+        smBackToHomeButton.setText("BACK TO HOME");
+        smBackToHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smBackToHomeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,13 +179,20 @@ public class NewAppointment extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(petTitleLabel)
-                .addGap(220, 220, 220))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(petTitleLabel)
+                        .addGap(220, 220, 220))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(smBackToHomeButton)
+                        .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(26, 26, 26)
+                .addComponent(smBackToHomeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(petTitleLabel)
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -218,6 +243,24 @@ public class NewAppointment extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smCustomerLastNameTextFieldActionPerformed
 
+    private void smSavePetToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSavePetToSelectServiceButtonActionPerformed
+        // TODO add your handling code here:
+        
+        TypeOfService typeOfServiceObj = new TypeOfService(bottomPanel);
+        bottomPanel.add(typeOfServiceObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smSavePetToSelectServiceButtonActionPerformed
+
+    private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
+        // TODO add your handling code here:
+
+        ClientInformationManager clientInformationManager = new ClientInformationManager(bottomPanel);
+        bottomPanel.add(clientInformationManager);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_smBackToHomeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -230,6 +273,7 @@ public class NewAppointment extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel petNameLable;
     private javax.swing.JLabel petTitleLabel;
+    private javax.swing.JButton smBackToHomeButton;
     private javax.swing.ButtonGroup smButtonGroup;
     private javax.swing.JRadioButton smCatRadioButton;
     private javax.swing.JTextField smCustomerEmailTextField;

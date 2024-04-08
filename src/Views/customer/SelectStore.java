@@ -38,6 +38,7 @@ public class SelectStore extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         storeTable = new javax.swing.JTable();
         nextToPetButton = new javax.swing.JButton();
+        backToHomeButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -81,6 +82,13 @@ public class SelectStore extends javax.swing.JPanel {
             }
         });
 
+        backToHomeButton.setText("BACK TO HOME");
+        backToHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToHomeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,11 +111,17 @@ public class SelectStore extends javax.swing.JPanel {
                         .addGap(294, 294, 294)
                         .addComponent(nextToPetButton)))
                 .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(backToHomeButton)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(30, 30, 30)
+                .addComponent(backToHomeButton)
+                .addGap(43, 43, 43)
                 .addComponent(strTitleLabel)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -133,8 +147,18 @@ public class SelectStore extends javax.swing.JPanel {
         
     }//GEN-LAST:event_nextToPetButtonActionPerformed
 
+    private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
+        // TODO add your handling code here:
+        
+        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
+        bottomPanel.add(customerLandingPageObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backToHomeButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backToHomeButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton nextToPetButton;

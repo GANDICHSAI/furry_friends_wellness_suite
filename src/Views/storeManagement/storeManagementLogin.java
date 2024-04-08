@@ -4,8 +4,8 @@
  */
 package Views.storeManagement;
 
+import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -152,15 +152,15 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                         layout.next(bottomPanel);
                     }
                     
-//                    case "SYSTEM ADMIN" -> {
-//                        
-//                        
-//                        HospitalOptionPanel hospitalOptionPanel = new HospitalOptionPanel(bottomPanel);
-//                        bottomPanel.add(hospitalOptionPanel);
-//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//                        layout.next(bottomPanel);
-//                        
-//                    }
+                    case "SYSTEM ADMIN" -> {
+                        
+                        
+                        AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+                        bottomPanel.add(adminMenuObj);
+                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                        layout.next(bottomPanel);
+                        
+                    }
                     
     
                     

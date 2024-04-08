@@ -112,11 +112,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Store Employees"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageStoreEmpBtn2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="manageStoreServicesBtn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Store Services"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageStoreServicesBtn2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="manageSystemAdminBtn2">
           <Properties>
@@ -138,6 +144,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Store "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageStoreBtn2ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
