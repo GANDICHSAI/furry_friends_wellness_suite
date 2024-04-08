@@ -4,6 +4,9 @@
  */
 package Views.customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +16,10 @@ public class CreatePetProfile extends javax.swing.JPanel {
     /**
      * Creates new form CreatePetProfile
      */
-    public CreatePetProfile() {
+    JPanel bottomPanel;
+    public CreatePetProfile(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -94,6 +99,11 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel6.setText("AGE");
 
         saveToSelectServiceButton.setText("SAVE AND SELECT SERVICE");
+        saveToSelectServiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToSelectServiceButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,6 +185,15 @@ public class CreatePetProfile extends javax.swing.JPanel {
                 .addContainerGap(124, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButtonActionPerformed
+        // TODO add your handling code here:
+        
+        SelectService selectServiceObj = new SelectService(bottomPanel);
+        bottomPanel.add(selectServiceObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_saveToSelectServiceButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

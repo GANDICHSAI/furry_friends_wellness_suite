@@ -4,17 +4,21 @@
  */
 package Views.storeManagement;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author chait
  */
-public class clientInformationManager extends javax.swing.JPanel {
+public class ClientInformationManager extends javax.swing.JPanel {
 
     /**
      * Creates new form clientInformationManager
      */
-    public clientInformationManager() {
+    JPanel bottomPanel;
+    public ClientInformationManager(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**

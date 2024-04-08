@@ -8,12 +8,12 @@ package Views.storeManagement;
  *
  * @author chait
  */
-public class typeOfService extends javax.swing.JPanel {
+public class TypeOfService extends javax.swing.JPanel {
 
     /**
      * Creates new form typeOfService
      */
-    public typeOfService() {
+    public TypeOfService() {
         initComponents();
     }
 

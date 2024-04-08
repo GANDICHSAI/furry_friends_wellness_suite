@@ -4,6 +4,9 @@
  */
 package Views.customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +16,10 @@ public class BookAppPage extends javax.swing.JPanel {
     /**
      * Creates new form BookAppPage
      */
-    public BookAppPage() {
+    JPanel bottomPanel;
+    public BookAppPage(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -73,27 +78,29 @@ public class BookAppPage extends javax.swing.JPanel {
         custSignUpButton.setText("SIGN UP");
 
         custLogInButton.setText("LOG IN");
+        custLogInButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custLogInButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(custEmailTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(custFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(custLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(confirmCustEmailTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(confirmPWTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(custEmailTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(custFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(26, 26, 26)
+                            .addComponent(custLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(confirmCustEmailTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(confirmPWTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(211, 211, 211))
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
@@ -147,6 +154,17 @@ public class BookAppPage extends javax.swing.JPanel {
     private void custLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLastNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_custLastNameTextFieldActionPerformed
+
+    private void custLogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogInButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
+        bottomPanel.add(customerLandingPageObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
+    }//GEN-LAST:event_custLogInButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

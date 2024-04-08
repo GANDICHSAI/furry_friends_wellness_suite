@@ -4,6 +4,10 @@
  */
 package Views;
 
+import Views.customer.BookAppPage;
+import Views.storeManagement.StoreManagementLogin;
+import java.awt.CardLayout;
+
 /**
  *
  * @author chait
@@ -28,10 +32,10 @@ public class MainPage extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        appointmentButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        storePortalButton = new javax.swing.JButton();
+        loginSignupButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        bottomPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,12 +44,17 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        appointmentButton.setText("STORE PORTAL");
-
-        jButton1.setText("LOG-IN/SIGNUP AS CUSTOMER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        storePortalButton.setText("STORE PORTAL");
+        storePortalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                storePortalButtonActionPerformed(evt);
+            }
+        });
+
+        loginSignupButton.setText("LOG-IN/SIGNUP AS CUSTOMER");
+        loginSignupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginSignupButtonActionPerformed(evt);
             }
         });
 
@@ -59,9 +68,9 @@ public class MainPage extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginSignupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(appointmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(storePortalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(164, Short.MAX_VALUE)
@@ -75,24 +84,24 @@ public class MainPage extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(appointmentButton))
+                    .addComponent(loginSignupButton)
+                    .addComponent(storePortalButton))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel2.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel2.setLayout(new java.awt.CardLayout());
+        bottomPanel.setBackground(new java.awt.Color(51, 51, 51));
+        bottomPanel.setForeground(new java.awt.Color(51, 51, 51));
+        bottomPanel.setLayout(new java.awt.CardLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("WELCOME TO FURRY FRIEND WELLNESS CENTER");
-        jPanel2.add(jLabel2, "card2");
+        bottomPanel.add(jLabel2, "card2");
 
-        jSplitPane1.setBottomComponent(jPanel2);
+        jSplitPane1.setBottomComponent(bottomPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,15 +111,31 @@ public class MainPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginSignupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginSignupButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+        BookAppPage bookAppPageObj = new BookAppPage(bottomPanel);
+        bottomPanel.add(bookAppPageObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
+    }//GEN-LAST:event_loginSignupButtonActionPerformed
+
+    private void storePortalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storePortalButtonActionPerformed
+        // TODO add your handling code here:
+        
+        StoreManagementLogin storeManagementLoginObj = new StoreManagementLogin(bottomPanel);
+        bottomPanel.add(storeManagementLoginObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_storePortalButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,12 +173,12 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton appointmentButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel bottomPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton loginSignupButton;
+    private javax.swing.JButton storePortalButton;
     // End of variables declaration//GEN-END:variables
 }

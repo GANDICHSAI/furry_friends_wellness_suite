@@ -4,6 +4,9 @@
  */
 package Views.customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +16,10 @@ public class SelectStore extends javax.swing.JPanel {
     /**
      * Creates new form SelectStore
      */
-    public SelectStore() {
+    JPanel bottomPanel;
+    public SelectStore(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -70,6 +75,11 @@ public class SelectStore extends javax.swing.JPanel {
         jScrollPane1.setViewportView(storeTable);
 
         nextToPetButton.setText("NEXT");
+        nextToPetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextToPetButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,6 +122,16 @@ public class SelectStore extends javax.swing.JPanel {
                 .addContainerGap(68, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nextToPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextToPetButtonActionPerformed
+        // TODO add your handling code here:
+        
+        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel);
+        bottomPanel.add(createPetProfileObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
+    }//GEN-LAST:event_nextToPetButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

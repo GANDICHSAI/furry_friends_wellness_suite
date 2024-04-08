@@ -4,6 +4,9 @@
  */
 package Views.customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +16,10 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     /**
      * Creates new form CustomerLandingPage
      */
-    public CustomerLandingPage() {
+    JPanel bottomPanel;
+    public CustomerLandingPage(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -40,6 +45,11 @@ public class CustomerLandingPage extends javax.swing.JPanel {
 
         bookAppButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bookAppButton.setText("BOOK AN APPOINTMENT");
+        bookAppButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookAppButtonActionPerformed(evt);
+            }
+        });
 
         checkAppHistoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         checkAppHistoryButton.setText("CHECK APPOINTMENT HISTORY");
@@ -97,11 +107,31 @@ public class CustomerLandingPage extends javax.swing.JPanel {
 
     private void checkAppHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAppHistoryButtonActionPerformed
         // TODO add your handling code here:
+        
+        CheckAppHistory checkAppHistoryObj= new CheckAppHistory(bottomPanel);
+        bottomPanel.add(checkAppHistoryObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_checkAppHistoryButtonActionPerformed
 
     private void updateAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppButtonActionPerformed
         // TODO add your handling code here:
+        
+        UpdateAppointment updateAppointmentObj= new UpdateAppointment(bottomPanel);
+        bottomPanel.add(updateAppointmentObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
     }//GEN-LAST:event_updateAppButtonActionPerformed
+
+    private void bookAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppButtonActionPerformed
+        // TODO add your handling code here:
+        
+        SelectStore selectStoreObj= new SelectStore(bottomPanel);
+        bottomPanel.add(selectStoreObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_bookAppButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

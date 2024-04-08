@@ -4,6 +4,8 @@
  */
 package Views.customer;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +15,10 @@ public class CheckAppHistory extends javax.swing.JPanel {
     /**
      * Creates new form CheckAppHistory
      */
-    public CheckAppHistory() {
+    JPanel bottomPanel;
+    public CheckAppHistory(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**

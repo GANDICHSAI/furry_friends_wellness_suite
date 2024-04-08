@@ -260,6 +260,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="SAVE AND SELECT SERVICE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToSelectServiceButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

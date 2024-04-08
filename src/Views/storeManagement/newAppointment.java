@@ -8,12 +8,12 @@ package Views.storeManagement;
  *
  * @author chait
  */
-public class newAppointment extends javax.swing.JPanel {
+public class NewAppointment extends javax.swing.JPanel {
 
     /**
      * Creates new form newAppointment
      */
-    public newAppointment() {
+    public NewAppointment() {
         initComponents();
     }
 

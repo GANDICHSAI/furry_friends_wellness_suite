@@ -4,6 +4,8 @@
  */
 package Views.customer;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +15,12 @@ public class AppointmentSummary extends javax.swing.JPanel {
     /**
      * Creates new form AppointmentSummary
      */
-    public AppointmentSummary() {
+    
+    JPanel bottomPanel;
+    public AppointmentSummary(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
+        
     }
 
     /**
@@ -62,9 +68,6 @@ public class AppointmentSummary extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(viewAppTitleLabel))
                     .addGroup(layout.createSequentialGroup()
@@ -72,8 +75,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
                         .addComponent(bookComplete))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +86,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(viewAppTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(40, 40, 40)
                 .addComponent(bookComplete)
                 .addGap(177, 177, 177))
         );

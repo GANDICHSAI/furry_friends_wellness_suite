@@ -4,6 +4,8 @@
  */
 package Views.storeManagement;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author yihan
@@ -13,8 +15,10 @@ public class StoreEmployeePanel extends javax.swing.JPanel {
     /**
      * Creates new form StoreEmployeePanel
      */
-    public StoreEmployeePanel() {
+    JPanel bottomPanel;
+    public StoreEmployeePanel(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**

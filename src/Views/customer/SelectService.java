@@ -4,6 +4,9 @@
  */
 package Views.customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author A
@@ -13,8 +16,10 @@ public class SelectService extends javax.swing.JPanel {
     /**
      * Creates new form SelectService
      */
-    public SelectService() {
+    JPanel bottomPanel;
+    public SelectService(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
@@ -67,6 +72,11 @@ public class SelectService extends javax.swing.JPanel {
         jLabel6.setText("PLACEHOLDER FOR JCAL");
 
         saveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
+        saveAndViewSummaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAndViewSummaryButtonActionPerformed(evt);
+            }
+        });
 
         chooseDatelb.setBackground(new java.awt.Color(255, 255, 255));
         chooseDatelb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -130,6 +140,15 @@ public class SelectService extends javax.swing.JPanel {
                 .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
+        // TODO add your handling code here:
+        
+        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel);
+        bottomPanel.add(appointmentSummaryObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

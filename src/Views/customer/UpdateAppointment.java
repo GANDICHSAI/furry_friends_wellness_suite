@@ -1,5 +1,7 @@
 package Views.customer;
 
+import javax.swing.JPanel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -14,8 +16,11 @@ public class UpdateAppointment extends javax.swing.JPanel {
     /**
      * Creates new form UpdateAppointment
      */
-    public UpdateAppointment() {
+    
+    JPanel bottomPanel;
+    public UpdateAppointment(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
