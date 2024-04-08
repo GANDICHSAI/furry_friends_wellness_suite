@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
-  </Properties>
-  <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
-  </SyntheticProperties>
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -60,25 +53,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="storeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="emailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="passwordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="storeDropdown" min="-2" max="-2" attributes="0"/>
-                      <Component id="idValue" min="-2" max="-2" attributes="0"/>
-                      <Component id="emailInput" max="32767" attributes="0"/>
+                      <Component id="storeDropdown" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="idValue" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="emailInput" alignment="0" max="32767" attributes="0"/>
                       <Component id="nameInput" alignment="0" max="32767" attributes="0"/>
-                      <Component id="passwordInput" pref="174" max="32767" attributes="0"/>
+                      <Component id="passwordInput" alignment="0" pref="174" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="deleteStoreEmpBtn" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="deleteStoreEmpBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
                       <Component id="saveChangesBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
                       <Component id="editStoreEmpBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -92,22 +85,22 @@
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="table" min="-2" pref="270" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="idValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="idValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="nameInput" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="storeLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="storeDropdown" min="-2" max="-2" attributes="0"/>
+                              <Component id="storeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="storeDropdown" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -119,16 +112,18 @@
                               <Component id="passwordInput" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace pref="7" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="deleteStoreEmpBtn" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Component id="editStoreEmpBtn" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="saveChangesBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="43" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

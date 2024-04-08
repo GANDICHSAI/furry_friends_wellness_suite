@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Views.systemAdmin;
 
@@ -8,10 +8,10 @@ package Views.systemAdmin;
  *
  * @author hanee
  */
-public class AdminMenu extends javax.swing.JFrame {
+public class AdminMenu extends javax.swing.JPanel {
 
     /**
-     * Creates new form AdminMenu
+     * Creates new form Test
      */
     public AdminMenu() {
         initComponents();
@@ -26,167 +26,140 @@ public class AdminMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
-        createCredentialsBtn = new javax.swing.JButton();
-        manageStoreEmpBtn = new javax.swing.JButton();
-        manageStoreServicesBtn = new javax.swing.JButton();
-        manageSystemAdminBtn = new javax.swing.JButton();
-        manageCIMBtn = new javax.swing.JButton();
-        manageStoreBtn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        title2 = new javax.swing.JLabel();
+        createCredentialsBtn2 = new javax.swing.JButton();
+        manageStoreEmpBtn2 = new javax.swing.JButton();
+        manageStoreServicesBtn2 = new javax.swing.JButton();
+        manageSystemAdminBtn2 = new javax.swing.JButton();
+        manageCIMBtn2 = new javax.swing.JButton();
+        manageStoreBtn2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        title2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        title2.setForeground(new java.awt.Color(255, 255, 255));
+        title2.setText("Admin Menu");
 
-        title.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Admin Menu");
-
-        createCredentialsBtn.setText("Create Credentials");
-        createCredentialsBtn.addActionListener(new java.awt.event.ActionListener() {
+        createCredentialsBtn2.setText("Create Credentials");
+        createCredentialsBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createCredentialsBtnActionPerformed(evt);
+                createCredentialsBtn2ActionPerformed(evt);
             }
         });
 
-        manageStoreEmpBtn.setText("Manage Store Employees");
+        manageStoreEmpBtn2.setText("Manage Store Employees");
 
-        manageStoreServicesBtn.setText("Manage Store Services");
+        manageStoreServicesBtn2.setText("Manage Store Services");
 
-        manageSystemAdminBtn.setText("Manage System Admin");
-        manageSystemAdminBtn.addActionListener(new java.awt.event.ActionListener() {
+        manageSystemAdminBtn2.setText("Manage System Admin");
+        manageSystemAdminBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageSystemAdminBtnActionPerformed(evt);
+                manageSystemAdminBtn2ActionPerformed(evt);
             }
         });
 
-        manageCIMBtn.setText("Manage CIM");
-        manageCIMBtn.addActionListener(new java.awt.event.ActionListener() {
+        manageCIMBtn2.setText("Manage CIM");
+        manageCIMBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageCIMBtnActionPerformed(evt);
+                manageCIMBtn2ActionPerformed(evt);
             }
         });
 
-        manageStoreBtn.setText("Manage Store ");
+        manageStoreBtn2.setText("Manage Store ");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(149, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(createCredentialsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageStoreServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(createCredentialsBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageStoreServicesBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageStoreEmpBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(manageSystemAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageCIMBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(manageSystemAdminBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageCIMBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageStoreBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(141, 141, 141))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(title)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(title2)
                         .addGap(270, 270, 270))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(148, 148, 148)
-                .addComponent(title)
+                .addComponent(title2)
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(manageSystemAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(manageCIMBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(manageStoreBtn2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createCredentialsBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageSystemAdminBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(manageStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(createCredentialsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(manageStoreEmpBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageCIMBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(manageStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(manageStoreServicesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(manageStoreServicesBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void manageSystemAdminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageSystemAdminBtnActionPerformed
+    private void createCredentialsBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCredentialsBtn2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_manageSystemAdminBtnActionPerformed
+    }//GEN-LAST:event_createCredentialsBtn2ActionPerformed
 
-    private void createCredentialsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCredentialsBtnActionPerformed
+    private void manageSystemAdminBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageSystemAdminBtn2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_createCredentialsBtnActionPerformed
+    }//GEN-LAST:event_manageSystemAdminBtn2ActionPerformed
 
-    private void manageCIMBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCIMBtnActionPerformed
+    private void manageCIMBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCIMBtn2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_manageCIMBtnActionPerformed
+    }//GEN-LAST:event_manageCIMBtn2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminMenu().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createCredentialsBtn;
+    private javax.swing.JButton createCredentialsBtn1;
+    private javax.swing.JButton createCredentialsBtn2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton manageCIMBtn;
+    private javax.swing.JButton manageCIMBtn1;
+    private javax.swing.JButton manageCIMBtn2;
     private javax.swing.JButton manageStoreBtn;
+    private javax.swing.JButton manageStoreBtn1;
+    private javax.swing.JButton manageStoreBtn2;
     private javax.swing.JButton manageStoreEmpBtn;
+    private javax.swing.JButton manageStoreEmpBtn1;
+    private javax.swing.JButton manageStoreEmpBtn2;
     private javax.swing.JButton manageStoreServicesBtn;
+    private javax.swing.JButton manageStoreServicesBtn1;
+    private javax.swing.JButton manageStoreServicesBtn2;
     private javax.swing.JButton manageSystemAdminBtn;
+    private javax.swing.JButton manageSystemAdminBtn1;
+    private javax.swing.JButton manageSystemAdminBtn2;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel title1;
+    private javax.swing.JLabel title2;
     // End of variables declaration//GEN-END:variables
 }
