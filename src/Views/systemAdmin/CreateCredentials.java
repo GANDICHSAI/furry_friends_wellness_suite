@@ -19,6 +19,7 @@ public class CreateCredentials extends javax.swing.JPanel {
     JPanel bottomPanel;
     public CreateCredentials(JPanel bottomPanel) {
         initComponents();
+        this.bottomPanel = bottomPanel;
     }
 
     /**
