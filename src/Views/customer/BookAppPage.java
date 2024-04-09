@@ -4,8 +4,13 @@
  */
 package Views.customer;
 
+import Models.Customer;
+import Utilities.DatabaseConnector;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +22,8 @@ public class BookAppPage extends javax.swing.JPanel {
      * Creates new form BookAppPage
      */
     JPanel bottomPanel;
+    private ArrayList<Customer> customers;
+    private Customer selectedUser;
     public BookAppPage(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -38,10 +45,7 @@ public class BookAppPage extends javax.swing.JPanel {
         custLastNameTextField = new javax.swing.JTextField();
         custEmailTextField = new javax.swing.JTextField();
         confirmCustEmailTextField = new javax.swing.JTextField();
-        passwordTextField = new javax.swing.JTextField();
-        confirmPWTextField = new javax.swing.JTextField();
         loginEmailTextField = new javax.swing.JTextField();
-        loginPWTextField = new javax.swing.JTextField();
         custSignUpButton = new javax.swing.JButton();
         custLogInButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -52,6 +56,9 @@ public class BookAppPage extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        confirmPasswordField = new javax.swing.JPasswordField();
+        passwordField = new javax.swing.JPasswordField();
+        loginPasswordField = new javax.swing.JPasswordField();
 
         jLabel5.setText("jLabel5");
 
@@ -78,6 +85,11 @@ public class BookAppPage extends javax.swing.JPanel {
         });
 
         custSignUpButton.setText("SIGN UP");
+        custSignUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custSignUpButtonActionPerformed(evt);
+            }
+        });
 
         custLogInButton.setText("LOG IN");
         custLogInButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +130,12 @@ public class BookAppPage extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("PASSWORD");
 
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,29 +150,27 @@ public class BookAppPage extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(custFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel3))
-                                            .addGap(26, 26, 26)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel4)
-                                                .addComponent(custLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(custEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7)
-                                            .addComponent(confirmCustEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel9)
-                                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(confirmPWTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel8))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(custFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(custLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel6)
+                                    .addComponent(custEmailTextField)
+                                    .addComponent(jLabel7)
+                                    .addComponent(confirmCustEmailTextField)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8)
+                                    .addComponent(confirmPasswordField))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(106, 106, 106)
                                     .addComponent(custSignUpButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(118, 118, 118))
+                                .addComponent(passwordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1))
                         .addGap(206, 206, 206))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -167,8 +183,8 @@ public class BookAppPage extends javax.swing.JPanel {
                                 .addGap(184, 184, 184)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(loginPWTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(108, 108, 108))
+                            .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(custLogInButton)
                         .addGap(311, 311, 311))))
@@ -197,11 +213,11 @@ public class BookAppPage extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(confirmPWTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(custSignUpButton)
                 .addGap(18, 18, 18)
@@ -211,10 +227,11 @@ public class BookAppPage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(loginPWTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel11))
+                        .addComponent(loginEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
                 .addComponent(custLogInButton)
                 .addGap(19, 19, 19))
@@ -227,23 +244,107 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void custLogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogInButtonActionPerformed
         // TODO add your handling code here:
+        try{
+            this.customers = DatabaseConnector.getAllCustomers();
+            String email = loginEmailTextField.getText();
+            char [] passwordChars = loginPasswordField.getPassword();
+            String password = new String(passwordChars);
+            
+            for (Customer cust: customers){
+                
+                if (email.equals(cust.getEmail())&&password.equals(cust.getPassword())){
+                    
+                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
+                    bottomPanel.add(customerLandingPageObj);
+                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                    layout.next(bottomPanel);
+                    
+                }
+                
+                else{
+                    throw new IllegalArgumentException("Invalid credentials");
+                }
+            }
+            
+            clearFields();
+           
+        }
+        
+        catch(Exception e){
+
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Login Error",JOptionPane.ERROR_MESSAGE);
+        }
         
         
-        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
-        bottomPanel.add(customerLandingPageObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        
+        
         
     }//GEN-LAST:event_custLogInButtonActionPerformed
 
     private void confirmCustEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmCustEmailTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmCustEmailTextFieldActionPerformed
+    private void clearFields(){
+  
+        custFirstNameTextField.setText("");
+        custLastNameTextField.setText("");
+        custEmailTextField.setText("");
+        confirmCustEmailTextField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
+
+        
+    }
+    private void custSignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custSignUpButtonActionPerformed
+        // TODO add your handling code here:
+        
+        String firstName = custFirstNameTextField.getText();
+        String lastName = custLastNameTextField.getText();
+        String email = custEmailTextField.getText();
+        String confirmEmail = confirmCustEmailTextField.getText();
+        char [] passwordChars = passwordField.getPassword();
+        String password = new String(passwordChars);
+        
+        char [] confirmPasswordChars = confirmPasswordField.getPassword();
+        String confirmPassword = new String(confirmPasswordChars);
+        
+        Customer customer = new Customer();
+        
+        try{
+            if(firstName == null || firstName.isEmpty()||lastName == null || lastName.isEmpty()||email == null || email.isEmpty()||confirmEmail == null || confirmEmail.isEmpty()||password == null || password.isEmpty()||confirmPassword == null || confirmPassword.isEmpty()){
+                
+                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
+            }
+            else{
+                
+                customer.setFirstName(firstName);
+                customer.setLastName(lastName);
+                customer.setEmail(email);
+                customer.setPassword(password);
+               
+                DatabaseConnector.addCustomer(customer);
+                JOptionPane.showMessageDialog(this, "Customer Registered Successfully","Successfull Registration",JOptionPane.INFORMATION_MESSAGE);
+
+                clearFields();
+            }
+            
+        }
+        
+        catch(IllegalArgumentException e){
+            
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Incomplete Form Submission Error",JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_custSignUpButtonActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField confirmCustEmailTextField;
-    private javax.swing.JTextField confirmPWTextField;
+    private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JTextField custEmailTextField;
     private javax.swing.JTextField custFirstNameTextField;
     private javax.swing.JTextField custLastNameTextField;
@@ -261,7 +362,7 @@ public class BookAppPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField loginEmailTextField;
-    private javax.swing.JTextField loginPWTextField;
-    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JPasswordField loginPasswordField;
+    private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
 }
