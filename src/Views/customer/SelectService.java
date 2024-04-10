@@ -4,8 +4,13 @@
  */
 package Views.customer;
 
+import Models.StoreService;
+import Utilities.StoreServicesController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +22,14 @@ public class SelectService extends javax.swing.JPanel {
      * Creates new form SelectService
      */
     JPanel bottomPanel;
+    private ArrayList<StoreService> storeServicesList;
+    private StoreService selectedStoreService;
+    
     public SelectService(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
+
     }
 
     /**
@@ -140,7 +150,27 @@ public class SelectService extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
-
+    
+    public void populateTable(){
+        try{
+            this.storeServicesList = StoreServicesController.getAllStoreServices();
+            
+            DefaultTableModel tableModel = (DefaultTableModel) ServiceTable.getModel();
+            tableModel.setRowCount(0);
+            for (StoreService ss: storeServicesList){
+                
+                String[] storeServiceData = {String.valueOf(ss.getStoreServiceID()),ss.getServiceName(),String.valueOf(ss.getServicePrice())};
+                tableModel.addRow(storeServiceData);
+            }
+            
+//            clearFields();
+           
+        }
+        
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
     private void backToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 

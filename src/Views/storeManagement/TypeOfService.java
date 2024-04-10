@@ -4,8 +4,13 @@
  */
 package Views.storeManagement;
 
+import Models.StoreService;
+import Utilities.StoreServicesController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +22,13 @@ public class TypeOfService extends javax.swing.JPanel {
      * Creates new form typeOfService
      */
     JPanel bottomPanel;
+    private ArrayList<StoreService> storeServicesList;
+    private StoreService selectedStoreService;
+    
     public TypeOfService(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
     }
 
     /**
@@ -37,7 +46,7 @@ public class TypeOfService extends javax.swing.JPanel {
         saveAndViewSummaryButton = new javax.swing.JButton();
         chooseDatelb = new javax.swing.JLabel();
         table = new javax.swing.JScrollPane();
-        ServiceTable = new javax.swing.JTable();
+        smServiceTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -67,7 +76,7 @@ public class TypeOfService extends javax.swing.JPanel {
         chooseDatelb.setForeground(new java.awt.Color(255, 255, 255));
         chooseDatelb.setText("CHOOSE APPOINTMENT DATE");
 
-        ServiceTable.setModel(new javax.swing.table.DefaultTableModel(
+        smServiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -78,7 +87,7 @@ public class TypeOfService extends javax.swing.JPanel {
                 "Service ID", "Name", "Price"
             }
         ));
-        table.setViewportView(ServiceTable);
+        table.setViewportView(smServiceTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,7 +146,26 @@ public class TypeOfService extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToProfileCreationButtonActionPerformed
-
+    public void populateTable(){
+        try{
+            this.storeServicesList = StoreServicesController.getAllStoreServices();
+            
+            DefaultTableModel tableModel = (DefaultTableModel) smServiceTable.getModel();
+            tableModel.setRowCount(0);
+            for (StoreService ss: storeServicesList){
+                
+                String[] storeServiceData = {String.valueOf(ss.getStoreServiceID()),ss.getServiceName(),String.valueOf(ss.getServicePrice())};
+                tableModel.addRow(storeServiceData);
+            }
+            
+//            clearFields();
+           
+        }
+        
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
 
@@ -149,12 +177,12 @@ public class TypeOfService extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable ServiceTable;
     private javax.swing.JLabel chooseDatelb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton saveAndViewSummaryButton;
     private javax.swing.JButton smBackToProfileCreationButton;
+    private javax.swing.JTable smServiceTable;
     private javax.swing.JScrollPane table;
     // End of variables declaration//GEN-END:variables
 }
