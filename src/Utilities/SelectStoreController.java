@@ -6,6 +6,7 @@ package Utilities;
 import java.sql.*;
 import java.util.ArrayList;
 import Models.Store;
+import java.util.Set;
 
         
 
@@ -37,7 +38,12 @@ public class SelectStoreController {
                 String storeName = rs.getString("store_name");
                 String storePostalCode = rs.getString("store_postal_code");
                 // Assuming your Store model class has a constructor matching these arguments
-                stores.add(new Store(id, storeName, storePostalCode));
+                
+                Store store = new Store();
+                store.setStoreId(id);
+                store.setPostalCode(storePostalCode);
+                store.setStoreName(storeName);
+                
             }
             rs.close();
         } catch (SQLException e) {
