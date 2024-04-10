@@ -133,5 +133,64 @@ public class SystemAdminController {
         return storeId;
     }
     
+    public static ArrayList<ClientInformationManager> getAllCIMs() {
+        ArrayList<ClientInformationManager> cims = new ArrayList<>();
+
+        String query = "SELECT * FROM Client_Information_Manager";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                ClientInformationManager cim = new ClientInformationManager();
+                cim.setCIMID(rs.getInt("cim_id"));
+                cim.setCIMName(rs.getString("name"));
+                cim.setCIMEmail(rs.getString("email"));
+                cim.setCIMPassword(rs.getString("password"));
+
+                cims.add(cim);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return cims;
+    }
+    
+    
+    public static void editClientInformationManager(ClientInformationManager oldCIM, ClientInformationManager newCIM) {
+        String query = "UPDATE Client_Information_Manager SET name=?, email=?, password=? WHERE cim_id=?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, newCIM.getCIMName());
+            stmt.setString(2, newCIM.getCIMEmail());
+            stmt.setString(3, newCIM.getCIMPassword());
+            stmt.setInt(4, oldCIM.getCIMID());
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Client Information Manager updated successfully.");
+            } else {
+                System.out.println("Failed to update Client Information Manager.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+     public static void deleteCIM(ClientInformationManager cim) {
+        String query = "delete from Client_Information_Manager where cim_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, cim.getCIMID());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     
 }
