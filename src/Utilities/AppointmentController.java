@@ -19,10 +19,6 @@ import java.util.ArrayList;
  */
 public class AppointmentController {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/FFWS";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
-
     /**
      * Privatized constructor so as to not allow object creation
      */
@@ -32,7 +28,7 @@ public class AppointmentController {
     public static void addAppointment(Appointment appointment) {
         //add to database
         String query = "INSERT INTO Appointment(cust_id,store_name,service_id,pet_id,date,status,rating) VALUES(?,?,?,?,?,?,?)";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             java.util.Date utilDate = appointment.getDate();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
@@ -58,11 +54,12 @@ public class AppointmentController {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
         String query = "SELECT * FROM Appointment";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Appointment appointment = new Appointment();
+                appointment.setAppointmentId(rs.getInt("app_id"));
                 appointment.setCustomerId(rs.getInt("cust_id"));
                 appointment.setStoreName(rs.getString("store_name"));
                 appointment.setServiceId(rs.getInt("service_id"));
@@ -85,12 +82,13 @@ public class AppointmentController {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
         String query = "SELECT * FROM Appointment WHERE cust_id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, customerId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Appointment appointment = new Appointment();
+                appointment.setAppointmentId(rs.getInt("app_id"));
                 appointment.setCustomerId(rs.getInt("cust_id"));
                 appointment.setStoreName(rs.getString("store_name"));
                 appointment.setServiceId(rs.getInt("service_id"));
@@ -113,12 +111,13 @@ public class AppointmentController {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
         String query = "SELECT * FROM Appointment WHERE store_id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, storeId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Appointment appointment = new Appointment();
+                appointment.setAppointmentId(rs.getInt("app_id"));
                 appointment.setCustomerId(rs.getInt("cust_id"));
                 appointment.setStoreName(rs.getString("store_name"));
                 appointment.setServiceId(rs.getInt("service_id"));
