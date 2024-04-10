@@ -6,17 +6,20 @@ public class Appointment {
     private int appointmentId;
     private int customerId;
     private String storeName;
-    private String serviceType;
+    private int serviceId;
     private int petId;
     private Date date;
     private String status;
     private int rating;
 
-    public Appointment(int appointmentId, int customerId, String storeName, String serviceType, int petId, Date date, String status, int rating) {
+    public Appointment() {
+    }
+        
+    public Appointment(int appointmentId, int customerId, String storeName, int serviceId, int petId, Date date, String status, int rating) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.storeName = storeName;
-        this.serviceType = serviceType;
+        this.serviceId = serviceId;
         this.petId = petId;
         this.date = date;
         this.status = status;
@@ -47,12 +50,12 @@ public class Appointment {
         this.storeName = storeName;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
     public int getPetId() {
