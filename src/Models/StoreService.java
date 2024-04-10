@@ -14,7 +14,7 @@ public class StoreService {
     
     private String serviceName;
     
-    private String servicePrice;
+    private float servicePrice;
 
     public int getStoreServiceID() {
         return storeServiceID;
@@ -32,20 +32,20 @@ public class StoreService {
         this.serviceName = serviceName;
     }
 
-    public String getServicePrice() { 
+    public float getServicePrice() { 
         return servicePrice;
     }
 
-    public void setServicePrice(String servicePrice) {
+    public void setServicePrice(float servicePrice) {
         this.servicePrice = servicePrice;
     }
     
-    public StoreService serviceSelection(int storeServiceID, String serviceName, String servicePrice) {
-        StoreService storeService = new StoreService();
-        storeService.setStoreServiceID(storeServiceID);
-        storeService.setServiceName(serviceName);
-        storeService.setServicePrice(servicePrice);
-        return storeService;
-    }
+//    public StoreService serviceSelection(int storeServiceID, String serviceName, String servicePrice) {
+//        StoreService storeService = new StoreService();
+//        storeService.setStoreServiceID(storeServiceID);
+//        storeService.setServiceName(serviceName);
+//        storeService.setServicePrice(servicePrice);
+//        return storeService;
+//    }
 
 }

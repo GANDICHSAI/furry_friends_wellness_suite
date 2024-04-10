@@ -141,10 +141,10 @@ public class TypeOfService extends javax.swing.JPanel {
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
 
-        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel);
-        bottomPanel.add(appointmentSummaryObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+//        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel);
+//        bottomPanel.add(appointmentSummaryObj);
+//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+//        layout.next(bottomPanel);
     }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
 
 
