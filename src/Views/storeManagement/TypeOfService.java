@@ -158,7 +158,6 @@ public class TypeOfService extends javax.swing.JPanel {
                 tableModel.addRow(storeServiceData);
             }
             
-//            clearFields();
            
         }
         

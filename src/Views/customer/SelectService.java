@@ -162,9 +162,6 @@ public class SelectService extends javax.swing.JPanel {
                 String[] storeServiceData = {String.valueOf(ss.getStoreServiceID()),ss.getServiceName(),String.valueOf(ss.getServicePrice())};
                 tableModel.addRow(storeServiceData);
             }
-            
-//            clearFields();
-           
         }
         
         catch(Exception e){

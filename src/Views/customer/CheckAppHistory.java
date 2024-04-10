@@ -4,6 +4,7 @@
  */
 package Views.customer;
 
+import Models.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -20,6 +21,7 @@ public class CheckAppHistory extends javax.swing.JPanel {
     public CheckAppHistory(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        
     }
 
     /**
@@ -101,7 +103,8 @@ public class CheckAppHistory extends javax.swing.JPanel {
 
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
-        
+   
+
         CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
         bottomPanel.add(customerLandingPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();

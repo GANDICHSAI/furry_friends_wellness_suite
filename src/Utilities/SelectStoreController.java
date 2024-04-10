@@ -24,7 +24,7 @@ public class SelectStoreController {
      */
    
         ArrayList<Store> stores = new ArrayList<>();
-        String query = "SELECT store_id, store_name, postalCode FROM Store WHERE postalCode = ?";
+        String query = "SELECT * FROM Store WHERE store_postal_code = ?";
 
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -35,7 +35,7 @@ public class SelectStoreController {
             while (rs.next()) {
                 int id = rs.getInt("store_id");
                 String storeName = rs.getString("store_name");
-                String storePostalCode = rs.getString("postalCode");
+                String storePostalCode = rs.getString("store_postal_code");
                 // Assuming your Store model class has a constructor matching these arguments
                 stores.add(new Store(id, storeName, storePostalCode));
             }
