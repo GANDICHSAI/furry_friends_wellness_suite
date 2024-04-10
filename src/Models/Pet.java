@@ -8,10 +8,13 @@ public class Pet {
     private int age;
     private String color;
     private String gender;
-    private double weight;
+    private float weight;
     private String type;
+    
+    public Pet() {
+    }
 
-    public Pet(int petId, int customerId, String petName, int age, String color, String gender, double weight, String type) {
+    public Pet(int petId, int customerId, String petName, int age, String color, String gender, float weight, String type) {
         this.petId = petId;
         this.customerId = customerId;
         this.petName = petName;
@@ -70,11 +73,11 @@ public class Pet {
         this.gender = gender;
     }
 
-    public double getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
