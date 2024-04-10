@@ -4,7 +4,10 @@
  */
 package Views.customer;
 
+
+import Models.Customer;
 import Models.StoreService;
+import Utilities.CustomerController;
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -23,12 +26,14 @@ public class SelectService extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     private ArrayList<StoreService> storeServicesList;
-    private StoreService selectedStoreService;
+    Customer customer;
     
-    public SelectService(JPanel bottomPanel) {
+    public SelectService(JPanel bottomPanel,Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.customer = customer;
         populateTable();
+        
 
     }
 
@@ -145,7 +150,7 @@ public class SelectService extends javax.swing.JPanel {
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         
-        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel);
+        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel,customer);
         bottomPanel.add(appointmentSummaryObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -153,6 +158,7 @@ public class SelectService extends javax.swing.JPanel {
     
     public void populateTable(){
         try{
+            
             this.storeServicesList = StoreServicesController.getAllStoreServices();
             
             DefaultTableModel tableModel = (DefaultTableModel) ServiceTable.getModel();
@@ -171,7 +177,7 @@ public class SelectService extends javax.swing.JPanel {
     private void backToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel);
+        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer);
         bottomPanel.add(createPetProfile);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

@@ -4,13 +4,13 @@
  */
 package Views.customer;
 
+
 import Models.Customer;
 import Utilities.CustomerController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +23,7 @@ public class BookAppPage extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     private ArrayList<Customer> customers;
-    private Customer selectedUser;
+    private Boolean auth=false;
     public BookAppPage(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -249,22 +249,27 @@ public class BookAppPage extends javax.swing.JPanel {
             String email = loginEmailTextField.getText();
             char [] passwordChars = loginPasswordField.getPassword();
             String password = new String(passwordChars);
+
+            System.out.println(password);
             
             for (Customer cust: customers){
                 
-                if (email.equals(cust.getEmail())&&password.equals(cust.getPassword())){
+                if (cust.getEmail().equals(email) && cust.getPassword().equals(password)){
                     
-                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel);
+
+                    auth = true;
+                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust);
                     bottomPanel.add(customerLandingPageObj);
                     CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                    layout.next(bottomPanel);
-                    
+                    layout.next(bottomPanel);     
+                    break;
                 }
-                
-                else{
+          
+              
+            }
+             if (!auth){
                     throw new IllegalArgumentException("Invalid credentials");
                 }
-            }
             
             clearFields();
            

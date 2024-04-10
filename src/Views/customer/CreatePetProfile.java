@@ -4,6 +4,7 @@
  */
 package Views.customer;
 
+import Models.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,9 +18,11 @@ public class CreatePetProfile extends javax.swing.JPanel {
      * Creates new form CreatePetProfile
      */
     JPanel bottomPanel;
-    public CreatePetProfile(JPanel bottomPanel) {
+    Customer customer;
+    public CreatePetProfile(JPanel bottomPanel,Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.customer = customer;
     }
 
     /**
@@ -203,7 +206,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private void saveToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButtonActionPerformed
         // TODO add your handling code here:
         
-        SelectService selectServiceObj = new SelectService(bottomPanel);
+        SelectService selectServiceObj = new SelectService(bottomPanel,customer);
         bottomPanel.add(selectServiceObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -212,7 +215,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private void backToStoreSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToStoreSelectionButtonActionPerformed
         // TODO add your handling code here:
 
-        SelectStore selectStore = new SelectStore(bottomPanel);
+        SelectStore selectStore = new SelectStore(bottomPanel,customer);
         bottomPanel.add(selectStore);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
