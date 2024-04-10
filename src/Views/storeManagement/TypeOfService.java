@@ -32,58 +32,18 @@ public class TypeOfService extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        pck1label = new javax.swing.JLabel();
-        choosePkglb = new javax.swing.JLabel();
-        pck2lb = new javax.swing.JLabel();
-        pkg3lb = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        smSaveAndViewSummaryButton = new javax.swing.JButton();
-        chooseDatelb = new javax.swing.JLabel();
-        smChoosePkgComboBox = new javax.swing.JComboBox<>();
         smBackToProfileCreationButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        saveAndViewSummaryButton = new javax.swing.JButton();
+        chooseDatelb = new javax.swing.JLabel();
+        table = new javax.swing.JScrollPane();
+        ServiceTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SELECT SERVICE PACKAGE");
-
-        pck1label.setBackground(new java.awt.Color(255, 255, 255));
-        pck1label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pck1label.setForeground(new java.awt.Color(255, 255, 255));
-        pck1label.setText("PACKAGE 1: BATH AND FULL HAIRCUT  -- $50");
-
-        choosePkglb.setBackground(new java.awt.Color(255, 255, 255));
-        choosePkglb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        choosePkglb.setForeground(new java.awt.Color(255, 255, 255));
-        choosePkglb.setText("CHOOSE YOUR SERVICE PACKAGE");
-
-        pck2lb.setBackground(new java.awt.Color(255, 255, 255));
-        pck2lb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pck2lb.setForeground(new java.awt.Color(255, 255, 255));
-        pck2lb.setText("PACKAGE 2: BATH AND BRUSH              -- $30");
-
-        pkg3lb.setBackground(new java.awt.Color(255, 255, 255));
-        pkg3lb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pkg3lb.setForeground(new java.awt.Color(255, 255, 255));
-        pkg3lb.setText("PACKAGE 3: BATH ONLY                          -- $25");
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("PLACEHOLDER FOR JCAL");
-
-        smSaveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
-        smSaveAndViewSummaryButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smSaveAndViewSummaryButtonActionPerformed(evt);
-            }
-        });
-
-        chooseDatelb.setBackground(new java.awt.Color(255, 255, 255));
-        chooseDatelb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        chooseDatelb.setForeground(new java.awt.Color(255, 255, 255));
-        chooseDatelb.setText("CHOOSE APPOINTMENT DATE");
-
-        smChoosePkgComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PACKAGE 1", "PACKAGE 2", "PACKAGE 3" }));
 
         smBackToProfileCreationButton.setText("BACK TO PROFILE CREATION");
         smBackToProfileCreationButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,40 +52,63 @@ public class TypeOfService extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("PLACEHOLDER FOR JCAL");
+
+        saveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
+        saveAndViewSummaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAndViewSummaryButtonActionPerformed(evt);
+            }
+        });
+
+        chooseDatelb.setBackground(new java.awt.Color(255, 255, 255));
+        chooseDatelb.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        chooseDatelb.setForeground(new java.awt.Color(255, 255, 255));
+        chooseDatelb.setText("CHOOSE APPOINTMENT DATE");
+
+        ServiceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Service ID", "Name", "Price"
+            }
+        ));
+        table.setViewportView(ServiceTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(250, 250, 250)
+                                    .addComponent(jLabel6))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(198, 198, 198)
+                                    .addComponent(chooseDatelb)))
+                            .addGap(221, 221, 221)))
+                    .addComponent(smBackToProfileCreationButton))
+                .addGap(15, 15, 15))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(226, 226, 226)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(chooseDatelb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(choosePkglb, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
-                .addContainerGap(82, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pck1label, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-                    .addComponent(pck2lb, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pkg3lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(258, 258, 258)
+                        .addComponent(saveAndViewSummaryButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(smSaveAndViewSummaryButton)
-                .addGap(260, 260, 260))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(smBackToProfileCreationButton)
-                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,34 +117,17 @@ public class TypeOfService extends javax.swing.JPanel {
                 .addComponent(smBackToProfileCreationButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(pck1label)
-                .addGap(29, 29, 29)
-                .addComponent(pck2lb)
+                .addGap(70, 70, 70)
+                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(chooseDatelb)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(pkg3lb)
-                .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(smChoosePkgComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(choosePkglb))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseDatelb)
-                    .addComponent(jLabel6))
-                .addGap(57, 57, 57)
-                .addComponent(smSaveAndViewSummaryButton)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addComponent(saveAndViewSummaryButton)
+                .addContainerGap(263, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void smSaveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSaveAndViewSummaryButtonActionPerformed
-        // TODO add your handling code here:
-        
-        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel);
-        bottomPanel.add(reviewClientAppointmentObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
-    }//GEN-LAST:event_smSaveAndViewSummaryButtonActionPerformed
 
     private void smBackToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
@@ -172,17 +138,23 @@ public class TypeOfService extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToProfileCreationButtonActionPerformed
 
+    private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
+        // TODO add your handling code here:
+
+        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel);
+        bottomPanel.add(appointmentSummaryObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ServiceTable;
     private javax.swing.JLabel chooseDatelb;
-    private javax.swing.JLabel choosePkglb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel pck1label;
-    private javax.swing.JLabel pck2lb;
-    private javax.swing.JLabel pkg3lb;
+    private javax.swing.JButton saveAndViewSummaryButton;
     private javax.swing.JButton smBackToProfileCreationButton;
-    private javax.swing.JComboBox<String> smChoosePkgComboBox;
-    private javax.swing.JButton smSaveAndViewSummaryButton;
+    private javax.swing.JScrollPane table;
     // End of variables declaration//GEN-END:variables
 }
