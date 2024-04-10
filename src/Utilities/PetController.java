@@ -18,12 +18,13 @@ import java.util.ArrayList;
  * @author yihan
  */
 public class PetController {
-    
+
     private PetController() {
     }
 
-    public static void addPet(Pet pet) {
+    public static int addPet(Pet pet) {
         //add to database
+        int generatedId = -1;
         String query = "INSERT INTO Pet(cust_id,pet_name,age,color,gender,weight,type) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
 
@@ -39,12 +40,19 @@ public class PetController {
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
 //            conn.close();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1); // get generatedId
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return generatedId;
     }
 
-     public static ArrayList<Pet> getPetsByCustomerId(int customerId) {
+    public static ArrayList<Pet> getPetsByCustomerId(int customerId) {
         ArrayList<Pet> pets = new ArrayList<>();
 
         String query = "SELECT * FROM Pet WHERE customer_id = ?";
