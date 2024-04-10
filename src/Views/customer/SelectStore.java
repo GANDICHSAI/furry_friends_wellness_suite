@@ -4,8 +4,13 @@
  */
 package Views.customer;
 
+import Models.Store;
+import Utilities.SelectStoreController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -53,6 +58,11 @@ public class SelectStore extends javax.swing.JPanel {
         jLabel2.setText("SEARCH BY YOUR LOCATION");
 
         searchByPostalCodeButton.setText("SEARCH");
+        searchByPostalCodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByPostalCodeButtonActionPerformed(evt);
+            }
+        });
 
         storeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,6 +165,30 @@ public class SelectStore extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToHomeButtonActionPerformed
+
+    private void searchByPostalCodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByPostalCodeButtonActionPerformed
+        // TODO add your handling code here:
+        String postalCode = postalCodeTextField.getText();
+    
+    // Clear the existing table data
+    DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
+    model.setRowCount(0);
+    
+    // Check if the postal code field is not empty or just the placeholder text
+    if(postalCode != null && !postalCode.trim().isEmpty() && !postalCode.equals("POSTAL CODE")) {
+        // Use StoreController to get the list of stores by postal code
+        SelectStoreController storeController = new SelectStoreController();
+        ArrayList<Store> stores = storeController.searchByPostalCode(postalCode);
+        
+        // Update the store table with the results
+        for(Store store : stores) {
+            model.addRow(new Object[]{store.getStoreName(), store.getPostalCode()});
+        }
+    } else {
+        // Show an error message dialog if the postal code field is empty
+        JOptionPane.showMessageDialog(this, "Please enter a valid postal code.", "Search Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_searchByPostalCodeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

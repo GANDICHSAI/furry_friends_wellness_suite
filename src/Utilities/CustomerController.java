@@ -13,16 +13,14 @@ import java.util.ArrayList;
  * Database Connector class for interacting with database
  * @author akshatr
  */
-public class DatabaseConnector {
+public class CustomerController {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/FFWS";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "mysql";
+
 
     /**
      * Privatized constructor so as to not allow object creation
      */
-    private DatabaseConnector() {
+    private CustomerController() {
     }
 
     /**
@@ -33,7 +31,7 @@ public class DatabaseConnector {
     public static void addCustomer(Customer customer) {
         //add to database
         String query = "INSERT INTO Customer(first_name,last_name,email,password) VALUES(?,?,?,?)";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
@@ -58,7 +56,7 @@ public class DatabaseConnector {
         ArrayList<Customer> customers = new ArrayList<>();
 
         String query = "SELECT * FROM Customer";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
