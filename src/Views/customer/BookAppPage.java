@@ -5,7 +5,7 @@
 package Views.customer;
 
 import Models.Customer;
-import Utilities.DatabaseConnector;
+import Utilities.CustomerController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -245,7 +245,7 @@ public class BookAppPage extends javax.swing.JPanel {
     private void custLogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogInButtonActionPerformed
         // TODO add your handling code here:
         try{
-            this.customers = DatabaseConnector.getAllCustomers();
+            this.customers = CustomerController.getAllCustomers();
             String email = loginEmailTextField.getText();
             char [] passwordChars = loginPasswordField.getPassword();
             String password = new String(passwordChars);
@@ -322,7 +322,7 @@ public class BookAppPage extends javax.swing.JPanel {
                 customer.setEmail(email);
                 customer.setPassword(password);
                
-                DatabaseConnector.addCustomer(customer);
+                CustomerController.addCustomer(customer);
                 JOptionPane.showMessageDialog(this, "Customer Registered Successfully","Successfull Registration",JOptionPane.INFORMATION_MESSAGE);
 
                 clearFields();
