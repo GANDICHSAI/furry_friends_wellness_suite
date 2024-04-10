@@ -4,22 +4,64 @@
  */
 package Views.systemAdmin;
 
+import Models.ClientInformationManager;
+import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hanee
  */
-public class ManageCIM extends javax.swing.JPanel {
+public final class ManageCIM extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCIMM
      */
     JPanel bottomPanel;
+    private ClientInformationManager selectedCIM;
+    private ClientInformationManager editingCIM;
+    private ArrayList<ClientInformationManager> cims;
+    
     public ManageCIM(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
+        
+    }
+    
+    private void clearFields() {
+        
+        nameInput.setText("");
+        emailInput.setText("");
+        passwordInput.setText("");
+        idValue.setText("");
+        
+        selectedCIM = null;
+        editingCIM = null;
+    }
+    
+    public void populateTable() {
+        try {
+            
+            this.cims = SystemAdminController.getAllCIMs();
+            DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+            
+            tableModel.setRowCount(0);
+            
+            for (ClientInformationManager cim : cims) {
+                String[] cimData = {(String) Integer.toString(cim.getCIMID()), cim.getCIMName(), cim.getCIMEmail(), cim.getCIMPassword()};
+                tableModel.addRow(cimData);
+            }
+            
+            clearFields();
+            
+        } catch (Exception e) {
+            
+        }
     }
 
     /**
@@ -106,10 +148,25 @@ public class ManageCIM extends javax.swing.JPanel {
         passwordLabel.setText("Password");
 
         deleteCIMBtn.setText("Delete CIM");
+        deleteCIMBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCIMBtnActionPerformed(evt);
+            }
+        });
 
         editCIMBtn.setText("Edit CIM");
+        editCIMBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCIMBtnActionPerformed(evt);
+            }
+        });
 
         saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         backToMenuBtn.setText("Back to admin menu");
         backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -217,12 +274,99 @@ public class ManageCIM extends javax.swing.JPanel {
 
     private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
         // TODO add your handling code here:
-        
+
         AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
         bottomPanel.add(adminMenuObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToMenuBtnActionPerformed
+
+    private void editCIMBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCIMBtnActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select a user you want to edit the data for!");
+            } else {
+                editingCIM = cims.get(selectedRowIndex);
+                idValue.setText((String) Integer.toString(editingCIM.getCIMID()));
+                nameInput.setText(editingCIM.getCIMName());
+                emailInput.setText(editingCIM.getCIMEmail());
+                passwordInput.setText(editingCIM.getCIMPassword());
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editCIMBtnActionPerformed
+
+    private void deleteCIMBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCIMBtnActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                
+                throw new IllegalArgumentException("Please select a user to delete!");
+                
+            } else {
+                
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                selectedCIM = cims.get(selectedRowIndex);
+                SystemAdminController.deleteCIM(selectedCIM);
+                clearFields();
+                populateTable();
+                JOptionPane.showMessageDialog(null, "User succesfully deleted!", "Successfully Deleted", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+            
+        } catch (IllegalArgumentException e) {
+            
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Selection Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Deletion Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_deleteCIMBtnActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            if (editingCIM == null) {
+                 throw new IllegalArgumentException("no-select");
+            } else {
+                ClientInformationManager newCIM = new ClientInformationManager();
+                
+                newCIM.setCIMName(nameInput.getText());
+                newCIM.setCIMEmail(emailInput.getText());
+                
+                char[] password = passwordInput.getPassword();
+                
+                String passwordString = new String(password);
+                newCIM.setCIMPassword(passwordString);
+                
+                if (editingCIM.getCIMName().equals(newCIM.getCIMName()) && editingCIM.getCIMEmail().equals(newCIM.getCIMEmail())) {
+                    System.out.print(editingCIM.getCIMName().equals(newCIM.getCIMName()) && editingCIM.getCIMEmail().equals(newCIM.getCIMEmail()));
+                    throw new IllegalArgumentException("no-edit");
+                } else {
+                    SystemAdminController.editClientInformationManager(editingCIM, newCIM);
+                    clearFields();
+                    populateTable();
+                    JOptionPane.showMessageDialog(null, "User succesfully updated!", "Successfully Updated", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("no-edit")) {
+                JOptionPane.showMessageDialog(this, "Please make some changes to the user you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (e.getMessage().equals("no-select")) {
+                JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
