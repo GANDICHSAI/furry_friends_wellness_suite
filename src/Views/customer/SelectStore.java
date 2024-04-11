@@ -162,7 +162,7 @@ public class SelectStore extends javax.swing.JPanel {
         layout.next(bottomPanel);
         
         //create new appointment object 
-        Appointment appointment = new Appointment();
+        //Appointment appointment = new Appointment();
         appointment.setCustomerId(customer.getCustomerID());
         
         //set store name into appointment

@@ -42,6 +42,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         petTitleLabel = new javax.swing.JLabel();
         petNameTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -49,7 +50,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
         catRadioButton = new javax.swing.JRadioButton();
         dogRadioButton = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        petGenTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         petWeightTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -58,6 +58,8 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         saveToSelectServiceButton = new javax.swing.JButton();
         backToStoreSelectionButton = new javax.swing.JButton();
+        girlRadioButton = new javax.swing.JRadioButton();
+        boyRadioButton = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -88,8 +90,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("PET TYPE");
-
-        petGenTextField.setText("pet gender");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,6 +123,21 @@ public class CreatePetProfile extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup2.add(girlRadioButton);
+        girlRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        girlRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        girlRadioButton.setText("GIRL");
+        girlRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                girlRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(boyRadioButton);
+        boyRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        boyRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        boyRadioButton.setText("BOY");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,10 +159,12 @@ public class CreatePetProfile extends javax.swing.JPanel {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(petWeightTextField))
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(petGenTextField))
+                                    .addComponent(girlRadioButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(boyRadioButton))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
@@ -190,7 +207,8 @@ public class CreatePetProfile extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(petGenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(girlRadioButton)
+                    .addComponent(boyRadioButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(petWeightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,14 +234,16 @@ public class CreatePetProfile extends javax.swing.JPanel {
         //pet info
         String petName = petNameTextField.getText();
         String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
-        String petGender = petGenTextField.getText();
+        
+        String petGender = buttonGroup2.getSelection().getActionCommand();
+        
         int petAge = Integer.parseInt(petAgeTextField.getText());
         String petColor = petColTextField.getText();
         float petWeight = Float.parseFloat(petWeightTextField.getText());
         
         //pet object
         Pet pet = new Pet();
-        pet.setCustomerId(customer.getCustomerID());
+        pet.setCustomerId(appointment.getCustomerId());
         pet.setPetName(petName);
         pet.setType(petType);
         pet.setGender(petGender);
@@ -263,12 +283,19 @@ public class CreatePetProfile extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToStoreSelectionButtonActionPerformed
 
+    private void girlRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_girlRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_girlRadioButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToStoreSelectionButton;
+    private javax.swing.JRadioButton boyRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JRadioButton catRadioButton;
     private javax.swing.JRadioButton dogRadioButton;
+    private javax.swing.JRadioButton girlRadioButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -276,7 +303,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField petAgeTextField;
     private javax.swing.JTextField petColTextField;
-    private javax.swing.JTextField petGenTextField;
     private javax.swing.JLabel petNameLable;
     private javax.swing.JTextField petNameTextField;
     private javax.swing.JLabel petTitleLabel;

@@ -50,12 +50,12 @@ public class SelectService extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         saveAndViewSummaryButton = new javax.swing.JButton();
         chooseDatelb = new javax.swing.JLabel();
         backToProfileCreationButton = new javax.swing.JButton();
         table = new javax.swing.JScrollPane();
         ServiceTable = new javax.swing.JTable();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -63,9 +63,6 @@ public class SelectService extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SELECT SERVICE PACKAGE");
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("PLACEHOLDER FOR JCAL");
 
         saveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
         saveAndViewSummaryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,8 +124,8 @@ public class SelectService extends javax.swing.JPanel {
                         .addGap(204, 204, 204)
                         .addComponent(chooseDatelb))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(jLabel6)))
+                        .addGap(285, 285, 285)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,9 +139,9 @@ public class SelectService extends javax.swing.JPanel {
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(chooseDatelb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addGap(82, 82, 82)
+                .addGap(33, 33, 33)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addComponent(saveAndViewSummaryButton)
                 .addContainerGap(125, Short.MAX_VALUE))
         );
@@ -156,16 +153,15 @@ public class SelectService extends javax.swing.JPanel {
         // retrieve service selection
         int selectedRow = ServiceTable.getSelectedRow();
         if (selectedRow != -1) {
-        // Assuming the Service ID is in the first column
+        
             int serviceId = Integer.parseInt(ServiceTable.getValueAt(selectedRow, 0).toString());
 
-            // Step 2: Store the service ID in the Appointment object
+            // Store the service ID in the Appointment object
             appointment.setServiceId(serviceId);
-
-            // Optional: Store the service name 
-            //String serviceName = ServiceTable.getValueAt(selectedRow, 1).toString();
             
-            // Step 3: Insert the appointment into the database
+            appointment.setDate(jDateChooser1.getDate());
+
+
             AppointmentController.addAppointment(appointment);
 
             // Navigate to the Appointment Summary page
@@ -216,8 +212,8 @@ public class SelectService extends javax.swing.JPanel {
     private javax.swing.JTable ServiceTable;
     private javax.swing.JButton backToProfileCreationButton;
     private javax.swing.JLabel chooseDatelb;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton saveAndViewSummaryButton;
     private javax.swing.JScrollPane table;
     // End of variables declaration//GEN-END:variables
