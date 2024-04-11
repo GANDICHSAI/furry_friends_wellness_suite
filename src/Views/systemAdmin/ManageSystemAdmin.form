@@ -61,16 +61,16 @@
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPasswordField1" alignment="0" pref="174" max="32767" attributes="0"/>
+                      <Component id="adminLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="systemAdminEmailField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="systemAdminNameField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="systemAdminPasswordField" alignment="0" pref="174" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton1" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="deleteSystemAdminButton" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="saveChangesButton" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="editSystemAdminButton" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -91,30 +91,30 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="adminLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="systemAdminNameField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="systemAdminEmailField" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jPasswordField1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="systemAdminPasswordField" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButton1" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="deleteSystemAdminButton" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="editSystemAdminButton" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="saveChangesButton" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -141,7 +141,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="systemAdminTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
@@ -166,7 +166,7 @@
             <Property name="text" type="java.lang.String" value="Admin ID"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="adminLabel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -191,14 +191,14 @@
             <Property name="text" type="java.lang.String" value="Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="systemAdminNameField">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="systemAdminNameFieldActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="systemAdminEmailField">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="systemAdminEmailFieldActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -223,22 +223,31 @@
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+        <Component class="javax.swing.JPasswordField" name="systemAdminPasswordField">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="deleteSystemAdminButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete System Admin"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteSystemAdminButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="saveChangesButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save Changes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChangesButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="editSystemAdminButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit System Admin"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editSystemAdminButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>

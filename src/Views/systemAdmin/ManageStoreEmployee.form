@@ -112,7 +112,7 @@
                               <Component id="passwordInput" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="7" max="32767" attributes="0"/>
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -225,6 +225,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="storeDropdownActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -262,16 +265,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete Store Employee"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteStoreEmpBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="editStoreEmpBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit Store Employee"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editStoreEmpBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="saveChangesBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save Changes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChangesBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="backToMenuBtn">
           <Properties>

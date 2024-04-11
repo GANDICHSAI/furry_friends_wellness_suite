@@ -4,8 +4,14 @@
  */
 package Views.systemAdmin;
 
+import Models.ClientInformationManager;
+import Models.StoreService;
+import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,10 +23,47 @@ public class ManageStoreServices extends javax.swing.JPanel {
      * Creates new form ManageStoreServicess
      */
     JPanel bottomPanel;
+    
+    private StoreService selectedSS;
+    private StoreService editingSS;
+    private ArrayList<StoreService> storeServicesList;
+    
     public ManageStoreServices(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
     }
+    
+    private void clearFields() {
+        
+        nameInput.setText("");
+
+        priceInput.setText("");
+        idValue.setText("");
+        
+        selectedSS = null;
+        editingSS = null;
+    }
+    public void populateTable() {
+        try {
+            
+            this.storeServicesList = SystemAdminController.getAllStoreServices();
+            DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+            
+            tableModel.setRowCount(0);
+            
+            for (StoreService ss : storeServicesList) {
+                String[] ssData = {String.valueOf(ss.getStoreServiceID()),ss.getServiceName(),String.valueOf(ss.getServicePrice()) };
+                tableModel.addRow(ssData);
+            }
+            
+            clearFields();
+            
+        } catch (Exception e) {
+            
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,11 +121,32 @@ public class ManageStoreServices extends javax.swing.JPanel {
         priceLabel.setForeground(new java.awt.Color(255, 255, 255));
         priceLabel.setText("Price");
 
+        priceInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceInputActionPerformed(evt);
+            }
+        });
+
         deleteServiceTypeBtn.setText("Delete Service Type");
+        deleteServiceTypeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteServiceTypeBtnActionPerformed(evt);
+            }
+        });
 
         editServiceTypeBtn.setText("Edit Service Type");
+        editServiceTypeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editServiceTypeBtnActionPerformed(evt);
+            }
+        });
 
         saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         backToMenuBtn.setText("Back to admin menu");
         backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +240,98 @@ public class ManageStoreServices extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToMenuBtnActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            if (editingSS == null) {
+                 throw new IllegalArgumentException("no-select");
+            } else {
+                StoreService newSS = new StoreService();
+                
+                newSS.setServiceName(nameInput.getText());
+                newSS.setServicePrice(Float.parseFloat(priceInput.getText()));
+                
+                if (editingSS.getServiceName().equals(newSS.getServiceName()) && editingSS.getServicePrice() == (newSS.getServicePrice())) {
+                  
+                    throw new IllegalArgumentException("no-edit");
+                } else {
+                    SystemAdminController.editStoreServices(editingSS, newSS);
+                    clearFields();
+                    populateTable();
+                    JOptionPane.showMessageDialog(null, "User succesfully updated!", "Successfully Updated", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("no-edit")) {
+                JOptionPane.showMessageDialog(this, "Please make some changes to the user you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (e.getMessage().equals("no-select")) {
+                JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
+
+    private void editServiceTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editServiceTypeBtnActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select a user you want to edit the data for!");
+            } else {
+                editingSS = storeServicesList.get(selectedRowIndex);
+                idValue.setText((String) Integer.toString(editingSS.getStoreServiceID()));
+                nameInput.setText(editingSS.getServiceName());
+                priceInput.setText(String.valueOf( editingSS.getServicePrice()));
+
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+       
+    }//GEN-LAST:event_editServiceTypeBtnActionPerformed
+
+    private void deleteServiceTypeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteServiceTypeBtnActionPerformed
+        // TODO add your handling code here:
+        
+         try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                
+                throw new IllegalArgumentException("Please select a user to delete!");
+                
+            } else {
+                
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                selectedSS = storeServicesList.get(selectedRowIndex);
+                SystemAdminController.deleteSS(selectedSS);
+                clearFields();
+                populateTable();
+                JOptionPane.showMessageDialog(null, "User succesfully deleted!", "Successfully Deleted", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+            
+        } catch (IllegalArgumentException e) {
+            
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Selection Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Deletion Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+        
+    }//GEN-LAST:event_deleteServiceTypeBtnActionPerformed
+
+    private void priceInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceInputActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

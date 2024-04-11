@@ -4,8 +4,14 @@
  */
 package Views.systemAdmin;
 
+import Models.StoreService;
+import Models.SystemAdmin;
+import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +23,14 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
      * Creates new form ManageSystemAdminn
      */
     JPanel bottomPanel;
+    private SystemAdmin selectedSA;
+    private SystemAdmin editingSA;
+    private ArrayList<SystemAdmin> systemAdminsList;
+    
     public ManageSystemAdmin(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
     }
 
     /**
@@ -34,18 +45,18 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        systemAdminTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        adminLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        systemAdminNameField = new javax.swing.JTextField();
+        systemAdminEmailField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        systemAdminPasswordField = new javax.swing.JPasswordField();
+        deleteSystemAdminButton = new javax.swing.JButton();
+        saveChangesButton = new javax.swing.JButton();
+        editSystemAdminButton = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -54,7 +65,7 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Manage System Admin");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        systemAdminTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,30 +76,30 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
                 "Admin ID", "Name", "Email", "Password"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(systemAdminTable);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Admin ID");
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Admin ID");
+        adminLabel.setBackground(new java.awt.Color(255, 255, 255));
+        adminLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        adminLabel.setForeground(new java.awt.Color(255, 255, 255));
+        adminLabel.setText("Admin ID");
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Name");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        systemAdminNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                systemAdminNameFieldActionPerformed(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        systemAdminEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                systemAdminEmailFieldActionPerformed(evt);
             }
         });
 
@@ -100,11 +111,26 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Password");
 
-        jButton1.setText("Delete System Admin");
+        deleteSystemAdminButton.setText("Delete System Admin");
+        deleteSystemAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSystemAdminButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Save Changes");
+        saveChangesButton.setText("Save Changes");
+        saveChangesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Edit System Admin");
+        editSystemAdminButton.setText("Edit System Admin");
+        editSystemAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editSystemAdminButtonActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Back to admin menu");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -136,15 +162,15 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                    .addComponent(adminLabel)
+                    .addComponent(systemAdminEmailField)
+                    .addComponent(systemAdminNameField)
+                    .addComponent(systemAdminPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteSystemAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editSystemAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
@@ -161,25 +187,25 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(adminLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(systemAdminNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(systemAdminEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(systemAdminPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteSystemAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editSystemAdminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -197,13 +223,13 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void systemAdminNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_systemAdminNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_systemAdminNameFieldActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void systemAdminEmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_systemAdminEmailFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_systemAdminEmailFieldActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -213,24 +239,142 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_jButton6ActionPerformed
+    private void clearFields() {
+        
+        systemAdminNameField.setText("");
+
+        systemAdminEmailField.setText("");
+        systemAdminPasswordField.setText("");
+        
+        selectedSA = null;
+        editingSA = null;
+    }
+    public void populateTable() {
+        try {
+            
+            this.systemAdminsList = SystemAdminController.getAllSystemAdmins();
+            DefaultTableModel tableModel = (DefaultTableModel) systemAdminTable.getModel();
+            
+            tableModel.setRowCount(0);
+            
+            for (SystemAdmin sa : systemAdminsList) {
+                String[] saData = {String.valueOf(sa.getAdminID()),sa.getAdminName(),sa.getAdminEmail(), sa.getAdminPassword() };
+                tableModel.addRow(saData);
+            }
+            
+            clearFields();
+            
+        } catch (Exception e) {
+            
+        }
+    }
+    private void deleteSystemAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSystemAdminButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            int selectedRowIndex = systemAdminTable.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                
+                throw new IllegalArgumentException("Please select a user to delete!");
+                
+            } else {
+                
+                DefaultTableModel model = (DefaultTableModel) systemAdminTable.getModel();
+                selectedSA = systemAdminsList.get(selectedRowIndex);
+                SystemAdminController.deleteSA(selectedSA);
+                clearFields();
+                populateTable();
+                JOptionPane.showMessageDialog(null, "User succesfully deleted!", "Successfully Deleted", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+            
+        } catch (IllegalArgumentException e) {
+            
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Selection Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Deletion Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_deleteSystemAdminButtonActionPerformed
+
+    private void saveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesButtonActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            if (editingSA == null) {
+                 throw new IllegalArgumentException("no-select");
+            } else {
+                SystemAdmin newSA = new SystemAdmin();
+                
+                newSA.setAdminEmail(systemAdminNameField.getText());
+                newSA.setAdminName(systemAdminEmailField.getText());
+                newSA.setAdminPassword(systemAdminPasswordField.getText());
+                
+                
+                if (editingSA.getAdminName().equals(newSA.getAdminName()) && 
+                        editingSA.getAdminEmail().equals(newSA.getAdminEmail()) &&
+                        editingSA.getAdminPassword().equals(newSA.getAdminPassword())) {
+                  
+                    throw new IllegalArgumentException("no-edit");
+                } else {
+                    SystemAdminController.editSystemAdmin(editingSA, newSA);
+                    clearFields();
+                    populateTable();
+                    JOptionPane.showMessageDialog(null, "User succesfully updated!", "Successfully Updated", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("no-edit")) {
+                JOptionPane.showMessageDialog(this, "Please make some changes to the user you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (e.getMessage().equals("no-select")) {
+                JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_saveChangesButtonActionPerformed
+
+    private void editSystemAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSystemAdminButtonActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            int selectedRowIndex = systemAdminTable.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select a user you want to edit the data for!");
+            } else {
+                editingSA = systemAdminsList.get(selectedRowIndex);
+                adminLabel.setText((String) Integer.toString(editingSA.getAdminID()));
+                systemAdminNameField.setText(editingSA.getAdminName());
+                systemAdminEmailField.setText(editingSA.getAdminEmail());
+                systemAdminPasswordField.setText(editingSA.getAdminPassword());
+
+
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editSystemAdminButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel adminLabel;
+    private javax.swing.JButton deleteSystemAdminButton;
+    private javax.swing.JButton editSystemAdminButton;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton saveChangesButton;
+    private javax.swing.JTextField systemAdminEmailField;
+    private javax.swing.JTextField systemAdminNameField;
+    private javax.swing.JPasswordField systemAdminPasswordField;
+    private javax.swing.JTable systemAdminTable;
     // End of variables declaration//GEN-END:variables
 }

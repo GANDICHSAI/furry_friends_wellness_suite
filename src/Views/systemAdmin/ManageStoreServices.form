@@ -183,21 +183,33 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="priceInput">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceInputActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="deleteServiceTypeBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete Service Type"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteServiceTypeBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="editServiceTypeBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit Service Type"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editServiceTypeBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="saveChangesBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save Changes"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveChangesBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="backToMenuBtn">
           <Properties>

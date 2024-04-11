@@ -4,8 +4,14 @@
  */
 package Views.systemAdmin;
 
+import Models.ClientInformationManager;
+import Models.StoreEmployee;
+import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +23,48 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
      * Creates new form ManageStoreEmployeee
      */
     JPanel bottomPanel;
+    private StoreEmployee selectedSE;
+    private StoreEmployee editingSE;
+    private ArrayList<StoreEmployee> storeEmployees;
+    
     public ManageStoreEmployee(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
+        populateStoreDropdown();
+        
+    }
+    
+    private void clearFields() {
+        
+        nameInput.setText("");
+        emailInput.setText("");
+        passwordInput.setText("");
+        idValue.setText("");
+        
+        selectedSE = null;
+        editingSE = null;
+    }
+    
+    public void populateTable() {
+        try {
+            
+            this.storeEmployees = SystemAdminController.getStoreEmployees();
+            DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+            
+            tableModel.setRowCount(0);
+            
+            for (StoreEmployee se : storeEmployees) {
+                String[] seData = {(String) Integer.toString(se.getstoreEmpID()), se.getStoreEmployeeName(), se.getStoreName(), 
+                    se.getstoreEmployeeEmail(),se.getstoreEmployeePassword()};
+                tableModel.addRow(seData);
+            }
+            
+            clearFields();
+            
+        } catch (Exception e) {
+            
+        }
     }
 
     /**
@@ -93,6 +138,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         storeLabel.setText("Store");
 
         storeDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        storeDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storeDropdownActionPerformed(evt);
+            }
+        });
 
         emailLabel.setBackground(new java.awt.Color(255, 255, 255));
         emailLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,10 +159,25 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         passwordLabel.setText("Password");
 
         deleteStoreEmpBtn.setText("Delete Store Employee");
+        deleteStoreEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteStoreEmpBtnActionPerformed(evt);
+            }
+        });
 
         editStoreEmpBtn.setText("Edit Store Employee");
+        editStoreEmpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editStoreEmpBtnActionPerformed(evt);
+            }
+        });
 
         saveChangesBtn.setText("Save Changes");
+        saveChangesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesBtnActionPerformed(evt);
+            }
+        });
 
         backToMenuBtn.setText("Back to admin menu");
         backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +253,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordLabel))
-                        .addContainerGap(7, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deleteStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,6 +292,120 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToMenuBtnActionPerformed
+
+    private void deleteStoreEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStoreEmpBtnActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                
+                throw new IllegalArgumentException("Please select a user to delete!");
+                
+            } else {
+                
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                selectedSE = storeEmployees.get(selectedRowIndex);
+                SystemAdminController.deleteSE(selectedSE);
+                clearFields();
+                populateTable();
+                JOptionPane.showMessageDialog(null, "User succesfully deleted!", "Successfully Deleted", JOptionPane.INFORMATION_MESSAGE);
+                
+            }
+            
+        } catch (IllegalArgumentException e) {
+            
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Selection Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Data Deletion Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        
+        
+    }//GEN-LAST:event_deleteStoreEmpBtnActionPerformed
+     private void populateStoreDropdown() {
+    // Clear existing items in the dropdown
+        storeDropdown.removeAllItems();
+
+        // Get new store names from the database
+        ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
+
+        // Add the new store names to the dropdown
+        for (String name : storeNames) {
+            storeDropdown.addItem(name);
+    }
+}
+    private void editStoreEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreEmpBtnActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select a user you want to edit the data for!");
+            } else {
+                editingSE = storeEmployees.get(selectedRowIndex);
+                idValue.setText((String) Integer.toString(editingSE.getstoreEmpID()));
+                System.out.println(editingSE.getStoreID());
+                nameInput.setText(editingSE.getStoreEmployeeName());
+                emailInput.setText(editingSE.getstoreEmployeeEmail());
+                passwordInput.setText(editingSE.getstoreEmployeePassword());
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editStoreEmpBtnActionPerformed
+
+    private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            if (editingSE == null) {
+                 throw new IllegalArgumentException("no-select");
+            } else {
+ 
+                
+                StoreEmployee newSE = new StoreEmployee();
+                
+                newSE.setStoreEmployeeName(nameInput.getText());
+                newSE.setstoreEmployeeEmail(emailInput.getText());
+                newSE.setStoreID(SystemAdminController.getStoreIdByName((String) storeDropdown.getSelectedItem()));
+   
+                
+                char[] password = passwordInput.getPassword();
+                
+                String passwordString = new String(password);
+                
+                newSE.setstoreEmployeePassword(passwordString);
+                
+                
+                if (editingSE.getStoreEmployeeName().equals(newSE.getStoreEmployeeName()) && 
+                        editingSE.getstoreEmployeeEmail().equals(newSE.getstoreEmployeeEmail())&& 
+                        editingSE.getstoreEmployeePassword().equals(newSE.getstoreEmployeePassword())&& 
+                        editingSE.getStoreID() == (newSE.getStoreID())) {
+                   
+                    throw new IllegalArgumentException("no-edit");
+                } else {
+                    SystemAdminController.editStoreEmployee(editingSE, newSE);
+                    clearFields();
+                    populateTable();
+                    JOptionPane.showMessageDialog(null, "User succesfully updated!", "Successfully Updated", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("no-edit")) {
+                JOptionPane.showMessageDialog(this, "Please make some changes to the user you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (e.getMessage().equals("no-select")) {
+                JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_saveChangesBtnActionPerformed
+
+    private void storeDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_storeDropdownActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

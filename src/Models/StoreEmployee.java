@@ -12,6 +12,7 @@ public class StoreEmployee {
     
     private int storeEmpID;
     private int storeID;
+    private String storeName;
     private String storeEmployeeName;
     private String storeEmployeeEmail;
     private String storeEmployeePassword;
@@ -34,6 +35,14 @@ public class StoreEmployee {
 
     public String getStoreEmployeeName() {
         return storeEmployeeName;
+    }
+    
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public void setStoreEmployeeName(String storeEmployeeName) {

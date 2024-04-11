@@ -5,9 +5,9 @@
 package Utilities;
 
 import Models.ClientInformationManager;
-import Models.Customer;
 import Models.Store;
 import Models.StoreEmployee;
+import Models.StoreService;
 import Models.SystemAdmin;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,6 +50,7 @@ public class SystemAdminController {
 
         return storeNames;
     }
+    
 
     public static ArrayList<Store> getAllStores() {
         ArrayList<Store> allStores = new ArrayList<>();
@@ -72,6 +73,52 @@ public class SystemAdminController {
         }
 
         return allStores;
+    }
+    
+    public static ArrayList<StoreService> getAllStoreServices() {
+        ArrayList<StoreService> storeServiceList= new ArrayList<>();
+
+        String query = "SELECT * FROM Store_Service";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                ClientInformationManager cim = new ClientInformationManager();
+                StoreService ss  = new StoreService();
+                ss.setStoreServiceID(rs.getInt("store_serv_id"));
+                ss.setServiceName(rs.getString("service_name"));
+                ss.setServicePrice(rs.getFloat("service_price"));
+
+
+                storeServiceList.add(ss);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return storeServiceList;
+    }
+    
+    public static ArrayList<SystemAdmin> getAllSystemAdmins() {
+        ArrayList<SystemAdmin> systemAdminList= new ArrayList<>();
+
+        String query = "SELECT * FROM System_Admin";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                
+                SystemAdmin sa = new SystemAdmin();
+                sa.setAdminID(rs.getInt("admin_id"));
+                sa.setAdminName(rs.getString("name"));
+                sa.setAdminEmail(rs.getString("email"));
+                sa.setAdminPassword(rs.getString("password"));
+
+                systemAdminList.add(sa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return systemAdminList;
     }
 
     public static int getStoreIdByName(String storeName) {
@@ -182,6 +229,58 @@ public class SystemAdminController {
 
         return cims;
     }
+    
+    public static ArrayList<StoreEmployee> getStoreEmployees() {
+        ArrayList<StoreEmployee> storeEmployees = new ArrayList<>();
+
+        String query = "select Store_Employee.employee_id,Store_Employee.name, Store_Employee.store_id, Store.store_name,Store_Employee.email, "
+                + "Store_Employee.password from Store_Employee join Store where Store_Employee.store_id = Store.store_id;";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                
+                StoreEmployee se = new StoreEmployee();
+                se.setstoreEmpID(rs.getInt("Store_Employee.employee_id"));
+                se.setStoreID(rs.getInt("Store_Employee.store_id"));
+                se.setStoreName(rs.getString("Store.store_name"));
+                se.setStoreEmployeeName(rs.getString("Store_Employee.name"));
+                se.setstoreEmployeeEmail(rs.getString("Store_Employee.email"));
+                se.setstoreEmployeePassword(rs.getString("Store_Employee.password"));
+
+
+                storeEmployees.add(se);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return storeEmployees;
+    }
+    
+    public static void editStoreEmployee(StoreEmployee oldSE, StoreEmployee newSE) {
+        String query = "UPDATE Store_Employee SET name=?, store_id = ?, email=?, password=? WHERE employee_id=?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, newSE.getStoreEmployeeName());
+            stmt.setInt(2, newSE.getStoreID());
+            stmt.setString(3, newSE.getstoreEmployeeEmail());
+
+            stmt.setString(4, newSE.getstoreEmployeePassword());
+            
+            
+            stmt.setInt(5, oldSE.getstoreEmpID());
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Client Information Manager updated successfully.");
+            } else {
+                System.out.println("Failed to update Client Information Manager.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void editClientInformationManager(ClientInformationManager oldCIM, ClientInformationManager newCIM) {
         String query = "UPDATE Client_Information_Manager SET name=?, email=?, password=? WHERE cim_id=?";
@@ -203,6 +302,50 @@ public class SystemAdminController {
             e.printStackTrace();
         }
     }
+    
+    public static void editStoreServices(StoreService oldSS, StoreService newSS) {
+        String query = "UPDATE Store_Service SET service_name=?, service_price=? WHERE store_serv_id=?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, newSS.getServiceName());
+            stmt.setDouble(2, newSS.getServicePrice());
+
+            stmt.setInt(3, oldSS.getStoreServiceID());
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Client Information Manager updated successfully.");
+            } else {
+                System.out.println("Failed to update Client Information Manager.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void editSystemAdmin(SystemAdmin oldSA, SystemAdmin newSA) {
+        String query = "UPDATE System_Admin SET name=?, email=?, password=? WHERE admin_id=?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, newSA.getAdminName());
+            stmt.setString(2, newSA.getAdminEmail());
+            stmt.setString(3, newSA.getAdminPassword());
+
+
+            stmt.setInt(4, oldSA.getAdminID());
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Client Information Manager updated successfully.");
+            } else {
+                System.out.println("Failed to update Client Information Manager.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void deleteCIM(ClientInformationManager cim) {
         String query = "delete from Client_Information_Manager where cim_id = ?";
@@ -210,6 +353,41 @@ public class SystemAdminController {
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, cim.getCIMID());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+     public static void deleteSS(StoreService ss) {
+        String query = "delete from Store_Service where store_serv_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, ss.getStoreServiceID());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+     
+     public static void deleteSA(SystemAdmin sa) {
+        String query = "delete from System_Admin where admin_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, sa.getAdminID());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void deleteSE(StoreEmployee se) {
+        String query = "delete from Store_Employee where employee_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, se.getstoreEmpID());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
