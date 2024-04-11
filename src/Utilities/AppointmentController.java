@@ -135,5 +135,41 @@ public class AppointmentController {
 
         return appointments;
     }
+    
+    public static void deleteAppointment(int appointmentId) {
+        String query = "DELETE FROM Appointment WHERE app_id = ?";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, appointmentId);
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Deleted " + rowsAffected + " appointment(s).");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editAppointment(Appointment oldAppointment, Appointment newAppointment) {
+        String query = "UPDATE Appointment SET cust_id=?, store_name=?, service_id=?, pet_id=?, date=?, status=?, rating=? WHERE app_id=?";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            // Set the parameters for the new values
+            stmt.setInt(1, newAppointment.getCustomerId());
+            stmt.setString(2, newAppointment.getStoreName());
+            stmt.setInt(3, newAppointment.getServiceId());
+            stmt.setInt(4, newAppointment.getPetId());
+            stmt.setDate(5, new java.sql.Date(newAppointment.getDate().getTime()));
+            stmt.setString(6, newAppointment.getStatus());
+            stmt.setInt(7, newAppointment.getRating());
+            
+            // Set the parameter for the appointment ID we are updating
+            stmt.setInt(8, oldAppointment.getAppointmentId());
+            
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Updated " + rowsAffected + " appointment(s).");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
