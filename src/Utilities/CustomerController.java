@@ -34,7 +34,7 @@ public class CustomerController {
 
         String query = "INSERT INTO Customer(first_name,last_name,email,password) VALUES(?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
-            PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, customer.getFirstName());
             stmt.setString(2, customer.getLastName());
             stmt.setString(3, customer.getEmail());
@@ -46,6 +46,7 @@ public class CustomerController {
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1); // get generatedId
+                System.out.println("Generated appointment ID: " + generatedId);
             }
         } catch (SQLException e) {
             e.printStackTrace();

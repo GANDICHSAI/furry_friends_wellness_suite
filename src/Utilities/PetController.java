@@ -28,7 +28,7 @@ public class PetController {
         String query = "INSERT INTO Pet(cust_id,pet_name,age,color,gender,weight,type) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
 
-            PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, pet.getCustomerId());
             stmt.setString(2, pet.getPetName());
             stmt.setInt(3, pet.getAge());
@@ -44,6 +44,7 @@ public class PetController {
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1); // get generatedId
+                System.out.println("Generated appointment ID: " + generatedId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
