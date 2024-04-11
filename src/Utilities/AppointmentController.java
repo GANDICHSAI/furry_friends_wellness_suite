@@ -148,28 +148,70 @@ public class AppointmentController {
         }
     }
 
-    public static void editAppointment(Appointment oldAppointment, Appointment newAppointment) {
-        String query = "UPDATE Appointment SET cust_id=?, store_name=?, service_id=?, pet_id=?, date=?, status=?, rating=? WHERE app_id=?";
+    public static void editAppointmentDate(int appointmentId, java.util.Date newDate) {
+        String query = "UPDATE Appointment SET date=? WHERE app_id=?";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            
-            // Set the parameters for the new values
-            stmt.setInt(1, newAppointment.getCustomerId());
-            stmt.setString(2, newAppointment.getStoreName());
-            stmt.setInt(3, newAppointment.getServiceId());
-            stmt.setInt(4, newAppointment.getPetId());
-            stmt.setDate(5, new java.sql.Date(newAppointment.getDate().getTime()));
-            stmt.setString(6, newAppointment.getStatus());
-            stmt.setInt(7, newAppointment.getRating());
-            
-            // Set the parameter for the appointment ID we are updating
-            stmt.setInt(8, oldAppointment.getAppointmentId());
-            
+            stmt.setDate(1, new java.sql.Date(newDate.getTime()));
+            stmt.setInt(2, appointmentId);
+
             int rowsAffected = stmt.executeUpdate();
             System.out.println("Updated " + rowsAffected + " appointment(s).");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    
+//    public static Appointment getAppointmentById(int appointmentId) {
+//    String query = "SELECT * FROM Appointment WHERE app_id = ?";
+//    Appointment appointment = null;
+//
+//    try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
+//         PreparedStatement stmt = conn.prepareStatement(query)) {
+//
+//        stmt.setInt(1, appointmentId);
+//        ResultSet rs = stmt.executeQuery();
+//
+//        if (rs.next()) {
+//            appointment = new Appointment();
+//            appointment.setAppointmentId(rs.getInt("app_id"));
+//            appointment.setCustomerId(rs.getInt("cust_id"));
+//            appointment.setStoreName(rs.getString("store_name"));
+//            appointment.setServiceId(rs.getInt("service_id"));
+//            appointment.setPetId(rs.getInt("pet_id"));
+//            appointment.setDate(rs.getDate("date"));
+//            appointment.setStatus(rs.getString("status"));
+//            appointment.setRating(rs.getInt("rating"));
+//        }
+//
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    }
+//    return appointment;
+//}
+//    public static void editAppointment(Appointment oldAppointment, Appointment newAppointment) {
+//        String query = "UPDATE Appointment SET cust_id=?, store_name=?, service_id=?, pet_id=?, date=?, status=?, rating=? WHERE app_id=?";
+//        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
+//            PreparedStatement stmt = conn.prepareStatement(query);
+//            
+//            // Set the parameters for the new values
+//            stmt.setInt(1, newAppointment.getCustomerId());
+//            stmt.setString(2, newAppointment.getStoreName());
+//            stmt.setInt(3, newAppointment.getServiceId());
+//            stmt.setInt(4, newAppointment.getPetId());
+//            stmt.setDate(5, new java.sql.Date(newAppointment.getDate().getTime()));
+//            stmt.setString(6, newAppointment.getStatus());
+//            stmt.setInt(7, newAppointment.getRating());
+//            
+//            // Set the parameter for the appointment ID we are updating
+//            stmt.setInt(8, oldAppointment.getAppointmentId());
+//            
+//            int rowsAffected = stmt.executeUpdate();
+//            System.out.println("Updated " + rowsAffected + " appointment(s).");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

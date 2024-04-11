@@ -2,8 +2,12 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Utilities.AppointmentController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,10 +27,12 @@ public class UpdateAppointment extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
+    private Appointment selectedAppointment;
     public UpdateAppointment(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
+        populateAppointmentTable();
         
     }
 
@@ -46,12 +52,14 @@ public class UpdateAppointment extends javax.swing.JPanel {
         saveApp = new javax.swing.JButton();
         deleteAPP = new javax.swing.JButton();
         backToHomeButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        ChangeDateChooser = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
         appCRUDTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         appCRUDTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        appCRUDTitleLabel.setText("SELECT TO UPDATE YOUR APPOINTMENT");
+        appCRUDTitleLabel.setText("SELECT TO CHANGE YOUR APPOINTMENT");
 
         AppSumTableCRUD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,10 +75,25 @@ public class UpdateAppointment extends javax.swing.JPanel {
         jScrollPane1.setViewportView(AppSumTableCRUD);
 
         editApp.setText("EDIT APPOINTMENT");
+        editApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAppActionPerformed(evt);
+            }
+        });
 
         saveApp.setText("SAVE CHANGE");
+        saveApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAppActionPerformed(evt);
+            }
+        });
 
         deleteAPP.setText("CANCEL APPOINTMENT");
+        deleteAPP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAPPActionPerformed(evt);
+            }
+        });
 
         backToHomeButton.setText("BACK TO HOME");
         backToHomeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -79,26 +102,16 @@ public class UpdateAppointment extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("NEW APPOINTMENT DATE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(editApp)
-                        .addGap(83, 83, 83)
-                        .addComponent(saveApp)
-                        .addGap(66, 66, 66)
-                        .addComponent(deleteAPP)
-                        .addGap(0, 71, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 120, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(appCRUDTitleLabel)
@@ -106,6 +119,25 @@ public class UpdateAppointment extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(backToHomeButton)
                         .addGap(23, 23, 23))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editApp)
+                            .addComponent(jLabel1))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(saveApp)
+                                .addGap(67, 67, 67)
+                                .addComponent(deleteAPP))
+                            .addComponent(ChangeDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,15 +148,43 @@ public class UpdateAppointment extends javax.swing.JPanel {
                 .addComponent(appCRUDTitleLabel)
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editApp)
-                    .addComponent(saveApp)
-                    .addComponent(deleteAPP))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editApp)
+                            .addComponent(saveApp)
+                            .addComponent(deleteAPP)))
+                    .addComponent(ChangeDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateAppointmentTable() {
+        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
+        DefaultTableModel model = (DefaultTableModel) AppSumTableCRUD.getModel();
+        model.setRowCount(0); 
+
+        for(Appointment app : appointments) {
+            
+            
+
+            model.addRow(new Object[]{
+                    app.getCustomerId(),
+                    app.getStoreName(),
+                    app.getServiceId(),
+                  
+                    app.getPetId(),
+                    app.getDate().toString(),
+                    app.getStatus(),
+                    app.getRating()
+            });
+        }
+    }
+    
+    
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
         
@@ -134,13 +194,96 @@ public class UpdateAppointment extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToHomeButtonActionPerformed
 
+    private void editAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppActionPerformed
+        // TODO add your handling code here:
+//       int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+//        if (selectedRowIndex >= 0) {
+//            // get all appointments for the customer
+//            ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
+//
+//            //selected appointment row index = the index of appointment in returned arraylist
+//            Appointment selectedAppointment = appointments.get(selectedRowIndex);
+//
+//            // Store the selectedAppointment for use when saving later
+//            this.selectedAppointment = selectedAppointment;
+//
+//            //set the date in JDateChooser to the date of the selected appointment
+//            ChangeDateChooser.setDate(selectedAppointment.getDate());
+//    } else {
+//        JOptionPane.showMessageDialog(this, "Please select an appointment to edit.", "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+    }//GEN-LAST:event_editAppActionPerformed
+
+    private void saveAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAppActionPerformed
+        // TODO add your handling code here:
+//        try {
+//            int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+//            if (selectedRowIndex < 0) {
+//                throw new IllegalArgumentException("Please select an appointment to edit.");
+//            }
+//            java.util.Date newDate = ChangeDateChooser.getDate();
+//            if (newDate == null) {
+//                throw new IllegalArgumentException("Please choose a new appointment date.");
+//            }
+//
+//            int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, 0); // Get the appointment ID
+//            // edit the appointment date
+//            AppointmentController.editAppointmentDate(appointmentId, newDate);
+//
+//            // Update the table model
+//            DefaultTableModel model = (DefaultTableModel) AppSumTableCRUD.getModel();
+//            model.setValueAt(newDate, selectedRowIndex, 5); // date is in column 5
+//
+//            JOptionPane.showMessageDialog(this, "Appointment updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+//        } catch (IllegalArgumentException e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+    }//GEN-LAST:event_saveAppActionPerformed
+
+    private void deleteAPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAPPActionPerformed
+//        // TODO add your handling code here:
+          //      need help with appointment deletion
+          // what index to use to delete appointment
+          
+
+
+
+
+//        int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+//        if (selectedRowIndex >= 0) {
+//        // Confirm deletion
+//        int confirm = JOptionPane.showConfirmDialog(
+//                this,
+//                "Are you sure you want to cancel the selected appointment?",
+//                "Cancel Appointment",
+//                JOptionPane.YES_NO_OPTION);
+//                
+//        if (confirm == JOptionPane.YES_OPTION) {
+//            // Assuming the table model starts with the appointment ID
+//            int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, /* correct column index for the appointment ID */);
+//            
+//            // Call the controller to delete the appointment
+//            AppointmentController.deleteAppointment(appointmentId);
+//            
+//            // Remove the row from the table model
+//            ((DefaultTableModel) AppSumTableCRUD.getModel()).removeRow(selectedRowIndex);
+//            
+//            JOptionPane.showMessageDialog(this, "Appointment cancelled successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+//        }
+//    } else {
+//        JOptionPane.showMessageDialog(this, "Please select an appointment to cancel.", "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+    }//GEN-LAST:event_deleteAPPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AppSumTableCRUD;
+    private com.toedter.calendar.JDateChooser ChangeDateChooser;
     private javax.swing.JLabel appCRUDTitleLabel;
     private javax.swing.JButton backToHomeButton;
     private javax.swing.JButton deleteAPP;
     private javax.swing.JButton editApp;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton saveApp;
     // End of variables declaration//GEN-END:variables
