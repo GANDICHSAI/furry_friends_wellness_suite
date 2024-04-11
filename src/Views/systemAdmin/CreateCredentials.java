@@ -4,6 +4,7 @@
  */
 package Views.systemAdmin;
 
+import Facade.AccountCreator;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class CreateCredentials extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     String valueSelected = "Client Information Manager";
+    
+    AccountCreator accCreator = new AccountCreator();
     public CreateCredentials(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -246,7 +249,6 @@ public class CreateCredentials extends javax.swing.JPanel {
     private void createAccountBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountBtn1ActionPerformed
         // TODO add your handling code here:
         
-        AccountFacade account = new AccountFacade();
 
         if ("Store Employee".equals(valueSelected)) {
 
@@ -255,8 +257,8 @@ public class CreateCredentials extends javax.swing.JPanel {
             // Convert char[] to String for demonstration 
             String passwordString = new String(password);
             
-           
-            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
+           accCreator.createStoreManagerAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
+//            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
             System.out.println("SE");
             return;
         }
@@ -266,7 +268,8 @@ public class CreateCredentials extends javax.swing.JPanel {
             // Convert char[] to String for demonstration (not recommended for passwords)
             String passwordString = new String(password);
 
-            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+            accCreator.createSystemAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+//            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
             
             System.out.println("SA");
             
@@ -280,7 +283,8 @@ public class CreateCredentials extends javax.swing.JPanel {
             // Convert char[] to String for demonstration (not recommended for passwords)
             String passwordString = new String(password);
 
-            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+            accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+//            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
             
             System.out.println("CIM");
         }
