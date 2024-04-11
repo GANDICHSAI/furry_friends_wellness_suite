@@ -5,6 +5,7 @@
 package Views.customer;
 
 
+import Models.Appointment;
 import Models.Customer;
 import Utilities.CustomerController;
 import java.awt.CardLayout;
@@ -22,11 +23,13 @@ public class BookAppPage extends javax.swing.JPanel {
      * Creates new form BookAppPage
      */
     JPanel bottomPanel;
+    Appointment appointment;
     private ArrayList<Customer> customers;
     private Boolean auth=false;
-    public BookAppPage(JPanel bottomPanel) {
+    public BookAppPage(JPanel bottomPanel,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.appointment = appointment;
     }
 
     /**
@@ -258,7 +261,7 @@ public class BookAppPage extends javax.swing.JPanel {
                     
 
                     auth = true;
-                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust);
+                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust,appointment);
                     bottomPanel.add(customerLandingPageObj);
                     CardLayout layout = (CardLayout) bottomPanel.getLayout();
                     layout.next(bottomPanel);     

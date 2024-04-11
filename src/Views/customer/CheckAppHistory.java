@@ -4,6 +4,7 @@
  */
 package Views.customer;
 
+import Models.Appointment;
 import Models.Customer;
 import Utilities.CustomerController;
 import java.awt.CardLayout;
@@ -22,6 +23,7 @@ public class CheckAppHistory extends javax.swing.JPanel {
     JPanel bottomPanel;
 //    private ArrayList<Customer> customersList;
     Customer customer;
+    Appointment appointment;
     public CheckAppHistory(JPanel bottomPanel, Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -109,7 +111,7 @@ public class CheckAppHistory extends javax.swing.JPanel {
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
    
-        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer);
+        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer,appointment);
         bottomPanel.add(customerLandingPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

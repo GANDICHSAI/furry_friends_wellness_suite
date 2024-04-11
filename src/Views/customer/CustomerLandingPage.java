@@ -4,6 +4,7 @@
  */
 package Views.customer;
 
+import Models.Appointment;
 import Models.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -19,10 +20,12 @@ public class CustomerLandingPage extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Customer customer;
-    public CustomerLandingPage(JPanel bottomPanel,Customer customer) {
+    Appointment appointment;
+    public CustomerLandingPage(JPanel bottomPanel,Customer customer,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
+        this.appointment = appointment;
     }
 
     /**
@@ -135,7 +138,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private void updateAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppButtonActionPerformed
         // TODO add your handling code here:
         
-        UpdateAppointment updateAppointmentObj= new UpdateAppointment(bottomPanel,customer);
+        UpdateAppointment updateAppointmentObj= new UpdateAppointment(bottomPanel,customer,appointment);
         bottomPanel.add(updateAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -145,7 +148,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private void bookAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppButtonActionPerformed
         // TODO add your handling code here:
         
-        SelectStore selectStoreObj= new SelectStore(bottomPanel,customer);
+        SelectStore selectStoreObj= new SelectStore(bottomPanel,customer,appointment);
         bottomPanel.add(selectStoreObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -154,7 +157,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
         // TODO add your handling code here:
 
-        BookAppPage bookAppPageObj = new BookAppPage(bottomPanel);
+        BookAppPage bookAppPageObj = new BookAppPage(bottomPanel,appointment);
         bottomPanel.add(bookAppPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
