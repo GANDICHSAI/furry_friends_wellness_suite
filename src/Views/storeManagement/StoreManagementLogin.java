@@ -137,7 +137,7 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                 
                     case "CLIENT INFORMATION MANAGER" -> {
 
-                        ClientInformationManager clientInformationManagerObj = new ClientInformationManager(bottomPanel);
+                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
                         bottomPanel.add(clientInformationManagerObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
@@ -146,8 +146,8 @@ public class StoreManagementLogin extends javax.swing.JPanel {
 
                     case "STORE EMPLOYEE" -> {
 
-                        StoreEmployeePanel storeEmployeePanelObj = new StoreEmployeePanel(bottomPanel);
-                        bottomPanel.add(storeEmployeePanelObj);
+                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
+                        bottomPanel.add(clientInformationManagerObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
                     }

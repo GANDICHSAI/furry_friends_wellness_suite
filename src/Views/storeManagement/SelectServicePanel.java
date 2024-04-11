@@ -4,7 +4,9 @@
  */
 package Views.storeManagement;
 
+import Models.Appointment;
 import Models.StoreService;
+
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -16,16 +18,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author chait
  */
-public class TypeOfService extends javax.swing.JPanel {
+public class SelectServicePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form typeOfService
      */
     JPanel bottomPanel;
+    Appointment appointment;
     private ArrayList<StoreService> storeServicesList;
-    private StoreService selectedStoreService;
-    
-    public TypeOfService(JPanel bottomPanel) {
+
+    public SelectServicePanel(Appointment appointment, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
         populateTable();
@@ -140,39 +142,40 @@ public class TypeOfService extends javax.swing.JPanel {
 
     private void smBackToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
-        
-        NewAppointment newAppointment = new NewAppointment(bottomPanel);
+
+        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(bottomPanel);
         bottomPanel.add(newAppointment);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToProfileCreationButtonActionPerformed
-    public void populateTable(){
-        try{
+
+    public void populateTable() {
+        try {
             this.storeServicesList = StoreServicesController.getAllStoreServices();
-            
+
             DefaultTableModel tableModel = (DefaultTableModel) smServiceTable.getModel();
             tableModel.setRowCount(0);
-            for (StoreService ss: storeServicesList){
-                
-                String[] storeServiceData = {String.valueOf(ss.getStoreServiceID()),ss.getServiceName(),String.valueOf(ss.getServicePrice())};
+            for (StoreService ss : storeServicesList) {
+
+                String[] storeServiceData = {String.valueOf(ss.getStoreServiceID()), ss.getServiceName(), String.valueOf(ss.getServicePrice())};
                 tableModel.addRow(storeServiceData);
             }
-            
+
 //            clearFields();
-           
-        }
-        
-        catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
+        int selectedRow = smServiceTable.getSelectedRow();
+        int serviceId = (int) smServiceTable.getValueAt(selectedRow, 1);
+        appointment.setServiceId(serviceId);
 
-//        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel);
-//        bottomPanel.add(appointmentSummaryObj);
-//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//        layout.next(bottomPanel);
+        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(appointment, bottomPanel);
+        bottomPanel.add(reviewClientAppointmentObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
 
 

@@ -11,13 +11,13 @@ import javax.swing.JPanel;
  *
  * @author chait
  */
-public class ClientInformationManager extends javax.swing.JPanel {
+public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form clientInformationManager
      */
     JPanel bottomPanel;
-    public ClientInformationManager(JPanel bottomPanel) {
+    public StoreEmployeeChoosePanel(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
     }
@@ -40,7 +40,7 @@ public class ClientInformationManager extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("WELCOME CLIENT INFORMATION MANAGERS");
+        jLabel1.setText("WELCOME STORE EMPLOYEE");
 
         smNewAppointment.setText(" CREATE A NEW APPOINTMENT");
         smNewAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -68,11 +68,8 @@ public class ClientInformationManager extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
+                .addContainerGap(317, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(162, 162, 162))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -80,16 +77,19 @@ public class ClientInformationManager extends javax.swing.JPanel {
                         .addGap(312, 312, 312))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(smLogOutButton)
-                        .addGap(41, 41, 41))))
+                        .addGap(41, 41, 41))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(246, 246, 246))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(smLogOutButton)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel1)
-                .addGap(90, 90, 90)
+                .addGap(66, 66, 66)
                 .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -100,7 +100,7 @@ public class ClientInformationManager extends javax.swing.JPanel {
     private void smNewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smNewAppointmentActionPerformed
         // TODO add your handling code here:
         
-        NewAppointment newAppointmentObj = new NewAppointment(bottomPanel);
+        CreateCustomerAndPetPanel newAppointmentObj = new CreateCustomerAndPetPanel(bottomPanel);
         bottomPanel.add(newAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

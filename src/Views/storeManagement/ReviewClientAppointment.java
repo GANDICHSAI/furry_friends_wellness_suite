@@ -4,7 +4,10 @@
  */
 package Views.storeManagement;
 
+import Models.Appointment;
+import Utilities.AppointmentController;
 import java.awt.CardLayout;
+import java.util.Date;
 import javax.swing.JPanel;
 
 /**
@@ -17,7 +20,9 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
      * Creates new form reviewClientAppointment
      */
     JPanel bottomPanel;
-    public ReviewClientAppointment(JPanel bottomPanel) {
+    Appointment appointment;
+
+    public ReviewClientAppointment(Appointment appointment, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
     }
@@ -40,6 +45,11 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 0, 0));
 
         submitAppointment.setText("COMPLETE BOOKING");
+        submitAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitAppointmentActionPerformed(evt);
+            }
+        });
 
         viewAppTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         viewAppTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,11 +114,21 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     private void smBackToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToServiceOptionsActionPerformed
         // TODO add your handling code here:
 
-        TypeOfService typeOfService = new TypeOfService(bottomPanel);
+        SelectServicePanel typeOfService = new SelectServicePanel(appointment, bottomPanel);
         bottomPanel.add(typeOfService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToServiceOptionsActionPerformed
+
+    private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
+        // TODO add your handling code here:
+        Date currentDate = new Date();
+
+        appointment.setDate(currentDate);
+        appointment.setStatus("Incompleted");
+        AppointmentController.addAppointment(appointment);
+
+    }//GEN-LAST:event_submitAppointmentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
