@@ -4,6 +4,7 @@
  */
 package Views.customer;
 
+import Models.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,9 +18,11 @@ public class CustomerLandingPage extends javax.swing.JPanel {
      * Creates new form CustomerLandingPage
      */
     JPanel bottomPanel;
-    public CustomerLandingPage(JPanel bottomPanel) {
+    Customer customer;
+    public CustomerLandingPage(JPanel bottomPanel,Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.customer = customer;
     }
 
     /**
@@ -123,7 +126,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private void checkAppHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAppHistoryButtonActionPerformed
         // TODO add your handling code here:
         
-        CheckAppHistory checkAppHistoryObj= new CheckAppHistory(bottomPanel);
+        CheckAppHistory checkAppHistoryObj= new CheckAppHistory(bottomPanel,customer);
         bottomPanel.add(checkAppHistoryObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -132,7 +135,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private void updateAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateAppButtonActionPerformed
         // TODO add your handling code here:
         
-        UpdateAppointment updateAppointmentObj= new UpdateAppointment(bottomPanel);
+        UpdateAppointment updateAppointmentObj= new UpdateAppointment(bottomPanel,customer);
         bottomPanel.add(updateAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -142,7 +145,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private void bookAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppButtonActionPerformed
         // TODO add your handling code here:
         
-        SelectStore selectStoreObj= new SelectStore(bottomPanel);
+        SelectStore selectStoreObj= new SelectStore(bottomPanel,customer);
         bottomPanel.add(selectStoreObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

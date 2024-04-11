@@ -4,7 +4,10 @@
  */
 package Views.systemAdmin;
 
+import Facade.AccountCreator;
+import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -17,10 +20,44 @@ public class CreateCredentials extends javax.swing.JPanel {
      * Creates new form NewJPanel
      */
     JPanel bottomPanel;
+    String valueSelected = "Client Information Manager";
+    
+    AccountCreator accCreator = new AccountCreator();
     public CreateCredentials(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        
+        populateStoreDropdown();
+        
+        storeDropdown1.setVisible(false);
+        storeLabel1.setVisible(false);
+
+        credentialsTypeDropdown1.addActionListener(e -> {
+            // Get the selected item when an action is performed (like selecting an item)
+            valueSelected = (String) credentialsTypeDropdown1.getSelectedItem();
+
+            if (!"Store Employee".equals(valueSelected)) {
+                storeDropdown1.setVisible(false);
+                storeLabel1.setVisible(false);
+            } else {
+                storeDropdown1.setVisible(true);
+                storeLabel1.setVisible(true);
+            }
+        });
     }
+    
+    private void populateStoreDropdown() {
+    // Clear existing items in the dropdown
+    storeDropdown1.removeAllItems();
+
+    // Get new store names from the database
+    ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
+
+    // Add the new store names to the dropdown
+    for (String name : storeNames) {
+        storeDropdown1.addItem(name);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,7 +118,7 @@ public class CreateCredentials extends javax.swing.JPanel {
         credentialsTypeLabel1.setForeground(new java.awt.Color(255, 255, 255));
         credentialsTypeLabel1.setText("Credential Type");
 
-        credentialsTypeDropdown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        credentialsTypeDropdown1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Client Information Manager", "Store Employee", "System Admin" }));
 
         storeLabel1.setBackground(new java.awt.Color(255, 255, 255));
         storeLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,6 +131,11 @@ public class CreateCredentials extends javax.swing.JPanel {
         requirementText1.setText("(Only for Store Employee)");
 
         createAccountBtn1.setText("Create Account");
+        createAccountBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountBtn1ActionPerformed(evt);
+            }
+        });
 
         backToMenuBtn.setText("Back to admin menu");
         backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +245,50 @@ public class CreateCredentials extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToMenuBtnActionPerformed
+
+    private void createAccountBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountBtn1ActionPerformed
+        // TODO add your handling code here:
+        
+
+        if ("Store Employee".equals(valueSelected)) {
+
+            char[] password = passwordInput1.getPassword();
+
+            // Convert char[] to String for demonstration 
+            String passwordString = new String(password);
+            
+           accCreator.createStoreManagerAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
+//            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
+            System.out.println("SE");
+            return;
+        }
+        if ("System Admin".equals(valueSelected)) {
+            char[] password = passwordInput1.getPassword();
+
+            // Convert char[] to String for demonstration (not recommended for passwords)
+            String passwordString = new String(password);
+
+            accCreator.createSystemAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+//            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+            
+            System.out.println("SA");
+            
+            
+            return;
+        }
+        if ("Client Information Manager".equals(valueSelected)) {
+            
+            char[] password = passwordInput1.getPassword();
+
+            // Convert char[] to String for demonstration (not recommended for passwords)
+            String passwordString = new String(password);
+
+            accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+//            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+            
+            System.out.println("CIM");
+        }
+    }//GEN-LAST:event_createAccountBtn1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

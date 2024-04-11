@@ -4,7 +4,7 @@
  */
 package Views.customer;
 
-import Views.systemAdmin.AdminMenu;
+import Models.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -19,9 +19,11 @@ public class AppointmentSummary extends javax.swing.JPanel {
      */
     
     JPanel bottomPanel;
-    public AppointmentSummary(JPanel bottomPanel) {
+    Customer customer;
+    public AppointmentSummary(JPanel bottomPanel,Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.customer = customer;
         
     }
 
@@ -106,7 +108,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
     private void backToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToServiceOptionsActionPerformed
         // TODO add your handling code here:
         
-        SelectService selectService = new SelectService(bottomPanel);
+        SelectService selectService = new SelectService(bottomPanel,customer);
         bottomPanel.add(selectService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
