@@ -28,8 +28,10 @@ public class CustomerController {
      * @see User
      * @param customer User object to be added
      */
-    public static void addCustomer(Customer customer) {
+    public static int addCustomer(Customer customer) {
         //add to database
+        int generatedId = -1;
+
         String query = "INSERT INTO Customer(first_name,last_name,email,password) VALUES(?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -41,9 +43,15 @@ public class CustomerController {
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
 //            conn.close();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1); // get generatedId
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return generatedId;
     }
 
     /**

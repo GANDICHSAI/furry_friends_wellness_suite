@@ -66,6 +66,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="COMPLETE BOOKING"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitAppointmentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="viewAppTitleLabel">
       <Properties>
