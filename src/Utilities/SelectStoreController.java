@@ -43,7 +43,7 @@ public class SelectStoreController {
                 store.setStoreId(id);
                 store.setPostalCode(storePostalCode);
                 store.setStoreName(storeName);
-                
+                stores.add(store);
             }
             rs.close();
         } catch (SQLException e) {
