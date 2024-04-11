@@ -4,9 +4,11 @@
  */
 package Views;
 
+import Models.Appointment;
 import Views.customer.BookAppPage;
 import Views.storeManagement.StoreManagementLogin;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,8 +19,11 @@ public class MainPage extends javax.swing.JFrame {
     /**
      * Creates new form MainPage
      */
+    
+    Appointment appointment;
     public MainPage() {
         initComponents();
+        
     }
 
     /**
@@ -121,7 +126,7 @@ public class MainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        BookAppPage bookAppPageObj = new BookAppPage(bottomPanel);
+        BookAppPage bookAppPageObj = new BookAppPage(bottomPanel,appointment);
         bottomPanel.add(bookAppPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

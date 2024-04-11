@@ -4,8 +4,12 @@
  */
 package Views.customer;
 
+import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
+import Utilities.PetController;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -19,10 +23,13 @@ public class CreatePetProfile extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Customer customer;
-    public CreatePetProfile(JPanel bottomPanel,Customer customer) {
+    Appointment appointment;
+    Pet pet;
+    public CreatePetProfile(JPanel bottomPanel,Customer customer,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
+        this.appointment = appointment;
     }
 
     /**
@@ -206,16 +213,51 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private void saveToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButtonActionPerformed
         // TODO add your handling code here:
         
-        SelectService selectServiceObj = new SelectService(bottomPanel,customer);
-        bottomPanel.add(selectServiceObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        //pet info
+        String petName = petNameTextField.getText();
+        String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
+        String petGender = petGenTextField.getText();
+        int petAge = Integer.parseInt(petAgeTextField.getText());
+        String petColor = petColTextField.getText();
+        float petWeight = Float.parseFloat(petWeightTextField.getText());
+        
+        //pet object
+        Pet pet = new Pet();
+        pet.setCustomerId(customer.getCustomerID());
+        pet.setPetName(petName);
+        pet.setType(petType);
+        pet.setGender(petGender);
+        pet.setAge(petAge);
+        pet.setColor(petColor);
+        pet.setWeight(petWeight);
+        int petId = PetController.addPet(pet);
+        
+        if(petId != -1) {
+            // Set the generated pet ID and pet name into the appointment object
+            appointment.setPetId(petId);
+            
+
+            // Continue to the next screen to select service
+            SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment);
+            bottomPanel.add(selectServiceObj);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+    } else {
+        // Handle the error case
+        JOptionPane.showMessageDialog(this, "Failed to save pet information. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+
+//        SelectService selectServiceObj = new SelectService(bottomPanel,customer);
+//        bottomPanel.add(selectServiceObj);
+//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+//        layout.next(bottomPanel);
     }//GEN-LAST:event_saveToSelectServiceButtonActionPerformed
 
     private void backToStoreSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToStoreSelectionButtonActionPerformed
         // TODO add your handling code here:
 
-        SelectStore selectStore = new SelectStore(bottomPanel,customer);
+        SelectStore selectStore = new SelectStore(bottomPanel,customer,appointment);
         bottomPanel.add(selectStore);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

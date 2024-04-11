@@ -1,5 +1,6 @@
 package Views.customer;
 
+import Models.Appointment;
 import Models.Customer;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -21,10 +22,12 @@ public class UpdateAppointment extends javax.swing.JPanel {
     
     JPanel bottomPanel;
     Customer customer;
-    public UpdateAppointment(JPanel bottomPanel,Customer customer) {
+    Appointment appointment;
+    public UpdateAppointment(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
+        
     }
 
     /**
@@ -125,7 +128,7 @@ public class UpdateAppointment extends javax.swing.JPanel {
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
         
-        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer);
+        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer,appointment);
         bottomPanel.add(customerLandingPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

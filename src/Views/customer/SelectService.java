@@ -5,8 +5,10 @@
 package Views.customer;
 
 
+import Models.Appointment;
 import Models.Customer;
 import Models.StoreService;
+import Utilities.AppointmentController;
 import Utilities.CustomerController;
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
@@ -27,13 +29,14 @@ public class SelectService extends javax.swing.JPanel {
     JPanel bottomPanel;
     private ArrayList<StoreService> storeServicesList;
     Customer customer;
+    Appointment appointment;
     
-    public SelectService(JPanel bottomPanel,Customer customer) {
+    public SelectService(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
+        this.appointment = appointment;
         populateTable();
-        
 
     }
 
@@ -112,21 +115,21 @@ public class SelectService extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(chooseDatelb)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(186, 186, 186)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
+                        .addGap(233, 233, 233)
                         .addComponent(saveAndViewSummaryButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addComponent(chooseDatelb))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(259, 259, 259)
+                        .addComponent(jLabel6)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,21 +142,46 @@ public class SelectService extends javax.swing.JPanel {
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(chooseDatelb)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addGap(82, 82, 82)
                 .addComponent(saveAndViewSummaryButton)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         
-        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel,customer);
-        bottomPanel.add(appointmentSummaryObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        // retrieve service selection
+        int selectedRow = ServiceTable.getSelectedRow();
+        if (selectedRow != -1) {
+        // Assuming the Service ID is in the first column
+            int serviceId = Integer.parseInt(ServiceTable.getValueAt(selectedRow, 0).toString());
+
+            // Step 2: Store the service ID in the Appointment object
+            appointment.setServiceId(serviceId);
+
+            // Optional: Store the service name 
+            //String serviceName = ServiceTable.getValueAt(selectedRow, 1).toString();
+            
+            // Step 3: Insert the appointment into the database
+            AppointmentController.addAppointment(appointment);
+
+            // Navigate to the Appointment Summary page
+            AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment);
+            bottomPanel.add("AppointmentSummary", appointmentSummaryObj);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.show(bottomPanel, "AppointmentSummary");
+        } else {
+        // If no service is selected, show an error message
+            JOptionPane.showMessageDialog(this, "Please select a service to continue.", "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+//        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel,customer,appointment);
+//        bottomPanel.add(appointmentSummaryObj);
+//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+//        layout.next(bottomPanel);
     }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
     
     public void populateTable(){
@@ -177,7 +205,7 @@ public class SelectService extends javax.swing.JPanel {
     private void backToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer);
+        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer,appointment);
         bottomPanel.add(createPetProfile);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

@@ -4,6 +4,7 @@
  */
 package Views.customer;
 
+import Models.Appointment;
 import Models.Customer;
 import Models.Store;
 import Utilities.SelectStoreController;
@@ -24,10 +25,12 @@ public class SelectStore extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Customer customer;
-    public SelectStore(JPanel bottomPanel,Customer customer) {
+    Appointment appointment;
+    public SelectStore(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
+        this.appointment = appointment;
     }
 
     /**
@@ -153,17 +156,27 @@ public class SelectStore extends javax.swing.JPanel {
     private void nextToPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextToPetButtonActionPerformed
         // TODO add your handling code here:
         
-        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer);
+        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment);
         bottomPanel.add(createPetProfileObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
+        
+        //create new appointment object 
+        Appointment appointment = new Appointment();
+        appointment.setCustomerId(customer.getCustomerID());
+        
+        //set store name into appointment
+        int selectedRowIndex = storeTable.getSelectedRow();
+        String storeName = (String) storeTable.getValueAt(selectedRowIndex, 0);
+        appointment.setStoreName(storeName);
+               
         
     }//GEN-LAST:event_nextToPetButtonActionPerformed
 
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
         
-        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer);
+        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer,appointment);
         bottomPanel.add(customerLandingPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
