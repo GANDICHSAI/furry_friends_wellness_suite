@@ -8,7 +8,8 @@ import Models.Appointment;
 import Models.Customer;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
-import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +31,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        fetchAndPopulateAppointmentDetails();
     }
 
     /**
@@ -39,22 +41,25 @@ public class AppointmentSummary extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     private void fetchAndPopulateAppointmentDetails() {
-        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
+//        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
 
         DefaultTableModel model = (DefaultTableModel) viewAppLabel.getModel();
         model.setRowCount(0); // Clear previous data
+        int i = viewAppLabel.getSelectedRow();
+        if(i >= 0){
+                model.setValueAt(appointment.getCustomerId(), i, 0);
+                model.setValueAt(appointment.getStoreName(), i, 1);
+                model.setValueAt(appointment.getServiceId(), i, 2);
+                model.setValueAt(appointment.getPetId(), i, 3);
+                model.setValueAt(appointment.getDate(), i, 4);
+                model.setValueAt(appointment.getStatus(), i, 5);
+                model.setValueAt(appointment.getRating(), i, 6);
 
-        for(Appointment app : appointments) {
-            model.addRow(new Object[]{
-                app.getCustomerId(),
-                app.getStoreName(),
-                app.getServiceId(), // Assuming you have a method to get the service name by ID
-                app.getPetId(),
-                app.getDate().toString(),
-                app.getStatus(),
-                app.getRating()
-            });
-        }
+                }else{
+                        JOptionPane.showMessageDialog(null, "ERROR!");
+                      }
+
+
     }
     
     
@@ -87,6 +92,11 @@ public class AppointmentSummary extends javax.swing.JPanel {
         jScrollPane1.setViewportView(viewAppLabel);
 
         bookComplete.setText("COMPLETE BOOKING");
+        bookComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookCompleteActionPerformed(evt);
+            }
+        });
 
         backToServiceOptions.setText("BACK TO SERVICE OPTIONS");
         backToServiceOptions.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +148,13 @@ public class AppointmentSummary extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToServiceOptionsActionPerformed
+
+    private void bookCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookCompleteActionPerformed
+        // TODO add your handling code here:
+        AppointmentController.addAppointment(appointment);
+        JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+        
+    }//GEN-LAST:event_bookCompleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

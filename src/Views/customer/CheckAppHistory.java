@@ -29,6 +29,7 @@ public class CheckAppHistory extends javax.swing.JPanel {
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         
+        
     }
 
     /**
