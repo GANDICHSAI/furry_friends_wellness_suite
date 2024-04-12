@@ -261,7 +261,7 @@ public class BookAppPage extends javax.swing.JPanel {
                     
 
                     auth = true;
-                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust,appointment);
+                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust,new Appointment());
                     bottomPanel.add(customerLandingPageObj);
                     CardLayout layout = (CardLayout) bottomPanel.getLayout();
                     layout.next(bottomPanel);     

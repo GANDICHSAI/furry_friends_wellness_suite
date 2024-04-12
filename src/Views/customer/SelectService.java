@@ -162,7 +162,7 @@ public class SelectService extends javax.swing.JPanel {
             appointment.setDate(jDateChooser1.getDate());
 
 
-            AppointmentController.addAppointment(appointment);
+            //AppointmentController.addAppointment(appointment);
 
             // Navigate to the Appointment Summary page
             AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment);
