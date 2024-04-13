@@ -5,6 +5,7 @@ import Models.Customer;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +29,7 @@ public class UpdateAppointment extends javax.swing.JPanel {
     Customer customer;
     Appointment appointment;
     private Appointment selectedAppointment;
+    ArrayList<Appointment> allAppointments;
     public UpdateAppointment(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -69,7 +71,7 @@ public class UpdateAppointment extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS", "RATING"
+                "APP ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS", "RATING"
             }
         ));
         jScrollPane1.setViewportView(AppSumTableCRUD);
@@ -163,7 +165,8 @@ public class UpdateAppointment extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void populateAppointmentTable() {
-        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
+        ArrayList<Appointment> appointments = AppointmentController.testController(customer.getCustomerID());
+        this.allAppointments = appointments;
         DefaultTableModel model = (DefaultTableModel) AppSumTableCRUD.getModel();
         model.setRowCount(0); 
 
@@ -172,11 +175,12 @@ public class UpdateAppointment extends javax.swing.JPanel {
             
 
             model.addRow(new Object[]{
-                    app.getCustomerId(),
+                    app.getAppointmentId(),
+//                    app.getCustomerId(),
                     app.getStoreName(),
-                    app.getServiceId(),
+                    app.getServiceName(),
                   
-                    app.getPetId(),
+                    app.getPetName(),
                     app.getDate().toString(),
                     app.getStatus(),
                     app.getRating()
@@ -196,48 +200,50 @@ public class UpdateAppointment extends javax.swing.JPanel {
 
     private void editAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppActionPerformed
         // TODO add your handling code here:
-//       int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
-//        if (selectedRowIndex >= 0) {
-//            // get all appointments for the customer
-//            ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
-//
-//            //selected appointment row index = the index of appointment in returned arraylist
-//            Appointment selectedAppointment = appointments.get(selectedRowIndex);
-//
-//            // Store the selectedAppointment for use when saving later
-//            this.selectedAppointment = selectedAppointment;
-//
-//            //set the date in JDateChooser to the date of the selected appointment
-//            ChangeDateChooser.setDate(selectedAppointment.getDate());
-//    } else {
-//        JOptionPane.showMessageDialog(this, "Please select an appointment to edit.", "Error", JOptionPane.ERROR_MESSAGE);
-//    }
+        int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+        if (selectedRowIndex >= 0) {
+            // get all appointments for the customer
+            //ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
+
+            //selected appointment row index = the index of appointment in returned arraylist
+            Appointment selectedAppointment = allAppointments.get(selectedRowIndex);
+
+            // Store the selectedAppointment for use when saving later
+            this.selectedAppointment = selectedAppointment;
+
+            //set the date in JDateChooser to the date of the selected appointment
+            ChangeDateChooser.setDate(selectedAppointment.getDate());
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select an appointment to edit.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    
     }//GEN-LAST:event_editAppActionPerformed
 
     private void saveAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAppActionPerformed
         // TODO add your handling code here:
-//        try {
-//            int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
-//            if (selectedRowIndex < 0) {
-//                throw new IllegalArgumentException("Please select an appointment to edit.");
-//            }
-//            java.util.Date newDate = ChangeDateChooser.getDate();
-//            if (newDate == null) {
-//                throw new IllegalArgumentException("Please choose a new appointment date.");
-//            }
-//
-//            int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, 0); // Get the appointment ID
-//            // edit the appointment date
-//            AppointmentController.editAppointmentDate(appointmentId, newDate);
-//
-//            // Update the table model
-//            DefaultTableModel model = (DefaultTableModel) AppSumTableCRUD.getModel();
-//            model.setValueAt(newDate, selectedRowIndex, 5); // date is in column 5
-//
-//            JOptionPane.showMessageDialog(this, "Appointment updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-//        } catch (IllegalArgumentException e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//    }
+        try {
+            int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select an appointment to edit.");
+            }
+            java.util.Date newDate = ChangeDateChooser.getDate();
+            if (newDate == null) {
+                throw new IllegalArgumentException("Please choose a new appointment date.");
+            }
+
+            int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, 0); // Get the appointment ID
+            // edit the appointment date
+            AppointmentController.editAppointmentDate(appointmentId, newDate);
+
+            // Update the table model
+            DefaultTableModel model = (DefaultTableModel) AppSumTableCRUD.getModel();
+            model.setValueAt(newDate, selectedRowIndex, 4); // date is in column 5
+
+            JOptionPane.showMessageDialog(this, "Appointment updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_saveAppActionPerformed
 
     private void deleteAPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAPPActionPerformed
@@ -249,30 +255,32 @@ public class UpdateAppointment extends javax.swing.JPanel {
 
 
 
-//        int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
-//        if (selectedRowIndex >= 0) {
-//        // Confirm deletion
-//        int confirm = JOptionPane.showConfirmDialog(
-//                this,
-//                "Are you sure you want to cancel the selected appointment?",
-//                "Cancel Appointment",
-//                JOptionPane.YES_NO_OPTION);
-//                
-//        if (confirm == JOptionPane.YES_OPTION) {
-//            // Assuming the table model starts with the appointment ID
-//            int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, /* correct column index for the appointment ID */);
-//            
-//            // Call the controller to delete the appointment
-//            AppointmentController.deleteAppointment(appointmentId);
-//            
-//            // Remove the row from the table model
-//            ((DefaultTableModel) AppSumTableCRUD.getModel()).removeRow(selectedRowIndex);
-//            
-//            JOptionPane.showMessageDialog(this, "Appointment cancelled successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-//        }
-//    } else {
-//        JOptionPane.showMessageDialog(this, "Please select an appointment to cancel.", "Error", JOptionPane.ERROR_MESSAGE);
-//    }
+        int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+        if (selectedRowIndex >= 0) {
+        // Confirm deletion
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to cancel the selected appointment?",
+                "Cancel Appointment",
+                JOptionPane.YES_NO_OPTION);
+                
+        if (confirm == JOptionPane.YES_OPTION) {
+            // Assuming the table model starts with the appointment ID
+            int appointmentId = (int) AppSumTableCRUD.getValueAt(selectedRowIndex, 0);
+            
+            // Call the controller to delete the appointment
+            AppointmentController.deleteAppointment(appointmentId);
+            
+            // Remove the row from the table model
+            //((DefaultTableModel) AppSumTableCRUD.getModel()).removeRow(selectedRowIndex);
+            populateAppointmentTable();
+            new Date().getDay();
+            
+            JOptionPane.showMessageDialog(this, "Appointment cancelled successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select an appointment to cancel.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_deleteAPPActionPerformed
 
 

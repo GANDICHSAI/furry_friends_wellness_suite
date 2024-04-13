@@ -7,10 +7,38 @@ public class Appointment {
     private int customerId;
     private String storeName;
     private int serviceId;
+    private String serviceName;
+    private String petName;
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
     private int petId;
     private Date date;
     private String status;
     private int rating;
+    
+    private int storeId;
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
 
     public Appointment() {
     }
