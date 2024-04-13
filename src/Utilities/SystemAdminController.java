@@ -22,11 +22,6 @@ import java.util.ArrayList;
  * @author hanee
  */
 public class SystemAdminController {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/FFWS";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "mysql";
-
     /**
      * Privatized constructor so as to not allow object creation
      */
@@ -38,7 +33,7 @@ public class SystemAdminController {
         ArrayList<String> storeNames = new ArrayList<>();
 
         String query = "SELECT store_name FROM Store"; // Ensure your table name is correct
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 String storeName = rs.getString("store_name");
@@ -56,7 +51,7 @@ public class SystemAdminController {
         ArrayList<Store> allStores = new ArrayList<>();
 
         String query = "SELECT * FROM Store"; // Ensure your table name is correct
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 Store store = new Store();
@@ -79,7 +74,7 @@ public class SystemAdminController {
         ArrayList<StoreService> storeServiceList= new ArrayList<>();
 
         String query = "SELECT * FROM Store_Service";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 ClientInformationManager cim = new ClientInformationManager();
@@ -102,7 +97,7 @@ public class SystemAdminController {
         ArrayList<SystemAdmin> systemAdminList= new ArrayList<>();
 
         String query = "SELECT * FROM System_Admin";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 
@@ -125,7 +120,7 @@ public class SystemAdminController {
         int storeId = -1; // Default value if not found
 
         String query = "SELECT store_id FROM Store WHERE store_name = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, storeName);
             ResultSet rs = stmt.executeQuery();
@@ -143,7 +138,7 @@ public class SystemAdminController {
     public static void addStore(Store store) {
         String query = "INSERT INTO Store (store_name, store_postal_code) VALUES (?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, store.getStoreName());
             stmt.setString(2, store.getPostalCode());
@@ -160,7 +155,7 @@ public class SystemAdminController {
     public static void editStore(Store oldStore, Store newStore) {
         String query = "UPDATE Store SET store_name=?, store_postal_code=? WHERE store_id=?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newStore.getStoreName());
             stmt.setString(2, newStore.getPostalCode());
@@ -180,7 +175,7 @@ public class SystemAdminController {
     public static void deleteStore(Store store) {
         String query = "delete from Store where store_id = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, store.getStoreId());
             stmt.executeUpdate();
@@ -193,7 +188,7 @@ public class SystemAdminController {
     public static void addCIM(ClientInformationManager cim) {
         String query = "INSERT INTO Client_Information_Manager (name, email, password) VALUES (?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, cim.getCIMName());
             stmt.setString(2, cim.getCIMEmail());
@@ -212,7 +207,7 @@ public class SystemAdminController {
         ArrayList<ClientInformationManager> cims = new ArrayList<>();
 
         String query = "SELECT * FROM Client_Information_Manager";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 ClientInformationManager cim = new ClientInformationManager();
@@ -233,16 +228,15 @@ public class SystemAdminController {
     public static ArrayList<StoreEmployee> getStoreEmployees() {
         ArrayList<StoreEmployee> storeEmployees = new ArrayList<>();
 
-        String query = "select Store_Employee.employee_id,Store_Employee.name, Store_Employee.store_id, Store.store_name,Store_Employee.email, "
+        String query = "select Store_Employee.employee_id,Store_Employee.name, Store_Employee.store_id, Store_Employee.email, "
                 + "Store_Employee.password from Store_Employee join Store where Store_Employee.store_id = Store.store_id;";
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 
                 StoreEmployee se = new StoreEmployee();
                 se.setstoreEmpID(rs.getInt("Store_Employee.employee_id"));
                 se.setStoreID(rs.getInt("Store_Employee.store_id"));
-                se.setStoreName(rs.getString("Store.store_name"));
                 se.setStoreEmployeeName(rs.getString("Store_Employee.name"));
                 se.setstoreEmployeeEmail(rs.getString("Store_Employee.email"));
                 se.setstoreEmployeePassword(rs.getString("Store_Employee.password"));
@@ -260,7 +254,7 @@ public class SystemAdminController {
     public static void editStoreEmployee(StoreEmployee oldSE, StoreEmployee newSE) {
         String query = "UPDATE Store_Employee SET name=?, store_id = ?, email=?, password=? WHERE employee_id=?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newSE.getStoreEmployeeName());
             stmt.setInt(2, newSE.getStoreID());
@@ -285,7 +279,7 @@ public class SystemAdminController {
     public static void editClientInformationManager(ClientInformationManager oldCIM, ClientInformationManager newCIM) {
         String query = "UPDATE Client_Information_Manager SET name=?, email=?, password=? WHERE cim_id=?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newCIM.getCIMName());
             stmt.setString(2, newCIM.getCIMEmail());
@@ -306,7 +300,7 @@ public class SystemAdminController {
     public static void editStoreServices(StoreService oldSS, StoreService newSS) {
         String query = "UPDATE Store_Service SET service_name=?, service_price=? WHERE store_serv_id=?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newSS.getServiceName());
             stmt.setDouble(2, newSS.getServicePrice());
@@ -327,7 +321,7 @@ public class SystemAdminController {
     public static void editSystemAdmin(SystemAdmin oldSA, SystemAdmin newSA) {
         String query = "UPDATE System_Admin SET name=?, email=?, password=? WHERE admin_id=?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newSA.getAdminName());
             stmt.setString(2, newSA.getAdminEmail());
@@ -350,7 +344,7 @@ public class SystemAdminController {
     public static void deleteCIM(ClientInformationManager cim) {
         String query = "delete from Client_Information_Manager where cim_id = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, cim.getCIMID());
             stmt.executeUpdate();
@@ -362,7 +356,7 @@ public class SystemAdminController {
      public static void deleteSS(StoreService ss) {
         String query = "delete from Store_Service where store_serv_id = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, ss.getStoreServiceID());
             stmt.executeUpdate();
@@ -374,7 +368,7 @@ public class SystemAdminController {
      public static void deleteSA(SystemAdmin sa) {
         String query = "delete from System_Admin where admin_id = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, sa.getAdminID());
             stmt.executeUpdate();
@@ -385,7 +379,7 @@ public class SystemAdminController {
     public static void deleteSE(StoreEmployee se) {
         String query = "delete from Store_Employee where employee_id = ?";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, se.getstoreEmpID());
             stmt.executeUpdate();
@@ -398,7 +392,7 @@ public class SystemAdminController {
     public static void addSystemAdmin(SystemAdmin sysAdmin) {
         String query = "INSERT INTO System_Admin (name, email, password) VALUES (?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, sysAdmin.getAdminName());
             stmt.setString(2, sysAdmin.getAdminEmail());
@@ -417,7 +411,7 @@ public class SystemAdminController {
     public static void addStoreEmployee(StoreEmployee storeEmp) {
         String query = "INSERT INTO Store_Employee (employee_id, name, store_id, email, password) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, storeEmp.getstoreEmpID());
             pstmt.setString(2, storeEmp.getStoreEmployeeName());

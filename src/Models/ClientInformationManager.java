@@ -8,7 +8,7 @@ package Models;
  *
  * @author chait
  */
-public class ClientInformationManager {
+public class ClientInformationManager implements Authenticatable {
     
     private int CIMID;
     
@@ -50,10 +50,13 @@ public class ClientInformationManager {
         this.CIMPassword = CIMPassword;
     }
     
-    
-    
-    
-    
-   
-    
+    @Override
+    public String getEmail() {
+        return CIMEmail;
+    }
+
+    @Override
+    public String getPassword() {
+        return CIMPassword;
+    }
 }

@@ -8,7 +8,7 @@ package Models;
  *
  * @author chait
  */
-public class StoreEmployee {
+public class StoreEmployee implements Authenticatable {
     
     private int storeEmpID;
     private int storeID;
@@ -65,5 +65,13 @@ public class StoreEmployee {
         this.storeEmployeePassword = storeEmployeePassword;
     }
     
-    
+    @Override
+    public String getEmail() {
+        return storeEmployeeEmail;
+    }
+
+    @Override
+    public String getPassword() {
+        return storeEmployeePassword;
+    }   
 }

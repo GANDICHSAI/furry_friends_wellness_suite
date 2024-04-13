@@ -18,11 +18,6 @@ import java.util.ArrayList;
  * @author chait
  */
 public class StoreServicesController {
-    
-    private static final String URL = "jdbc:mysql://localhost:3306/FFWS";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "mysql";
-
     /**
      * Privatized constructor so as to not allow object creation
      */
