@@ -6,10 +6,12 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Utilities.AppointmentController;
 import Utilities.CustomerController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,14 +26,35 @@ public class CheckAppHistory extends javax.swing.JPanel {
 //    private ArrayList<Customer> customersList;
     Customer customer;
     Appointment appointment;
+//    private Appointment checkAppointment;
     public CheckAppHistory(JPanel bottomPanel, Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
-        
-        
-    }
+        populateAppointment();
+}
 
+    private void populateAppointment() {
+        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); 
+
+        for(Appointment app : appointments) {
+            
+            
+
+            model.addRow(new Object[]{
+                    app.getCustomerId(),
+                    app.getStoreName(),
+                    app.getServiceId(),
+                  
+                    app.getPetId(),
+                    app.getDate().toString(),
+                    app.getStatus(),
+                    app.getRating()
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
