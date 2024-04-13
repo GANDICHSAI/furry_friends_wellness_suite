@@ -4,8 +4,17 @@
  */
 package Views.storeManagement;
 
+import Models.Authenticatable;
+import Models.SystemAdmin;
+import Models.ClientInformationManager;
+import Models.StoreEmployee;
+
+import Utilities.SystemAdminController;
 import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -17,8 +26,8 @@ public class StoreManagementLogin extends javax.swing.JPanel {
     /**
      * Creates new form storeManagementLogin
      */
-    
     JPanel bottomPanel;
+
     public StoreManagementLogin(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -129,110 +138,107 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smUsernameActionPerformed
 
+    public static <T extends Authenticatable> boolean authenticate(String email, String password, List<T> users) {
+        for (Authenticatable user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void smLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smLoginActionPerformed
         // TODO add your handling code here:
-        
-        
-        switch(smRole.getSelectedItem().toString()){
-                
-                    case "CLIENT INFORMATION MANAGER" -> {
 
+        String email = smUsername.getText();
+        char[] passwordChars = smPassword.getPassword();
+        String password = new String(passwordChars);
+
+        Boolean auth = false;
+        switch (smRole.getSelectedItem().toString()) {
+
+            case "CLIENT INFORMATION MANAGER" -> {
+                try {
+                    ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
+
+                    auth = StoreManagementLogin.<ClientInformationManager>authenticate(email, password, clientInformationManagers);
+
+                    if (auth) {
                         StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
                         bottomPanel.add(clientInformationManagerObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
-
+                    } else {
+                        throw new IllegalArgumentException("Invalid credentials");
                     }
 
-                    case "STORE EMPLOYEE" -> {
+                    clearFields();
 
-                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
-                        bottomPanel.add(clientInformationManagerObj);
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+
+            case "STORE EMPLOYEE" -> {
+                try {
+                    ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
+                    System.out.println(storeEmployees);
+
+                    auth = StoreManagementLogin.<StoreEmployee>authenticate(email, password, storeEmployees);
+
+                    if (auth) {
+                        StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel(bottomPanel);
+                        bottomPanel.add(storeEmployeeChooseObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
+                    } else {
+                        throw new IllegalArgumentException("Invalid credentials");
                     }
-                    
-                    case "SYSTEM ADMIN" -> {
-                        
-                        
+
+                    clearFields();
+
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+
+            case "SYSTEM ADMIN" -> {
+                try {
+                    ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
+
+                    auth = StoreManagementLogin.<SystemAdmin>authenticate(email, password, systemAdmins);
+
+                    if (auth) {
                         AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
                         bottomPanel.add(adminMenuObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
-                        
+                    } else {
+                        throw new IllegalArgumentException("Invalid credentials");
                     }
-                    
-    
-                    
-                    default -> {
-                        
-                        throw new IllegalArgumentException("please select correct Role");
-                    }
-        
-//        try{
-//            AdminLoginCreds adminLoginCreds = new AdminLoginCreds();
-//            adminLoginCreds.addCreds();
-//
-//            char [] passwordChars = passwordField.getPassword();
-//            String password = new String(passwordChars);
-//
-//
-//            if (adminLoginCreds.authenticate(smPassword.getText(), password)){
-//               
-//                
-//                switch(adminTypeDropDown.getSelectedItem().toString()){
-//                
-//                    case "CLIENT INFORMATION MANAGER" -> {
-//
-//                        PatientOptionPanel patientOptionPanel = new PatientOptionPanel(bottomPanel);
-//                        bottomPanel.add(patientOptionPanel);
-//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//                        layout.next(bottomPanel);
-//
-//                    }
-//
-//                    case "STORE EMPLOYEE" -> {
-//
-//                        DoctorOptionPanel doctorOptionPanel = new DoctorOptionPanel(bottomPanel);
-//                        bottomPanel.add(doctorOptionPanel);
-//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//                        layout.next(bottomPanel);
-//                    }
-//                    
-//                    case "SYSTEM ADMIN" -> {
-//                        
-//                        
-//                        HospitalOptionPanel hospitalOptionPanel = new HospitalOptionPanel(bottomPanel);
-//                        bottomPanel.add(hospitalOptionPanel);
-//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//                        layout.next(bottomPanel);
-//                        
-//                    }
-//                    
-//    
-//                    
-//                    default -> {
-//                        
-//                        throw new IllegalArgumentException("please select correct Admin Type");
-//                    }
-//                 
-//         
-//            }
-//
-//            }
-//
-//            else{
-//                throw new IllegalArgumentException("Please provide valid credentials");
-// 
-//            }
-//        }
-//        
-//        catch(IllegalArgumentException e){
-//            
-//            JOptionPane.showMessageDialog(this, e.getMessage(),"Admin Access Error",JOptionPane.ERROR_MESSAGE);
-//            
-//        }
+
+                    clearFields();
+
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+
+            default -> {
+                throw new IllegalArgumentException("please select correct Role");
+            }
     }//GEN-LAST:event_smLoginActionPerformed
+    }
+
+    private void clearFields() {
+        smUsername.setText("");
+        smPassword.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

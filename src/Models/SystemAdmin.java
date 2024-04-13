@@ -8,7 +8,7 @@ package Models;
  *
  * @author chait
  */
-public class SystemAdmin {
+public class SystemAdmin implements Authenticatable {
     
     
     private int adminID;
@@ -48,4 +48,13 @@ public class SystemAdmin {
         this.adminPassword = adminPassword;
     }
     
+    @Override
+    public String getEmail() {
+        return adminEmail;
+    }
+
+    @Override
+    public String getPassword() {
+        return adminPassword;
+    }  
 }
