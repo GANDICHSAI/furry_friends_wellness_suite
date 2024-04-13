@@ -12,6 +12,7 @@ import Utilities.AppointmentController;
 import Utilities.CustomerController;
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,6 +31,8 @@ public class SelectService extends javax.swing.JPanel {
     private ArrayList<StoreService> storeServicesList;
     Customer customer;
     Appointment appointment;
+    
+
     
     public SelectService(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
@@ -147,6 +150,23 @@ public class SelectService extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public static String formatAppointmentDetails(Appointment appointment) {
+        if (appointment == null) return "Appointment is null";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
+        
+        return "Appointment Details: {" +
+               "Appointment ID: " + appointment.getAppointmentId() +
+               ", Customer ID: " + appointment.getCustomerId() +
+               ", Store Name: '" + appointment.getStoreName() + '\'' +
+               ", Service ID: " + appointment.getServiceId() +
+               ", Pet ID: " + appointment.getPetId() +
+               ", Date: " + formattedDate +
+               ", Status: '" + appointment.getStatus() + '\'' +
+               ", Rating: " + appointment.getRating() +
+               "}";
+    }
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         
@@ -163,6 +183,12 @@ public class SelectService extends javax.swing.JPanel {
 
 
             //AppointmentController.addAppointment(appointment);
+            
+            //debugging
+            System.out.println("Selected Row: " + selectedRow);
+            System.out.println("Service ID: " + serviceId);
+            System.out.println("Date: " + jDateChooser1.getDate());
+            System.out.println(formatAppointmentDetails(appointment));
 
             // Navigate to the Appointment Summary page
             AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment);

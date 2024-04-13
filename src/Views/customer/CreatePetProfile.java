@@ -7,6 +7,7 @@ package Views.customer;
 import Models.Appointment;
 import Models.Customer;
 import Models.Pet;
+import Utilities.AppointmentController;
 import Utilities.PetController;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -234,8 +235,9 @@ public class CreatePetProfile extends javax.swing.JPanel {
         //pet info
         String petName = petNameTextField.getText();
         String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
+        String petGender = girlRadioButton.isSelected() ? "Girl" : "Boy";
         
-        String petGender = buttonGroup2.getSelection().getActionCommand();
+        //String petGender = buttonGroup2.getSelection().getActionCommand();
         
         int petAge = Integer.parseInt(petAgeTextField.getText());
         String petColor = petColTextField.getText();
@@ -250,11 +252,15 @@ public class CreatePetProfile extends javax.swing.JPanel {
         pet.setAge(petAge);
         pet.setColor(petColor);
         pet.setWeight(petWeight);
+        
         int petId = PetController.addPet(pet);
         
         if(petId != -1) {
             // Set the generated pet ID and pet name into the appointment object
             appointment.setPetId(petId);
+            
+            // insert pet into pet DB
+            
             
 
             // Continue to the next screen to select service

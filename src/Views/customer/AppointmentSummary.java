@@ -8,6 +8,8 @@ import Models.Appointment;
 import Models.Customer;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -41,25 +43,23 @@ public class AppointmentSummary extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     private void fetchAndPopulateAppointmentDetails() {
-//        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
-
         DefaultTableModel model = (DefaultTableModel) viewAppLabel.getModel();
-        model.setRowCount(0); // Clear previous data
-        int i = viewAppLabel.getSelectedRow();
-        if(i >= 0){
-                model.setValueAt(appointment.getCustomerId(), i, 0);
-                model.setValueAt(appointment.getStoreName(), i, 1);
-                model.setValueAt(appointment.getServiceId(), i, 2);
-                model.setValueAt(appointment.getPetId(), i, 3);
-                model.setValueAt(appointment.getDate(), i, 4);
-                model.setValueAt(appointment.getStatus(), i, 5);
-                model.setValueAt(appointment.getRating(), i, 6);
+        model.setRowCount(0); // Clear existing data
 
-                }else{
-                        JOptionPane.showMessageDialog(null, "ERROR!");
-                      }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
 
+        Object[] row = new Object[7];
+        row[0] = appointment.getCustomerId();
+        row[1] = appointment.getStoreName();
+        row[2] = appointment.getServiceId(); 
+        row[3] = appointment.getPetId();  
+        row[4] = formattedDate;
+        row[5] = appointment.getStatus();
+        row[6] = appointment.getRating();
 
+        model.addRow(row);
+//        
     }
     
     
