@@ -6,6 +6,7 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
+    Pet pet;
     public AppointmentSummary(JPanel bottomPanel,Customer customer,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -71,6 +73,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
         viewAppLabel = new javax.swing.JTable();
         bookComplete = new javax.swing.JButton();
         backToServiceOptions = new javax.swing.JButton();
+        bookComplete1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -105,6 +108,13 @@ public class AppointmentSummary extends javax.swing.JPanel {
             }
         });
 
+        bookComplete1.setText("BACK TO HOME");
+        bookComplete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookComplete1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +126,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
                         .addComponent(viewAppTitleLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(261, 261, 261)
-                        .addComponent(bookComplete)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bookComplete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bookComplete1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(141, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -136,7 +148,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(bookComplete)
-                .addGap(177, 177, 177))
+                .addGap(27, 27, 27)
+                .addComponent(bookComplete1)
+                .addGap(127, 127, 127))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -156,10 +170,19 @@ public class AppointmentSummary extends javax.swing.JPanel {
         
     }//GEN-LAST:event_bookCompleteActionPerformed
 
+    private void bookComplete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookComplete1ActionPerformed
+        // TODO add your handling code here:
+            CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer,appointment);
+            bottomPanel.add(customerLandingPageObj);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+    }//GEN-LAST:event_bookComplete1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToServiceOptions;
     private javax.swing.JButton bookComplete;
+    private javax.swing.JButton bookComplete1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable viewAppLabel;
     private javax.swing.JLabel viewAppTitleLabel;
