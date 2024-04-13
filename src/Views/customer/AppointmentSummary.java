@@ -7,6 +7,7 @@ package Views.customer;
 import Models.Appointment;
 import Models.Customer;
 import Models.Pet;
+import Models.StoreService;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
@@ -30,12 +31,16 @@ public class AppointmentSummary extends javax.swing.JPanel {
     Customer customer;
     Appointment appointment;
     Pet pet;
-    public AppointmentSummary(JPanel bottomPanel,Customer customer,Appointment appointment) {
+    StoreService service;
+    public AppointmentSummary(JPanel bottomPanel,Customer customer,Appointment appointment, StoreService service, Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        this.pet = pet;
+        this.service = service;
         fetchAndPopulateAppointmentDetails();
+        System.out.println(appointment.getStoreId());
     }
 
     /**
@@ -54,8 +59,8 @@ public class AppointmentSummary extends javax.swing.JPanel {
         Object[] row = new Object[7];
         row[0] = appointment.getCustomerId();
         row[1] = appointment.getStoreName();
-        row[2] = appointment.getServiceId(); 
-        row[3] = appointment.getPetId();  
+        row[2] = service.getServiceName(); 
+        row[3] = pet.getPetName();  
         row[4] = formattedDate;
         row[5] = appointment.getStatus();
         row[6] = appointment.getRating();
@@ -157,7 +162,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
     private void backToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToServiceOptionsActionPerformed
         // TODO add your handling code here:
         
-        SelectService selectService = new SelectService(bottomPanel,customer,appointment);
+        SelectService selectService = new SelectService(bottomPanel,customer,appointment,pet);
         bottomPanel.add(selectService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

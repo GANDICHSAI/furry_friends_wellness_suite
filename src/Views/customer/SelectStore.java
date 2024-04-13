@@ -6,6 +6,7 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
 import Models.Store;
 import Utilities.SelectStoreController;
 import java.awt.CardLayout;
@@ -26,6 +27,7 @@ public class SelectStore extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
+    Pet pet;
     public SelectStore(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -72,23 +74,15 @@ public class SelectStore extends javax.swing.JPanel {
 
         storeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STORE NAME", "POSTAL CODE"
+                "ID", "STORE NAME", "POSTAL CODE"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(storeTable);
 
         nextToPetButton.setText("NEXT");
@@ -156,7 +150,7 @@ public class SelectStore extends javax.swing.JPanel {
     private void nextToPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextToPetButtonActionPerformed
         // TODO add your handling code here:
         
-        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment);
+        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment,pet);
         bottomPanel.add(createPetProfileObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -167,8 +161,10 @@ public class SelectStore extends javax.swing.JPanel {
         
         //set store name into appointment
         int selectedRowIndex = storeTable.getSelectedRow();
-        String storeName = (String) storeTable.getValueAt(selectedRowIndex, 0);
+        String storeName = (String) storeTable.getValueAt(selectedRowIndex, 1);
         appointment.setStoreName(storeName);
+        int storeId = (int)storeTable.getValueAt(selectedRowIndex, 0);
+        appointment.setStoreId(storeId);
                
         
     }//GEN-LAST:event_nextToPetButtonActionPerformed
@@ -198,7 +194,7 @@ public class SelectStore extends javax.swing.JPanel {
         
         // Update the store table with the results
         for(Store store : stores) {
-            model.addRow(new Object[]{store.getStoreName(), store.getPostalCode()});
+            model.addRow(new Object[]{store.getStoreId(),store.getStoreName(), store.getPostalCode()});
         }
     } else {
         // Show an error message dialog if the postal code field is empty

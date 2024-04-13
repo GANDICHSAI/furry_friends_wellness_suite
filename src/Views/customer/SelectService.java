@@ -7,6 +7,7 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
 import Models.StoreService;
 import Utilities.AppointmentController;
 import Utilities.CustomerController;
@@ -14,6 +15,7 @@ import Utilities.StoreServicesController;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -31,14 +33,18 @@ public class SelectService extends javax.swing.JPanel {
     private ArrayList<StoreService> storeServicesList;
     Customer customer;
     Appointment appointment;
+    StoreService service;
+    Pet pet;
     
 
     
-    public SelectService(JPanel bottomPanel,Customer customer, Appointment appointment) {
+    public SelectService(JPanel bottomPanel,Customer customer, Appointment appointment, Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        this.pet = pet;
+        this.service = service;
         populateTable();
 
     }
@@ -150,11 +156,12 @@ public class SelectService extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    //debug method, plz ignore
     public static String formatAppointmentDetails(Appointment appointment) {
         if (appointment == null) return "Appointment is null";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
+        appointment.setStatus("PENDING");
         
         return "Appointment Details: {" +
                "Appointment ID: " + appointment.getAppointmentId() +
@@ -175,11 +182,26 @@ public class SelectService extends javax.swing.JPanel {
         if (selectedRow != -1) {
         
             int serviceId = Integer.parseInt(ServiceTable.getValueAt(selectedRow, 0).toString());
+            String serviceName = ServiceTable.getValueAt(selectedRow, 1).toString();
+            
 
             // Store the service ID in the Appointment object
             appointment.setServiceId(serviceId);
             
+            //initialize service object to store service name
+            this.service = new StoreService();
+            service.setServiceName(serviceName);
+            
+            
             appointment.setDate(jDateChooser1.getDate());
+            
+           if (this.pet == null) {
+            System.out.println("Error: Pet object is null.");
+            JOptionPane.showMessageDialog(this, "Pet details are missing.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Don't proceed further since pet is null
+            }
+
+            System.out.println("Navigating to Appointment Summary with Pet: " + pet.getPetName());
 
 
             //AppointmentController.addAppointment(appointment);
@@ -191,7 +213,7 @@ public class SelectService extends javax.swing.JPanel {
             System.out.println(formatAppointmentDetails(appointment));
 
             // Navigate to the Appointment Summary page
-            AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment);
+            AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment, service, pet);
             bottomPanel.add("AppointmentSummary", appointmentSummaryObj);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.show(bottomPanel, "AppointmentSummary");
@@ -227,7 +249,7 @@ public class SelectService extends javax.swing.JPanel {
     private void backToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer,appointment);
+        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer,appointment,pet);
         bottomPanel.add(createPetProfile);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -27,7 +28,7 @@ public class AppointmentController {
 
     public static void addAppointment(Appointment appointment) {
         //add to database
-        String query = "INSERT INTO Appointment(cust_id,store_name,service_id,pet_id,date,status,rating) VALUES(?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Appointment(cust_id,store_name,service_id,store_id,pet_id,date,status,rating) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             java.util.Date utilDate = appointment.getDate();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -36,10 +37,12 @@ public class AppointmentController {
             stmt.setInt(1, appointment.getCustomerId());
             stmt.setString(2, appointment.getStoreName());
             stmt.setInt(3, appointment.getServiceId());
-            stmt.setInt(4, appointment.getPetId());
-            stmt.setDate(5, sqlDate);
-            stmt.setString(6, appointment.getStatus());
-            stmt.setInt(7, appointment.getRating());
+            stmt.setInt(4, appointment.getStoreId());
+            stmt.setInt(5, appointment.getPetId());
+            
+            stmt.setDate(6, sqlDate);
+            stmt.setString(7, appointment.getStatus());
+            stmt.setInt(8, appointment.getRating());
 
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
@@ -106,6 +109,7 @@ public class AppointmentController {
 
         return appointments;
     }
+    
 
     public static ArrayList<Appointment> getAppointmentsByStoreId(int storeId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
@@ -137,12 +141,13 @@ public class AppointmentController {
     }
     
     public static void deleteAppointment(int appointmentId) {
-        String query = "DELETE FROM Appointment WHERE app_id = ?";
+        String query = "UPDATE Appointment SET status=? WHERE app_id=?";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, appointmentId);
+            stmt.setString(1,"CANCELLED");
+            stmt.setInt(2, appointmentId);
             int rowsAffected = stmt.executeUpdate();
-            System.out.println("Deleted " + rowsAffected + " appointment(s).");
+            //System.out.println("Deleted " + rowsAffected + " appointment(s).");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -161,6 +166,65 @@ public class AppointmentController {
             e.printStackTrace();
         }
     }
+    
+    
+    public static ArrayList<Appointment> testController(int customerId) {
+        ArrayList<Appointment> appointments = new ArrayList<>();
+
+        String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, " +
+                        "a.date, a.status, a.rating " +
+                        "FROM Appointment a " +
+                        "JOIN Store s ON a.store_id = s.store_id " +
+                        "JOIN Store_Service sv ON a.service_id = sv.store_serv_id " +
+                        "JOIN Pet p ON a.pet_id = p.pet_id " +
+                        "WHERE a.cust_id = ?";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, customerId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                        int appId = rs.getInt("app_id");
+                        String storeName = rs.getString("store_name");
+                        String serviceName = rs.getString("service_name");
+                        String petName = rs.getString("pet_name");
+                        Date date = rs.getDate("date");
+                        String status = rs.getString("status");
+                        int rating = rs.getInt("rating");
+                        
+                        Appointment selectedAppointment = new Appointment();
+                        selectedAppointment.setAppointmentId(rs.getInt("app_id"));
+                        selectedAppointment.setStoreName(rs.getString("store_name"));
+                        selectedAppointment.setServiceName(rs.getString("store_name"));
+                        selectedAppointment.setPetName(rs.getString("pet_name"));
+                        
+                        //java.util.Date utilDate = selectedAppointment.getDate();
+                        //java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                        selectedAppointment.setDate(rs.getDate("date"));
+                        selectedAppointment.setStatus(rs.getString("status"));
+                        selectedAppointment.setRating(rs.getInt("rating"));
+                        
+                        
+                        // Print the retrieved data
+//                        System.out.println("Store Name: " + storeName);
+//                        System.out.println("Service Name: " + serviceName);
+//                        System.out.println("Pet Name: " + petName);
+//                        System.out.println("Date: " + date);
+//                        System.out.println("Status: " + status);
+//                        System.out.println("Rating: " + rating);
+//                        System.out.println("-----------------------------------");
+                        
+                        //add to column
+                        
+                        appointments.add(selectedAppointment);
+                    }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return appointments;
+    }
+    
     
     
 //    public static Appointment getAppointmentById(int appointmentId) {

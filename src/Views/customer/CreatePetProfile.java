@@ -26,11 +26,12 @@ public class CreatePetProfile extends javax.swing.JPanel {
     Customer customer;
     Appointment appointment;
     Pet pet;
-    public CreatePetProfile(JPanel bottomPanel,Customer customer,Appointment appointment) {
+    public CreatePetProfile(JPanel bottomPanel,Customer customer,Appointment appointment,Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        this.pet = pet;
     }
 
     /**
@@ -244,7 +245,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
         float petWeight = Float.parseFloat(petWeightTextField.getText());
         
         //pet object
-        Pet pet = new Pet();
+        this.pet = new Pet();
         pet.setCustomerId(appointment.getCustomerId());
         pet.setPetName(petName);
         pet.setType(petType);
@@ -253,6 +254,9 @@ public class CreatePetProfile extends javax.swing.JPanel {
         pet.setColor(petColor);
         pet.setWeight(petWeight);
         
+        //Debug Log to check Pet details
+    System.out.println("Pet details: " + this.pet);
+        
         int petId = PetController.addPet(pet);
         
         if(petId != -1) {
@@ -260,11 +264,9 @@ public class CreatePetProfile extends javax.swing.JPanel {
             appointment.setPetId(petId);
             
             // insert pet into pet DB
-            
-            
 
             // Continue to the next screen to select service
-            SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment);
+            SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
             bottomPanel.add(selectServiceObj);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel);
