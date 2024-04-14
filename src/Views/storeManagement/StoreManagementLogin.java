@@ -138,13 +138,13 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smUsernameActionPerformed
 
-    public static <T extends Authenticatable> boolean authenticate(String email, String password, List<T> users) {
+    public static <T extends Authenticatable> Authenticatable authenticate(String email, String password, List<T> users) {
         for (Authenticatable user : users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
     private void smLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smLoginActionPerformed
@@ -154,20 +154,20 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         char[] passwordChars = smPassword.getPassword();
         String password = new String(passwordChars);
 
-        Boolean auth = false;
         switch (smRole.getSelectedItem().toString()) {
 
             case "CLIENT INFORMATION MANAGER" -> {
                 try {
                     ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
+                    List<Authenticatable> authenticatables = new ArrayList<>(clientInformationManagers);
 
-                    auth = StoreManagementLogin.<ClientInformationManager>authenticate(email, password, clientInformationManagers);
+                    Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
 
-                    if (auth) {
-                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
-                        bottomPanel.add(clientInformationManagerObj);
-                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                        layout.next(bottomPanel);
+                    if (authenticatedEmployee != null) {
+//                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
+//                        bottomPanel.add(clientInformationManagerObj);
+//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+//                        layout.next(bottomPanel);
                     } else {
                         throw new IllegalArgumentException("Invalid credentials");
                     }
@@ -184,12 +184,14 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             case "STORE EMPLOYEE" -> {
                 try {
                     ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
+                    List<Authenticatable> authenticatables = new ArrayList<>(storeEmployees);
+
                     System.out.println(storeEmployees);
 
-                    auth = StoreManagementLogin.<StoreEmployee>authenticate(email, password, storeEmployees);
+                    Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
 
-                    if (auth) {
-                        StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel(bottomPanel);
+                    if (authenticatedEmployee != null) {
+                        StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
                         bottomPanel.add(storeEmployeeChooseObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
@@ -209,10 +211,11 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             case "SYSTEM ADMIN" -> {
                 try {
                     ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
+                    List<Authenticatable> authenticatables = new ArrayList<>(systemAdmins);
 
-                    auth = StoreManagementLogin.<SystemAdmin>authenticate(email, password, systemAdmins);
+                    Authenticatable authenticatedEmployee  = authenticate(email, password, authenticatables);
 
-                    if (auth) {
+                    if (authenticatedEmployee != null) {
                         AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
                         bottomPanel.add(adminMenuObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();

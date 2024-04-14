@@ -4,6 +4,7 @@
  */
 package Views.storeManagement;
 
+import Models.StoreEmployee;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,7 +18,8 @@ public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
      * Creates new form clientInformationManager
      */
     JPanel bottomPanel;
-    public StoreEmployeeChoosePanel(JPanel bottomPanel) {
+    StoreEmployee storeEmployee;
+    public StoreEmployeeChoosePanel(StoreEmployee storeEmployee, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
     }
@@ -100,7 +102,7 @@ public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
     private void smNewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smNewAppointmentActionPerformed
         // TODO add your handling code here:
         
-        CreateCustomerAndPetPanel newAppointmentObj = new CreateCustomerAndPetPanel(bottomPanel);
+        CreateCustomerAndPetPanel newAppointmentObj = new CreateCustomerAndPetPanel(storeEmployee, bottomPanel);
         bottomPanel.add(newAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -110,7 +112,7 @@ public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
     private void smViewAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smViewAppointmentsActionPerformed
         // TODO add your handling code here:
         
-        ClientAppointments clientAppointmentsObj = new ClientAppointments(bottomPanel);
+        StoreAppointments clientAppointmentsObj = new StoreAppointments(storeEmployee, bottomPanel);
         bottomPanel.add(clientAppointmentsObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

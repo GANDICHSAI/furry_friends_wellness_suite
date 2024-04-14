@@ -30,6 +30,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
     public SelectServicePanel(Appointment appointment, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.appointment = appointment;
         populateTable();
     }
 

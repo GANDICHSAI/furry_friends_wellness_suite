@@ -82,4 +82,22 @@ public class PetController {
         return pets;
     }
 
+    public static String getPetNameByPetId(int petId) {
+        String petName = null;
+
+        String query = "SELECT pet_name FROM Pet WHERE pet_id = ?";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, petId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                petName = rs.getString("pet_name");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return petName;
+    }
 }

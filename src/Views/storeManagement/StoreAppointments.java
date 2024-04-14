@@ -4,22 +4,35 @@
  */
 package Views.storeManagement;
 
+import Models.Appointment;
+import Models.StoreEmployee;
+import Utilities.AppointmentController;
+import Utilities.PetController;
+import Utilities.StoreServicesController;
+
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author chait
  */
-public class ClientAppointments extends javax.swing.JPanel {
+public class StoreAppointments extends javax.swing.JPanel {
 
     /**
      * Creates new form clientAppointments
      */
     JPanel bottomPanel;
-    public ClientAppointments(JPanel bottomPanel) {
+    StoreEmployee storeEmployee;
+    private ArrayList<Appointment> storeAppointmentList;
+
+    public StoreAppointments(StoreEmployee storeEmployee, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        populateTable();
     }
 
     /**
@@ -41,7 +54,7 @@ public class ClientAppointments extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("CLIENT APPOINTMENTS");
+        jLabel1.setText("STORE APPOINTMENTS");
 
         smAppointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,13 +117,32 @@ public class ClientAppointments extends javax.swing.JPanel {
 
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
-        
-        StoreEmployeeChoosePanel clientInformationManager = new StoreEmployeeChoosePanel(bottomPanel);
+
+        StoreEmployeeChoosePanel clientInformationManager = new StoreEmployeeChoosePanel(storeEmployee, bottomPanel);
         bottomPanel.add(clientInformationManager);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
 
+    public void populateTable() {
+        int storeId = storeEmployee.getStoreID();
+
+        try {
+            this.storeAppointmentList = AppointmentController.getAppointmentsByStoreId(storeId);
+
+            DefaultTableModel tableModel = (DefaultTableModel) smAppointmentsTable.getModel();
+            tableModel.setRowCount(0);
+            for (Appointment appointment : storeAppointmentList) {
+                String petName = PetController.getPetNameByPetId(appointment.getPetId());
+                String serviceName = StoreServicesController.getServiceNameById(appointment.getServiceId());
+
+                String[] appointmentData = {appointment.getStoreName(), petName, serviceName, String.valueOf(appointment.getDate()), appointment.getStatus()};
+                tableModel.addRow(appointmentData);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

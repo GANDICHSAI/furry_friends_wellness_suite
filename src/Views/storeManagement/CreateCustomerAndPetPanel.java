@@ -9,6 +9,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import Models.Customer;
 import Models.Pet;
+import Models.StoreEmployee;
 import Utilities.CustomerController;
 import Utilities.PetController;
 
@@ -23,8 +24,10 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     private int customerId;
+    StoreEmployee storeEmployee;
 
-    public CreateCustomerAndPetPanel(JPanel bottomPanel) {
+
+    public CreateCustomerAndPetPanel(StoreEmployee storeEmployee, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
     }
@@ -343,6 +346,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         Appointment appointment = new Appointment();
         appointment.setCustomerId(customerId);
         appointment.setPetId(petId);
+        appointment.setStoreName(storeEmployee.getStoreID());
 
 
         smCustomerFirstNameTextField.setText("");
@@ -364,7 +368,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        StoreEmployeeChoosePanel clientInformationManager = new StoreEmployeeChoosePanel(bottomPanel);
+        StoreEmployeeChoosePanel clientInformationManager = new StoreEmployeeChoosePanel(storeEmployee, bottomPanel);
         bottomPanel.add(clientInformationManager);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
