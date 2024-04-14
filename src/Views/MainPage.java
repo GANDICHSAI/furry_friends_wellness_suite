@@ -29,7 +29,7 @@ public class MainPage extends javax.swing.JFrame {
             
             SystemAdmin systemAdmin = new SystemAdmin();
             
-            systemAdmin.setAdminEmail("admin");
+            systemAdmin.setAdminEmail("admin@admin.com");
             systemAdmin.setAdminPassword("anonymous");
             SystemAdminController.addDefaultAdminCreds(systemAdmin);
         }
