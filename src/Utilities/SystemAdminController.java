@@ -115,6 +115,28 @@ public class SystemAdminController {
 
         return systemAdminList;
     }
+    
+    public static ArrayList<SystemAdmin> getDefaultSystemAdmins() {
+        ArrayList<SystemAdmin> defaultSystemAdminList= new ArrayList<>();
+
+        String query = "SELECT * FROM DEFAULT_SYS_ADM_CREDS";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                
+                SystemAdmin dsa = new SystemAdmin();
+
+                dsa.setAdminEmail(rs.getString("sys_email"));
+                dsa.setAdminPassword(rs.getString("sys_password"));
+
+                defaultSystemAdminList.add(dsa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return defaultSystemAdminList;
+    }
 
     public static int getStoreIdByName(String storeName) {
         int storeId = -1; // Default value if not found
@@ -151,6 +173,78 @@ public class SystemAdminController {
             e.printStackTrace();
         }
     }
+    
+    public static void addStoreType(StoreService storeService) {
+        String query = "INSERT INTO Store_Service (service_name, service_price) VALUES (?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, storeService.getServiceName());
+            stmt.setFloat(2, storeService.getServicePrice());
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new store has been created!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void addNewSystemAdmin(SystemAdmin systemAdmin) {
+        String query = "INSERT INTO System_Admin (name, email, password) VALUES (?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, systemAdmin.getAdminName());
+            stmt.setString(2, systemAdmin.getAdminEmail());
+            stmt.setString(3, systemAdmin.getAdminPassword());
+
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new store has been created!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void addNewStoreEmployee(SystemAdmin systemAdmin) {
+        String query = "INSERT INTO Store_Employee (name, email, password) VALUES (?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, systemAdmin.getAdminName());
+            stmt.setString(2, systemAdmin.getAdminEmail());
+            stmt.setString(3, systemAdmin.getAdminPassword());
+
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new store has been created!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void addDefaultAdminCreds(SystemAdmin systemadmin) {
+        String query = "INSERT INTO DEFAULT_SYS_ADM_CREDS (sys_email,sys_password) VALUES (?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, systemadmin.getAdminEmail());
+            stmt.setString(2, systemadmin.getAdminPassword());
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new default admin creds has been created!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void editStore(Store oldStore, Store newStore) {
         String query = "UPDATE Store SET store_name=?, store_postal_code=? WHERE store_id=?";
@@ -165,7 +259,7 @@ public class SystemAdminController {
             if (rowsUpdated > 0) {
                 System.out.println("Store updated successfully.");
             } else {
-                System.out.println("Failed to update Store Manager.");
+                System.out.println("Failed to update Store.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -267,9 +361,9 @@ public class SystemAdminController {
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Client Information Manager updated successfully.");
+                System.out.println("Store Employee updated successfully.");
             } else {
-                System.out.println("Failed to update Client Information Manager.");
+                System.out.println("Failed to update Store Employee.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -309,9 +403,9 @@ public class SystemAdminController {
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Client Information Manager updated successfully.");
+                System.out.println("Store Service Types successfully.");
             } else {
-                System.out.println("Failed to update Client Information Manager.");
+                System.out.println("Failed to update Store Service Types.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -332,9 +426,9 @@ public class SystemAdminController {
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("Client Information Manager updated successfully.");
+                System.out.println("System Admin updated successfully.");
             } else {
-                System.out.println("Failed to update Client Information Manager.");
+                System.out.println("Failed to update System Admin.");
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -150,9 +150,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="petNameTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="pet name"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -227,9 +224,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="petWeightTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="weight"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -243,14 +237,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="petAgeTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="age"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="petColTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="color"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>

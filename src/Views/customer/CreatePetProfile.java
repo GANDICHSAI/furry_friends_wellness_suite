@@ -69,8 +69,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
         petTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         petTitleLabel.setText("TELL US ABOUT YOUR PET");
 
-        petNameTextField.setText("pet name");
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("GENDER");
@@ -97,15 +95,9 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("COLOR");
 
-        petWeightTextField.setText("weight");
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("WEIGHT");
-
-        petAgeTextField.setText("age");
-
-        petColTextField.setText("color");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));

@@ -4,12 +4,14 @@
  */
 package Views.storeManagement;
 
+import Models.Appointment;
 import Models.Authenticatable;
 import Models.SystemAdmin;
 import Models.ClientInformationManager;
 import Models.StoreEmployee;
 
 import Utilities.SystemAdminController;
+import Views.customer.CustomerLandingPage;
 import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -27,10 +29,10 @@ public class StoreManagementLogin extends javax.swing.JPanel {
      * Creates new form storeManagementLogin
      */
     JPanel bottomPanel;
-
     public StoreManagementLogin(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+
     }
 
     /**
@@ -147,6 +149,7 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         return false;
     }
 
+
     private void smLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smLoginActionPerformed
         // TODO add your handling code here:
 
@@ -155,7 +158,30 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         String password = new String(passwordChars);
 
         Boolean auth = false;
-        switch (smRole.getSelectedItem().toString()) {
+  
+        try{
+    
+            ArrayList<SystemAdmin> defaultSystemAdmins = SystemAdminController.getDefaultSystemAdmins();
+            auth = StoreManagementLogin.<SystemAdmin>authenticate(email, password, defaultSystemAdmins);
+            
+            if (auth){
+                
+                if(smRole.getSelectedItem().toString().equals("SYSTEM ADMIN")){
+                   
+                    AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+                    bottomPanel.add(adminMenuObj);
+                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                    layout.next(bottomPanel);    
+
+                }
+                else{
+                    throw new IllegalArgumentException("Please select only system admin with creds you choose");
+                }
+          
+              
+            }
+            else{
+                    switch (smRole.getSelectedItem().toString()) {
 
             case "CLIENT INFORMATION MANAGER" -> {
                 try {
@@ -233,8 +259,17 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             default -> {
                 throw new IllegalArgumentException("please select correct Role");
             }
+    } 
+                }
+            
+        }
+        catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                }
+ 
     }//GEN-LAST:event_smLoginActionPerformed
-    }
+    
 
     private void clearFields() {
         smUsername.setText("");

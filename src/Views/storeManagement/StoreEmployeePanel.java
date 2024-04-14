@@ -4,6 +4,7 @@
  */
 package Views.storeManagement;
 
+import Models.SystemAdmin;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,9 +18,10 @@ public class StoreEmployeePanel extends javax.swing.JPanel {
      * Creates new form StoreEmployeePanel
      */
     JPanel bottomPanel;
-    public StoreEmployeePanel(JPanel bottomPanel) {
+    public StoreEmployeePanel(JPanel bottomPanel,SystemAdmin systemAdmin) {
         initComponents();
         this.bottomPanel = bottomPanel;
+
     }
 
     /**

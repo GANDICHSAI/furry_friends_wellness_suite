@@ -4,6 +4,7 @@
  */
 package Views.systemAdmin;
 
+import Views.storeManagement.StoreManagementLogin;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -39,6 +40,7 @@ public class AdminMenu extends javax.swing.JPanel {
         manageSystemAdminBtn2 = new javax.swing.JButton();
         manageCIMBtn2 = new javax.swing.JButton();
         manageStoreBtn2 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -88,6 +90,13 @@ public class AdminMenu extends javax.swing.JPanel {
             }
         });
 
+        jButton6.setText("LOGOUT");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -108,12 +117,17 @@ public class AdminMenu extends javax.swing.JPanel {
                         .addGap(141, 141, 141))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(title2)
-                        .addGap(270, 270, 270))))
+                        .addGap(270, 270, 270))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addGap(34, 34, 34))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(37, 37, 37)
+                .addComponent(jButton6)
+                .addGap(88, 88, 88)
                 .addComponent(title2)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,9 +213,19 @@ public class AdminMenu extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_manageStoreBtn2ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        StoreManagementLogin storeManagementLoginObject = new StoreManagementLogin(bottomPanel);
+        bottomPanel.add(storeManagementLoginObject);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createCredentialsBtn2;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton manageCIMBtn2;
     private javax.swing.JButton manageStoreBtn2;

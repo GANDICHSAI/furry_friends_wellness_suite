@@ -5,10 +5,11 @@
 package Views;
 
 import Models.Appointment;
+import Models.SystemAdmin;
+import Utilities.SystemAdminController;
 import Views.customer.BookAppPage;
 import Views.storeManagement.StoreManagementLogin;
 import java.awt.CardLayout;
-import javax.swing.JPanel;
 
 /**
  *
@@ -21,8 +22,17 @@ public class MainPage extends javax.swing.JFrame {
      */
     
     Appointment appointment;
+
     public MainPage() {
         initComponents();
+        if(SystemAdminController.getAllSystemAdmins().isEmpty()&&SystemAdminController.getDefaultSystemAdmins().isEmpty()){
+            
+            SystemAdmin systemAdmin = new SystemAdmin();
+            
+            systemAdmin.setAdminEmail("admin");
+            systemAdmin.setAdminPassword("anonymous");
+            SystemAdminController.addDefaultAdminCreds(systemAdmin);
+        }
         
     }
 
@@ -135,8 +145,10 @@ public class MainPage extends javax.swing.JFrame {
 
     private void storePortalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storePortalButtonActionPerformed
         // TODO add your handling code here:
-        
+//        this.systemAdmin.setAdminEmail("admin");
+//        this.systemAdmin.setAdminPassword("anonymous");
         StoreManagementLogin storeManagementLoginObj = new StoreManagementLogin(bottomPanel);
+       
         bottomPanel.add(storeManagementLoginObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
