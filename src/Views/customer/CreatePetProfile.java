@@ -10,6 +10,7 @@ import Models.Pet;
 import Utilities.AppointmentController;
 import Utilities.PetController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -69,6 +70,20 @@ public class CreatePetProfile extends javax.swing.JPanel {
         petTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         petTitleLabel.setText("TELL US ABOUT YOUR PET");
 
+        petNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                petNameTextFieldActionPerformed(evt);
+            }
+        });
+        petNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                petNameTextFieldKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                petNameTextFieldKeyReleased(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("GENDER");
@@ -95,9 +110,27 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("COLOR");
 
+        petWeightTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                petWeightTextFieldKeyPressed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("WEIGHT");
+
+        petAgeTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                petAgeTextFieldKeyPressed(evt);
+            }
+        });
+
+        petColTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                petColTextFieldKeyPressed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,47 +258,66 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private void saveToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButtonActionPerformed
         // TODO add your handling code here:
         
-        //pet info
-        String petName = petNameTextField.getText();
-        String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
-        String petGender = girlRadioButton.isSelected() ? "Girl" : "Boy";
-        
-        //String petGender = buttonGroup2.getSelection().getActionCommand();
-        
-        int petAge = Integer.parseInt(petAgeTextField.getText());
-        String petColor = petColTextField.getText();
-        float petWeight = Float.parseFloat(petWeightTextField.getText());
-        
-        //pet object
-        this.pet = new Pet();
-        pet.setCustomerId(appointment.getCustomerId());
-        pet.setPetName(petName);
-        pet.setType(petType);
-        pet.setGender(petGender);
-        pet.setAge(petAge);
-        pet.setColor(petColor);
-        pet.setWeight(petWeight);
-        
-        //Debug Log to check Pet details
-    System.out.println("Pet details: " + this.pet);
-        
-        int petId = PetController.addPet(pet);
-        
-        if(petId != -1) {
-            // Set the generated pet ID and pet name into the appointment object
-            appointment.setPetId(petId);
+        try{
             
-            // insert pet into pet DB
+            String petName = petNameTextField.getText();
+            String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
+            String petGender = girlRadioButton.isSelected() ? "Girl" : "Boy";
 
-            // Continue to the next screen to select service
-            SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
-            bottomPanel.add(selectServiceObj);
-            CardLayout layout = (CardLayout) bottomPanel.getLayout();
-            layout.next(bottomPanel);
-    } else {
-        // Handle the error case
-        JOptionPane.showMessageDialog(this, "Failed to save pet information. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+            //String petGender = buttonGroup2.getSelection().getActionCommand();
+
+            int petAge = Integer.parseInt(petAgeTextField.getText());
+            String petColor = petColTextField.getText();
+            float petWeight = Float.parseFloat(petWeightTextField.getText());
+
+
+            if(!petName.isEmpty() && !petType.isEmpty() && !petGender.isEmpty() && petAge > 0 && !petColor.isEmpty() && petWeight > 0)
+            {
+                
+                    //pet object
+                    this.pet = new Pet();
+                    pet.setCustomerId(appointment.getCustomerId());
+                    pet.setPetName(petName);
+                    pet.setType(petType);
+                    pet.setGender(petGender);
+                    pet.setAge(petAge);
+                    pet.setColor(petColor);
+                    pet.setWeight(petWeight);
+
+                    //Debug Log to check Pet details
+        //            System.out.println("Pet details: " + this.pet);
+
+                    int petId = PetController.addPet(pet);
+
+                    if(petId != -1) {
+                        // Set the generated pet ID and pet name into the appointment object
+                        appointment.setPetId(petId);
+
+                        // insert pet into pet DB
+
+                        // Continue to the next screen to select service
+                        SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
+                        bottomPanel.add(selectServiceObj);
+                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                        layout.next(bottomPanel);
+                    }
+//}
+            else {
+                // Handle the error case
+        
+                throw new IllegalArgumentException("Failed to save pet information. Please try again.");
+        
+            }
+       
+        }
+        } catch (Exception e){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+        
+        
+        
+        //pet info
+        
         
 
 //        SelectService selectServiceObj = new SelectService(bottomPanel,customer);
@@ -286,6 +338,100 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private void girlRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_girlRadioButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_girlRadioButtonActionPerformed
+
+    private void petNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_petNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_petNameTextFieldActionPerformed
+
+    private void petNameTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_petNameTextFieldKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_petNameTextFieldKeyReleased
+
+    private void petNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_petNameTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (petNameTextField.getText().matches("^[a-zA-Z]*")){
+                 
+                 petNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            petNameTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_petNameTextFieldKeyPressed
+
+    private void petWeightTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_petWeightTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        
+        
+        try{
+            
+                int weight = Integer.parseInt(petWeightTextField.getText());
+
+                petWeightTextField.setForeground(Color.black);
+            
+        }
+        catch(Exception e){
+            
+            petWeightTextField.setForeground(Color.red);
+
+        }
+                
+    }//GEN-LAST:event_petWeightTextFieldKeyPressed
+
+    private void petAgeTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_petAgeTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+            
+                int age = Integer.parseInt(petAgeTextField.getText());
+
+                petAgeTextField.setForeground(Color.black);
+            
+        }
+        catch(Exception e){
+            
+            petAgeTextField.setForeground(Color.red);
+
+        }
+        
+    }//GEN-LAST:event_petAgeTextFieldKeyPressed
+
+    private void petColTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_petColTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (petNameTextField.getText().matches("^[a-zA-Z]*")){
+                 
+                 petNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            petNameTextField.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_petColTextFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

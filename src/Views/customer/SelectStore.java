@@ -74,10 +74,7 @@ public class SelectStore extends javax.swing.JPanel {
 
         storeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "STORE NAME", "POSTAL CODE"
@@ -150,21 +147,45 @@ public class SelectStore extends javax.swing.JPanel {
     private void nextToPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextToPetButtonActionPerformed
         // TODO add your handling code here:
         
-        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment,pet);
-        bottomPanel.add(createPetProfileObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        
+        try{
+            int selectedRowIndex = storeTable.getSelectedRow();
+            
+            
+            System.out.println(selectedRowIndex);
+            
+
+
+            if (selectedRowIndex<0){
+                throw new IllegalArgumentException("Select any one store");
+            }
+            else{
+
+                CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment,pet);
+                bottomPanel.add(createPetProfileObj);
+                CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                layout.next(bottomPanel);
+                
+                String storeName = (String) storeTable.getValueAt(selectedRowIndex, 1);
+                int storeId = (int)storeTable.getValueAt(selectedRowIndex, 0);
+
+                appointment.setCustomerId(customer.getCustomerID());
+                appointment.setStoreName(storeName);
+                appointment.setStoreId(storeId);
+            }
+        }
+        catch (IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
         
         //create new appointment object 
         //Appointment appointment = new Appointment();
-        appointment.setCustomerId(customer.getCustomerID());
+        
         
         //set store name into appointment
-        int selectedRowIndex = storeTable.getSelectedRow();
-        String storeName = (String) storeTable.getValueAt(selectedRowIndex, 1);
-        appointment.setStoreName(storeName);
-        int storeId = (int)storeTable.getValueAt(selectedRowIndex, 0);
-        appointment.setStoreId(storeId);
+        
                
         
     }//GEN-LAST:event_nextToPetButtonActionPerformed

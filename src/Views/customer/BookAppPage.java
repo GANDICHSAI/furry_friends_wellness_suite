@@ -9,6 +9,7 @@ import Models.Appointment;
 import Models.Customer;
 import Utilities.CustomerController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -75,9 +76,26 @@ public class BookAppPage extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("LOG IN AS FF MEMBER");
 
+        custFirstNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                custFirstNameTextFieldKeyPressed(evt);
+            }
+        });
+
         custLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 custLastNameTextFieldActionPerformed(evt);
+            }
+        });
+        custLastNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                custLastNameTextFieldKeyPressed(evt);
+            }
+        });
+
+        custEmailTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                custEmailTextFieldActionPerformed(evt);
             }
         });
 
@@ -248,31 +266,39 @@ public class BookAppPage extends javax.swing.JPanel {
     private void custLogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogInButtonActionPerformed
         // TODO add your handling code here:
         try{
+            
+            
             this.customers = CustomerController.getAllCustomers();
             String email = loginEmailTextField.getText();
             char [] passwordChars = loginPasswordField.getPassword();
             String password = new String(passwordChars);
 
             System.out.println(password);
-            
-            for (Customer cust: customers){
+            if(email == null || email.isEmpty() || password.isEmpty()){
                 
-                if (cust.getEmail().equals(email) && cust.getPassword().equals(password)){
-                    
-
-                    auth = true;
-                    CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust,new Appointment());
-                    bottomPanel.add(customerLandingPageObj);
-                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                    layout.next(bottomPanel);     
-                    break;
-                }
-          
-              
+                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
             }
-             if (!auth){
-                    throw new IllegalArgumentException("Invalid credentials");
+            else{
+                for (Customer cust: customers){
+
+                    if (cust.getEmail().equals(email) && cust.getPassword().equals(password)){
+
+
+                        auth = true;
+                        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust,new Appointment());
+                        bottomPanel.add(customerLandingPageObj);
+                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                        layout.next(bottomPanel);     
+                        break;
+                    }
+
+
                 }
+                 if (!auth){
+                        throw new IllegalArgumentException("Invalid credentials");
+                    }
+                 
+            }
             
             clearFields();
            
@@ -291,6 +317,30 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void confirmCustEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmCustEmailTextFieldActionPerformed
         // TODO add your handling code here:
+
+        
+        try{
+             
+             if (confirmCustEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 confirmCustEmailTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            confirmCustEmailTextField.setForeground(Color.red);
+
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_confirmCustEmailTextFieldActionPerformed
     private void clearFields(){
   
@@ -319,10 +369,24 @@ public class BookAppPage extends javax.swing.JPanel {
         Customer customer = new Customer();
         
         try{
-            if(firstName == null || firstName.isEmpty()||lastName == null || lastName.isEmpty()||email == null || email.isEmpty()||confirmEmail == null || confirmEmail.isEmpty()||password == null || password.isEmpty()||confirmPassword == null || confirmPassword.isEmpty()){
+            if(firstName == null || firstName.isEmpty()||lastName == null || lastName.isEmpty()||email == null || email.isEmpty()
+                    ||confirmEmail == null || confirmEmail.isEmpty()||password == null || password.isEmpty()||
+                    confirmPassword == null || confirmPassword.isEmpty()){
                 
                 throw new IllegalArgumentException("Please Fill out the form before submitting the details");
             }
+            if(!password.equals(confirmPassword)&&!email.equals(confirmEmail)){
+                throw new IllegalArgumentException("Email and Password are not mathcing");
+            }
+            if(!password.equals(confirmPassword)){
+                throw new IllegalArgumentException("Password is not matching");
+            }
+            
+            if(!email.equals(confirmEmail)){
+                throw new IllegalArgumentException("Email is not matching");
+            }
+            
+            
             else{
                 
                 customer.setFirstName(firstName);
@@ -348,6 +412,75 @@ public class BookAppPage extends javax.swing.JPanel {
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private void custFirstNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custFirstNameTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (custFirstNameTextField.getText().matches("^[a-zA-Z]*")){
+                 
+                 custFirstNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            custFirstNameTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_custFirstNameTextFieldKeyPressed
+
+    private void custLastNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custLastNameTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (custLastNameTextField.getText().matches("^[a-zA-Z]*")){
+                 
+                 custLastNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            custLastNameTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_custLastNameTextFieldKeyPressed
+
+    private void custEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custEmailTextFieldActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (custEmailTextField.getText().matches("^[a-zA-Z]*")){
+                 
+                 custEmailTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            custEmailTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_custEmailTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
