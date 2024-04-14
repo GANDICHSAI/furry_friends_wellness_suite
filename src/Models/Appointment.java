@@ -10,40 +10,20 @@ public class Appointment {
     private String serviceName;
     private String petName;
 
-    public String getPetName() {
-        return petName;
-    }
 
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
     private int petId;
     private Date date;
     private String status;
-    private int rating;
+
     
     private int storeId;
 
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
+    
 
     public Appointment() {
     }
         
-    public Appointment(int appointmentId, int customerId, String storeName, int serviceId, int petId, Date date, String status, int rating) {
+    public Appointment(int appointmentId, int customerId, String storeName, int serviceId, int petId, Date date, String status) {
         this.appointmentId = appointmentId;
         this.customerId = customerId;
         this.storeName = storeName;
@@ -51,12 +31,12 @@ public class Appointment {
         this.petId = petId;
         this.date = date;
         this.status = status;
-        this.rating = rating;
+   
     }
     
-    public Appointment(int appointmentId, int customerId, String storeName, int serviceId, int petId, Date date, String status) {
-    this(appointmentId, customerId, storeName, serviceId, petId, date, status, -1); // -1 means rating is empty
-}
+//    public Appointment(int appointmentId, int customerId, String storeName, int serviceId, int petId, Date date, String status) {
+//    this(appointmentId, customerId, storeName, serviceId, petId, date, status, -1); // -1 means rating is empty
+//}
 
     public int getAppointmentId() {
         return appointmentId;
@@ -113,13 +93,29 @@ public class Appointment {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public int getRating() {
-        return rating;
+    
+        public String getPetName() {
+        return petName;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+    
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 }
 
