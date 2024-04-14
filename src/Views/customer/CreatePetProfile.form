@@ -72,10 +72,6 @@
                                       <Component id="petAgeTextField" min="-2" pref="113" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="saveToSelectServiceButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -86,6 +82,11 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="backToStoreSelectionButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
+              <Component id="saveToSelectServiceButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,9 +131,9 @@
                   </Group>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Component id="saveToSelectServiceButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="124" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Component id="saveToSelectServiceButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="119" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -265,12 +266,12 @@
         <Property name="text" type="java.lang.String" value="AGE"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="saveToSelectServiceButton">
+    <Component class="javax.swing.JButton" name="saveToSelectServiceButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="SAVE AND SELECT SERVICE"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToSelectServiceButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToSelectServiceButton1ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backToStoreSelectionButton">

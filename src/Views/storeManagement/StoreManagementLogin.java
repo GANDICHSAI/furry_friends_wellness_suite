@@ -14,6 +14,7 @@ import Utilities.SystemAdminController;
 import Views.customer.CustomerLandingPage;
 import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -67,6 +68,11 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         smUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smUsernameActionPerformed(evt);
+            }
+        });
+        smUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smUsernameKeyPressed(evt);
             }
         });
 
@@ -269,6 +275,31 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                 }
  
     }//GEN-LAST:event_smLoginActionPerformed
+
+    private void smUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smUsernameKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (smUsername.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 smUsername.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            smUsername.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_smUsernameKeyPressed
     
 
     private void clearFields() {

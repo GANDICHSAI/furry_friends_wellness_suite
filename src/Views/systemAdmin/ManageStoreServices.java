@@ -9,6 +9,7 @@ import Models.Store;
 import Models.StoreService;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -120,12 +121,23 @@ public class ManageStoreServices extends javax.swing.JPanel {
         nameLabel.setForeground(new java.awt.Color(255, 255, 255));
         nameLabel.setText("Name");
 
+        nameInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameInputKeyPressed(evt);
+            }
+        });
+
         priceLabel.setForeground(new java.awt.Color(255, 255, 255));
         priceLabel.setText("Price");
 
         priceInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceInputActionPerformed(evt);
+            }
+        });
+        priceInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                priceInputKeyPressed(evt);
             }
         });
 
@@ -350,7 +362,7 @@ public class ManageStoreServices extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         if(nameInput.getText().equals("") || priceInput.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -365,6 +377,54 @@ public class ManageStoreServices extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_addServiceTypeBtn1ActionPerformed
+
+    private void nameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (nameInput.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 nameInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            nameInput.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_nameInputKeyPressed
+
+    private void priceInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (priceInput.getText().matches("^\\d+(\\.\\d{1,2})?$")){
+                 
+                 priceInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            priceInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_priceInputKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

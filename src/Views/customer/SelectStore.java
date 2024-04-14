@@ -59,11 +59,9 @@ public class SelectStore extends javax.swing.JPanel {
         strTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         strTitleLabel.setText("SELECT STORE LOCATION");
 
-        postalCodeTextField.setText("POSTAL CODE");
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("SEARCH BY YOUR LOCATION");
+        jLabel2.setText("SEARCH BY POSTAL CODE");
 
         searchByPostalCodeButton.setText("SEARCH");
         searchByPostalCodeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +115,7 @@ public class SelectStore extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(294, 294, 294)
                         .addComponent(nextToPetButton)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(backToHomeButton)

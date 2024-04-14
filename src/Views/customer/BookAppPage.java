@@ -98,10 +98,26 @@ public class BookAppPage extends javax.swing.JPanel {
                 custEmailTextFieldActionPerformed(evt);
             }
         });
+        custEmailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                custEmailTextFieldKeyPressed(evt);
+            }
+        });
 
         confirmCustEmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmCustEmailTextFieldActionPerformed(evt);
+            }
+        });
+        confirmCustEmailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                confirmCustEmailTextFieldKeyPressed(evt);
+            }
+        });
+
+        loginEmailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                loginEmailTextFieldKeyPressed(evt);
             }
         });
 
@@ -151,9 +167,20 @@ public class BookAppPage extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("PASSWORD");
 
+        confirmPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                confirmPasswordFieldKeyPressed(evt);
+            }
+        });
+
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
+            }
+        });
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
             }
         });
 
@@ -418,7 +445,7 @@ public class BookAppPage extends javax.swing.JPanel {
         
         try{
              
-             if (custFirstNameTextField.getText().matches("^[a-zA-Z]*")){
+             if (custFirstNameTextField.getText().matches("^[a-zA-Z ]+$")){
                  
                  custFirstNameTextField.setForeground(Color.black);
 
@@ -441,7 +468,7 @@ public class BookAppPage extends javax.swing.JPanel {
         
         try{
              
-             if (custLastNameTextField.getText().matches("^[a-zA-Z]*")){
+             if (custLastNameTextField.getText().matches("^[a-zA-Z ]+$")){
                  
                  custLastNameTextField.setForeground(Color.black);
 
@@ -481,6 +508,87 @@ public class BookAppPage extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_custEmailTextFieldActionPerformed
+
+    private void loginEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginEmailTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (loginEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 loginEmailTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            loginEmailTextField.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_loginEmailTextFieldKeyPressed
+
+    private void custEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custEmailTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (custEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 custEmailTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            custEmailTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_custEmailTextFieldKeyPressed
+
+    private void confirmCustEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmCustEmailTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (confirmCustEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 confirmCustEmailTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            confirmCustEmailTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_confirmCustEmailTextFieldKeyPressed
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_passwordFieldKeyPressed
+
+    private void confirmPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmPasswordFieldKeyPressed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_confirmPasswordFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

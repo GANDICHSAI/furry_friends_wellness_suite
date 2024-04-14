@@ -203,6 +203,7 @@
         <Component class="javax.swing.JTextField" name="nameInput">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameInputActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameInputKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="storeLabel">
@@ -248,6 +249,7 @@
         <Component class="javax.swing.JTextField" name="emailInput">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailInputActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="emailInputKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="passwordLabel">

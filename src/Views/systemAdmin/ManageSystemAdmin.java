@@ -8,6 +8,7 @@ import Models.StoreService;
 import Models.SystemAdmin;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -96,10 +97,20 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
                 systemAdminNameFieldActionPerformed(evt);
             }
         });
+        systemAdminNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                systemAdminNameFieldKeyPressed(evt);
+            }
+        });
 
         systemAdminEmailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 systemAdminEmailFieldActionPerformed(evt);
+            }
+        });
+        systemAdminEmailField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                systemAdminEmailFieldKeyPressed(evt);
             }
         });
 
@@ -360,6 +371,56 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editSystemAdminButtonActionPerformed
+
+    private void systemAdminNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_systemAdminNameFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (systemAdminNameField.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 systemAdminNameField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            systemAdminNameField.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_systemAdminNameFieldKeyPressed
+
+    private void systemAdminEmailFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_systemAdminEmailFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (systemAdminEmailField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 systemAdminEmailField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            systemAdminEmailField.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_systemAdminEmailFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

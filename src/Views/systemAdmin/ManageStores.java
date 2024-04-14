@@ -8,6 +8,7 @@ import Models.ClientInformationManager;
 import Models.Store;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -145,8 +146,20 @@ public final class ManageStores extends javax.swing.JPanel {
         storeNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         storeNameLabel.setText("Store name");
 
+        storeNameInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                storeNameInputKeyPressed(evt);
+            }
+        });
+
         storePostalLabel.setForeground(new java.awt.Color(255, 255, 255));
         storePostalLabel.setText("Store Postal Code");
+
+        storePostalInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                storePostalInputKeyPressed(evt);
+            }
+        });
 
         backToMenuBtn.setText("Back to admin menu");
         backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +262,7 @@ public final class ManageStores extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         if(storeNameInput.getText().equals("") || storePostalInput.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -343,6 +356,54 @@ public final class ManageStores extends javax.swing.JPanel {
             
         }
     }//GEN-LAST:event_deleteStoreBtnActionPerformed
+
+    private void storeNameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeNameInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (storeNameInput.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 storeNameInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            storeNameInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_storeNameInputKeyPressed
+
+    private void storePostalInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storePostalInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (storePostalInput.getText().matches("^[A-Z]\\d[A-Z] \\d[A-Z]\\d$")){
+                 
+                 storePostalInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            storePostalInput.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_storePostalInputKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

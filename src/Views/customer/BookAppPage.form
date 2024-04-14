@@ -187,14 +187,19 @@
     <Component class="javax.swing.JTextField" name="custEmailTextField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="custEmailTextFieldActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="custEmailTextFieldKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="confirmCustEmailTextField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmCustEmailTextFieldActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="confirmCustEmailTextFieldKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="loginEmailTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="loginEmailTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="custSignUpButton">
       <Properties>
@@ -301,10 +306,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="confirmPasswordField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="confirmPasswordFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordFieldActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordFieldKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="loginPasswordField">

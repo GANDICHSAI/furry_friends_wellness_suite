@@ -7,7 +7,9 @@ package Views.systemAdmin;
 import Facade.AccountCreator;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -99,6 +101,11 @@ public class CreateCredentials extends javax.swing.JPanel {
                 nameInput1ActionPerformed(evt);
             }
         });
+        nameInput1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameInput1KeyPressed(evt);
+            }
+        });
 
         emailLabel1.setBackground(new java.awt.Color(255, 255, 255));
         emailLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,6 +114,11 @@ public class CreateCredentials extends javax.swing.JPanel {
         emailInput1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailInput1ActionPerformed(evt);
+            }
+        });
+        emailInput1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailInput1KeyPressed(evt);
             }
         });
 
@@ -249,24 +261,32 @@ public class CreateCredentials extends javax.swing.JPanel {
     private void createAccountBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountBtn1ActionPerformed
         // TODO add your handling code here:
         
-
+        try{
+            
+            char [] passwordChars = passwordInput1.getPassword(); 
+        
+        // Convert char[] to String for demonstration (not recommended for passwords
+        String passwordString = new String(passwordChars);
+        
+        if(nameInput1.getText() == null ||nameInput1.getText().isEmpty()||emailInput1.getText() == null||
+                emailInput1.getText().isEmpty()||passwordString == null||passwordString.isEmpty()||
+                credentialsTypeDropdown1.getSelectedItem() == null||
+                storeDropdown1.getSelectedItem() == null){
+            
+            throw new IllegalArgumentException("Please Fill out details to create account");
+            
+       
+    }
+        
         if ("Store Employee".equals(valueSelected)) {
 
-            char[] password = passwordInput1.getPassword();
-
-            // Convert char[] to String for demonstration 
-            String passwordString = new String(password);
-            
            accCreator.createStoreManagerAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
 //            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
             System.out.println("SE");
             return;
         }
         if ("System Admin".equals(valueSelected)) {
-            char[] password = passwordInput1.getPassword();
 
-            // Convert char[] to String for demonstration (not recommended for passwords)
-            String passwordString = new String(password);
 
             accCreator.createSystemAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
 //            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
@@ -278,17 +298,68 @@ public class CreateCredentials extends javax.swing.JPanel {
         }
         if ("Client Information Manager".equals(valueSelected)) {
             
-            char[] password = passwordInput1.getPassword();
-
-            // Convert char[] to String for demonstration (not recommended for passwords)
-            String passwordString = new String(password);
 
             accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
 //            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
             
             System.out.println("CIM");
         }
+            
+        }
+        
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Account Creation Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_createAccountBtn1ActionPerformed
+
+    private void emailInput1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailInput1KeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (emailInput1.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 emailInput1.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            emailInput1.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_emailInput1KeyPressed
+
+    private void nameInput1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameInput1KeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (nameInput1.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 nameInput1.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            nameInput1.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_nameInput1KeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ import Models.StoreEmployee;
 import Models.SystemAdmin;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -133,6 +134,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 nameInputActionPerformed(evt);
             }
         });
+        nameInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameInputKeyPressed(evt);
+            }
+        });
 
         storeLabel.setBackground(new java.awt.Color(255, 255, 255));
         storeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,6 +158,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         emailInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailInputActionPerformed(evt);
+            }
+        });
+        emailInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailInputKeyPressed(evt);
             }
         });
 
@@ -408,6 +419,52 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
     private void storeDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDropdownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_storeDropdownActionPerformed
+
+    private void nameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (nameInput.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 nameInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            nameInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_nameInputKeyPressed
+
+    private void emailInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (emailInput.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 emailInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            emailInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_emailInputKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

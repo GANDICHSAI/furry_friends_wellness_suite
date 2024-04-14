@@ -59,7 +59,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
         petAgeTextField = new javax.swing.JTextField();
         petColTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        saveToSelectServiceButton = new javax.swing.JButton();
+        saveToSelectServiceButton1 = new javax.swing.JButton();
         backToStoreSelectionButton = new javax.swing.JButton();
         girlRadioButton = new javax.swing.JRadioButton();
         boyRadioButton = new javax.swing.JRadioButton();
@@ -136,10 +136,10 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("AGE");
 
-        saveToSelectServiceButton.setText("SAVE AND SELECT SERVICE");
-        saveToSelectServiceButton.addActionListener(new java.awt.event.ActionListener() {
+        saveToSelectServiceButton1.setText("SAVE AND SELECT SERVICE");
+        saveToSelectServiceButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveToSelectServiceButtonActionPerformed(evt);
+                saveToSelectServiceButton1ActionPerformed(evt);
             }
         });
 
@@ -205,15 +205,16 @@ public class CreatePetProfile extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(petColTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(petAgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(saveToSelectServiceButton)
-                                    .addGap(19, 19, 19))))))
+                                        .addComponent(petAgeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(0, 210, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backToStoreSelectionButton)
                 .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(258, 258, 258)
+                .addComponent(saveToSelectServiceButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,13 +250,13 @@ public class CreatePetProfile extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(petColTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
-                .addGap(45, 45, 45)
-                .addComponent(saveToSelectServiceButton)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(saveToSelectServiceButton1)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saveToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButtonActionPerformed
+    private void saveToSelectServiceButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButton1ActionPerformed
         // TODO add your handling code here:
         
         try{
@@ -274,33 +275,35 @@ public class CreatePetProfile extends javax.swing.JPanel {
             if(!petName.isEmpty() && !petType.isEmpty() && !petGender.isEmpty() && petAge > 0 && !petColor.isEmpty() && petWeight > 0)
             {
                 
+                
                     //pet object
-                    this.pet = new Pet();
-                    pet.setCustomerId(appointment.getCustomerId());
-                    pet.setPetName(petName);
-                    pet.setType(petType);
-                    pet.setGender(petGender);
-                    pet.setAge(petAge);
-                    pet.setColor(petColor);
-                    pet.setWeight(petWeight);
+              
+                this.pet = new Pet();
+                pet.setCustomerId(appointment.getCustomerId());
+                pet.setPetName(petName);
+                pet.setType(petType);
+                pet.setGender(petGender);
+                pet.setAge(petAge);
+                pet.setColor(petColor);
+                pet.setWeight(petWeight);
 
-                    //Debug Log to check Pet details
-        //            System.out.println("Pet details: " + this.pet);
+                //Debug Log to check Pet details
+    //            System.out.println("Pet details: " + this.pet);
 
-                    int petId = PetController.addPet(pet);
+                int petId = PetController.addPet(pet);
 
-                    if(petId != -1) {
-                        // Set the generated pet ID and pet name into the appointment object
-                        appointment.setPetId(petId);
+                if(petId != -1) {
+                    // Set the generated pet ID and pet name into the appointment object
+                    appointment.setPetId(petId);
 
-                        // insert pet into pet DB
+                    // insert pet into pet DB
 
-                        // Continue to the next screen to select service
-                        SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
-                        bottomPanel.add(selectServiceObj);
-                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                        layout.next(bottomPanel);
-                    }
+                    // Continue to the next screen to select service
+                    SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
+                    bottomPanel.add(selectServiceObj);
+                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                    layout.next(bottomPanel);
+                }
 //}
             else {
                 // Handle the error case
@@ -310,8 +313,19 @@ public class CreatePetProfile extends javax.swing.JPanel {
             }
        
         }
+            else{
+                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
+            }
         } catch (Exception e){
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                if(e.getMessage().equals("Please Fill out the form before submitting the details")){
+                
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Incomplete Form Submission Error",JOptionPane.ERROR_MESSAGE);
+                
+            }
+            
+            else{
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            }
                 }
         
         
@@ -324,7 +338,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
 //        bottomPanel.add(selectServiceObj);
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
-    }//GEN-LAST:event_saveToSelectServiceButtonActionPerformed
+    }//GEN-LAST:event_saveToSelectServiceButton1ActionPerformed
 
     private void backToStoreSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToStoreSelectionButtonActionPerformed
         // TODO add your handling code here:
@@ -352,7 +366,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
         
         try{
              
-             if (petNameTextField.getText().matches("^[a-zA-Z]*")){
+             if (petNameTextField.getText().matches("^[a-zA-Z ]+$")){
                  
                  petNameTextField.setForeground(Color.black);
 
@@ -377,9 +391,15 @@ public class CreatePetProfile extends javax.swing.JPanel {
         
         try{
             
-                int weight = Integer.parseInt(petWeightTextField.getText());
+                if(petWeightTextField.getText().matches("^[0-9]*")){
+                    
+                    petWeightTextField.setForeground(Color.black);
+                    
+                }
 
-                petWeightTextField.setForeground(Color.black);
+                else{
+                    throw new Exception();
+                }
             
         }
         catch(Exception e){
@@ -395,9 +415,15 @@ public class CreatePetProfile extends javax.swing.JPanel {
         
         try{
             
-                int age = Integer.parseInt(petAgeTextField.getText());
+                if(petAgeTextField.getText().matches("^[0-9]*")){
+                    
+                    petAgeTextField.setForeground(Color.black);
+                }
+                else{
+                    throw new Exception();
+                }
 
-                petAgeTextField.setForeground(Color.black);
+                
             
         }
         catch(Exception e){
@@ -413,9 +439,9 @@ public class CreatePetProfile extends javax.swing.JPanel {
         
         try{
              
-             if (petNameTextField.getText().matches("^[a-zA-Z]*")){
+             if (petColTextField.getText().matches("^[a-zA-Z]*")){
                  
-                 petNameTextField.setForeground(Color.black);
+                 petColTextField.setForeground(Color.black);
 
             }
             
@@ -426,7 +452,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
         }
         catch(Exception e){
             
-            petNameTextField.setForeground(Color.red);
+            petColTextField.setForeground(Color.red);
 
         }
         
@@ -453,6 +479,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private javax.swing.JTextField petNameTextField;
     private javax.swing.JLabel petTitleLabel;
     private javax.swing.JTextField petWeightTextField;
-    private javax.swing.JButton saveToSelectServiceButton;
+    private javax.swing.JButton saveToSelectServiceButton1;
     // End of variables declaration//GEN-END:variables
 }

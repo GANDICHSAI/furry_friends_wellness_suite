@@ -88,13 +88,13 @@ public class AppointmentSummary extends javax.swing.JPanel {
 
         viewAppLabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
+                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS", "RATING"
             }
         ));
         jScrollPane1.setViewportView(viewAppLabel);
@@ -149,9 +149,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
                 .addComponent(backToServiceOptions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewAppTitleLabel)
-                .addGap(41, 41, 41)
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(bookComplete)
                 .addGap(27, 27, 27)
                 .addComponent(bookComplete1)
@@ -170,8 +170,22 @@ public class AppointmentSummary extends javax.swing.JPanel {
 
     private void bookCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookCompleteActionPerformed
         // TODO add your handling code here:
-        AppointmentController.addAppointment(appointment);
-        JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+        
+        try{
+             int selectedRowIndex = viewAppLabel.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select an appointment to complete booking an appointment.");
+            }
+            AppointmentController.addAppointment(appointment);
+            JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+        }
+        catch (Exception e){
+            
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+      
+        
         
     }//GEN-LAST:event_bookCompleteActionPerformed
 
