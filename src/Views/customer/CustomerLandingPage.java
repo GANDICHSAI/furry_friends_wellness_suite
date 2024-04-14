@@ -41,7 +41,6 @@ public class CustomerLandingPage extends javax.swing.JPanel {
         bookAppButton = new javax.swing.JButton();
         checkAppHistoryButton = new javax.swing.JButton();
         updateAppButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         logOutButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
@@ -74,9 +73,6 @@ public class CustomerLandingPage extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("reuse app summary page");
-
         logOutButton.setText("LOGOUT");
         logOutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,11 +90,9 @@ public class CustomerLandingPage extends javax.swing.JPanel {
                     .addComponent(checkAppHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bookAppButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateAppButton, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel2)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(192, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(custLandingTitleLabel)
@@ -117,9 +111,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
                 .addGap(108, 108, 108)
                 .addComponent(bookAppButton)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkAppHistoryButton)
-                    .addComponent(jLabel2))
+                .addComponent(checkAppHistoryButton)
                 .addGap(31, 31, 31)
                 .addComponent(updateAppButton)
                 .addContainerGap(232, Short.MAX_VALUE))
@@ -168,7 +160,6 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     private javax.swing.JButton bookAppButton;
     private javax.swing.JButton checkAppHistoryButton;
     private javax.swing.JLabel custLandingTitleLabel;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton logOutButton;
     private javax.swing.JButton updateAppButton;
     // End of variables declaration//GEN-END:variables

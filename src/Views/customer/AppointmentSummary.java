@@ -6,8 +6,12 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
+import Models.StoreService;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,12 +30,17 @@ public class AppointmentSummary extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
-    public AppointmentSummary(JPanel bottomPanel,Customer customer,Appointment appointment) {
+    Pet pet;
+    StoreService service;
+    public AppointmentSummary(JPanel bottomPanel,Customer customer,Appointment appointment, StoreService service, Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        this.pet = pet;
+        this.service = service;
         fetchAndPopulateAppointmentDetails();
+        System.out.println(appointment.getStoreId());
     }
 
     /**
@@ -41,25 +50,23 @@ public class AppointmentSummary extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     private void fetchAndPopulateAppointmentDetails() {
-//        ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
-
         DefaultTableModel model = (DefaultTableModel) viewAppLabel.getModel();
-        model.setRowCount(0); // Clear previous data
-        int i = viewAppLabel.getSelectedRow();
-        if(i >= 0){
-                model.setValueAt(appointment.getCustomerId(), i, 0);
-                model.setValueAt(appointment.getStoreName(), i, 1);
-                model.setValueAt(appointment.getServiceId(), i, 2);
-                model.setValueAt(appointment.getPetId(), i, 3);
-                model.setValueAt(appointment.getDate(), i, 4);
-                model.setValueAt(appointment.getStatus(), i, 5);
-                model.setValueAt(appointment.getRating(), i, 6);
+        model.setRowCount(0); // Clear existing data
 
-                }else{
-                        JOptionPane.showMessageDialog(null, "ERROR!");
-                      }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
 
+        Object[] row = new Object[7];
+        row[0] = appointment.getCustomerId();
+        row[1] = appointment.getStoreName();
+        row[2] = service.getServiceName(); 
+        row[3] = pet.getPetName();  
+        row[4] = formattedDate;
+        row[5] = appointment.getStatus();
+        row[6] = appointment.getRating();
 
+        model.addRow(row);
+//        
     }
     
     
@@ -71,6 +78,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
         viewAppLabel = new javax.swing.JTable();
         bookComplete = new javax.swing.JButton();
         backToServiceOptions = new javax.swing.JButton();
+        bookComplete1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -105,6 +113,13 @@ public class AppointmentSummary extends javax.swing.JPanel {
             }
         });
 
+        bookComplete1.setText("BACK TO HOME");
+        bookComplete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookComplete1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +131,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
                         .addComponent(viewAppTitleLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(261, 261, 261)
-                        .addComponent(bookComplete)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bookComplete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bookComplete1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(141, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -132,18 +149,20 @@ public class AppointmentSummary extends javax.swing.JPanel {
                 .addComponent(backToServiceOptions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(viewAppTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(bookComplete)
-                .addGap(177, 177, 177))
+                .addGap(27, 27, 27)
+                .addComponent(bookComplete1)
+                .addGap(127, 127, 127))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void backToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToServiceOptionsActionPerformed
         // TODO add your handling code here:
         
-        SelectService selectService = new SelectService(bottomPanel,customer,appointment);
+        SelectService selectService = new SelectService(bottomPanel,customer,appointment,pet);
         bottomPanel.add(selectService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -151,15 +170,38 @@ public class AppointmentSummary extends javax.swing.JPanel {
 
     private void bookCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookCompleteActionPerformed
         // TODO add your handling code here:
-        AppointmentController.addAppointment(appointment);
-        JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+        
+        try{
+             int selectedRowIndex = viewAppLabel.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select an appointment to complete booking an appointment.");
+            }
+            AppointmentController.addAppointment(appointment);
+            JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+        }
+        catch (Exception e){
+            
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+      
+        
         
     }//GEN-LAST:event_bookCompleteActionPerformed
+
+    private void bookComplete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookComplete1ActionPerformed
+        // TODO add your handling code here:
+            CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,customer,appointment);
+            bottomPanel.add(customerLandingPageObj);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+    }//GEN-LAST:event_bookComplete1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToServiceOptions;
     private javax.swing.JButton bookComplete;
+    private javax.swing.JButton bookComplete1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable viewAppLabel;
     private javax.swing.JLabel viewAppTitleLabel;

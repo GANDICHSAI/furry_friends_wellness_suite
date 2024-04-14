@@ -7,12 +7,15 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
 import Models.StoreService;
 import Utilities.AppointmentController;
 import Utilities.CustomerController;
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -30,12 +33,18 @@ public class SelectService extends javax.swing.JPanel {
     private ArrayList<StoreService> storeServicesList;
     Customer customer;
     Appointment appointment;
+    StoreService service;
+    Pet pet;
     
-    public SelectService(JPanel bottomPanel,Customer customer, Appointment appointment) {
+
+    
+    public SelectService(JPanel bottomPanel,Customer customer, Appointment appointment, Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        this.pet = pet;
+        this.service = service;
         populateTable();
 
     }
@@ -55,7 +64,7 @@ public class SelectService extends javax.swing.JPanel {
         backToProfileCreationButton = new javax.swing.JButton();
         table = new javax.swing.JScrollPane();
         ServiceTable = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        appointmentDate = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -125,7 +134,7 @@ public class SelectService extends javax.swing.JPanel {
                         .addComponent(chooseDatelb))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(285, 285, 285)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(appointmentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -140,44 +149,125 @@ public class SelectService extends javax.swing.JPanel {
                 .addGap(35, 35, 35)
                 .addComponent(chooseDatelb)
                 .addGap(33, 33, 33)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(appointmentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addComponent(saveAndViewSummaryButton)
                 .addContainerGap(125, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //debug method, plz ignore
+    public static String formatAppointmentDetails(Appointment appointment) {
+        if (appointment == null) return "Appointment is null";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
+        appointment.setStatus("PENDING");
+        
+        return "Appointment Details: {" +
+               "Appointment ID: " + appointment.getAppointmentId() +
+               ", Customer ID: " + appointment.getCustomerId() +
+               ", Store Name: '" + appointment.getStoreName() + '\'' +
+               ", Service ID: " + appointment.getServiceId() +
+               ", Pet ID: " + appointment.getPetId() +
+               ", Date: " + formattedDate +
+               ", Status: '" + appointment.getStatus() + '\'' +
+               ", Rating: " + appointment.getRating() +
+               "}";
+    }
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         
-        // retrieve service selection
-        int selectedRow = ServiceTable.getSelectedRow();
-        if (selectedRow != -1) {
-        
-            int serviceId = Integer.parseInt(ServiceTable.getValueAt(selectedRow, 0).toString());
-
-            // Store the service ID in the Appointment object
-            appointment.setServiceId(serviceId);
+        try{
             
-            appointment.setDate(jDateChooser1.getDate());
+             // retrieve service selection
+            int selectedRow = ServiceTable.getSelectedRow();
+            
+            if(selectedRow<0 && appointmentDate.getDate() == null){
+                throw new IllegalArgumentException("Please select a service and choose to book appointment");
+            }
+            
+            if (selectedRow != -1) {
+
+                int serviceId = Integer.parseInt(ServiceTable.getValueAt(selectedRow, 0).toString());
+                String serviceName = ServiceTable.getValueAt(selectedRow, 1).toString();
 
 
-            //AppointmentController.addAppointment(appointment);
+                // Store the service ID in the Appointment object
+                appointment.setServiceId(serviceId);
 
-            // Navigate to the Appointment Summary page
-            AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment);
-            bottomPanel.add("AppointmentSummary", appointmentSummaryObj);
-            CardLayout layout = (CardLayout) bottomPanel.getLayout();
-            layout.show(bottomPanel, "AppointmentSummary");
-        } else {
-        // If no service is selected, show an error message
-            JOptionPane.showMessageDialog(this, "Please select a service to continue.", "Selection Error", JOptionPane.ERROR_MESSAGE);
-        }
+                //initialize service object to store service name
+                this.service = new StoreService();
+                service.setServiceName(serviceName);
+                
+                if(appointmentDate.getDate() == null){
+                    throw new IllegalArgumentException("Please choose date before completing appointment");
+                }
+                else{
+                    appointment.setDate(appointmentDate.getDate());
+                }
+
+                
+               if (this.pet == null) {
+                System.out.println("Error: Pet object is null.");
+                
+                throw new IllegalArgumentException("Pet details are missing.");
+                
+//                return; // Don't proceed further since pet is null
+                }
+
+                System.out.println("Navigating to Appointment Summary with Pet: " + pet.getPetName());
+
+
+                //AppointmentController.addAppointment(appointment);
+
+                //debugging
+                System.out.println("Selected Row: " + selectedRow);
+                System.out.println("Service ID: " + serviceId);
+                System.out.println("Date: " + appointmentDate.getDate());
+                System.out.println(formatAppointmentDetails(appointment));
+
+                // Navigate to the Appointment Summary page
+                AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment, service, pet);
+                bottomPanel.add("AppointmentSummary", appointmentSummaryObj);
+                CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                layout.show(bottomPanel, "AppointmentSummary");
+            } else {
+                
+                throw new IllegalArgumentException("Please select a service to continue.");
+            // If no service is selected, show an error message
+       
+            }
+            
+            
         
 //        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel,customer,appointment);
 //        bottomPanel.add(appointmentSummaryObj);
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
+            
+        }
+        
+        catch(Exception e){
+            
+            
+            if (e.getMessage().equals("Please select a service to continue.")){
+                 JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+                
+            }
+            if (e.getMessage().equals("Please choose date before completing appointment")){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if(e.getMessage().equals("Pet details are missing.")){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if(e.getMessage().equals("Please select a service and choose to book appointment")){
+                
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }
+        }
+        
+       
     }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
     
     public void populateTable(){
@@ -201,7 +291,7 @@ public class SelectService extends javax.swing.JPanel {
     private void backToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer,appointment);
+        CreatePetProfile createPetProfile = new CreatePetProfile(bottomPanel,customer,appointment,pet);
         bottomPanel.add(createPetProfile);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -210,9 +300,9 @@ public class SelectService extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ServiceTable;
+    private com.toedter.calendar.JDateChooser appointmentDate;
     private javax.swing.JButton backToProfileCreationButton;
     private javax.swing.JLabel chooseDatelb;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton saveAndViewSummaryButton;
     private javax.swing.JScrollPane table;

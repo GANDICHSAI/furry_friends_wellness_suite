@@ -8,6 +8,7 @@ import Models.ClientInformationManager;
 import Models.Store;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -145,8 +146,20 @@ public final class ManageStores extends javax.swing.JPanel {
         storeNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         storeNameLabel.setText("Store name");
 
+        storeNameInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                storeNameInputKeyPressed(evt);
+            }
+        });
+
         storePostalLabel.setForeground(new java.awt.Color(255, 255, 255));
         storePostalLabel.setText("Store Postal Code");
+
+        storePostalInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                storePostalInputKeyPressed(evt);
+            }
+        });
 
         backToMenuBtn.setText("Back to admin menu");
         backToMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -161,26 +174,27 @@ public final class ManageStores extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(table)
+                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(idLabel)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(storeNameLabel)
-                    .addComponent(storePostalLabel))
-                .addGap(18, 18, 18)
+                    .addComponent(storePostalLabel)
+                    .addComponent(idLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(storePostalInput, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idValue)
-                    .addComponent(storeNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                    .addComponent(storeNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(deleteStoreBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(heading)
@@ -197,29 +211,30 @@ public final class ManageStores extends javax.swing.JPanel {
                     .addComponent(backToMenuBtn))
                 .addGap(18, 18, 18)
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(idLabel)
-                        .addComponent(idValue)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(storeNameLabel)
-                    .addComponent(storeNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(idLabel)
+                            .addComponent(idValue))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(storeNameLabel)
+                            .addComponent(storeNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(storePostalLabel)
-                            .addComponent(storePostalInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                            .addComponent(storePostalInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(addStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editStoreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -247,7 +262,7 @@ public final class ManageStores extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         if(storeNameInput.getText().equals("") || storePostalInput.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -341,6 +356,54 @@ public final class ManageStores extends javax.swing.JPanel {
             
         }
     }//GEN-LAST:event_deleteStoreBtnActionPerformed
+
+    private void storeNameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeNameInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (storeNameInput.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 storeNameInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            storeNameInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_storeNameInputKeyPressed
+
+    private void storePostalInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storePostalInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (storePostalInput.getText().matches("^[A-Z]\\d[A-Z] \\d[A-Z]\\d$")){
+                 
+                 storePostalInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            storePostalInput.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_storePostalInputKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

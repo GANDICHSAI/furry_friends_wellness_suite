@@ -38,29 +38,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="table" max="32767" attributes="0"/>
+                  <Component id="table" pref="690" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="priceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="idValue" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="nameInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Component id="priceInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="202" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="deleteServiceTypeBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="saveChangesBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="editServiceTypeBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -68,6 +47,28 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="backToMenuBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="priceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="idValue" min="-2" max="-2" attributes="0"/>
+                      <Component id="nameInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                      <Component id="priceInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="deleteServiceTypeBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="editServiceTypeBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="addServiceTypeBtn1" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="saveChangesBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -82,8 +83,19 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="table" min="-2" pref="250" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="addServiceTypeBtn1" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Component id="deleteServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="editServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="saveChangesBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace pref="10" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="idValue" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -98,17 +110,9 @@
                               <Component id="priceInput" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="priceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="deleteServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="editServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="saveChangesBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -173,6 +177,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nameInput">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameInputKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="priceLabel">
           <Properties>
@@ -185,6 +192,7 @@
         <Component class="javax.swing.JTextField" name="priceInput">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceInputActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="priceInputKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="deleteServiceTypeBtn">
@@ -217,6 +225,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backToMenuBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="addServiceTypeBtn1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Add Service Type"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addServiceTypeBtn1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -6,6 +6,7 @@ package Views.customer;
 
 import Models.Appointment;
 import Models.Customer;
+import Models.Pet;
 import Models.Store;
 import Utilities.SelectStoreController;
 import java.awt.CardLayout;
@@ -26,6 +27,7 @@ public class SelectStore extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
+    Pet pet;
     public SelectStore(JPanel bottomPanel,Customer customer, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -57,11 +59,9 @@ public class SelectStore extends javax.swing.JPanel {
         strTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         strTitleLabel.setText("SELECT STORE LOCATION");
 
-        postalCodeTextField.setText("POSTAL CODE");
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("SEARCH BY YOUR LOCATION");
+        jLabel2.setText("SEARCH BY POSTAL CODE");
 
         searchByPostalCodeButton.setText("SEARCH");
         searchByPostalCodeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,23 +72,12 @@ public class SelectStore extends javax.swing.JPanel {
 
         storeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "STORE NAME", "POSTAL CODE"
+                "ID", "STORE NAME", "POSTAL CODE"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(storeTable);
 
         nextToPetButton.setText("NEXT");
@@ -126,7 +115,7 @@ public class SelectStore extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(294, 294, 294)
                         .addComponent(nextToPetButton)))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(backToHomeButton)
@@ -156,19 +145,45 @@ public class SelectStore extends javax.swing.JPanel {
     private void nextToPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextToPetButtonActionPerformed
         // TODO add your handling code here:
         
-        CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment);
-        bottomPanel.add(createPetProfileObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        
+        try{
+            int selectedRowIndex = storeTable.getSelectedRow();
+            
+            
+            System.out.println(selectedRowIndex);
+            
+
+
+            if (selectedRowIndex<0){
+                throw new IllegalArgumentException("Select any one store");
+            }
+            else{
+
+                CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment,pet);
+                bottomPanel.add(createPetProfileObj);
+                CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                layout.next(bottomPanel);
+                
+                String storeName = (String) storeTable.getValueAt(selectedRowIndex, 1);
+                int storeId = (int)storeTable.getValueAt(selectedRowIndex, 0);
+
+                appointment.setCustomerId(customer.getCustomerID());
+                appointment.setStoreName(storeName);
+                appointment.setStoreId(storeId);
+            }
+        }
+        catch (IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
         
         //create new appointment object 
         //Appointment appointment = new Appointment();
-        appointment.setCustomerId(customer.getCustomerID());
+        
         
         //set store name into appointment
-        int selectedRowIndex = storeTable.getSelectedRow();
-        String storeName = (String) storeTable.getValueAt(selectedRowIndex, 0);
-        appointment.setStoreName(storeName);
+        
                
         
     }//GEN-LAST:event_nextToPetButtonActionPerformed
@@ -198,7 +213,7 @@ public class SelectStore extends javax.swing.JPanel {
         
         // Update the store table with the results
         for(Store store : stores) {
-            model.addRow(new Object[]{store.getStoreName(), store.getPostalCode()});
+            model.addRow(new Object[]{store.getStoreId(),store.getStoreName(), store.getPostalCode()});
         }
     } else {
         // Show an error message dialog if the postal code field is empty

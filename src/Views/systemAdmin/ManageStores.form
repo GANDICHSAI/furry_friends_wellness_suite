@@ -38,30 +38,32 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="table" max="32767" attributes="0"/>
+                  <Component id="table" pref="758" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="idLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="storeNameLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="storePostalLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="storeNameLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="storePostalLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="idLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="storePostalInput" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
-                      <Component id="idValue" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="storeNameInput" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
+                      <Component id="idValue" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="168" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="deleteStoreBtn" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Component id="editStoreBtn" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Component id="saveChangesBtn" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Component id="addStoreBtn" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="deleteStoreBtn" alignment="0" max="32767" attributes="0"/>
+                          <Component id="saveChangesBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                          <Component id="editStoreBtn" min="-2" pref="184" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="addStoreBtn" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -82,36 +84,36 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="table" min="-2" pref="310" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="addStoreBtn" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="idValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="editStoreBtn" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="storeNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="storeNameInput" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="idValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="saveChangesBtn" min="-2" pref="31" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="deleteStoreBtn" min="-2" pref="31" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="storeNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="storeNameInput" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="storePostalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="storePostalInput" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="addStoreBtn" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="deleteStoreBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="editStoreBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="saveChangesBtn" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -208,6 +210,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="storeNameInput">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="storeNameInputKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="storePostalLabel">
           <Properties>
@@ -218,6 +223,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="storePostalInput">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="storePostalInputKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="backToMenuBtn">
           <Properties>

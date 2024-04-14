@@ -5,9 +5,11 @@
 package Views.systemAdmin;
 
 import Models.ClientInformationManager;
+import Models.Store;
 import Models.StoreService;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -88,6 +90,7 @@ public class ManageStoreServices extends javax.swing.JPanel {
         editServiceTypeBtn = new javax.swing.JButton();
         saveChangesBtn = new javax.swing.JButton();
         backToMenuBtn = new javax.swing.JButton();
+        addServiceTypeBtn1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -118,12 +121,23 @@ public class ManageStoreServices extends javax.swing.JPanel {
         nameLabel.setForeground(new java.awt.Color(255, 255, 255));
         nameLabel.setText("Name");
 
+        nameInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameInputKeyPressed(evt);
+            }
+        });
+
         priceLabel.setForeground(new java.awt.Color(255, 255, 255));
         priceLabel.setText("Price");
 
         priceInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 priceInputActionPerformed(evt);
+            }
+        });
+        priceInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                priceInputKeyPressed(evt);
             }
         });
 
@@ -155,16 +169,29 @@ public class ManageStoreServices extends javax.swing.JPanel {
             }
         });
 
+        addServiceTypeBtn1.setText("Add Service Type");
+        addServiceTypeBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addServiceTypeBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(table)
+                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(28, 28, 28)
+                .addComponent(heading)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backToMenuBtn)
+                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(priceLabel)
                     .addComponent(nameLabel)
@@ -174,18 +201,13 @@ public class ManageStoreServices extends javax.swing.JPanel {
                     .addComponent(idValue)
                     .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(priceInput, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteServiceTypeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editServiceTypeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(heading)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(backToMenuBtn)
-                .addGap(22, 22, 22))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteServiceTypeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editServiceTypeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addServiceTypeBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveChangesBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +220,17 @@ public class ManageStoreServices extends javax.swing.JPanel {
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addServiceTypeBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(deleteServiceTypeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editServiceTypeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(idLabel)
                             .addComponent(idValue))
@@ -209,15 +241,8 @@ public class ManageStoreServices extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(priceInput, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priceLabel)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(deleteServiceTypeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(editServiceTypeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(priceLabel))
+                        .addGap(30, 30, 30))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -333,8 +358,77 @@ public class ManageStoreServices extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceInputActionPerformed
 
+    private void addServiceTypeBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addServiceTypeBtn1ActionPerformed
+        // TODO add your handling code here:
+        
+        if(nameInput.getText().equals("") || priceInput.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please make sure you fill all the fields!", "Empty data inputs", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        StoreService newStoreService = new StoreService();
+        
+        newStoreService.setServiceName(nameInput.getText());
+        newStoreService.setServicePrice(Float.parseFloat(priceInput.getText()));
+        
+        SystemAdminController.addStoreType(newStoreService);
+        
+       populateTable();
+        
+        
+    }//GEN-LAST:event_addServiceTypeBtn1ActionPerformed
+
+    private void nameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (nameInput.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 nameInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            nameInput.setForeground(Color.red);
+
+        }
+        
+        
+    }//GEN-LAST:event_nameInputKeyPressed
+
+    private void priceInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (priceInput.getText().matches("^\\d+(\\.\\d{1,2})?$")){
+                 
+                 priceInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            priceInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_priceInputKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addServiceTypeBtn1;
     private javax.swing.JButton backToMenuBtn;
     private javax.swing.JButton deleteServiceTypeBtn;
     private javax.swing.JButton editServiceTypeBtn;

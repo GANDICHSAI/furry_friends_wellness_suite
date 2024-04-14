@@ -6,8 +6,10 @@ package Views.systemAdmin;
 
 import Models.ClientInformationManager;
 import Models.StoreEmployee;
+import Models.SystemAdmin;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -132,6 +134,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 nameInputActionPerformed(evt);
             }
         });
+        nameInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameInputKeyPressed(evt);
+            }
+        });
 
         storeLabel.setBackground(new java.awt.Color(255, 255, 255));
         storeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,6 +158,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         emailInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailInputActionPerformed(evt);
+            }
+        });
+        emailInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailInputKeyPressed(evt);
             }
         });
 
@@ -198,7 +210,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
@@ -220,7 +232,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                     .addComponent(deleteStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,13 +243,13 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                     .addComponent(heading))
                 .addGap(21, 21, 21)
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idLabel)
+                    .addComponent(idValue))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(idLabel)
-                            .addComponent(idValue))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nameLabel)
                             .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,23 +264,24 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLabel))
-                        .addContainerGap(12, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                            .addComponent(passwordLabel)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(editStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))))
+                        .addComponent(deleteStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,6 +419,52 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
     private void storeDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeDropdownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_storeDropdownActionPerformed
+
+    private void nameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (nameInput.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 nameInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            nameInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_nameInputKeyPressed
+
+    private void emailInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailInputKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (emailInput.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 emailInput.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            emailInput.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_emailInputKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
