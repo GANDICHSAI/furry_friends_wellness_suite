@@ -56,14 +56,14 @@ public class AppointmentSummary extends javax.swing.JPanel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
 
-        Object[] row = new Object[7];
+        Object[] row = new Object[6];
         row[0] = appointment.getCustomerId();
         row[1] = appointment.getStoreName();
         row[2] = service.getServiceName(); 
         row[3] = pet.getPetName();  
         row[4] = formattedDate;
         row[5] = appointment.getStatus();
-        row[6] = appointment.getRating();
+//        row[6] = appointment.getRating();
 
         model.addRow(row);
 //        
@@ -88,13 +88,13 @@ public class AppointmentSummary extends javax.swing.JPanel {
 
         viewAppLabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS", "RATING"
+                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(viewAppLabel);

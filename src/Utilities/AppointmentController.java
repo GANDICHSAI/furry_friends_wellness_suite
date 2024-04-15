@@ -96,7 +96,7 @@ public class AppointmentController {
                 appointment.setPetId(rs.getInt("pet_id"));
                 appointment.setDate(rs.getDate("date"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setRating(rs.getInt("rating"));
+//                appointment.setRating(rs.getInt("rating"));
 
                 appointments.add(appointment);
             }
@@ -168,8 +168,16 @@ public class AppointmentController {
     public static ArrayList<Appointment> testController(int customerId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
-        String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, " +
-                        "a.date, a.status, a.rating " +
+//        String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, " +
+//                        "a.date, a.status, a.rating " +
+//                        "FROM Appointment a " +
+//                        "JOIN Store s ON a.store_id = s.store_id " +
+//                        "JOIN Store_Service sv ON a.service_id = sv.store_serv_id " +
+//                        "JOIN Pet p ON a.pet_id = p.pet_id " +
+//                        "WHERE a.cust_id = ?";
+        
+         String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, " +
+                        "a.date, a.status " +
                         "FROM Appointment a " +
                         "JOIN Store s ON a.store_id = s.store_id " +
                         "JOIN Store_Service sv ON a.service_id = sv.store_serv_id " +
@@ -186,7 +194,7 @@ public class AppointmentController {
                         String petName = rs.getString("pet_name");
                         Date date = rs.getDate("date");
                         String status = rs.getString("status");
-                        int rating = rs.getInt("rating");
+//                        int rating = rs.getInt("rating");
                         
                         Appointment selectedAppointment = new Appointment();
                         selectedAppointment.setAppointmentId(rs.getInt("app_id"));
@@ -198,7 +206,7 @@ public class AppointmentController {
                         //java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                         selectedAppointment.setDate(rs.getDate("date"));
                         selectedAppointment.setStatus(rs.getString("status"));
-                        selectedAppointment.setRating(rs.getInt("rating"));
+//                        selectedAppointment.setRating(rs.getInt("rating"));
                         
                         
                         // Print the retrieved data

@@ -171,7 +171,7 @@ public class SelectService extends javax.swing.JPanel {
                ", Pet ID: " + appointment.getPetId() +
                ", Date: " + formattedDate +
                ", Status: '" + appointment.getStatus() + '\'' +
-               ", Rating: " + appointment.getRating() +
+//               ", Rating: " + appointment.getRating() +
                "}";
     }
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
