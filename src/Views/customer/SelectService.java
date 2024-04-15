@@ -9,13 +9,12 @@ import Models.Appointment;
 import Models.Customer;
 import Models.Pet;
 import Models.StoreService;
-import Utilities.AppointmentController;
-import Utilities.CustomerController;
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -174,6 +173,14 @@ public class SelectService extends javax.swing.JPanel {
 //               ", Rating: " + appointment.getRating() +
                "}";
     }
+    public static Boolean checkSelectedDate(Date selectedDate,Date currentDate) {
+        
+        if (selectedDate != null && !selectedDate.before(currentDate)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         
@@ -181,10 +188,16 @@ public class SelectService extends javax.swing.JPanel {
             
              // retrieve service selection
             int selectedRow = ServiceTable.getSelectedRow();
+            Date currentDate = Calendar.getInstance().getTime();
             
-            if(selectedRow<0 && appointmentDate.getDate() == null){
-                throw new IllegalArgumentException("Please select a service and choose to book appointment");
+//            System.out.println(appointmentDate.getDate().before(currentDate));
+            if(selectedRow<0 && (appointmentDate.getDate() == null||appointmentDate.getDate().before(currentDate))){
+                throw new IllegalArgumentException("Please select a service and choose appropriate date to book appointment");
             }
+            
+//            if(selectedRow<0 && true){
+//                    throw new IllegalArgumentException("Please choose date correctly");
+//                }
             
             if (selectedRow != -1) {
 
@@ -200,8 +213,13 @@ public class SelectService extends javax.swing.JPanel {
                 service.setServiceName(serviceName);
                 
                 if(appointmentDate.getDate() == null){
-                    throw new IllegalArgumentException("Please choose date before completing appointment");
+                    throw new IllegalArgumentException("Please choose date to book appointment");
                 }
+                
+                if(appointmentDate.getDate().before(currentDate)){
+                    throw new IllegalArgumentException("Please choose apropriate date");
+                }
+
                 else{
                     appointment.setDate(appointmentDate.getDate());
                 }
@@ -249,22 +267,9 @@ public class SelectService extends javax.swing.JPanel {
         
         catch(Exception e){
             
-            
-            if (e.getMessage().equals("Please select a service to continue.")){
-                 JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
-                
-            }
-            if (e.getMessage().equals("Please choose date before completing appointment")){
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            if(e.getMessage().equals("Pet details are missing.")){
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            if(e.getMessage().equals("Please select a service and choose to book appointment")){
-                
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            
-        }
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+
         }
         
        

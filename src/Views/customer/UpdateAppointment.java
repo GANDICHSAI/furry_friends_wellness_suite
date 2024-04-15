@@ -4,7 +4,9 @@ import Models.Appointment;
 import Models.Customer;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -221,12 +223,22 @@ public class UpdateAppointment extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+            Date currentDate = Calendar.getInstance().getTime();
             if (selectedRowIndex < 0) {
                 throw new IllegalArgumentException("Please select an appointment to edit.");
             }
             java.util.Date newDate = ChangeDateChooser.getDate();
+            String existingDate = (String) AppSumTableCRUD.getValueAt(selectedRowIndex, 4);
+            
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = outputFormat.format(newDate);
+            System.out.println(formattedDate+" "+existingDate);
+            
             if (newDate == null) {
                 throw new IllegalArgumentException("Please choose a new appointment date.");
+            }
+            if(newDate.before(currentDate)||formattedDate.equals(existingDate)){
+                throw new IllegalArgumentException("Please choose appropriate date.");
             }
 
             int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, 0); // Get the appointment ID
