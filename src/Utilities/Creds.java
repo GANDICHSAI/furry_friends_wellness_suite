@@ -11,7 +11,7 @@ package Utilities;
 public class Creds {
     private static final String URL = "jdbc:mysql://localhost:3306/FFWS";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "mysql";
     
     public static String getURL() {
         return URL;
