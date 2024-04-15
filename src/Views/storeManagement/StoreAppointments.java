@@ -32,6 +32,7 @@ public class StoreAppointments extends javax.swing.JPanel {
     public StoreAppointments(StoreEmployee storeEmployee, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.storeEmployee = storeEmployee;
         populateTable();
     }
 

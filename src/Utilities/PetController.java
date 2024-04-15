@@ -44,7 +44,7 @@ public class PetController {
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1); // get generatedId
-                System.out.println("Generated appointment ID: " + generatedId);
+                System.out.println("Generated Pet ID: " + generatedId);
             }
         } catch (SQLException e) {
             e.printStackTrace();

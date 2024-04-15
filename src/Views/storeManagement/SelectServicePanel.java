@@ -5,6 +5,7 @@
 package Views.storeManagement;
 
 import Models.Appointment;
+import Models.StoreEmployee;
 import Models.StoreService;
 
 import Utilities.StoreServicesController;
@@ -25,12 +26,15 @@ public class SelectServicePanel extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Appointment appointment;
+    StoreEmployee storeEmployee;
+
     private ArrayList<StoreService> storeServicesList;
 
-    public SelectServicePanel(Appointment appointment, JPanel bottomPanel) {
+    public SelectServicePanel(StoreEmployee storeEmployee, Appointment appointment, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
+        this.storeEmployee = storeEmployee;
         populateTable();
     }
 
@@ -144,7 +148,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
     private void smBackToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(bottomPanel);
+        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(storeEmployee, bottomPanel);
         bottomPanel.add(newAppointment);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -161,17 +165,22 @@ public class SelectServicePanel extends javax.swing.JPanel {
                 String[] storeServiceData = {String.valueOf(ss.getStoreServiceID()), ss.getServiceName(), String.valueOf(ss.getServicePrice())};
                 tableModel.addRow(storeServiceData);
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
+
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         int selectedRow = smServiceTable.getSelectedRow();
-        int serviceId = (int) smServiceTable.getValueAt(selectedRow, 1);
+        int serviceId = Integer.parseInt((String) smServiceTable.getValueAt(selectedRow, 0));
         appointment.setServiceId(serviceId);
+        String serviceName = (String) smServiceTable.getValueAt(selectedRow, 1);
+        appointment.setServiceName(serviceName);
+        
+        System.out.println(appointment);
 
-        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(appointment, bottomPanel);
+        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(storeEmployee, appointment, bottomPanel);
         bottomPanel.add(reviewClientAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

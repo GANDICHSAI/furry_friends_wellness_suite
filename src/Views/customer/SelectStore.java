@@ -8,7 +8,7 @@ import Models.Appointment;
 import Models.Customer;
 import Models.Pet;
 import Models.Store;
-import Utilities.SelectStoreController;
+import Utilities.StoreController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -208,7 +208,7 @@ public class SelectStore extends javax.swing.JPanel {
     // Check if the postal code field is not empty or just the placeholder text
     if(postalCode != null && !postalCode.trim().isEmpty() && !postalCode.equals("POSTAL CODE")) {
         // Use StoreController to get the list of stores by postal code
-        SelectStoreController storeController = new SelectStoreController();
+        StoreController storeController = new StoreController();
         ArrayList<Store> stores = storeController.searchByPostalCode(postalCode);
         
         // Update the store table with the results

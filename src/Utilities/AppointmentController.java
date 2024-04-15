@@ -28,7 +28,7 @@ public class AppointmentController {
 
     public static void addAppointment(Appointment appointment) {
         //add to database
-        String query = "INSERT INTO Appointment(cust_id,store_name,service_id,store_id,pet_id,date,status,rating) VALUES(?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Appointment(cust_id,store_name,service_id,store_id,pet_id,date,status) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             java.util.Date utilDate = appointment.getDate();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -42,7 +42,6 @@ public class AppointmentController {
             
             stmt.setDate(6, sqlDate);
             stmt.setString(7, appointment.getStatus());
-            stmt.setInt(8, appointment.getRating());
 
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
@@ -69,7 +68,6 @@ public class AppointmentController {
                 appointment.setPetId(rs.getInt("pet_id"));
                 appointment.setDate(rs.getDate("date"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setRating(rs.getInt("rating"));
 
                 appointments.add(appointment);
             }
@@ -128,7 +126,6 @@ public class AppointmentController {
                 appointment.setPetId(rs.getInt("pet_id"));
                 appointment.setDate(rs.getDate("date"));
                 appointment.setStatus(rs.getString("status"));
-                appointment.setRating(rs.getInt("rating"));
 
                 appointments.add(appointment);
             }

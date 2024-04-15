@@ -6,15 +6,13 @@ package Utilities;
 import java.sql.*;
 import java.util.ArrayList;
 import Models.Store;
-import java.util.Set;
 
-        
 
 /**
  *
  * @author nosil
  */
-public class SelectStoreController {
+public class StoreController {
 
 
     public ArrayList<Store> searchByPostalCode(String postalCode) {
@@ -50,6 +48,23 @@ public class SelectStoreController {
             e.printStackTrace();
         }
         return stores;
+    }
+
+    public static String getStoreNameById(int storeId) {
+        String storeName = null;
+        String query = "SELECT store_name FROM Store WHERE store_id = ?";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, storeId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                storeName = rs.getString("store_name");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return storeName;
     }
 }
 

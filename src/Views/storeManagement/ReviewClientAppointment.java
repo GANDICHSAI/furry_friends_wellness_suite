@@ -5,10 +5,14 @@
 package Views.storeManagement;
 
 import Models.Appointment;
+import Models.StoreEmployee;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,10 +25,15 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Appointment appointment;
+    StoreEmployee storeEmployee;
 
-    public ReviewClientAppointment(Appointment appointment, JPanel bottomPanel) {
+    public ReviewClientAppointment(StoreEmployee storeEmployee, Appointment appointment, JPanel bottomPanel) {
         initComponents();
+
         this.bottomPanel = bottomPanel;
+        this.appointment = appointment;
+        this.storeEmployee = storeEmployee;
+        populateTable();
     }
 
     /**
@@ -114,7 +123,7 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     private void smBackToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToServiceOptionsActionPerformed
         // TODO add your handling code here:
 
-        SelectServicePanel typeOfService = new SelectServicePanel(appointment, bottomPanel);
+        SelectServicePanel typeOfService = new SelectServicePanel(storeEmployee, appointment, bottomPanel);
         bottomPanel.add(typeOfService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -122,14 +131,26 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
 
     private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
         // TODO add your handling code here:
-        Date currentDate = new Date();
-
-        appointment.setDate(currentDate);
-        appointment.setStatus("Incompleted");
         AppointmentController.addAppointment(appointment);
-
     }//GEN-LAST:event_submitAppointmentActionPerformed
 
+    public void populateTable() {
+        try {
+            DefaultTableModel tableModel = (DefaultTableModel) smReviewAppointmentTable.getModel();
+            tableModel.setRowCount(0);
+            Date currentDate = new Date();
+            appointment.setDate(currentDate);
+            appointment.setStatus("Not Started");
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = (appointment.getDate() != null) ? sdf.format(new Date()) : "No Date Set";
+
+            String[] storeServiceData = {appointment.getStoreName(), appointment.getPetName(), appointment.getServiceName(), formattedDate, appointment.getStatus()};
+            tableModel.addRow(storeServiceData);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
