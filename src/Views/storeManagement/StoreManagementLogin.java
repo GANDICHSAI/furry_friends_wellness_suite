@@ -4,17 +4,14 @@
  */
 package Views.storeManagement;
 
-import Models.Appointment;
 import Models.Authenticatable;
 import Models.SystemAdmin;
 import Models.ClientInformationManager;
 import Models.StoreEmployee;
 
 import Utilities.SystemAdminController;
-import Views.customer.CustomerLandingPage;
 import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -30,10 +27,10 @@ public class StoreManagementLogin extends javax.swing.JPanel {
      * Creates new form storeManagementLogin
      */
     JPanel bottomPanel;
+
     public StoreManagementLogin(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
-
     }
 
     /**
@@ -68,11 +65,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         smUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smUsernameActionPerformed(evt);
-            }
-        });
-        smUsername.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                smUsernameKeyPressed(evt);
             }
         });
 
@@ -146,15 +138,14 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smUsernameActionPerformed
 
-    public static <T extends Authenticatable> boolean authenticate(String email, String password, List<T> users) {
+    public static <T extends Authenticatable> Authenticatable authenticate(String email, String password, List<T> users) {
         for (Authenticatable user : users) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
-
 
     private void smLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smLoginActionPerformed
         // TODO add your handling code here:
@@ -163,43 +154,20 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         char[] passwordChars = smPassword.getPassword();
         String password = new String(passwordChars);
 
-        Boolean auth = false;
-  
-        try{
-    
-            ArrayList<SystemAdmin> defaultSystemAdmins = SystemAdminController.getDefaultSystemAdmins();
-            auth = StoreManagementLogin.<SystemAdmin>authenticate(email, password, defaultSystemAdmins);
-            
-            if (auth){
-                
-                if(smRole.getSelectedItem().toString().equals("SYSTEM ADMIN")){
-                   
-                    AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
-                    bottomPanel.add(adminMenuObj);
-                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                    layout.next(bottomPanel);    
-
-                }
-                else{
-                    throw new IllegalArgumentException("Please select only system admin with creds you choose");
-                }
-          
-              
-            }
-            else{
-                    switch (smRole.getSelectedItem().toString()) {
+        switch (smRole.getSelectedItem().toString()) {
 
             case "CLIENT INFORMATION MANAGER" -> {
                 try {
                     ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
+                    List<Authenticatable> authenticatables = new ArrayList<>(clientInformationManagers);
 
-                    auth = StoreManagementLogin.<ClientInformationManager>authenticate(email, password, clientInformationManagers);
+                    Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
 
-                    if (auth) {
-                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
-                        bottomPanel.add(clientInformationManagerObj);
-                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                        layout.next(bottomPanel);
+                    if (authenticatedEmployee != null) {
+//                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
+//                        bottomPanel.add(clientInformationManagerObj);
+//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+//                        layout.next(bottomPanel);
                     } else {
                         throw new IllegalArgumentException("Invalid credentials");
                     }
@@ -216,12 +184,14 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             case "STORE EMPLOYEE" -> {
                 try {
                     ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
+                    List<Authenticatable> authenticatables = new ArrayList<>(storeEmployees);
+
                     System.out.println(storeEmployees);
 
-                    auth = StoreManagementLogin.<StoreEmployee>authenticate(email, password, storeEmployees);
+                    Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
 
-                    if (auth) {
-                        StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel(bottomPanel);
+                    if (authenticatedEmployee != null) {
+                        StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
                         bottomPanel.add(storeEmployeeChooseObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);
@@ -241,10 +211,11 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             case "SYSTEM ADMIN" -> {
                 try {
                     ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
+                    List<Authenticatable> authenticatables = new ArrayList<>(systemAdmins);
 
-                    auth = StoreManagementLogin.<SystemAdmin>authenticate(email, password, systemAdmins);
+                    Authenticatable authenticatedEmployee  = authenticate(email, password, authenticatables);
 
-                    if (auth) {
+                    if (authenticatedEmployee != null) {
                         AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
                         bottomPanel.add(adminMenuObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
@@ -265,42 +236,8 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             default -> {
                 throw new IllegalArgumentException("please select correct Role");
             }
-    } 
-                }
-            
-        }
-        catch (Exception e) {
-
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
-                }
- 
     }//GEN-LAST:event_smLoginActionPerformed
-
-    private void smUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smUsernameKeyPressed
-        // TODO add your handling code here:
-        
-        try{
-             
-             if (smUsername.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 smUsername.setForeground(Color.black);
-
-            }
-            
-            else{
-                throw new Exception();
-            }
-                        
-        }
-        catch(Exception e){
-            
-            smUsername.setForeground(Color.red);
-
-        }
-        
-        
-    }//GEN-LAST:event_smUsernameKeyPressed
-    
+    }
 
     private void clearFields() {
         smUsername.setText("");

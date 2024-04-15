@@ -4,11 +4,12 @@
  */
 package Views.storeManagement;
 
+import Models.StoreEmployee;
+
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
- *
  * @author chait
  */
 public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
@@ -17,9 +18,12 @@ public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
      * Creates new form clientInformationManager
      */
     JPanel bottomPanel;
-    public StoreEmployeeChoosePanel(JPanel bottomPanel) {
+    StoreEmployee storeEmployee;
+
+    public StoreEmployeeChoosePanel(StoreEmployee storeEmployee, JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.storeEmployee = storeEmployee;
     }
 
     /**
@@ -66,51 +70,51 @@ public class StoreEmployeeChoosePanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(317, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(312, 312, 312))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(smLogOutButton)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(246, 246, 246))))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(317, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(312, 312, 312))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(smLogOutButton)
+                                                .addGap(41, 41, 41))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(246, 246, 246))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(smLogOutButton)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
-                .addGap(66, 66, 66)
-                .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(410, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(smLogOutButton)
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel1)
+                                .addGap(66, 66, 66)
+                                .addComponent(smNewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(smViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(410, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void smNewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smNewAppointmentActionPerformed
         // TODO add your handling code here:
-        
-        CreateCustomerAndPetPanel newAppointmentObj = new CreateCustomerAndPetPanel(bottomPanel);
+        System.out.println(storeEmployee);
+        CreateCustomerAndPetPanel newAppointmentObj = new CreateCustomerAndPetPanel(storeEmployee, bottomPanel);
         bottomPanel.add(newAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
-        
+
     }//GEN-LAST:event_smNewAppointmentActionPerformed
 
     private void smViewAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smViewAppointmentsActionPerformed
         // TODO add your handling code here:
-        
-        ClientAppointments clientAppointmentsObj = new ClientAppointments(bottomPanel);
+
+        StoreAppointments clientAppointmentsObj = new StoreAppointments(storeEmployee, bottomPanel);
         bottomPanel.add(clientAppointmentsObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
