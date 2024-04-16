@@ -36,7 +36,6 @@ public class AppointmentController {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, appointment.getCustomerId());
 
-
             stmt.setString(2, appointment.getStoreName());
             stmt.setInt(3, appointment.getServiceId());
             stmt.setInt(4, appointment.getStoreId());
@@ -52,8 +51,6 @@ public class AppointmentController {
             e.printStackTrace();
         }
     }
-    
-
 
     public static ArrayList<Appointment> getAllAppointments() {
 //        return list of users from db
@@ -139,7 +136,7 @@ public class AppointmentController {
 
         return appointments;
     }
-    
+
     public static ArrayList<Appointment> getAppointmentsByStoreID(int storeId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
@@ -147,13 +144,12 @@ public class AppointmentController {
                 + "Appointment.status from Appointment join Customer on "
                 + "Appointment.cust_id = Customer.cust_id join Pet on Appointment.pet_id = Pet.pet_id join "
                 + "Store_Service on Appointment.service_id = Store_Service.store_serv_id where Appointment.store_id=?";
-        
+
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, storeId);
 //            stmt.setInt(2, storeId);
 
-            
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Appointment appointment = new Appointment();
@@ -174,23 +170,22 @@ public class AppointmentController {
 
         return appointments;
     }
-    
+
     public static ArrayList<Appointment> getAppointmentsByJoin() {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
         String query = "select Appointment.app_id, Appointment.store_name,Pet.pet_name,Store_Service.service_name,Appointment.date,"
-                + "Appointment.status from Appointment join Customer on "
+                + "Appointment.status, Customer.cust_id from Appointment join Customer on "
                 + "Appointment.cust_id = Customer.cust_id join Pet on Appointment.pet_id = Pet.pet_id join "
                 + "Store_Service on Appointment.service_id = Store_Service.store_serv_id";
-        
-        
+
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Appointment appointment = new Appointment();
                 appointment.setAppointmentId(rs.getInt("Appointment.app_id"));
-//                appointment.setCustomerId(rs.getInt("cust_id"));
+                appointment.setCustomerId(rs.getInt("Customer.cust_id"));
                 appointment.setStoreName(rs.getString("Appointment.store_name"));
                 appointment.setServiceName(rs.getString("Store_Service.service_name"));
                 appointment.setPetName(rs.getString("Pet.pet_name"));
@@ -234,7 +229,7 @@ public class AppointmentController {
         }
     }
 
-    public static ArrayList<Appointment> testController(int customerId) {
+    public static ArrayList<Appointment> getAppointmentListByCustomerId(int customerId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
 //        String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, " +
@@ -245,7 +240,7 @@ public class AppointmentController {
 //                        "JOIN Pet p ON a.pet_id = p.pet_id " +
 //                        "WHERE a.cust_id = ?";
         String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, "
-                + "a.date, a.status "
+                + "a.date, a.status, a.cust_id "
                 + "FROM Appointment a "
                 + "JOIN Store s ON a.store_id = s.store_id "
                 + "JOIN Store_Service sv ON a.service_id = sv.store_serv_id "
@@ -274,8 +269,9 @@ public class AppointmentController {
                 //java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 selectedAppointment.setDate(rs.getDate("date"));
                 selectedAppointment.setStatus(rs.getString("status"));
-//                        selectedAppointment.setRating(rs.getInt("rating"));
+                selectedAppointment.setCustomerId(rs.getInt("cust_id"));
 
+//                        selectedAppointment.setRating(rs.getInt("rating"));
                 // Print the retrieved data
 //                        System.out.println("Store Name: " + storeName);
 //                        System.out.println("Service Name: " + serviceName);

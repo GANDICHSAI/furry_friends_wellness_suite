@@ -52,6 +52,8 @@ public class ClientAppointments extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         smAppointmentsTable = new javax.swing.JTable();
         smBackToHomeButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        searchCustomerIdTextField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -61,13 +63,13 @@ public class ClientAppointments extends javax.swing.JPanel {
 
         smAppointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "APP ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
+                "APP ID", "CUS ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(smAppointmentsTable);
@@ -79,6 +81,20 @@ public class ClientAppointments extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        searchCustomerIdTextField.setText("Search By Customer ID");
+        searchCustomerIdTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchCustomerIdTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,13 +102,20 @@ public class ClientAppointments extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(smBackToHomeButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap(37, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchCustomerIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(126, 126, 126))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(smBackToHomeButton)))))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -105,9 +128,13 @@ public class ClientAppointments extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(smBackToHomeButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(searchCustomerIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(95, 95, 95))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,6 +147,41 @@ public class ClientAppointments extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
 
+    private void searchCustomerIdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCustomerIdTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchCustomerIdTextFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String searchCustomerId = searchCustomerIdTextField.getText();
+
+        // Clear the existing table data
+        DefaultTableModel model = (DefaultTableModel) smAppointmentsTable.getModel();
+        model.setRowCount(0);
+
+        if (searchCustomerId != null && !searchCustomerId.trim().isEmpty()) {
+            ArrayList<Appointment> appointments = AppointmentController.getAppointmentListByCustomerId(Integer.parseInt(searchCustomerId));
+
+            if (appointments.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No appointments found for customer ID: " + searchCustomerId, "Not Found Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            for (Appointment appointment : appointments) {
+                model.addRow(new Object[]{String.valueOf(appointment.getAppointmentId()), String.valueOf(appointment.getCustomerId()), appointment.getStoreName(), appointment.getServiceName(), appointment.getPetName(), String.valueOf(appointment.getDate()), appointment.getStatus()});
+            }
+        } else {
+            ArrayList<Appointment> allAppointments = AppointmentController.getAllAppointments();
+
+            if (allAppointments.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No appointments found.", "Not Found Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            for (Appointment appointment : allAppointments) {
+                model.addRow(new Object[]{String.valueOf(appointment.getAppointmentId()), String.valueOf(appointment.getCustomerId()), appointment.getStoreName(), appointment.getServiceName(), appointment.getPetName(), String.valueOf(appointment.getDate()), appointment.getStatus()});
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void populateTable() {
 //        int storeId = storeEmployee.getStoreID();
 
@@ -131,7 +193,7 @@ public class ClientAppointments extends javax.swing.JPanel {
             for (Appointment appointment : storeAppointmentList) {
 
 
-                String[] appointmentData = {String.valueOf(appointment.getAppointmentId()),appointment.getStoreName(),appointment.getServiceName(),appointment.getPetName(), String.valueOf(appointment.getDate()), appointment.getStatus()};
+                String[] appointmentData = {String.valueOf(appointment.getAppointmentId()), String.valueOf(appointment.getCustomerId()), appointment.getStoreName(),appointment.getServiceName(),appointment.getPetName(), String.valueOf(appointment.getDate()), appointment.getStatus()};
                 tableModel.addRow(appointmentData);
             }
         } catch (Exception e) {
@@ -140,8 +202,10 @@ public class ClientAppointments extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField searchCustomerIdTextField;
     private javax.swing.JTable smAppointmentsTable;
     private javax.swing.JButton smBackToHomeButton;
     // End of variables declaration//GEN-END:variables

@@ -68,6 +68,12 @@ public class SelectStorePanel extends javax.swing.JPanel {
         strTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         strTitleLabel.setText("SELECT STORE LOCATION");
 
+        postalCodeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postalCodeTextFieldActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("SEARCH BY POSTAL CODE");
@@ -263,6 +269,10 @@ public class SelectStorePanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToHomeButtonActionPerformed
+
+    private void postalCodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postalCodeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_postalCodeTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
