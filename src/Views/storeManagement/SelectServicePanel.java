@@ -183,7 +183,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
             appointment.setDate(appointmentDateChooser.getDate());
         }
 
-        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel, appointment,customer,pet );
+        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel, appointment,customer,pet);
         bottomPanel.add(reviewClientAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

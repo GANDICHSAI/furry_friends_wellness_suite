@@ -7,10 +7,11 @@ package Views.storeManagement;
 import Models.Appointment;
 import Models.Customer;
 import Models.Pet;
-import Models.StoreEmployee;
 import Utilities.AppointmentController;
+import Utilities.EmailSender;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -28,17 +29,39 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     Appointment appointment;
     Customer customer;
     Pet pet;
-    StoreEmployee storeEmployee;
 
-    public ReviewClientAppointment(JPanel bottomPanel, Appointment appointment,Customer customer, Pet pet ) {
+    public ReviewClientAppointment(JPanel bottomPanel, Appointment appointment, Customer customer, Pet pet) {
         initComponents();
 
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
         this.customer = customer;
         this.pet = pet;
-        this.storeEmployee = storeEmployee;
         populateTable();
+    }
+
+    private void sendConfirmationEmail() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "not specified";
+
+        String emailBody = String.format(
+                "Hello %s,\n\n"
+                + "Your appointment for the %s service with %s on %s has been successfully booked.\n"
+                + "Here are the details:\n"
+                + "Service: %s\n"
+                + "Pet: %s\n"
+                + "Date: %s\n"
+                + "If you have any questions, please contact us. Thank you for choosing our services.\n\n"
+                + "Best regards,\n"
+                + "Furry Friends Veterinary Clinic",
+                customer.getFirstName(), appointment.getServiceName(), pet.getPetName(), date, appointment.getServiceName(), pet.getPetName(), date);
+        try {
+            EmailSender.sendEmail(customer.getEmail(), "Appointment Confirmation - Furry Friends Veterinary Clinic", emailBody);
+            System.out.println("Confirmation email sent to " + customer.getEmail());
+        } catch (MessagingException e) {
+            JOptionPane.showMessageDialog(this, "Failed to send confirmation email.", "Email Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -140,7 +163,7 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     private void smBackToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToServiceOptionsActionPerformed
         // TODO add your handling code here:
 
-        SelectServicePanel typeOfService = new SelectServicePanel(bottomPanel, appointment,customer,pet );
+        SelectServicePanel typeOfService = new SelectServicePanel(bottomPanel, appointment, customer, pet);
         bottomPanel.add(typeOfService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -148,19 +171,22 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
 
     private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
         // TODO add your handling code here:                          
-        try{
+        try {
             AppointmentController.addAppointment(appointment);
             JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
-            
-        }
-        catch (Exception e){
+
+            sendConfirmationEmail();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitAppointmentActionPerformed
 
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
-        
+        StoreManagementLogin storeManagementLogin = new StoreManagementLogin(bottomPanel, appointment);
+        bottomPanel.add(storeManagementLogin);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_backToHomeButtonActionPerformed
 
     public void populateTable() {
