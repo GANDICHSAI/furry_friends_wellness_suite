@@ -33,6 +33,7 @@ public class SelectStore extends javax.swing.JPanel {
         this.bottomPanel = bottomPanel;
         this.customer = customer;
         this.appointment = appointment;
+        populateStores();
     }
 
     /**
@@ -142,6 +143,18 @@ public class SelectStore extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateStores() {
+        DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
+        model.setRowCount(0);
+
+        StoreController storeController = new StoreController();
+        ArrayList<Store> stores = storeController.getAllStores();
+        for (Store store : stores) {
+            model.addRow(new Object[]{store.getStoreId(), store.getStoreName(), store.getPostalCode()});
+        }
+    }
+    
+    
     private void nextToPetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextToPetButtonActionPerformed
         // TODO add your handling code here:
         

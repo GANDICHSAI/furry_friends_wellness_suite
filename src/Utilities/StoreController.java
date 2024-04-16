@@ -50,6 +50,31 @@ public class StoreController {
         return stores;
     }
 
+    public ArrayList<Store> getAllStores() {
+        ArrayList<Store> stores = new ArrayList<>();
+        String query = "SELECT * FROM Store";
+
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+             
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Store store = new Store();
+                store.setStoreId(rs.getInt("store_id"));
+                store.setStoreName(rs.getString("store_name"));
+                store.setPostalCode(rs.getString("store_postal_code"));
+                stores.add(store);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stores;
+    }
+    
+    
+    
+    
     public static String getStoreNameById(int storeId) {
         String storeName = null;
         String query = "SELECT store_name FROM Store WHERE store_id = ?";
@@ -67,4 +92,6 @@ public class StoreController {
         return storeName;
     }
 }
+
+
 
