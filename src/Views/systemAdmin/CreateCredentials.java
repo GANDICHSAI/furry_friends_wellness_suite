@@ -289,6 +289,7 @@ public class CreateCredentials extends javax.swing.JPanel {
 
 
             accCreator.createSystemAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+            JOptionPane.showMessageDialog(this, "Admin Created Successfully","Successful Account Creation",JOptionPane.INFORMATION_MESSAGE);
 //            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
             
             System.out.println("SA");

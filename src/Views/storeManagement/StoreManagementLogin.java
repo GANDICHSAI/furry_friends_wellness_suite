@@ -153,91 +153,129 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         String email = smUsername.getText();
         char[] passwordChars = smPassword.getPassword();
         String password = new String(passwordChars);
+        
+        Boolean auth = false;
+        
+        try{
 
-        switch (smRole.getSelectedItem().toString()) {
+            ArrayList<SystemAdmin> defaultSystemAdmins = SystemAdminController.getDefaultSystemAdmins();
+ 
+            List<Authenticatable> adminAuthenticatables = new ArrayList<>(defaultSystemAdmins);
 
-            case "CLIENT INFORMATION MANAGER" -> {
-                try {
-                    ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
-                    List<Authenticatable> authenticatables = new ArrayList<>(clientInformationManagers);
+           Authenticatable adminAuthenticatedEmployee = authenticate(email, password, adminAuthenticatables);
 
-                    Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
+            if (adminAuthenticatedEmployee!=null){
 
-                    if (authenticatedEmployee != null) {
-//                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
-//                        bottomPanel.add(clientInformationManagerObj);
-//                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//                        layout.next(bottomPanel);
-                    } else {
-                        throw new IllegalArgumentException("Invalid credentials");
+                if(smRole.getSelectedItem().toString().equals("SYSTEM ADMIN")){
+
+                    AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+                    bottomPanel.add(adminMenuObj);
+                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                    layout.next(bottomPanel);    
+
+                }
+                else{
+                    throw new IllegalArgumentException("Please select only system admin with creds you choose");
+                }
+
+
+            }
+            else{
+                
+                switch (smRole.getSelectedItem().toString()) {
+
+                case "CLIENT INFORMATION MANAGER" -> {
+                    try {
+                        ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
+                        List<Authenticatable> authenticatables = new ArrayList<>(clientInformationManagers);
+
+                        Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
+
+                        if (authenticatedEmployee != null) {
+    //                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
+    //                        bottomPanel.add(clientInformationManagerObj);
+    //                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+    //                        layout.next(bottomPanel);
+                        } else {
+                            throw new IllegalArgumentException("Invalid credentials");
+                        }
+
+                        clearFields();
+
+                    } catch (Exception e) {
+
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
                     }
 
-                    clearFields();
+                }
 
-                } catch (Exception e) {
+                case "STORE EMPLOYEE" -> {
+                    try {
+                        ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
+                        List<Authenticatable> authenticatables = new ArrayList<>(storeEmployees);
+
+                        System.out.println(storeEmployees);
+
+                        Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
+
+                        if (authenticatedEmployee != null) {
+                            StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
+                            bottomPanel.add(storeEmployeeChooseObj);
+                            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                            layout.next(bottomPanel);
+                        } else {
+                            throw new IllegalArgumentException("Invalid credentials");
+                        }
+
+                        clearFields();
+
+                    } catch (Exception e) {
+
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+
+                case "SYSTEM ADMIN" -> {
+                    try {
+                        ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
+                        List<Authenticatable> authenticatables = new ArrayList<>(systemAdmins);
+
+                        Authenticatable authenticatedEmployee  = authenticate(email, password, authenticatables);
+
+                        if (authenticatedEmployee != null) {
+                            AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+                            bottomPanel.add(adminMenuObj);
+                            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                            layout.next(bottomPanel);
+                        } else {
+                            throw new IllegalArgumentException("Invalid credentials");
+                        }
+
+                        clearFields();
+
+                    } catch (Exception e) {
+
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+
+                default -> {
+                    throw new IllegalArgumentException("please select correct Role");
+                }
+                
+            } 
+            }
+        }catch (Exception e) {
 
                     JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
                 }
-
-            }
-
-            case "STORE EMPLOYEE" -> {
-                try {
-                    ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
-                    List<Authenticatable> authenticatables = new ArrayList<>(storeEmployees);
-
-                    System.out.println(storeEmployees);
-
-                    Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
-
-                    if (authenticatedEmployee != null) {
-                        StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
-                        bottomPanel.add(storeEmployeeChooseObj);
-                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                        layout.next(bottomPanel);
-                    } else {
-                        throw new IllegalArgumentException("Invalid credentials");
-                    }
-
-                    clearFields();
-
-                } catch (Exception e) {
-
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-            }
-
-            case "SYSTEM ADMIN" -> {
-                try {
-                    ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
-                    List<Authenticatable> authenticatables = new ArrayList<>(systemAdmins);
-
-                    Authenticatable authenticatedEmployee  = authenticate(email, password, authenticatables);
-
-                    if (authenticatedEmployee != null) {
-                        AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
-                        bottomPanel.add(adminMenuObj);
-                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                        layout.next(bottomPanel);
-                    } else {
-                        throw new IllegalArgumentException("Invalid credentials");
-                    }
-
-                    clearFields();
-
-                } catch (Exception e) {
-
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
-                }
-
-            }
-
-            default -> {
-                throw new IllegalArgumentException("please select correct Role");
-            }
+            
+      
+        
     }//GEN-LAST:event_smLoginActionPerformed
-    }
+   
 
     private void clearFields() {
         smUsername.setText("");
