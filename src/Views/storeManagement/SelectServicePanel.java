@@ -49,11 +49,11 @@ public class SelectServicePanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         smBackToProfileCreationButton = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         saveAndViewSummaryButton = new javax.swing.JButton();
         chooseDatelb = new javax.swing.JLabel();
         table = new javax.swing.JScrollPane();
         smServiceTable = new javax.swing.JTable();
+        appointmentDateChooser = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -67,9 +67,6 @@ public class SelectServicePanel extends javax.swing.JPanel {
                 smBackToProfileCreationButtonActionPerformed(evt);
             }
         });
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("PLACEHOLDER FOR JCAL");
 
         saveAndViewSummaryButton.setText("SAVE AND VIEW SUMMARY");
         saveAndViewSummaryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,13 +103,8 @@ public class SelectServicePanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(table, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(250, 250, 250)
-                                    .addComponent(jLabel6))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(198, 198, 198)
-                                    .addComponent(chooseDatelb)))
+                            .addGap(198, 198, 198)
+                            .addComponent(chooseDatelb)
                             .addGap(221, 221, 221)))
                     .addComponent(smBackToProfileCreationButton))
                 .addGap(15, 15, 15))
@@ -123,7 +115,10 @@ public class SelectServicePanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(258, 258, 258)
-                        .addComponent(saveAndViewSummaryButton)))
+                        .addComponent(saveAndViewSummaryButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(appointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,11 +132,11 @@ public class SelectServicePanel extends javax.swing.JPanel {
                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(chooseDatelb)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
+                .addComponent(appointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(saveAndViewSummaryButton)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -177,8 +172,11 @@ public class SelectServicePanel extends javax.swing.JPanel {
         appointment.setServiceId(serviceId);
         String serviceName = (String) smServiceTable.getValueAt(selectedRow, 1);
         appointment.setServiceName(serviceName);
-        
-        System.out.println(appointment);
+        if (appointmentDateChooser.getDate() == null) {
+            throw new IllegalArgumentException("Please choose date before completing appointment");
+        } else {
+            appointment.setDate(appointmentDateChooser.getDate());
+        }
 
         ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(storeEmployee, appointment, bottomPanel);
         bottomPanel.add(reviewClientAppointmentObj);
@@ -188,9 +186,9 @@ public class SelectServicePanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser appointmentDateChooser;
     private javax.swing.JLabel chooseDatelb;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton saveAndViewSummaryButton;
     private javax.swing.JButton smBackToProfileCreationButton;
     private javax.swing.JTable smServiceTable;

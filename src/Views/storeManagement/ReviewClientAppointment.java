@@ -130,20 +130,26 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     }//GEN-LAST:event_smBackToServiceOptionsActionPerformed
 
     private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
-        // TODO add your handling code here:
-        AppointmentController.addAppointment(appointment);
+        // TODO add your handling code here:                          
+        try{
+            AppointmentController.addAppointment(appointment);
+            JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_submitAppointmentActionPerformed
 
     public void populateTable() {
         try {
             DefaultTableModel tableModel = (DefaultTableModel) smReviewAppointmentTable.getModel();
             tableModel.setRowCount(0);
-            Date currentDate = new Date();
-            appointment.setDate(currentDate);
+//            Date currentDate = new Date();
+//            appointment.setDate(currentDate);
             appointment.setStatus("Not Started");
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = (appointment.getDate() != null) ? sdf.format(new Date()) : "No Date Set";
+            String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
 
             String[] storeServiceData = {appointment.getStoreName(), appointment.getPetName(), appointment.getServiceName(), formattedDate, appointment.getStatus()};
             tableModel.addRow(storeServiceData);
