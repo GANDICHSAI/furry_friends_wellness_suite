@@ -8,14 +8,24 @@ package Models;
  *
  * @author chait
  */
-public class StoreEmployee implements Authenticatable {
+public class StoreEmployee extends Admin {
     
     private int storeEmpID;
     private int storeID;
     private String storeName;
     private String storeEmployeeName;
-    private String storeEmployeeEmail;
-    private String storeEmployeePassword;
+
+    public StoreEmployee(int storeEmpID, int storeID, String storeName, String storeEmployeeName, String email, String password) {
+        super(email, password);
+        this.storeEmpID = storeEmpID;
+        this.storeID = storeID;
+        this.storeName = storeName;
+        this.storeEmployeeName = storeEmployeeName;
+    }
+
+    public StoreEmployee() {
+        super("", "");
+    }
 
     public int getstoreEmpID() {
         return storeEmpID;
@@ -49,29 +59,19 @@ public class StoreEmployee implements Authenticatable {
         this.storeEmployeeName = storeEmployeeName;
     }
 
-    public String getstoreEmployeeEmail() {
-        return storeEmployeeEmail;
+    public String getStoreEmployeeEmail() {
+        return getEmail();
     }
 
-    public void setstoreEmployeeEmail(String storeEmployeeEmail) {
-        this.storeEmployeeEmail = storeEmployeeEmail;
+    public void setStoreEmployeeEmail(String email) {
+        setEmail(email);
     }
 
-    public String getstoreEmployeePassword() {
-        return storeEmployeePassword;
+    public String getStoreEmployeePassword() {
+        return getPassword();
     }
 
-    public void setstoreEmployeePassword(String storeEmployeePassword) {
-        this.storeEmployeePassword = storeEmployeePassword;
+    public void setstoreEmployeePassword(String password) {
+        setPassword(password);
     }
-    
-    @Override
-    public String getEmail() {
-        return storeEmployeeEmail;
-    }
-
-    @Override
-    public String getPassword() {
-        return storeEmployeePassword;
-    }   
 }

@@ -4,9 +4,7 @@
  */
 package Views.systemAdmin;
 
-import Models.ClientInformationManager;
 import Models.StoreEmployee;
-import Models.SystemAdmin;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -58,7 +56,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
             
             for (StoreEmployee se : storeEmployees) {
                 String[] seData = {(String) Integer.toString(se.getstoreEmpID()), se.getStoreEmployeeName(), se.getStoreName(), 
-                    se.getstoreEmployeeEmail(),se.getstoreEmployeePassword()};
+                    se.getStoreEmployeeEmail(),se.getStoreEmployeePassword()};
                 tableModel.addRow(seData);
             }
             
@@ -360,8 +358,8 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 idValue.setText((String) Integer.toString(editingSE.getstoreEmpID()));
                 System.out.println(editingSE.getStoreID());
                 nameInput.setText(editingSE.getStoreEmployeeName());
-                emailInput.setText(editingSE.getstoreEmployeeEmail());
-                passwordInput.setText(editingSE.getstoreEmployeePassword());
+                emailInput.setText(editingSE.getStoreEmployeeEmail());
+                passwordInput.setText(editingSE.getStoreEmployeePassword());
             }
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
@@ -380,7 +378,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 StoreEmployee newSE = new StoreEmployee();
                 
                 newSE.setStoreEmployeeName(nameInput.getText());
-                newSE.setstoreEmployeeEmail(emailInput.getText());
+                newSE.setStoreEmployeeEmail(emailInput.getText());
                 newSE.setStoreID(SystemAdminController.getStoreIdByName((String) storeDropdown.getSelectedItem()));
    
                 
@@ -392,8 +390,8 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 
                 
                 if (editingSE.getStoreEmployeeName().equals(newSE.getStoreEmployeeName()) && 
-                        editingSE.getstoreEmployeeEmail().equals(newSE.getstoreEmployeeEmail())&& 
-                        editingSE.getstoreEmployeePassword().equals(newSE.getstoreEmployeePassword())&& 
+                        editingSE.getStoreEmployeeEmail().equals(newSE.getStoreEmployeeEmail())&&
+                        editingSE.getStoreEmployeePassword().equals(newSE.getStoreEmployeePassword())&&
                         editingSE.getStoreID() == (newSE.getStoreID())) {
                    
                     throw new IllegalArgumentException("no-edit");

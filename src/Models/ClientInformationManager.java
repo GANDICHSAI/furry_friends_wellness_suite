@@ -8,15 +8,21 @@ package Models;
  *
  * @author chait
  */
-public class ClientInformationManager implements Authenticatable {
+public class ClientInformationManager extends Admin {
     
     private int CIMID;
     
     private String CIMName;
-    
-    private String CIMEmail;
-    
-    private String CIMPassword;
+
+    public ClientInformationManager(int CIMID, String CIMName, String email, String password) {
+        super(email, password);
+        this.CIMID = CIMID;
+        this.CIMName = CIMName;
+    }
+
+    public ClientInformationManager() {
+        super("", "");
+    }
 
     public int getCIMID() {
         return CIMID;
@@ -35,28 +41,18 @@ public class ClientInformationManager implements Authenticatable {
     }
 
     public String getCIMEmail() {
-        return CIMEmail;
+        return getEmail();
     }
 
-    public void setCIMEmail(String CIMEmail) {
-        this.CIMEmail = CIMEmail;
+    public void setCIMEmail(String email) {
+        setEmail(email);
     }
 
     public String getCIMPassword() {
-        return CIMPassword;
+        return getPassword();
     }
 
-    public void setCIMPassword(String CIMPassword) {
-        this.CIMPassword = CIMPassword;
-    }
-    
-    @Override
-    public String getEmail() {
-        return CIMEmail;
-    }
-
-    @Override
-    public String getPassword() {
-        return CIMPassword;
+    public void setCIMPassword(String password) {
+        setPassword(password);
     }
 }
