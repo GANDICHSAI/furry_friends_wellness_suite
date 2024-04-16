@@ -6,9 +6,8 @@ package Views.storeManagement;
 
 import Models.Appointment;
 import Models.ClientInformationManager;
-import Models.Store;
+import Models.StoreEmployee;
 import Utilities.AppointmentController;
-import Utilities.StoreController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -30,11 +29,11 @@ public class StoreClientAppointments extends javax.swing.JPanel {
     ClientInformationManager clims;
     Appointment appointments;
     ArrayList<Appointment> storeAppointmentList;
-    ArrayList<Store> storeLocations;
-    public StoreClientAppointments(JPanel bottomPanel, String storeLocation) {
+    StoreEmployee storeEmployee;
+    public StoreClientAppointments(JPanel bottomPanel, StoreEmployee storeEmployee) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        this.storeLocation = storeLocation;
+        this.storeEmployee = storeEmployee;
         populateTable();
     }
 
@@ -156,10 +155,9 @@ public class StoreClientAppointments extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
     public void populateTable() {
-//        int storeId = storeEmployee.getStoreID();
+        int storeId = storeEmployee.getStoreID();
 
         try {
-            int storeId = StoreController.getStoreIDByName(storeLocation);
             this.storeAppointmentList = AppointmentController.getAppointmentsByStoreID(storeId);
             
             DefaultTableModel tableModel = (DefaultTableModel) smAppointmentsTable.getModel();
