@@ -156,7 +156,7 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
     private void smUpdateAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smUpdateAppointmentsActionPerformed
         // TODO add your handling code here:
         
-        UpdateAppointmentPanel updateAppointmentPanel = new UpdateAppointmentPanel(bottomPanel,null);
+        UpdateAppointmentPanel updateAppointmentPanel = new UpdateAppointmentPanel(bottomPanel);
         bottomPanel.add(updateAppointmentPanel);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

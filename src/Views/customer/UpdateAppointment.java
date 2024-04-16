@@ -164,7 +164,7 @@ public class UpdateAppointment extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void populateAppointmentTable() {
-        ArrayList<Appointment> appointments = AppointmentController.testController(customer.getCustomerID());
+        ArrayList<Appointment> appointments = AppointmentController.getAppointmentListByCustomerId(customer.getCustomerID());
         this.allAppointments = appointments;
         DefaultTableModel model = (DefaultTableModel) AppSumTableCRUD.getModel();
         model.setRowCount(0); 
