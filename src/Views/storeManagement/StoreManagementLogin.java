@@ -32,36 +32,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
-        populateStoreDropdown();
-
-        storesDropDown.setVisible(false);
-        storeLocationLabel.setVisible(false);
-
-        smRole.addActionListener(e -> {
-            // Get the selected item when an action is performed (like selecting an item)
-            valueSelected = (String) smRole.getSelectedItem();
-
-            if (!"STORE EMPLOYEE".equals(valueSelected)) {
-                storesDropDown.setVisible(false);
-                storeLocationLabel.setVisible(false);
-            } else {
-                storesDropDown.setVisible(true);
-                storeLocationLabel.setVisible(true);
-            }
-        });
-    }
-
-    private void populateStoreDropdown() {
-        // Clear existing items in the dropdown
-        storesDropDown.removeAllItems();
-
-        // Get new store names from the database
-        ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
-
-        // Add the new store names to the dropdown
-        for (String name : storeNames) {
-            storesDropDown.addItem(name);
-        }
     }
 
     /**
@@ -80,8 +50,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         smRole = new javax.swing.JComboBox<>();
         smLogin = new javax.swing.JButton();
         smPassword = new javax.swing.JPasswordField();
-        storesDropDown = new javax.swing.JComboBox<>();
-        storeLocationLabel = new javax.swing.JLabel();
         smUsername = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
@@ -103,7 +71,7 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("ROLE");
 
-        smRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"CLIENT INFORMATION MANAGER", "STORE EMPLOYEE", "SYSTEM ADMIN"}));
+        smRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLIENT INFORMATION MANAGER", "STORE EMPLOYEE", "SYSTEM ADMIN" }));
 
         smLogin.setText("LOGIN");
         smLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -111,12 +79,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                 smLoginActionPerformed(evt);
             }
         });
-
-        storesDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-
-        storeLocationLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        storeLocationLabel.setForeground(new java.awt.Color(255, 255, 255));
-        storeLocationLabel.setText("SELECT STORE LOCATION");
 
         smUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -127,55 +89,49 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(218, 218, 218)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(210, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(225, 225, 225)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(storesDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(smRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(storeLocationLabel)
-                                                        .addComponent(jLabel3)
-                                                        .addComponent(jLabel2)
-                                                        .addComponent(smPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                                        .addComponent(smUsername))
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(210, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(225, 225, 225)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(smPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(smUsername))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(jLabel1)
-                                .addGap(72, 72, 72)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(smUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(smPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
-                                .addComponent(storeLocationLabel)
-                                .addGap(26, 26, 26)
-                                .addComponent(storesDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(175, 175, 175))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel1)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(smUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(smPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(175, 175, 175))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -253,15 +209,13 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                         try {
                             ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
 
-                            String SelectedStore = storesDropDown.getSelectedItem().toString();
-
                             System.out.println(storeEmployees);
 
                             StoreEmployee authenticatedEmployee = authenticate(email, password, storeEmployees);
 
                             if (authenticatedEmployee != null) {
 
-                                StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel, SelectedStore);
+                                StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel, authenticatedEmployee);
                                 bottomPanel.add(storeClientAppointmentObj);
                                 CardLayout layout = (CardLayout) bottomPanel.getLayout();
                                 layout.next(bottomPanel);
@@ -353,7 +307,5 @@ public class StoreManagementLogin extends javax.swing.JPanel {
     private javax.swing.JPasswordField smPassword;
     private javax.swing.JComboBox<String> smRole;
     private javax.swing.JTextField smUsername;
-    private javax.swing.JLabel storeLocationLabel;
-    private javax.swing.JComboBox<String> storesDropDown;
     // End of variables declaration//GEN-END:variables
 }
