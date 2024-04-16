@@ -9,9 +9,11 @@ import Models.Customer;
 import Models.Pet;
 import Models.StoreService;
 import Utilities.AppointmentController;
+import Utilities.EmailSender;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.mail.MessagingException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -68,6 +70,32 @@ public class AppointmentSummary extends javax.swing.JPanel {
         model.addRow(row);
 //        
     }
+    
+    private void sendConfirmationEmail() {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String date = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "not specified";
+
+    String emailBody = String.format(
+        "Hello %s,\n\n" +
+        "Your appointment for the %s service with %s on %s has been successfully booked.\n" +
+        "Here are the details:\n" +
+        "Service: %s\n" +
+        "Pet: %s\n" +
+        "Date: %s\n" +
+        "If you have any questions, please contact us. Thank you for choosing our services.\n\n" +
+        "Best regards,\n" +
+        "Furry Friends Veterinary Clinic",
+        customer.getFirstName(), service.getServiceName(), pet.getPetName(), date, service.getServiceName(), pet.getPetName(), date);
+
+    try {
+        EmailSender.sendEmail(customer.getEmail(), "Appointment Confirmation - Furry Friends Veterinary Clinic", emailBody);
+        System.out.println("Confirmation email sent to " + customer.getEmail());
+    } catch (MessagingException e) {
+        JOptionPane.showMessageDialog(this, "Failed to send confirmation email.", "Email Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    }
+}
+
     
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -178,6 +206,8 @@ public class AppointmentSummary extends javax.swing.JPanel {
             }
             AppointmentController.addAppointment(appointment);
             JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+            
+            sendConfirmationEmail();
         }
         catch (Exception e){
             
