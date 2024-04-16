@@ -5,6 +5,7 @@
 package Views.systemAdmin;
 
 import Facade.AccountCreator;
+import Utilities.CredentialsChecker;
 import Utilities.SystemAdminController;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -23,14 +24,15 @@ public class CreateCredentials extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     String valueSelected = "Client Information Manager";
-    
+
     AccountCreator accCreator = new AccountCreator();
+
     public CreateCredentials(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        
+
         populateStoreDropdown();
-        
+
         storeDropdown1.setVisible(false);
         storeLabel1.setVisible(false);
 
@@ -47,19 +49,19 @@ public class CreateCredentials extends javax.swing.JPanel {
             }
         });
     }
-    
+
     private void populateStoreDropdown() {
-    // Clear existing items in the dropdown
-    storeDropdown1.removeAllItems();
+        // Clear existing items in the dropdown
+        storeDropdown1.removeAllItems();
 
-    // Get new store names from the database
-    ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
+        // Get new store names from the database
+        ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
 
-    // Add the new store names to the dropdown
-    for (String name : storeNames) {
-        storeDropdown1.addItem(name);
+        // Add the new store names to the dropdown
+        for (String name : storeNames) {
+            storeDropdown1.addItem(name);
+        }
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -260,106 +262,109 @@ public class CreateCredentials extends javax.swing.JPanel {
 
     private void createAccountBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountBtn1ActionPerformed
         // TODO add your handling code here:
-        
-        try{
-            
-            char [] passwordChars = passwordInput1.getPassword(); 
-        
-        // Convert char[] to String for demonstration (not recommended for passwords
-        String passwordString = new String(passwordChars);
-        
-        if(nameInput1.getText() == null ||nameInput1.getText().isEmpty()||emailInput1.getText() == null||
-                emailInput1.getText().isEmpty()||passwordString == null||passwordString.isEmpty()||
-                credentialsTypeDropdown1.getSelectedItem() == null||
-                storeDropdown1.getSelectedItem() == null){
-            
-            throw new IllegalArgumentException("Please Fill out details to create account");
-            
-       
-    }
-        
-        if ("Store Employee".equals(valueSelected)) {
 
-           accCreator.createStoreManagerAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
-           
-           JOptionPane.showMessageDialog(this, "Store Employee Created Successfully","Successful Account Creation",JOptionPane.INFORMATION_MESSAGE);
+        try {
+
+            char[] passwordChars = passwordInput1.getPassword();
+
+            // Convert char[] to String for demonstration (not recommended for passwords
+            String passwordString = new String(passwordChars);
+
+            if (nameInput1.getText() == null || nameInput1.getText().isEmpty() || emailInput1.getText() == null
+                    || emailInput1.getText().isEmpty() || passwordString == null || passwordString.isEmpty()
+                    || credentialsTypeDropdown1.getSelectedItem() == null
+                    || storeDropdown1.getSelectedItem() == null) {
+
+                throw new IllegalArgumentException("Please Fill out details to create account");
+
+            }
+
+            if ("Store Employee".equals(valueSelected)) {
+
+                if (CredentialsChecker.checkStoreEmployee(emailInput1.getText())) {
+                    JOptionPane.showMessageDialog(this, "This email is already in use! Please use another email!", "Existing User Error!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                accCreator.createStoreManagerAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
+
+                JOptionPane.showMessageDialog(this, "Store Employee Created Successfully", "Successful Account Creation", JOptionPane.INFORMATION_MESSAGE);
 //            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
-            System.out.println("SE");
-            return;
-        }
-        if ("System Admin".equals(valueSelected)) {
+                System.out.println("SE");
+                return;
+            }
+            if ("System Admin".equals(valueSelected)) {
 
+                if (CredentialsChecker.checkSysAdmin(emailInput1.getText())) {
+                    JOptionPane.showMessageDialog(this, "This email is already in use! Please use another email!", "Existing User Error!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-            accCreator.createSystemAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
-            JOptionPane.showMessageDialog(this, "Admin Created Successfully","Successful Account Creation",JOptionPane.INFORMATION_MESSAGE);
+                accCreator.createSystemAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+                JOptionPane.showMessageDialog(this, "Admin Created Successfully", "Successful Account Creation", JOptionPane.INFORMATION_MESSAGE);
 //            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
-            
-            System.out.println("SA");
-            
-            
-            return;
-        }
-        if ("Client Information Manager".equals(valueSelected)) {
-            
 
-            accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
-            JOptionPane.showMessageDialog(this, "Client Information Manager Created Successfully","Successful Account Creation",JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("SA");
+
+                return;
+            }
+            if ("Client Information Manager".equals(valueSelected)) {
+
+                if (CredentialsChecker.checkCimExist(emailInput1.getText())) {
+                    JOptionPane.showMessageDialog(this, "This email is already in use! Please use another email!", "Existsing User Error!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+                JOptionPane.showMessageDialog(this, "Client Information Manager Created Successfully", "Successful Account Creation", JOptionPane.INFORMATION_MESSAGE);
 //            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
-            
-            System.out.println("CIM");
+
+                System.out.println("CIM");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Account Creation Error", JOptionPane.ERROR_MESSAGE);
         }
-            
-        }
-        
-        catch (Exception e){
-            JOptionPane.showMessageDialog(this,e.getMessage(),"Account Creation Error",JOptionPane.ERROR_MESSAGE);
-        }
-        
+
     }//GEN-LAST:event_createAccountBtn1ActionPerformed
 
     private void emailInput1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailInput1KeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (emailInput1.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 emailInput1.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (emailInput1.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                emailInput1.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             emailInput1.setForeground(Color.red);
 
         }
-        
-        
+
+
     }//GEN-LAST:event_emailInput1KeyPressed
 
     private void nameInput1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameInput1KeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (nameInput1.getText().matches("^[a-zA-Z ]+$")){
-                 
-                 nameInput1.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (nameInput1.getText().matches("^[a-zA-Z ]+$")) {
+
+                nameInput1.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             nameInput1.setForeground(Color.red);
 
         }
