@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import Utilities.EmailSender; 
+import javax.mail.MessagingException;
 
 /**
  *
@@ -414,7 +416,7 @@ public class BookAppPage extends javax.swing.JPanel {
             }
             
             
-            else{
+            
                 
                 customer.setFirstName(firstName);
                 customer.setLastName(lastName);
@@ -423,17 +425,29 @@ public class BookAppPage extends javax.swing.JPanel {
                
                 CustomerController.addCustomer(customer);
                 JOptionPane.showMessageDialog(this, "Customer Registered Successfully","Successfull Registration",JOptionPane.INFORMATION_MESSAGE);
+                
+                String body = "Welcome to Furry Friends Membership, " + firstName + "!\n\n" +
+                      "Your account has been created successfully. Your login details are:\n" +
+                      "Email: " + email + "\n" +
+                      "Password: " + password + "\n\n" +
+                      "Enjoy our services!";
+                EmailSender.sendEmail(email, "Welcome to Furry Friends!", body);
 
+       
+                
                 clearFields();
-            }
+            
             
         }
         
         catch(IllegalArgumentException e){
-            
             JOptionPane.showMessageDialog(this,e.getMessage(),"Incomplete Form Submission Error",JOptionPane.ERROR_MESSAGE);
-            
         }
+        catch(MessagingException e) {
+            JOptionPane.showMessageDialog(this, "Email could not be sent. Please check your network connection and email settings.", "Email Sending Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_custSignUpButtonActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed

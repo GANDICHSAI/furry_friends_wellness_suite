@@ -99,7 +99,7 @@ public class SelectService extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Service ID", "Name", "Price"
+                "Service Package", "Name", "Price"
             }
         ));
         table.setViewportView(ServiceTable);
