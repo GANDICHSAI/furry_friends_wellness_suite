@@ -13,6 +13,7 @@ import Models.StoreEmployee;
 import Utilities.CustomerController;
 import Utilities.StoreController;
 import Utilities.PetController;
+import javax.swing.JOptionPane;
 
 /**
  * @author chait
@@ -338,7 +339,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         pet.setPetName(smPetNameTextField.getText());
         pet.setType(smTypeButtonGroup.getSelection().getActionCommand());
         pet.setGender(smGenderButtonGroup.getSelection().getActionCommand());
-        System.out.println(smGenderButtonGroup.getSelection().getActionCommand());
         pet.setWeight(Float.parseFloat(smPetWeightTextField.getText()));
         pet.setAge(Integer.parseInt(smPetAgeTextField.getText()));
         pet.setColor(smPetColTextField.getText());
@@ -353,7 +353,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         appointment.setStoreName(storeName);
         appointment.setPetId(petId);
         appointment.setPetName(smPetNameTextField.getText());
-
 
         smCustomerFirstNameTextField.setText("");
         smCustomerLastNameTextField.setText("");
@@ -406,6 +405,9 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         customer.setPassword(smCustomerPasswordTextField.getText());
 
         customerId = CustomerController.addCustomer(customer);
+        if (customerId != 0) {
+            JOptionPane.showMessageDialog(this, "Customer created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_smSaveCustomerButtonActionPerformed
 
 
