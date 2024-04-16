@@ -25,13 +25,14 @@ public class MainPage extends javax.swing.JFrame {
 
     public MainPage() {
         initComponents();
-        if(SystemAdminController.getAllSystemAdmins().isEmpty()&&SystemAdminController.getDefaultSystemAdmins().isEmpty()){
+        if(SystemAdminController.getAllSystemAdmins().isEmpty()){
             
             SystemAdmin systemAdmin = new SystemAdmin();
             
+            systemAdmin.setAdminName("admin");
             systemAdmin.setAdminEmail("admin@admin.com");
             systemAdmin.setAdminPassword("anonymous");
-            SystemAdminController.addDefaultAdminCreds(systemAdmin);
+            SystemAdminController.addNewSystemAdmin(systemAdmin);
         }
         
     }

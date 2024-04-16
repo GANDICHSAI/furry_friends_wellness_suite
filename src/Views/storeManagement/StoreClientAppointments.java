@@ -73,7 +73,7 @@ public class StoreClientAppointments extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(smAppointmentsTable);
 
-        smBackToHomeButton.setText("BACK TO HOME");
+        smBackToHomeButton.setText("LOGOUT");
         smBackToHomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smBackToHomeButtonActionPerformed(evt);
@@ -150,8 +150,8 @@ public class StoreClientAppointments extends javax.swing.JPanel {
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        ClientAppointmentChoosePanel clientInformationManager = new ClientAppointmentChoosePanel(bottomPanel,clims,appointments);
-        bottomPanel.add(clientInformationManager);
+        StoreManagementLogin storeManagementLogin = new StoreManagementLogin(bottomPanel,appointments);
+        bottomPanel.add(storeManagementLogin);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed

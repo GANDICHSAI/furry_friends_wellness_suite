@@ -215,7 +215,7 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
 //        int storeId = storeEmployee.getStoreID();
 
         try {
-            this.storeAppointmentList = AppointmentController.getAppointmentsByCIM();
+            this.storeAppointmentList = AppointmentController.getAppointmentsByJoin();
 
             DefaultTableModel tableModel = (DefaultTableModel) updateAppointmentTable.getModel();
             tableModel.setRowCount(0);
@@ -232,7 +232,7 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
     private void storeEmployeeLogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeEmployeeLogoutButtonActionPerformed
         // TODO add your handling code here:
         
-        ClientAppointmentChoosePanel clientAppointmentChoosePanel = new ClientAppointmentChoosePanel(bottomPanel,clims,appointment);
+        ClientAppointmentChoosePanel clientAppointmentChoosePanel = new ClientAppointmentChoosePanel(bottomPanel,appointment);
         bottomPanel.add(clientAppointmentChoosePanel);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

@@ -119,11 +119,11 @@ public class SelectServicePanel extends javax.swing.JPanel {
                         .addGap(226, 226, 226)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(saveAndViewSummaryButton))
+                        .addGap(272, 272, 272)
+                        .addComponent(appointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(302, 302, 302)
-                        .addComponent(appointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(254, 254, 254)
+                        .addComponent(saveAndViewSummaryButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,9 +139,9 @@ public class SelectServicePanel extends javax.swing.JPanel {
                 .addComponent(chooseDatelb)
                 .addGap(18, 18, 18)
                 .addComponent(appointmentDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(33, 33, 33)
                 .addComponent(saveAndViewSummaryButton)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

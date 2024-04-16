@@ -114,7 +114,7 @@ public class ClientAppointments extends javax.swing.JPanel {
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        ClientAppointmentChoosePanel clientInformationManager = new ClientAppointmentChoosePanel(bottomPanel,clims,appointments);
+        ClientAppointmentChoosePanel clientInformationManager = new ClientAppointmentChoosePanel(bottomPanel,appointments);
         bottomPanel.add(clientInformationManager);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -124,7 +124,7 @@ public class ClientAppointments extends javax.swing.JPanel {
 //        int storeId = storeEmployee.getStoreID();
 
         try {
-            this.storeAppointmentList = AppointmentController.getAppointmentsByCIM();
+            this.storeAppointmentList = AppointmentController.getAppointmentsByJoin();
 
             DefaultTableModel tableModel = (DefaultTableModel) smAppointmentsTable.getModel();
             tableModel.setRowCount(0);

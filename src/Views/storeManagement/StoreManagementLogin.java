@@ -8,15 +8,13 @@ import Models.Appointment;
 import Models.Authenticatable;
 import Models.SystemAdmin;
 import Models.ClientInformationManager;
-import Models.Customer;
 import Models.StoreEmployee;
 import Utilities.CIMController;
 
 import Utilities.SystemAdminController;
-import Views.customer.CustomerLandingPage;
 import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
-import java.awt.event.KeyEvent;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -33,8 +31,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Appointment appointment;
-    ArrayList<ClientInformationManager> cims;
-    Boolean auth = false;
     String valueSelected = "CLIENT INFORMATION MANAGER";
     public StoreManagementLogin(JPanel bottomPanel,Appointment appointment) {
         initComponents();
@@ -125,6 +121,12 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         storeLocationLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         storeLocationLabel.setForeground(new java.awt.Color(255, 255, 255));
         storeLocationLabel.setText("SELECT STORE LOCATION");
+
+        smUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smUsernameKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -234,32 +236,18 @@ public class StoreManagementLogin extends javax.swing.JPanel {
 
                         if (authenticatedEmployee != null) {
                             
-                            this.cims = CIMController.getAllCIM();
-                            
-                            for (ClientInformationManager clims: cims){
 
-                                    if (clims.getCIMEmail().equals(email) && clims.getCIMPassword().equals(password)){
-
-
-                                        auth = true;
-                                        ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel(bottomPanel,clims, new Appointment());
+                                        ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel(bottomPanel, new Appointment());
 
 //                             ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
                                         bottomPanel.add(storeEmployeeChooseObj);
                                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                                         layout.next(bottomPanel);    
-                                        break;
-                                    }
-
 
                                 }
-                                 if (!auth){
-                                        throw new IllegalArgumentException("Unable to get Client Information Manager Details");
-                                    }
-
-                            
-    //                        
-                        } else {
+                                 
+               
+                         else {
                             throw new IllegalArgumentException("Invalid credentials");
                         }
 
@@ -342,6 +330,30 @@ public class StoreManagementLogin extends javax.swing.JPanel {
       
         
     }//GEN-LAST:event_smLoginActionPerformed
+
+    private void smUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smUsernameKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (smUsername.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
+                 
+                 smUsername.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            smUsername.setForeground(Color.red);
+
+        }
+    
+    }//GEN-LAST:event_smUsernameKeyPressed
    
 
     private void clearFields() {

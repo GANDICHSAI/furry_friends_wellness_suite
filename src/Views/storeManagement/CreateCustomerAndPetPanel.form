@@ -74,10 +74,10 @@
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="smCustomerLastNameTextField" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
-                              <Component id="smCustomerEmailTextField" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
-                              <Component id="smCustomerPasswordTextField" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="smCustomerLastNameTextField" alignment="0" pref="171" max="32767" attributes="0"/>
+                              <Component id="smCustomerEmailTextField" alignment="0" pref="171" max="32767" attributes="0"/>
+                              <Component id="smCustomerPasswordField" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -133,7 +133,7 @@
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="smCustomerPasswordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="smCustomerPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Component id="petNameLable" min="-2" max="-2" attributes="0"/>
@@ -190,6 +190,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="smPetColTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smPetColTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -289,6 +292,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="smPetWeightTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smPetWeightTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -302,6 +308,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="smPetAgeTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smPetAgeTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="smCustomerEmailTextField">
       <Events>
@@ -309,10 +318,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="smCustomerFirstNameTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smCustomerFirstNameTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="smCustomerLastNameTextField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smCustomerLastNameTextFieldActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="smCustomerLastNameTextFieldKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -367,11 +380,6 @@
         <Property name="text" type="java.lang.String" value="PROVIDE BELOW INFO TO BOOK APPOINTMENT"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="smCustomerPasswordTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smCustomerPasswordTextFieldActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -419,6 +427,8 @@
           <Connection code="&quot;BOY&quot;" type="code"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="smCustomerPasswordField">
     </Component>
   </SubComponents>
 </Form>

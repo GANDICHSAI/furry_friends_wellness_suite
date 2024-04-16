@@ -31,13 +31,13 @@ public class SelectStorePanel extends javax.swing.JPanel {
     Appointment appointment;
     Customer customer;
     Pet pet;
-    ClientInformationManager clims;
-    public SelectStorePanel(JPanel bottomPanel,ClientInformationManager clims, Appointment appointment,Customer customer) {
+   
+    public SelectStorePanel(JPanel bottomPanel, Appointment appointment,Customer customer) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
  
-        this.clims = clims;
+
         this.customer = customer;
     }
 
@@ -183,6 +183,10 @@ public class SelectStorePanel extends javax.swing.JPanel {
             // Use StoreController to get the list of stores by postal code
             StoreController storeController = new StoreController();
             ArrayList<Store> stores = storeController.searchByPostalCode(postalCode);
+            
+            if(stores.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No Postal code found", "Not Found Error", JOptionPane.ERROR_MESSAGE);
+            }
 
             // Update the store table with the results
             for(Store store : stores) {
@@ -223,8 +227,7 @@ public class SelectStorePanel extends javax.swing.JPanel {
 
                 appointment.setStoreName(storeName);
                 appointment.setStoreId(storeId);
-                appointment.setCimId(clims.getCIMID());
-                System.out.println(clims.getCIMID());
+
             }
         }
         catch (IllegalArgumentException e){
@@ -241,7 +244,7 @@ public class SelectStorePanel extends javax.swing.JPanel {
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        ClientAppointmentChoosePanel clientAppointmentChoosePanel = new ClientAppointmentChoosePanel(bottomPanel,clims,appointment);
+        ClientAppointmentChoosePanel clientAppointmentChoosePanel = new ClientAppointmentChoosePanel(bottomPanel,appointment);
         bottomPanel.add(clientAppointmentChoosePanel);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

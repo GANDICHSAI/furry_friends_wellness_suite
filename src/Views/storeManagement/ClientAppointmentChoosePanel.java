@@ -23,15 +23,15 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
 //    StoreEmployee storeEmployee;
     Customer customer;
     Appointment appointment;
-    ClientInformationManager clims;
 
 
-    public ClientAppointmentChoosePanel(JPanel bottomPanel,ClientInformationManager clims, Appointment appointment) {
+
+    public ClientAppointmentChoosePanel(JPanel bottomPanel, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
         this.customer = customer;
-        this.clims = clims;
+   
 
 //        this.storeEmployee = storeEmployee;
     }
@@ -126,7 +126,7 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 //        System.out.println(storeEmployee);
 
-        SelectStorePanel selectStorePanelObj = new SelectStorePanel(bottomPanel,clims,appointment,customer);
+        SelectStorePanel selectStorePanelObj = new SelectStorePanel(bottomPanel,appointment,customer);
         bottomPanel.add(selectStorePanelObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

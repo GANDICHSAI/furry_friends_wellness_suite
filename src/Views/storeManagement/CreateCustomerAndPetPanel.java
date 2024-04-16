@@ -13,6 +13,7 @@ import Models.Pet;
 import Models.StoreEmployee;
 import Utilities.CustomerController;
 import Utilities.PetController;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -76,16 +77,22 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         smBackToHomeButton = new javax.swing.JButton();
         petTitleLabel1 = new javax.swing.JLabel();
-        smCustomerPasswordTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         smGirlRadioButton = new javax.swing.JRadioButton();
         smBoyRadioButton = new javax.swing.JRadioButton();
+        smCustomerPasswordField = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
         smPetNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smPetNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        smPetColTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smPetColTextFieldKeyPressed(evt);
             }
         });
 
@@ -128,9 +135,21 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("COLOR");
 
+        smPetWeightTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smPetWeightTextFieldKeyPressed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("WEIGHT");
+
+        smPetAgeTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smPetAgeTextFieldKeyPressed(evt);
+            }
+        });
 
         smCustomerEmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,9 +157,20 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
             }
         });
 
+        smCustomerFirstNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smCustomerFirstNameTextFieldKeyPressed(evt);
+            }
+        });
+
         smCustomerLastNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smCustomerLastNameTextFieldActionPerformed(evt);
+            }
+        });
+        smCustomerLastNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smCustomerLastNameTextFieldKeyPressed(evt);
             }
         });
 
@@ -166,12 +196,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         petTitleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         petTitleLabel1.setForeground(new java.awt.Color(255, 255, 255));
         petTitleLabel1.setText("PROVIDE BELOW INFO TO BOOK APPOINTMENT");
-
-        smCustomerPasswordTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smCustomerPasswordTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,10 +260,10 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel8)
                                 .addComponent(jLabel9))
                             .addGap(41, 41, 41)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(smCustomerLastNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(smCustomerEmailTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(smCustomerPasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(smCustomerLastNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(smCustomerEmailTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(smCustomerPasswordField))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(smSavePetToSelectServiceButton)))
@@ -281,7 +305,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
-                                    .addComponent(smCustomerPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(smCustomerPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(38, 38, 38)
                                 .addComponent(petNameLable))
                             .addComponent(smPetNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -344,64 +368,86 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private void smSavePetToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSavePetToSelectServiceButtonActionPerformed
         // TODO add your handling code here:
 //        Pet pet = new Pet();
-        this.customer = new Customer();
-        this.pet = new Pet();
-        
-        
-        
-        
-        customer.setFirstName(smCustomerFirstNameTextField.getText());
-        customer.setLastName(smCustomerLastNameTextField.getText());
-        customer.setEmail(smCustomerEmailTextField.getText());
-        customer.setPassword("");
-        
-        int custId = CustomerController.addCustomer(customer);
-        
-        
-//        Customer customerObj = getCustomerByEmail(smCustomerEmailTextField.getText());
-        
-       
-        pet.setPetName(smPetNameTextField.getText());
-        pet.setType(smTypeButtonGroup.getSelection().getActionCommand());
-        pet.setGender(smGenderButtonGroup.getSelection().getActionCommand());
-        pet.setWeight(Float.parseFloat(smPetWeightTextField.getText()));
-        pet.setAge(Integer.parseInt(smPetAgeTextField.getText()));
-        pet.setColor(smPetColTextField.getText());
-        appointment.setCustomerId(custId);
-        pet.setCustomerId(appointment.getCustomerId());
-        int petId = PetController.addPet(pet);
-//        int custId = CustomerController.addCustomer(customer);
 
-//        int storeId = storeEmployee.getStoreID();
+        try{
+            
+            char [] passwordChars = smCustomerPasswordField.getPassword();
+            String password = new String(passwordChars);
+            
+            if(smCustomerFirstNameTextField.getText() == null || smCustomerFirstNameTextField.getText().isEmpty()||
+                    smCustomerLastNameTextField.getText() == null || smCustomerLastNameTextField.getText().isEmpty()||
+                    smCustomerEmailTextField.getText() == null || smCustomerEmailTextField.getText().isEmpty()||password.isEmpty()||
+                    smTypeButtonGroup.getSelection().getActionCommand().isEmpty()||
+                    smGenderButtonGroup.getSelection().getActionCommand().isEmpty()
+                    ){
+                
+                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
+            }
+            
+            this.customer = new Customer();
+            this.pet = new Pet();
 
-//        appointment = new Appointment();
+
+
+
+            customer.setFirstName(smCustomerFirstNameTextField.getText());
+            customer.setLastName(smCustomerLastNameTextField.getText());
+            customer.setEmail(smCustomerEmailTextField.getText());
+            customer.setPassword(password);
+
+            int custId = CustomerController.addCustomer(customer);
+
+
+    //        Customer customerObj = getCustomerByEmail(smCustomerEmailTextField.getText());
+
+
+            pet.setPetName(smPetNameTextField.getText());
+            pet.setType(smTypeButtonGroup.getSelection().getActionCommand());
+            pet.setGender(smGenderButtonGroup.getSelection().getActionCommand());
+            pet.setWeight(Float.parseFloat(smPetWeightTextField.getText()));
+            pet.setAge(Integer.parseInt(smPetAgeTextField.getText()));
+            pet.setColor(smPetColTextField.getText());
+            appointment.setCustomerId(custId);
+            pet.setCustomerId(appointment.getCustomerId());
+            int petId = PetController.addPet(pet);
+    //        int custId = CustomerController.addCustomer(customer);
+
+    //        int storeId = storeEmployee.getStoreID();
+
+    //        appointment = new Appointment();
+
+    //        String storeName = StoreController.getStoreNameById(storeId);
+    //        appointment.setStoreId(storeEmployee.getStoreID());
+    //        appointment.setStoreName(storeName);
+            appointment.setPetId(petId);
+            appointment.setPetName(smPetNameTextField.getText());
+
+            smCustomerFirstNameTextField.setText("");
+            smCustomerLastNameTextField.setText("");
+            smCustomerEmailTextField.setText("");
+            smCustomerPasswordField.setText("");
+
+            smPetNameTextField.setText("");
+            smPetWeightTextField.setText("");
+            smPetAgeTextField.setText("");
+            smPetColTextField.setText("");
+
+            SelectServicePanel typeOfServiceObj = new SelectServicePanel(bottomPanel, appointment, customer,pet);
+            bottomPanel.add(typeOfServiceObj);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Incomplete Form Submission Error",JOptionPane.ERROR_MESSAGE);
+        }
         
-//        String storeName = StoreController.getStoreNameById(storeId);
-//        appointment.setStoreId(storeEmployee.getStoreID());
-//        appointment.setStoreName(storeName);
-        appointment.setPetId(petId);
-        appointment.setPetName(smPetNameTextField.getText());
-
-        smCustomerFirstNameTextField.setText("");
-        smCustomerLastNameTextField.setText("");
-        smCustomerEmailTextField.setText("");
-        smCustomerPasswordTextField.setText("");
-
-        smPetNameTextField.setText("");
-        smPetWeightTextField.setText("");
-        smPetAgeTextField.setText("");
-        smPetColTextField.setText("");
-
-        SelectServicePanel typeOfServiceObj = new SelectServicePanel(bottomPanel, appointment, customer,pet);
-        bottomPanel.add(typeOfServiceObj);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
     }//GEN-LAST:event_smSavePetToSelectServiceButtonActionPerformed
 
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        SelectStorePanel selectStorePanelObj = new SelectStorePanel(bottomPanel,clims,appointment,customer);
+        SelectStorePanel selectStorePanelObj = new SelectStorePanel(bottomPanel,appointment,customer);
         bottomPanel.add(selectStorePanelObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -411,10 +457,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smCustomerEmailTextFieldActionPerformed
 
-    private void smCustomerPasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smCustomerPasswordTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_smCustomerPasswordTextFieldActionPerformed
-
     private void smPetNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smPetNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_smPetNameTextFieldActionPerformed
@@ -422,6 +464,121 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private void smGirlRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smGirlRadioButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_smGirlRadioButtonActionPerformed
+
+    private void smCustomerFirstNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smCustomerFirstNameTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (smCustomerFirstNameTextField.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 smCustomerFirstNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            smCustomerFirstNameTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_smCustomerFirstNameTextFieldKeyPressed
+
+    private void smCustomerLastNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smCustomerLastNameTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (smCustomerLastNameTextField.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 smCustomerLastNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            smCustomerLastNameTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_smCustomerLastNameTextFieldKeyPressed
+
+    private void smPetWeightTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smPetWeightTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+            
+                if(smPetWeightTextField.getText().matches("^[0-9]*")){
+                    
+                    smPetWeightTextField.setForeground(Color.black);
+                    
+                }
+
+                else{
+                    throw new Exception();
+                }
+            
+        }
+        catch(Exception e){
+            
+            smPetWeightTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_smPetWeightTextFieldKeyPressed
+
+    private void smPetAgeTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smPetAgeTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+            
+                if(smPetAgeTextField.getText().matches("^[0-9]*")){
+                    
+                    smPetAgeTextField.setForeground(Color.black);
+                    
+                }
+
+                else{
+                    throw new Exception();
+                }
+            
+        }
+        catch(Exception e){
+            
+            smPetAgeTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_smPetAgeTextFieldKeyPressed
+
+    private void smPetColTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smPetColTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (smPetColTextField.getText().matches("^[a-zA-Z]*")){
+                 
+                 smPetColTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            smPetColTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_smPetColTextFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -442,7 +599,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private javax.swing.JTextField smCustomerEmailTextField;
     private javax.swing.JTextField smCustomerFirstNameTextField;
     private javax.swing.JTextField smCustomerLastNameTextField;
-    private javax.swing.JTextField smCustomerPasswordTextField;
+    private javax.swing.JPasswordField smCustomerPasswordField;
     private javax.swing.JRadioButton smDogRadioButton;
     private javax.swing.ButtonGroup smGenderButtonGroup;
     private javax.swing.JRadioButton smGirlRadioButton;

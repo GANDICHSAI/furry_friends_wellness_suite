@@ -53,32 +53,7 @@ public class AppointmentController {
         }
     }
     
-    public static void addCIMAppointment(Appointment appointment) {
-        //add to database
-        String query = "INSERT INTO CIMAppointment(cust_id,cim_id,store_name,service_id,store_id,pet_id,date,status) VALUES(?,?,?,?,?,?,?,?)";
-        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
-            java.util.Date utilDate = appointment.getDate();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, appointment.getCustomerId());
-                        stmt.setInt(2, appointment.getCimId());
-
-            stmt.setString(3, appointment.getStoreName());
-            stmt.setInt(4, appointment.getServiceId());
-            stmt.setInt(5, appointment.getStoreId());
-            stmt.setInt(6, appointment.getPetId());
-
-            stmt.setDate(7, sqlDate);
-            stmt.setString(8, appointment.getStatus());
-
-            int rows = stmt.executeUpdate();
-            System.out.println("Rows impacted : " + rows);
-//            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static ArrayList<Appointment> getAllAppointments() {
 //        return list of users from db
@@ -168,32 +143,27 @@ public class AppointmentController {
     public static ArrayList<Appointment> getAppointmentsByStoreID(int storeId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
-        String query = "select allappointments.app_id,allappointments.store_name,allappointments.pet_name,allappointments.service_name,"
-                + "allappointments.date,allappointments.status "
-                + "from(select Appointment.app_id,Appointment.store_name,Pet.pet_name,Store_Service.service_name,Appointment.date,"
-                + "Appointment.status from Appointment join Pet on Appointment.pet_id = Pet.pet_id join Customer on "
-                + "Appointment.cust_id = Customer.cust_id join Store_Service on Appointment.service_id = Store_Service.store_serv_id "
-                + "where Appointment.store_id=? union all select CIMAppointment.app_id,CIMAppointment.store_name,Pet.pet_name,Store_Service.service_name,CIMAppointment.date,"
-                + "CIMAppointment.status from CIMAppointment join Pet on CIMAppointment.pet_id = Pet.pet_id join Customer on "
-                + "CIMAppointment.cust_id = Customer.cust_id join Store_Service on CIMAppointment.service_id = Store_Service.store_serv_id "
-                + "where CIMAppointment.store_id=?)as allappointments";
+        String query = "select Appointment.app_id, Appointment.store_name,Pet.pet_name,Store_Service.service_name,Appointment.date,"
+                + "Appointment.status from Appointment join Customer on "
+                + "Appointment.cust_id = Customer.cust_id join Pet on Appointment.pet_id = Pet.pet_id join "
+                + "Store_Service on Appointment.service_id = Store_Service.store_serv_id where Appointment.store_id=?";
         
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, storeId);
-            stmt.setInt(2, storeId);
+//            stmt.setInt(2, storeId);
 
             
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Appointment appointment = new Appointment();
-                appointment.setAppointmentId(rs.getInt("allappointments.app_id"));
+                appointment.setAppointmentId(rs.getInt("Appointment.app_id"));
 //                appointment.setCustomerId(rs.getInt("cust_id"));
-                appointment.setStoreName(rs.getString("allappointments.store_name"));
-                appointment.setServiceName(rs.getString("allappointments.service_name"));
-                appointment.setPetName(rs.getString("allappointments.pet_name"));
-                appointment.setDate(rs.getDate("allappointments.date"));
-                appointment.setStatus(rs.getString("allappointments.status"));
+                appointment.setStoreName(rs.getString("Appointment.store_name"));
+                appointment.setServiceName(rs.getString("Store_Service.service_name"));
+                appointment.setPetName(rs.getString("Pet.pet_name"));
+                appointment.setDate(rs.getDate("Appointment.date"));
+                appointment.setStatus(rs.getString("Appointment.status"));
 
                 appointments.add(appointment);
             }
@@ -205,13 +175,13 @@ public class AppointmentController {
         return appointments;
     }
     
-    public static ArrayList<Appointment> getAppointmentsByCIM() {
+    public static ArrayList<Appointment> getAppointmentsByJoin() {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
-        String query = "select CIMAppointment.app_id, CIMAppointment.store_name,Pet.pet_name,Store_Service.service_name,CIMAppointment.date,"
-                + "CIMAppointment.status from CIMAppointment join Client_Information_Manager on "
-                + "CIMAppointment.cim_id = Client_Information_Manager.cim_id join Pet on CIMAppointment.pet_id = Pet.pet_id join "
-                + "Store_Service on CIMAppointment.service_id = Store_Service.store_serv_id";
+        String query = "select Appointment.app_id, Appointment.store_name,Pet.pet_name,Store_Service.service_name,Appointment.date,"
+                + "Appointment.status from Appointment join Customer on "
+                + "Appointment.cust_id = Customer.cust_id join Pet on Appointment.pet_id = Pet.pet_id join "
+                + "Store_Service on Appointment.service_id = Store_Service.store_serv_id";
         
         
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {

@@ -149,7 +149,7 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
         // TODO add your handling code here:                          
         try{
-            AppointmentController.addCIMAppointment(appointment);
+            AppointmentController.addAppointment(appointment);
             JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
             
         }
