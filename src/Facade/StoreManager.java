@@ -26,7 +26,7 @@ public class StoreManager implements Account {
         StoreEmployee storeEmp = new StoreEmployee();
 
           storeEmp.setStoreEmployeeName(name);
-        storeEmp.setstoreEmployeeEmail(email);
+        storeEmp.setStoreEmployeeEmail(email);
         storeEmp.setstoreEmployeePassword(password);
         
 //        Retrieve the ID using the name 

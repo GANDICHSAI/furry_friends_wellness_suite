@@ -4,15 +4,11 @@
  */
 package Views.storeManagement;
 
-import Models.Appointment;
-import Models.Authenticatable;
-import Models.SystemAdmin;
-import Models.ClientInformationManager;
-import Models.StoreEmployee;
-import Utilities.CIMController;
+import Models.*;
 
 import Utilities.SystemAdminController;
 import Views.systemAdmin.AdminMenu;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -21,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
  * @author chait
  */
 public class StoreManagementLogin extends javax.swing.JPanel {
@@ -32,12 +27,13 @@ public class StoreManagementLogin extends javax.swing.JPanel {
     JPanel bottomPanel;
     Appointment appointment;
     String valueSelected = "CLIENT INFORMATION MANAGER";
-    public StoreManagementLogin(JPanel bottomPanel,Appointment appointment) {
+
+    public StoreManagementLogin(JPanel bottomPanel, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
         populateStoreDropdown();
-        
+
         storesDropDown.setVisible(false);
         storeLocationLabel.setVisible(false);
 
@@ -54,19 +50,19 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             }
         });
     }
-    
+
     private void populateStoreDropdown() {
-    // Clear existing items in the dropdown
-    storesDropDown.removeAllItems();
+        // Clear existing items in the dropdown
+        storesDropDown.removeAllItems();
 
-    // Get new store names from the database
-    ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
+        // Get new store names from the database
+        ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
 
-    // Add the new store names to the dropdown
-    for (String name : storeNames) {
-        storesDropDown.addItem(name);
+        // Add the new store names to the dropdown
+        for (String name : storeNames) {
+            storesDropDown.addItem(name);
+        }
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,7 +103,7 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("ROLE");
 
-        smRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLIENT INFORMATION MANAGER", "STORE EMPLOYEE", "SYSTEM ADMIN" }));
+        smRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"CLIENT INFORMATION MANAGER", "STORE EMPLOYEE", "SYSTEM ADMIN"}));
 
         smLogin.setText("LOGIN");
         smLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +112,7 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             }
         });
 
-        storesDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        storesDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         storeLocationLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         storeLocationLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,66 +127,67 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(218, 218, 218)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(210, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(storesDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(smRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(storeLocationLabel)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(smPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(smUsername))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(218, 218, 218)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(210, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(225, 225, 225)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(storesDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(smRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(storeLocationLabel)
+                                                        .addComponent(jLabel3)
+                                                        .addComponent(jLabel2)
+                                                        .addComponent(smPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                                                        .addComponent(smUsername))
+                                                .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel1)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(smUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(smPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(storeLocationLabel)
-                .addGap(26, 26, 26)
-                .addComponent(storesDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(175, 175, 175))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(jLabel1)
+                                .addGap(72, 72, 72)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(smUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(smPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(storeLocationLabel)
+                                .addGap(26, 26, 26)
+                                .addComponent(storesDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(175, 175, 175))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public static <T extends Authenticatable> Authenticatable authenticate(String email, String password, List<T> users) {
-        for (Authenticatable user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return user;
+    public static <T extends Admin> T authenticate(String email, String password, List<T> admins) {
+        for (Admin admin : admins) {
+            if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
+                return (T) admin;
             }
         }
         return null;
     }
+
 
     private void smLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smLoginActionPerformed
         // TODO add your handling code here:
@@ -198,163 +195,149 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         String email = smUsername.getText();
         char[] passwordChars = smPassword.getPassword();
         String password = new String(passwordChars);
-        
-        try{
+
+        try {
 
             ArrayList<SystemAdmin> defaultSystemAdmins = SystemAdminController.getDefaultSystemAdmins();
- 
-            List<Authenticatable> adminAuthenticatables = new ArrayList<>(defaultSystemAdmins);
 
-           Authenticatable adminAuthenticatedEmployee = authenticate(email, password, adminAuthenticatables);
+            Admin adminAuthenticatedEmployee = authenticate(email, password, defaultSystemAdmins);
 
-            if (adminAuthenticatedEmployee!=null){
+            if (adminAuthenticatedEmployee != null) {
 
-                if(smRole.getSelectedItem().toString().equals("SYSTEM ADMIN")){
+                if (smRole.getSelectedItem().toString().equals("SYSTEM ADMIN")) {
 
                     AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
                     bottomPanel.add(adminMenuObj);
                     CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                    layout.next(bottomPanel);    
+                    layout.next(bottomPanel);
 
-                }
-                else{
+                } else {
                     throw new IllegalArgumentException("Please select only system admin with creds you choose");
                 }
 
 
-            }
-            else{
-                
+            } else {
+
                 switch (smRole.getSelectedItem().toString()) {
 
-                case "CLIENT INFORMATION MANAGER" -> {
-                    try {
-                        ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
-                        List<Authenticatable> authenticatables = new ArrayList<>(clientInformationManagers);
+                    case "CLIENT INFORMATION MANAGER" -> {
+                        try {
+                            ArrayList<ClientInformationManager> clientInformationManagers = SystemAdminController.getAllCIMs();
 
-                        Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
+                            ClientInformationManager authenticatedEmployee = authenticate(email, password, clientInformationManagers);
 
-                        if (authenticatedEmployee != null) {
-                            
+                            if (authenticatedEmployee != null) {
 
-                                        ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel(bottomPanel, new Appointment());
+
+                                ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel(bottomPanel, new Appointment());
 
 //                             ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
-                                        bottomPanel.add(storeEmployeeChooseObj);
-                                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                                        layout.next(bottomPanel);    
+                                bottomPanel.add(storeEmployeeChooseObj);
+                                CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                                layout.next(bottomPanel);
 
-                                }
-                                 
-               
-                         else {
-                            throw new IllegalArgumentException("Invalid credentials");
+                            } else {
+                                throw new IllegalArgumentException("Invalid credentials");
+                            }
+
+                            clearFields();
+
+                        } catch (Exception e) {
+
+                            JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
                         }
 
-                        clearFields();
+                    }
 
-                    } catch (Exception e) {
+                    case "STORE EMPLOYEE" -> {
+                        try {
+                            ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
 
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                            String SelectedStore = storesDropDown.getSelectedItem().toString();
+
+                            System.out.println(storeEmployees);
+
+                            StoreEmployee authenticatedEmployee = authenticate(email, password, storeEmployees);
+
+                            if (authenticatedEmployee != null) {
+
+                                StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel, SelectedStore);
+                                bottomPanel.add(storeClientAppointmentObj);
+                                CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                                layout.next(bottomPanel);
+
+                            } else {
+                                throw new IllegalArgumentException("Invalid credentials");
+                            }
+
+                            clearFields();
+
+                        } catch (Exception e) {
+
+                            JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    }
+
+                    case "SYSTEM ADMIN" -> {
+                        try {
+                            ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
+
+                            SystemAdmin authenticatedEmployee = authenticate(email, password, systemAdmins);
+
+                            if (authenticatedEmployee != null) {
+                                AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
+                                bottomPanel.add(adminMenuObj);
+                                CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                                layout.next(bottomPanel);
+                            } else {
+                                throw new IllegalArgumentException("Invalid credentials");
+                            }
+
+                            clearFields();
+
+                        } catch (Exception e) {
+
+                            JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    }
+
+                    default -> {
+                        throw new IllegalArgumentException("please select correct Role");
                     }
 
                 }
-
-                case "STORE EMPLOYEE" -> {
-                    try {
-                        ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
-                        List<Authenticatable> authenticatables = new ArrayList<>(storeEmployees);
-                        
-                        String SelectedStore = storesDropDown.getSelectedItem().toString();
-
-                        System.out.println(storeEmployees);
-
-                        Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
-
-                        if (authenticatedEmployee != null) {
-                            
-                            StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel,SelectedStore);
-                            bottomPanel.add(storeClientAppointmentObj);
-                            CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                            layout.next(bottomPanel);
-                           
-                        } else {
-                            throw new IllegalArgumentException("Invalid credentials");
-                        }
-
-                        clearFields();
-
-                    } catch (Exception e) {
-
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }
-
-                case "SYSTEM ADMIN" -> {
-                    try {
-                        ArrayList<SystemAdmin> systemAdmins = SystemAdminController.getAllSystemAdmins();
-                        List<Authenticatable> authenticatables = new ArrayList<>(systemAdmins);
-
-                        Authenticatable authenticatedEmployee  = authenticate(email, password, authenticatables);
-
-                        if (authenticatedEmployee != null) {
-                            AdminMenu adminMenuObj = new AdminMenu(bottomPanel);
-                            bottomPanel.add(adminMenuObj);
-                            CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                            layout.next(bottomPanel);
-                        } else {
-                            throw new IllegalArgumentException("Invalid credentials");
-                        }
-
-                        clearFields();
-
-                    } catch (Exception e) {
-
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }
-
-                default -> {
-                    throw new IllegalArgumentException("please select correct Role");
-                }
-                
-            } 
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
 
-                    JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
-                }
-            
-      
-        
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_smLoginActionPerformed
 
     private void smUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smUsernameKeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (smUsername.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 smUsername.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (smUsername.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                smUsername.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             smUsername.setForeground(Color.red);
 
         }
-    
+
     }//GEN-LAST:event_smUsernameKeyPressed
-   
+
 
     private void clearFields() {
         smUsername.setText("");

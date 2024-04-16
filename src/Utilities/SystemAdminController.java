@@ -332,7 +332,7 @@ public class SystemAdminController {
                 se.setstoreEmpID(rs.getInt("Store_Employee.employee_id"));
                 se.setStoreID(rs.getInt("Store_Employee.store_id"));
                 se.setStoreEmployeeName(rs.getString("Store_Employee.name"));
-                se.setstoreEmployeeEmail(rs.getString("Store_Employee.email"));
+                se.setStoreEmployeeEmail(rs.getString("Store_Employee.email"));
                 se.setstoreEmployeePassword(rs.getString("Store_Employee.password"));
 
 
@@ -352,9 +352,9 @@ public class SystemAdminController {
 
             stmt.setString(1, newSE.getStoreEmployeeName());
             stmt.setInt(2, newSE.getStoreID());
-            stmt.setString(3, newSE.getstoreEmployeeEmail());
+            stmt.setString(3, newSE.getStoreEmployeeEmail());
 
-            stmt.setString(4, newSE.getstoreEmployeePassword());
+            stmt.setString(4, newSE.getStoreEmployeePassword());
             
             
             stmt.setInt(5, oldSE.getstoreEmpID());
@@ -510,8 +510,8 @@ public class SystemAdminController {
             pstmt.setInt(1, storeEmp.getstoreEmpID());
             pstmt.setString(2, storeEmp.getStoreEmployeeName());
             pstmt.setInt(3, storeEmp.getStoreID());
-            pstmt.setString(4, storeEmp.getstoreEmployeeEmail());
-            pstmt.setString(5, storeEmp.getstoreEmployeePassword());
+            pstmt.setString(4, storeEmp.getStoreEmployeeEmail());
+            pstmt.setString(5, storeEmp.getStoreEmployeePassword());
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {

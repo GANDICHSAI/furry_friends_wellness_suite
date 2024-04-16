@@ -8,13 +8,19 @@ package Models;
  *
  * @author chait
  */
-public class SystemAdmin implements Authenticatable {
-    
-    
+public class SystemAdmin extends Admin {
     private int adminID;
     private String adminName;
-    private String adminEmail;
-    private String adminPassword;
+
+    public SystemAdmin(int adminID, String adminName, String email, String password) {
+        super(email, password);
+        this.adminID = adminID;
+        this.adminName = adminName;
+    }
+
+    public SystemAdmin() {
+        super("", "");
+    }
 
     public int getAdminID() {
         return adminID;
@@ -33,28 +39,18 @@ public class SystemAdmin implements Authenticatable {
     }
 
     public String getAdminEmail() {
-        return adminEmail;
+        return getEmail();
     }
 
-    public void setAdminEmail(String adminEmail) {
-        this.adminEmail = adminEmail;
+    public void setAdminEmail(String email) {
+        setEmail(email);
     }
 
     public String getAdminPassword() {
-        return adminPassword;
+        return getPassword();
     }
 
-    public void setAdminPassword(String adminPassword) {
-        this.adminPassword = adminPassword;
+    public void setAdminPassword(String password) {
+        setPassword(password);
     }
-    
-    @Override
-    public String getEmail() {
-        return adminEmail;
-    }
-
-    @Override
-    public String getPassword() {
-        return adminPassword;
-    }  
 }
