@@ -59,13 +59,13 @@ public class StoreAppointments extends javax.swing.JPanel {
 
         smAppointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STORE NAME", "PET NAME", "SERVICE", "DATE", "STATUS"
+                "APP ID", "STORE NAME", "PET NAME", "SERVICE", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(smAppointmentsTable);
@@ -78,6 +78,11 @@ public class StoreAppointments extends javax.swing.JPanel {
         });
 
         jButton1.setText("MARK AS COMPLETED");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -125,6 +130,21 @@ public class StoreAppointments extends javax.swing.JPanel {
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = smAppointmentsTable.getSelectedRow();
+
+        if (selectedRowIndex != -1) {
+            String appointmentId = (String) smAppointmentsTable.getValueAt(selectedRowIndex, 0);
+
+            AppointmentController.updateAppointmentStatus(appointmentId, "Completed");
+
+            smAppointmentsTable.setValueAt("Completed", selectedRowIndex, 5);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void populateTable() {
         int storeId = storeEmployee.getStoreID();
 
@@ -137,7 +157,7 @@ public class StoreAppointments extends javax.swing.JPanel {
                 String petName = PetController.getPetNameByPetId(appointment.getPetId());
                 String serviceName = StoreServicesController.getServiceNameById(appointment.getServiceId());
 
-                String[] appointmentData = {appointment.getStoreName(), petName, serviceName, String.valueOf(appointment.getDate()), appointment.getStatus()};
+                String[] appointmentData = {String.valueOf(appointment.getAppointmentId()), appointment.getStoreName(), petName, serviceName, String.valueOf(appointment.getDate()), appointment.getStatus()};
                 tableModel.addRow(appointmentData);
             }
         } catch (Exception e) {
