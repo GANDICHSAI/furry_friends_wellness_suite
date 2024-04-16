@@ -5,11 +5,12 @@
 package Views.storeManagement;
 
 import Models.Appointment;
+import Models.Customer;
+import Models.Pet;
 import Models.StoreEmployee;
 import Utilities.AppointmentController;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -25,13 +26,17 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     Appointment appointment;
+    Customer customer;
+    Pet pet;
     StoreEmployee storeEmployee;
 
-    public ReviewClientAppointment(StoreEmployee storeEmployee, Appointment appointment, JPanel bottomPanel) {
+    public ReviewClientAppointment(JPanel bottomPanel, Appointment appointment,Customer customer, Pet pet ) {
         initComponents();
 
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
+        this.customer = customer;
+        this.pet = pet;
         this.storeEmployee = storeEmployee;
         populateTable();
     }
@@ -50,6 +55,7 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         smReviewAppointmentTable = new javax.swing.JTable();
         smBackToServiceOptions = new javax.swing.JButton();
+        backToHomeButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -66,13 +72,13 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
 
         smReviewAppointmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STORE NAME", "PET NAME", "SERVICE", "DATE", "STATUS"
+                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(smReviewAppointmentTable);
@@ -81,6 +87,13 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         smBackToServiceOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smBackToServiceOptionsActionPerformed(evt);
+            }
+        });
+
+        backToHomeButton.setText("BACK TO HOME");
+        backToHomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToHomeButtonActionPerformed(evt);
             }
         });
 
@@ -98,8 +111,10 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(276, 276, 276)
-                        .addComponent(submitAppointment)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(submitAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(backToHomeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(14, 14, 14))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(smBackToServiceOptions)
@@ -116,14 +131,16 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(submitAppointment)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(backToHomeButton)
+                .addContainerGap(276, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void smBackToServiceOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToServiceOptionsActionPerformed
         // TODO add your handling code here:
 
-        SelectServicePanel typeOfService = new SelectServicePanel(storeEmployee, appointment, bottomPanel);
+        SelectServicePanel typeOfService = new SelectServicePanel(bottomPanel, appointment,customer,pet );
         bottomPanel.add(typeOfService);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -132,13 +149,19 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
         // TODO add your handling code here:                          
         try{
-            AppointmentController.addAppointment(appointment);
+            AppointmentController.addCIMAppointment(appointment);
             JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
+            
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitAppointmentActionPerformed
+
+    private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_backToHomeButtonActionPerformed
 
     public void populateTable() {
         try {
@@ -146,12 +169,12 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
             tableModel.setRowCount(0);
 //            Date currentDate = new Date();
 //            appointment.setDate(currentDate);
-            appointment.setStatus("Not Started");
+            appointment.setStatus("PENDING");
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
 
-            String[] storeServiceData = {appointment.getStoreName(), appointment.getPetName(), appointment.getServiceName(), formattedDate, appointment.getStatus()};
+            String[] storeServiceData = {String.valueOf(appointment.getCustomerId()), appointment.getStoreName(), appointment.getServiceName(), appointment.getPetName(), formattedDate, appointment.getStatus()};
             tableModel.addRow(storeServiceData);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -159,6 +182,7 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backToHomeButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton smBackToServiceOptions;
     private javax.swing.JTable smReviewAppointmentTable;

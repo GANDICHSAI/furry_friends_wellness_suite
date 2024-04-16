@@ -5,6 +5,7 @@
 package Views.storeManagement;
 
 import Models.Appointment;
+import Models.ClientInformationManager;
 import Models.StoreEmployee;
 import Utilities.AppointmentController;
 import Utilities.PetController;
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author chait
  */
-public class StoreAppointments extends javax.swing.JPanel {
+public class ClientAppointments extends javax.swing.JPanel {
 
     /**
      * Creates new form clientAppointments
@@ -28,8 +29,10 @@ public class StoreAppointments extends javax.swing.JPanel {
     JPanel bottomPanel;
     StoreEmployee storeEmployee;
     private ArrayList<Appointment> storeAppointmentList;
+    ClientInformationManager clims;
+    Appointment appointments;
 
-    public StoreAppointments(StoreEmployee storeEmployee, JPanel bottomPanel) {
+    public ClientAppointments(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.storeEmployee = storeEmployee;
@@ -49,13 +52,12 @@ public class StoreAppointments extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         smAppointmentsTable = new javax.swing.JTable();
         smBackToHomeButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("STORE APPOINTMENTS");
+        jLabel1.setText("CLIENT APPOINTMENTS");
 
         smAppointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,7 +67,7 @@ public class StoreAppointments extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "APP ID", "STORE NAME", "PET NAME", "SERVICE", "DATE", "STATUS"
+                "APP ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(smAppointmentsTable);
@@ -77,13 +79,6 @@ public class StoreAppointments extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("MARK AS COMPLETED");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,16 +86,13 @@ public class StoreAppointments extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(37, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(209, 209, 209)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(smBackToHomeButton)))
+                        .addComponent(smBackToHomeButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(37, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -115,49 +107,31 @@ public class StoreAppointments extends javax.swing.JPanel {
                         .addComponent(smBackToHomeButton)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        StoreEmployeeChoosePanel clientInformationManager = new StoreEmployeeChoosePanel(storeEmployee, bottomPanel);
+        ClientAppointmentChoosePanel clientInformationManager = new ClientAppointmentChoosePanel(bottomPanel,clims,appointments);
         bottomPanel.add(clientInformationManager);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = smAppointmentsTable.getSelectedRow();
-
-        if (selectedRowIndex != -1) {
-            String appointmentId = (String) smAppointmentsTable.getValueAt(selectedRowIndex, 0);
-
-            AppointmentController.updateAppointmentStatus(appointmentId, "Completed");
-
-            smAppointmentsTable.setValueAt("Completed", selectedRowIndex, 5);
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row.", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     public void populateTable() {
-        int storeId = storeEmployee.getStoreID();
+//        int storeId = storeEmployee.getStoreID();
 
         try {
-            this.storeAppointmentList = AppointmentController.getAppointmentsByStoreId(storeId);
+            this.storeAppointmentList = AppointmentController.getAppointmentsByCIM();
 
             DefaultTableModel tableModel = (DefaultTableModel) smAppointmentsTable.getModel();
             tableModel.setRowCount(0);
             for (Appointment appointment : storeAppointmentList) {
-                String petName = PetController.getPetNameByPetId(appointment.getPetId());
-                String serviceName = StoreServicesController.getServiceNameById(appointment.getServiceId());
 
-                String[] appointmentData = {String.valueOf(appointment.getAppointmentId()), appointment.getStoreName(), petName, serviceName, String.valueOf(appointment.getDate()), appointment.getStatus()};
+
+                String[] appointmentData = {String.valueOf(appointment.getAppointmentId()),appointment.getStoreName(),appointment.getServiceName(),appointment.getPetName(), String.valueOf(appointment.getDate()), appointment.getStatus()};
                 tableModel.addRow(appointmentData);
             }
         } catch (Exception e) {
@@ -166,7 +140,6 @@ public class StoreAppointments extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable smAppointmentsTable;

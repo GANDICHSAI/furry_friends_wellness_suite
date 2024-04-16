@@ -147,7 +147,7 @@ public class MainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        this.systemAdmin.setAdminEmail("admin");
 //        this.systemAdmin.setAdminPassword("anonymous");
-        StoreManagementLogin storeManagementLoginObj = new StoreManagementLogin(bottomPanel);
+        StoreManagementLogin storeManagementLoginObj = new StoreManagementLogin(bottomPanel,appointment);
        
         bottomPanel.add(storeManagementLoginObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();

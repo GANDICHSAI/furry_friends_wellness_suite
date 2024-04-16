@@ -91,6 +91,23 @@ public class StoreController {
         }
         return storeName;
     }
+    
+    public static int getStoreIDByName(String storeName) {
+        int storeId = 0;
+        String query = "SELECT store_id FROM Store WHERE store_name = ?";
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, storeName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                storeId = rs.getInt("store_id");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return storeId;
+    }
 }
 
 

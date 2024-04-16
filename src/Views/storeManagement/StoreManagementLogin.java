@@ -4,14 +4,19 @@
  */
 package Views.storeManagement;
 
+import Models.Appointment;
 import Models.Authenticatable;
 import Models.SystemAdmin;
 import Models.ClientInformationManager;
+import Models.Customer;
 import Models.StoreEmployee;
+import Utilities.CIMController;
 
 import Utilities.SystemAdminController;
+import Views.customer.CustomerLandingPage;
 import Views.systemAdmin.AdminMenu;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,11 +32,45 @@ public class StoreManagementLogin extends javax.swing.JPanel {
      * Creates new form storeManagementLogin
      */
     JPanel bottomPanel;
-
-    public StoreManagementLogin(JPanel bottomPanel) {
+    Appointment appointment;
+    ArrayList<ClientInformationManager> cims;
+    Boolean auth = false;
+    String valueSelected = "CLIENT INFORMATION MANAGER";
+    public StoreManagementLogin(JPanel bottomPanel,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.appointment = appointment;
+        populateStoreDropdown();
+        
+        storesDropDown.setVisible(false);
+        storeLocationLabel.setVisible(false);
+
+        smRole.addActionListener(e -> {
+            // Get the selected item when an action is performed (like selecting an item)
+            valueSelected = (String) smRole.getSelectedItem();
+
+            if (!"STORE EMPLOYEE".equals(valueSelected)) {
+                storesDropDown.setVisible(false);
+                storeLocationLabel.setVisible(false);
+            } else {
+                storesDropDown.setVisible(true);
+                storeLocationLabel.setVisible(true);
+            }
+        });
     }
+    
+    private void populateStoreDropdown() {
+    // Clear existing items in the dropdown
+    storesDropDown.removeAllItems();
+
+    // Get new store names from the database
+    ArrayList<String> storeNames = SystemAdminController.getAllStoreNames();
+
+    // Add the new store names to the dropdown
+    for (String name : storeNames) {
+        storesDropDown.addItem(name);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,12 +83,14 @@ public class StoreManagementLogin extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        smUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         smRole = new javax.swing.JComboBox<>();
         smLogin = new javax.swing.JButton();
         smPassword = new javax.swing.JPasswordField();
+        storesDropDown = new javax.swing.JComboBox<>();
+        storeLocationLabel = new javax.swing.JLabel();
+        smUsername = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -61,12 +102,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("EMAIL");
-
-        smUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smUsernameActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,6 +120,12 @@ public class StoreManagementLogin extends javax.swing.JPanel {
             }
         });
 
+        storesDropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        storeLocationLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        storeLocationLabel.setForeground(new java.awt.Color(255, 255, 255));
+        storeLocationLabel.setText("SELECT STORE LOCATION");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,16 +140,18 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                 .addGap(225, 225, 225)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(storesDropDown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(smRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(storeLocationLabel)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(smUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(smPassword))
+                            .addComponent(smPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(smUsername))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -124,19 +167,19 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(smPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(smRole, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(16, 16, 16)
+                .addComponent(storeLocationLabel)
+                .addGap(26, 26, 26)
+                .addComponent(storesDropDown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(smLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(230, 230, 230))
+                .addGap(175, 175, 175))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void smUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_smUsernameActionPerformed
 
     public static <T extends Authenticatable> Authenticatable authenticate(String email, String password, List<T> users) {
         for (Authenticatable user : users) {
@@ -153,8 +196,6 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         String email = smUsername.getText();
         char[] passwordChars = smPassword.getPassword();
         String password = new String(passwordChars);
-        
-        Boolean auth = false;
         
         try{
 
@@ -192,10 +233,32 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                         Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
 
                         if (authenticatedEmployee != null) {
-    //                        StoreEmployeeChoosePanel clientInformationManagerObj = new StoreEmployeeChoosePanel(bottomPanel);
-    //                        bottomPanel.add(clientInformationManagerObj);
-    //                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-    //                        layout.next(bottomPanel);
+                            
+                            this.cims = CIMController.getAllCIM();
+                            
+                            for (ClientInformationManager clims: cims){
+
+                                    if (clims.getCIMEmail().equals(email) && clims.getCIMPassword().equals(password)){
+
+
+                                        auth = true;
+                                        ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel(bottomPanel,clims, new Appointment());
+
+//                             ClientAppointmentChoosePanel storeEmployeeChooseObj = new ClientAppointmentChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
+                                        bottomPanel.add(storeEmployeeChooseObj);
+                                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                                        layout.next(bottomPanel);    
+                                        break;
+                                    }
+
+
+                                }
+                                 if (!auth){
+                                        throw new IllegalArgumentException("Unable to get Client Information Manager Details");
+                                    }
+
+                            
+    //                        
                         } else {
                             throw new IllegalArgumentException("Invalid credentials");
                         }
@@ -213,16 +276,20 @@ public class StoreManagementLogin extends javax.swing.JPanel {
                     try {
                         ArrayList<StoreEmployee> storeEmployees = SystemAdminController.getStoreEmployees();
                         List<Authenticatable> authenticatables = new ArrayList<>(storeEmployees);
+                        
+                        String SelectedStore = storesDropDown.getSelectedItem().toString();
 
                         System.out.println(storeEmployees);
 
                         Authenticatable authenticatedEmployee = authenticate(email, password, authenticatables);
 
                         if (authenticatedEmployee != null) {
-                            StoreEmployeeChoosePanel storeEmployeeChooseObj = new StoreEmployeeChoosePanel((StoreEmployee) authenticatedEmployee, bottomPanel);
-                            bottomPanel.add(storeEmployeeChooseObj);
+                            
+                            StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel,SelectedStore);
+                            bottomPanel.add(storeClientAppointmentObj);
                             CardLayout layout = (CardLayout) bottomPanel.getLayout();
                             layout.next(bottomPanel);
+                           
                         } else {
                             throw new IllegalArgumentException("Invalid credentials");
                         }
@@ -291,5 +358,7 @@ public class StoreManagementLogin extends javax.swing.JPanel {
     private javax.swing.JPasswordField smPassword;
     private javax.swing.JComboBox<String> smRole;
     private javax.swing.JTextField smUsername;
+    private javax.swing.JLabel storeLocationLabel;
+    private javax.swing.JComboBox<String> storesDropDown;
     // End of variables declaration//GEN-END:variables
 }

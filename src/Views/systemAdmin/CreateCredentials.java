@@ -281,6 +281,8 @@ public class CreateCredentials extends javax.swing.JPanel {
         if ("Store Employee".equals(valueSelected)) {
 
            accCreator.createStoreManagerAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
+           
+           JOptionPane.showMessageDialog(this, "Store Employee Created Successfully","Successful Account Creation",JOptionPane.INFORMATION_MESSAGE);
 //            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
             System.out.println("SE");
             return;
@@ -301,6 +303,7 @@ public class CreateCredentials extends javax.swing.JPanel {
             
 
             accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
+            JOptionPane.showMessageDialog(this, "Client Information Manager Created Successfully","Successful Account Creation",JOptionPane.INFORMATION_MESSAGE);
 //            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
             
             System.out.println("CIM");

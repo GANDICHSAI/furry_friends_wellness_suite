@@ -5,14 +5,15 @@
 package Views.storeManagement;
 
 import Models.Appointment;
+import Models.ClientInformationManager;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import Models.Customer;
 import Models.Pet;
 import Models.StoreEmployee;
 import Utilities.CustomerController;
-import Utilities.StoreController;
 import Utilities.PetController;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,13 +26,22 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     private int customerId;
+    Customer customer;
+    Pet pet;
     StoreEmployee storeEmployee;
+    private ArrayList<Customer> customers;
+    private Boolean auth=false;
     Appointment appointment;
+    ClientInformationManager clims;
 
-    public CreateCustomerAndPetPanel(StoreEmployee storeEmployee, JPanel bottomPanel) {
+    public CreateCustomerAndPetPanel( JPanel bottomPanel,Appointment appointment,Customer customer, Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
-        this.storeEmployee = storeEmployee;
+        this.appointment = appointment;
+        this.customer = customer;
+        this.pet = pet;
+//        this.storeEmployee = storeEmployee;
+
     }
 
     /**
@@ -57,7 +67,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         smPetWeightTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        petTitleLabel = new javax.swing.JLabel();
         smPetAgeTextField = new javax.swing.JTextField();
         smCustomerEmailTextField = new javax.swing.JTextField();
         smCustomerFirstNameTextField = new javax.swing.JTextField();
@@ -71,7 +80,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         smGirlRadioButton = new javax.swing.JRadioButton();
         smBoyRadioButton = new javax.swing.JRadioButton();
-        smSaveCustomerButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -124,10 +132,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("WEIGHT");
 
-        petTitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        petTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        petTitleLabel.setText("TELL US ABOUT YOUR PET");
-
         smCustomerEmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smCustomerEmailTextFieldActionPerformed(evt);
@@ -152,7 +156,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("LAST NAME");
 
-        smBackToHomeButton.setText("BACK TO HOME");
+        smBackToHomeButton.setText("BACK TO STORE");
         smBackToHomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smBackToHomeButtonActionPerformed(evt);
@@ -161,7 +165,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
 
         petTitleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         petTitleLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        petTitleLabel1.setText("TELL US ABOUT YOU");
+        petTitleLabel1.setText("PROVIDE BELOW INFO TO BOOK APPOINTMENT");
 
         smCustomerPasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,124 +194,110 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         smBoyRadioButton.setText("BOY");
         smBoyRadioButton.setActionCommand("BOY");
 
-        smSaveCustomerButton.setText("SAVE");
-        smSaveCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smSaveCustomerButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(228, 228, 228)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(petNameLable, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(smPetNameTextField))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(smGirlRadioButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(smBoyRadioButton))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(smCatRadioButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(smDogRadioButton))
-                                    .addComponent(smPetWeightTextField)
-                                    .addComponent(smPetAgeTextField)
-                                    .addComponent(smPetColTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 117, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(smBackToHomeButton)
-                                .addGap(29, 29, 29))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(petTitleLabel1)
-                                .addGap(235, 235, 235))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(petTitleLabel)
-                                    .addComponent(smSavePetToSelectServiceButton))
-                                .addGap(187, 187, 187))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(petNameLable, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(smPetNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(smGirlRadioButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(smBoyRadioButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(smCatRadioButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(smDogRadioButton))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(smPetColTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(smPetAgeTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(smPetWeightTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(37, 37, 37)
+                            .addComponent(smCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9))
+                            .addGap(41, 41, 41)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(smCustomerLastNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(smCustomerEmailTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(smCustomerPasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(37, 37, 37)
-                                .addComponent(smCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(smCustomerLastNameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(smCustomerEmailTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(smCustomerPasswordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(smSaveCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))))
+                        .addGap(40, 40, 40)
+                        .addComponent(smSavePetToSelectServiceButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(petTitleLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(smBackToHomeButton)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(smBackToHomeButton)
-                .addGap(28, 28, 28)
-                .addComponent(petTitleLabel1)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(smCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(smCustomerLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(smSaveCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(smCustomerEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(smCustomerPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(petTitleLabel)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(smPetNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(petNameLable))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(smCatRadioButton)
-                    .addComponent(smDogRadioButton)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(smGirlRadioButton)
-                    .addComponent(smBoyRadioButton))
-                .addGap(22, 22, 22)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(smBackToHomeButton)
+                        .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(petTitleLabel1)
+                        .addGap(36, 36, 36)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(smCustomerFirstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(smCustomerLastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(smCustomerEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(smCustomerPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38)
+                                .addComponent(petNameLable))
+                            .addComponent(smPetNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(smCatRadioButton)
+                            .addComponent(smDogRadioButton))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(smGirlRadioButton)
+                            .addComponent(smBoyRadioButton))))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(smPetWeightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,36 +311,74 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(smPetColTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
+                .addGap(49, 49, 49)
                 .addComponent(smSavePetToSelectServiceButton)
-                .addGap(28, 28, 28))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void smCustomerLastNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smCustomerLastNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_smCustomerLastNameTextFieldActionPerformed
-
+    
+//    private Customer getCustomerByEmail(String email){
+//        this.customers = CustomerController.getAllCustomers();
+//        
+//        for (Customer cust: customers){
+//
+//                    if (cust.getEmail().equals(email)){
+//
+//
+//                        auth = true;
+//                        
+//                        return cust;
+//                        
+//                    }
+//                    if (!auth){
+//                        throw new IllegalArgumentException("Customer not found");
+//                    }
+//
+//
+//                }
+//    }
     private void smSavePetToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSavePetToSelectServiceButtonActionPerformed
         // TODO add your handling code here:
-        Pet pet = new Pet();
-
-        pet.setCustomerId(customerId);
+//        Pet pet = new Pet();
+        this.customer = new Customer();
+        this.pet = new Pet();
+        
+        
+        
+        
+        customer.setFirstName(smCustomerFirstNameTextField.getText());
+        customer.setLastName(smCustomerLastNameTextField.getText());
+        customer.setEmail(smCustomerEmailTextField.getText());
+        customer.setPassword("");
+        
+        int custId = CustomerController.addCustomer(customer);
+        
+        
+//        Customer customerObj = getCustomerByEmail(smCustomerEmailTextField.getText());
+        
+       
         pet.setPetName(smPetNameTextField.getText());
         pet.setType(smTypeButtonGroup.getSelection().getActionCommand());
         pet.setGender(smGenderButtonGroup.getSelection().getActionCommand());
         pet.setWeight(Float.parseFloat(smPetWeightTextField.getText()));
         pet.setAge(Integer.parseInt(smPetAgeTextField.getText()));
         pet.setColor(smPetColTextField.getText());
-
+        appointment.setCustomerId(custId);
+        pet.setCustomerId(appointment.getCustomerId());
         int petId = PetController.addPet(pet);
-        int storeId = storeEmployee.getStoreID();
+//        int custId = CustomerController.addCustomer(customer);
 
-        appointment = new Appointment();
-        appointment.setCustomerId(customerId);
-        String storeName = StoreController.getStoreNameById(storeId);
-        appointment.setStoreId(storeEmployee.getStoreID());
-        appointment.setStoreName(storeName);
+//        int storeId = storeEmployee.getStoreID();
+
+//        appointment = new Appointment();
+        
+//        String storeName = StoreController.getStoreNameById(storeId);
+//        appointment.setStoreId(storeEmployee.getStoreID());
+//        appointment.setStoreName(storeName);
         appointment.setPetId(petId);
         appointment.setPetName(smPetNameTextField.getText());
 
@@ -364,7 +392,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         smPetAgeTextField.setText("");
         smPetColTextField.setText("");
 
-        SelectServicePanel typeOfServiceObj = new SelectServicePanel(storeEmployee, appointment, bottomPanel);
+        SelectServicePanel typeOfServiceObj = new SelectServicePanel(bottomPanel, appointment, customer,pet);
         bottomPanel.add(typeOfServiceObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -373,8 +401,8 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        StoreEmployeeChoosePanel clientInformationManager = new StoreEmployeeChoosePanel(storeEmployee, bottomPanel);
-        bottomPanel.add(clientInformationManager);
+        SelectStorePanel selectStorePanelObj = new SelectStorePanel(bottomPanel,clims,appointment,customer);
+        bottomPanel.add(selectStorePanelObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
@@ -395,21 +423,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smGirlRadioButtonActionPerformed
 
-    private void smSaveCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSaveCustomerButtonActionPerformed
-        // TODO add your handling code here:
-        Customer customer = new Customer();
-
-        customer.setFirstName(smCustomerFirstNameTextField.getText());
-        customer.setLastName(smCustomerLastNameTextField.getText());
-        customer.setEmail(smCustomerEmailTextField.getText());
-        customer.setPassword(smCustomerPasswordTextField.getText());
-
-        customerId = CustomerController.addCustomer(customer);
-        if (customerId != 0) {
-            JOptionPane.showMessageDialog(this, "Customer created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_smSaveCustomerButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -422,7 +435,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel petNameLable;
-    private javax.swing.JLabel petTitleLabel;
     private javax.swing.JLabel petTitleLabel1;
     private javax.swing.JButton smBackToHomeButton;
     private javax.swing.JRadioButton smBoyRadioButton;
@@ -438,7 +450,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
     private javax.swing.JTextField smPetColTextField;
     private javax.swing.JTextField smPetNameTextField;
     private javax.swing.JTextField smPetWeightTextField;
-    private javax.swing.JButton smSaveCustomerButton;
     private javax.swing.JButton smSavePetToSelectServiceButton;
     private javax.swing.ButtonGroup smTypeButtonGroup;
     // End of variables declaration//GEN-END:variables

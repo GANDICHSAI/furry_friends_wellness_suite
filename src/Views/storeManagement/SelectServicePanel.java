@@ -5,6 +5,8 @@
 package Views.storeManagement;
 
 import Models.Appointment;
+import Models.Customer;
+import Models.Pet;
 import Models.StoreEmployee;
 import Models.StoreService;
 
@@ -27,14 +29,17 @@ public class SelectServicePanel extends javax.swing.JPanel {
     JPanel bottomPanel;
     Appointment appointment;
     StoreEmployee storeEmployee;
-
+    Customer customer;
+    Pet pet;
     private ArrayList<StoreService> storeServicesList;
 
-    public SelectServicePanel(StoreEmployee storeEmployee, Appointment appointment, JPanel bottomPanel) {
+    public SelectServicePanel(JPanel bottomPanel, Appointment appointment, Customer customer, Pet pet) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
-        this.storeEmployee = storeEmployee;
+//        this.storeEmployee = storeEmployee;
+        this.customer = customer;
+        this.pet = pet;
         populateTable();
     }
 
@@ -143,7 +148,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
     private void smBackToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(storeEmployee, bottomPanel);
+        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(bottomPanel,appointment,customer,pet );
         bottomPanel.add(newAppointment);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -178,7 +183,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
             appointment.setDate(appointmentDateChooser.getDate());
         }
 
-        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(storeEmployee, appointment, bottomPanel);
+        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel, appointment,customer,pet );
         bottomPanel.add(reviewClientAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

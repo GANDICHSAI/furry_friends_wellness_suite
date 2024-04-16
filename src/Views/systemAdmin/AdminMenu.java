@@ -4,6 +4,8 @@
  */
 package Views.systemAdmin;
 
+import Models.Appointment;
+import Models.ClientInformationManager;
 import Views.storeManagement.StoreManagementLogin;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -18,6 +20,7 @@ public class AdminMenu extends javax.swing.JPanel {
      * Creates new form Test
      */
     JPanel bottomPanel;
+    Appointment appointment;
     public AdminMenu(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -216,7 +219,7 @@ public class AdminMenu extends javax.swing.JPanel {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
-        StoreManagementLogin storeManagementLoginObject = new StoreManagementLogin(bottomPanel);
+        StoreManagementLogin storeManagementLoginObject = new StoreManagementLogin(bottomPanel,appointment);
         bottomPanel.add(storeManagementLoginObject);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
