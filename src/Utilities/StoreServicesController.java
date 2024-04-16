@@ -55,6 +55,25 @@ public class StoreServicesController {
 
         return storeServicesList;
     }
+    
+    public static void addNewStoreService(StoreService storeService) {
+        String query = "INSERT INTO Store_Service (service_name, service_price) VALUES (?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, storeService.getServiceName());
+            stmt.setFloat(2, storeService.getServicePrice());
+
+
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new store has been created!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static String getServiceNameById(int serviceId) {
         String serviceName = null;

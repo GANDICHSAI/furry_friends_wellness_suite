@@ -6,6 +6,7 @@ package Utilities;
 import java.sql.*;
 import java.util.ArrayList;
 import Models.Store;
+import Models.SystemAdmin;
 
 
 /**
@@ -49,8 +50,27 @@ public class StoreController {
         }
         return stores;
     }
+    
+    public static void addNewStore(Store store) {
+        String query = "INSERT INTO Store (store_name, store_postal_code) VALUES (?, ?)";
 
-    public ArrayList<Store> getAllStores() {
+        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, store.getStoreName());
+            stmt.setString(2, store.getPostalCode());
+
+
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new store has been created!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Store> getAllStores() {
         ArrayList<Store> stores = new ArrayList<>();
         String query = "SELECT * FROM Store";
 

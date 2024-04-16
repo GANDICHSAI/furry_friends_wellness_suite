@@ -5,7 +5,11 @@
 package Views;
 
 import Models.Appointment;
+import Models.Store;
+import Models.StoreService;
 import Models.SystemAdmin;
+import Utilities.StoreController;
+import Utilities.StoreServicesController;
 import Utilities.SystemAdminController;
 import Views.customer.BookAppPage;
 import Views.storeManagement.StoreManagementLogin;
@@ -33,6 +37,24 @@ public class MainPage extends javax.swing.JFrame {
             systemAdmin.setAdminEmail("admin@admin.com");
             systemAdmin.setAdminPassword("anonymous");
             SystemAdminController.addNewSystemAdmin(systemAdmin);
+        }
+        
+        if(StoreController.getAllStores().isEmpty()){
+            
+            Store newStore = new Store();
+            
+            newStore.setStoreName("Paws & Claws Emporium");
+            newStore.setPostalCode("M4C 1J7");
+            StoreController.addNewStore(newStore);
+            
+        }
+        
+        if(StoreServicesController.getAllStoreServices().isEmpty()){
+            StoreService newStoreService = new StoreService();
+            
+            newStoreService.setServiceName("BATH AND FULL HAIRCUT");
+            newStoreService.setServicePrice(50);
+            StoreServicesController.addNewStoreService(newStoreService);
         }
         
     }
