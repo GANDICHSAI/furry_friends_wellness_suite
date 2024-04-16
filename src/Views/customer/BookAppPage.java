@@ -4,16 +4,16 @@
  */
 package Views.customer;
 
-
 import Models.Appointment;
 import Models.Customer;
+import Utilities.CredentialsChecker;
 import Utilities.CustomerController;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import Utilities.EmailSender; 
+import Utilities.EmailSender;
 import javax.mail.MessagingException;
 
 /**
@@ -28,8 +28,9 @@ public class BookAppPage extends javax.swing.JPanel {
     JPanel bottomPanel;
     Appointment appointment;
     private ArrayList<Customer> customers;
-    private Boolean auth=false;
-    public BookAppPage(JPanel bottomPanel,Appointment appointment) {
+    private Boolean auth = false;
+
+    public BookAppPage(JPanel bottomPanel, Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
@@ -294,85 +295,70 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void custLogInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custLogInButtonActionPerformed
         // TODO add your handling code here:
-        try{
-            
-            
+        try {
+
             this.customers = CustomerController.getAllCustomers();
             String email = loginEmailTextField.getText();
-            char [] passwordChars = loginPasswordField.getPassword();
+            char[] passwordChars = loginPasswordField.getPassword();
             String password = new String(passwordChars);
 
             System.out.println(password);
-            if(email == null || email.isEmpty() || password.isEmpty()){
-                
+            if (email == null || email.isEmpty() || password.isEmpty()) {
+
                 throw new IllegalArgumentException("Please Fill out the form before submitting the details");
-            }
-            else{
-                for (Customer cust: customers){
+            } else {
+                for (Customer cust : customers) {
 
-                    if (cust.getEmail().equals(email) && cust.getPassword().equals(password)){
-
+                    if (cust.getEmail().equals(email) && cust.getPassword().equals(password)) {
 
                         auth = true;
-                        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel,cust,new Appointment());
+                        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel, cust, new Appointment());
                         bottomPanel.add(customerLandingPageObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                        layout.next(bottomPanel);     
+                        layout.next(bottomPanel);
                         break;
                     }
 
-
                 }
-                 if (!auth){
-                        throw new IllegalArgumentException("Invalid credentials");
-                    }
-                 
-            }
-            
-            clearFields();
-           
-        }
-        
-        catch(Exception e){
+                if (!auth) {
+                    throw new IllegalArgumentException("Invalid credentials");
+                }
 
-            JOptionPane.showMessageDialog(this,e.getMessage(),"Login Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+            clearFields();
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_custLogInButtonActionPerformed
 
     private void confirmCustEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmCustEmailTextFieldActionPerformed
         // TODO add your handling code here:
 
-        
-        try{
-             
-             if (confirmCustEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 confirmCustEmailTextField.setForeground(Color.black);
+        try {
 
-            }
-            
-            else{
+            if (confirmCustEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                confirmCustEmailTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             confirmCustEmailTextField.setForeground(Color.red);
 
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_confirmCustEmailTextFieldActionPerformed
-    private void clearFields(){
-  
+    private void clearFields() {
+
         custFirstNameTextField.setText("");
         custLastNameTextField.setText("");
         custEmailTextField.setText("");
@@ -380,74 +366,69 @@ public class BookAppPage extends javax.swing.JPanel {
         passwordField.setText("");
         confirmPasswordField.setText("");
 
-        
     }
     private void custSignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custSignUpButtonActionPerformed
         // TODO add your handling code here:
-        
+
         String firstName = custFirstNameTextField.getText();
         String lastName = custLastNameTextField.getText();
         String email = custEmailTextField.getText();
         String confirmEmail = confirmCustEmailTextField.getText();
-        char [] passwordChars = passwordField.getPassword();
+        char[] passwordChars = passwordField.getPassword();
         String password = new String(passwordChars);
-        
-        char [] confirmPasswordChars = confirmPasswordField.getPassword();
+
+        char[] confirmPasswordChars = confirmPasswordField.getPassword();
         String confirmPassword = new String(confirmPasswordChars);
-        
+
         Customer customer = new Customer();
-        
-        try{
-            if(firstName == null || firstName.isEmpty()||lastName == null || lastName.isEmpty()||email == null || email.isEmpty()
-                    ||confirmEmail == null || confirmEmail.isEmpty()||password == null || password.isEmpty()||
-                    confirmPassword == null || confirmPassword.isEmpty()){
-                
+
+        try {
+            if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || email == null || email.isEmpty()
+                    || confirmEmail == null || confirmEmail.isEmpty() || password == null || password.isEmpty()
+                    || confirmPassword == null || confirmPassword.isEmpty()) {
+
                 throw new IllegalArgumentException("Please Fill out the form before submitting the details");
             }
-            if(!password.equals(confirmPassword)&&!email.equals(confirmEmail)){
+            if (!password.equals(confirmPassword) && !email.equals(confirmEmail)) {
                 throw new IllegalArgumentException("Email and Password are not mathcing");
             }
-            if(!password.equals(confirmPassword)){
+            if (!password.equals(confirmPassword)) {
                 throw new IllegalArgumentException("Password is not matching");
             }
-            
-            if(!email.equals(confirmEmail)){
+
+            if (!email.equals(confirmEmail)) {
                 throw new IllegalArgumentException("Email is not matching");
             }
             
-            
-            
-                
-                customer.setFirstName(firstName);
-                customer.setLastName(lastName);
-                customer.setEmail(email);
-                customer.setPassword(password);
-               
-                CustomerController.addCustomer(customer);
-                JOptionPane.showMessageDialog(this, "Customer Registered Successfully","Successfull Registration",JOptionPane.INFORMATION_MESSAGE);
-                
-                String body = "Welcome to Furry Friends Membership, " + firstName + "!\n\n" +
-                      "Your account has been created successfully. Your login details are:\n" +
-                      "Email: " + email + "\n" +
-                      "Password: " + password + "\n\n" +
-                      "Enjoy our services!";
-                EmailSender.sendEmail(email, "Welcome to Furry Friends!", body);
+            if (CredentialsChecker.checkCustomer(email)) {
+                    JOptionPane.showMessageDialog(this, "This email is already in use! Please use another email or login with your existing email!", "Existing User Error!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-       
-                
-                clearFields();
-            
-            
-        }
-        
-        catch(IllegalArgumentException e){
-            JOptionPane.showMessageDialog(this,e.getMessage(),"Incomplete Form Submission Error",JOptionPane.ERROR_MESSAGE);
-        }
-        catch(MessagingException e) {
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            customer.setEmail(email);
+            customer.setPassword(password);
+
+            CustomerController.addCustomer(customer);
+            JOptionPane.showMessageDialog(this, "Customer Registered Successfully", "Successfull Registration", JOptionPane.INFORMATION_MESSAGE);
+
+            String body = "Welcome to Furry Friends Membership, " + firstName + "!\n\n"
+                    + "Your account has been created successfully. Your login details are:\n"
+                    + "Email: " + email + "\n"
+                    + "Password: " + password + "\n\n"
+                    + "Enjoy our services!";
+            EmailSender.sendEmail(email, "Welcome to Furry Friends!", body);
+
+            clearFields();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Incomplete Form Submission Error", JOptionPane.ERROR_MESSAGE);
+        } catch (MessagingException e) {
             JOptionPane.showMessageDialog(this, "Email could not be sent. Please check your network connection and email settings.", "Email Sending Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_custSignUpButtonActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
@@ -456,22 +437,19 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void custFirstNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custFirstNameTextFieldKeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (custFirstNameTextField.getText().matches("^[a-zA-Z ]+$")){
-                 
-                 custFirstNameTextField.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (custFirstNameTextField.getText().matches("^[a-zA-Z ]+$")) {
+
+                custFirstNameTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             custFirstNameTextField.setForeground(Color.red);
 
         }
@@ -479,22 +457,19 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void custLastNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custLastNameTextFieldKeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (custLastNameTextField.getText().matches("^[a-zA-Z ]+$")){
-                 
-                 custLastNameTextField.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (custLastNameTextField.getText().matches("^[a-zA-Z ]+$")) {
+
+                custLastNameTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             custLastNameTextField.setForeground(Color.red);
 
         }
@@ -502,22 +477,19 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void custEmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custEmailTextFieldActionPerformed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (custEmailTextField.getText().matches("^[a-zA-Z]*")){
-                 
-                 custEmailTextField.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (custEmailTextField.getText().matches("^[a-zA-Z]*")) {
+
+                custEmailTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             custEmailTextField.setForeground(Color.red);
 
         }
@@ -525,47 +497,41 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void loginEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginEmailTextFieldKeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (loginEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 loginEmailTextField.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (loginEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                loginEmailTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             loginEmailTextField.setForeground(Color.red);
 
         }
-        
-        
+
+
     }//GEN-LAST:event_loginEmailTextFieldKeyPressed
 
     private void custEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_custEmailTextFieldKeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (custEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 custEmailTextField.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (custEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                custEmailTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             custEmailTextField.setForeground(Color.red);
 
         }
@@ -573,22 +539,19 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void confirmCustEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmCustEmailTextFieldKeyPressed
         // TODO add your handling code here:
-        
-        try{
-             
-             if (confirmCustEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
-                 
-                 confirmCustEmailTextField.setForeground(Color.black);
 
-            }
-            
-            else{
+        try {
+
+            if (confirmCustEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                confirmCustEmailTextField.setForeground(Color.black);
+
+            } else {
                 throw new Exception();
             }
-                        
-        }
-        catch(Exception e){
-            
+
+        } catch (Exception e) {
+
             confirmCustEmailTextField.setForeground(Color.red);
 
         }
@@ -596,12 +559,12 @@ public class BookAppPage extends javax.swing.JPanel {
 
     private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_passwordFieldKeyPressed
 
     private void confirmPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmPasswordFieldKeyPressed
         // TODO add your handling code here:
-         
+
     }//GEN-LAST:event_confirmPasswordFieldKeyPressed
 
 

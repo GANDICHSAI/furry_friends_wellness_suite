@@ -119,15 +119,15 @@ public class SystemAdminController {
     public static ArrayList<SystemAdmin> getDefaultSystemAdmins() {
         ArrayList<SystemAdmin> defaultSystemAdminList= new ArrayList<>();
 
-        String query = "SELECT * FROM DEFAULT_SYS_ADM_CREDS";
+        String query = "SELECT * FROM System_Admin";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 
                 SystemAdmin dsa = new SystemAdmin();
 
-                dsa.setAdminEmail(rs.getString("sys_email"));
-                dsa.setAdminPassword(rs.getString("sys_password"));
+                dsa.setAdminEmail(rs.getString("email"));
+                dsa.setAdminPassword(rs.getString("password"));
 
                 defaultSystemAdminList.add(dsa);
             }
@@ -283,7 +283,8 @@ public class SystemAdminController {
         String query = "INSERT INTO Client_Information_Manager (name, email, password) VALUES (?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
-
+            
+            
             stmt.setString(1, cim.getCIMName());
             stmt.setString(2, cim.getCIMEmail());
             stmt.setString(3, cim.getCIMPassword());
