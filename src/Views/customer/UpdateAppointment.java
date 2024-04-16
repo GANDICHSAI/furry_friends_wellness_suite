@@ -223,26 +223,40 @@ public class UpdateAppointment extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             int selectedRowIndex = AppSumTableCRUD.getSelectedRow();
+            
+            
             Date currentDate = Calendar.getInstance().getTime();
             if (selectedRowIndex < 0) {
                 throw new IllegalArgumentException("Please select an appointment to edit.");
             }
+            
+            String appointmentStatus = (String) AppSumTableCRUD.getValueAt(selectedRowIndex,5);
+            if(appointmentStatus.equals("CANCELLED")||appointmentStatus.equals("COMPLETED")){
+                throw new IllegalArgumentException("You can't update the new appointment as appointment cancelled or completed");
+            }
+            
             java.util.Date newDate = ChangeDateChooser.getDate();
             String existingDate = (String) AppSumTableCRUD.getValueAt(selectedRowIndex, 4);
             
             SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = outputFormat.format(newDate);
-            System.out.println(formattedDate+" "+existingDate);
+            String formattedNewDate = outputFormat.format(newDate);
+            String formattedCurrentDate = outputFormat.format(currentDate);
             
+          
             if (newDate == null) {
                 throw new IllegalArgumentException("Please choose a new appointment date.");
             }
-            if(newDate.before(currentDate)||formattedDate.equals(existingDate)){
+            
+            if(formattedNewDate.compareTo(formattedCurrentDate)<0||formattedNewDate.equals(existingDate)){
                 throw new IllegalArgumentException("Please choose appropriate date.");
             }
 
+            
+
             int appointmentId = (Integer) AppSumTableCRUD.getValueAt(selectedRowIndex, 0); // Get the appointment ID
             // edit the appointment date
+            
+            
             AppointmentController.editAppointmentDate(appointmentId, newDate);
 
             // Update the table model

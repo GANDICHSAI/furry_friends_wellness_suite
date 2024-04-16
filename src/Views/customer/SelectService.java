@@ -189,9 +189,12 @@ public class SelectService extends javax.swing.JPanel {
              // retrieve service selection
             int selectedRow = ServiceTable.getSelectedRow();
             Date currentDate = Calendar.getInstance().getTime();
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedNewDate = outputFormat.format(appointmentDate.getDate());
+            String formattedCurrentDate = outputFormat.format(currentDate);
             
 //            System.out.println(appointmentDate.getDate().before(currentDate));
-            if(selectedRow<0 && (appointmentDate.getDate() == null||appointmentDate.getDate().before(currentDate))){
+            if(selectedRow<0 && (appointmentDate.getDate() == null||formattedNewDate.compareTo(formattedCurrentDate)<0)){
                 throw new IllegalArgumentException("Please select a service and choose appropriate date to book appointment");
             }
             
@@ -216,7 +219,7 @@ public class SelectService extends javax.swing.JPanel {
                     throw new IllegalArgumentException("Please choose date to book appointment");
                 }
                 
-                if(appointmentDate.getDate().before(currentDate)){
+                if(formattedNewDate.compareTo(formattedCurrentDate)<0){
                     throw new IllegalArgumentException("Please choose apropriate date");
                 }
 
