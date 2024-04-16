@@ -88,7 +88,7 @@ public class CheckAppHistory extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
+                "CUSTOMER REF NO.", "STORE NAME", "SERVICE PKG", "PET", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

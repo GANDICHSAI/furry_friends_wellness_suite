@@ -122,7 +122,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "CUSTOMER ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
+                "CUSTOMER REF NO.", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(viewAppLabel);

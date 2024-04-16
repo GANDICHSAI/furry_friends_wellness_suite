@@ -39,6 +39,8 @@ public class SelectStorePanel extends javax.swing.JPanel {
  
 
         this.customer = customer;
+        
+        populateStores();
     }
 
     /**
@@ -170,6 +172,18 @@ public class SelectStorePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void populateStores() {
+        DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
+        model.setRowCount(0);
+
+        StoreController storeController = new StoreController();
+        ArrayList<Store> stores = storeController.getAllStores();
+        for (Store store : stores) {
+            model.addRow(new Object[]{store.getStoreId(), store.getStoreName(), store.getPostalCode()});
+        }
+    }
+       
+    
     private void searchByPostalCodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByPostalCodeButtonActionPerformed
         // TODO add your handling code here:
         String postalCode = postalCodeTextField.getText();

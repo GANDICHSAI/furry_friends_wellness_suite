@@ -73,7 +73,7 @@ public class UpdateAppointment extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "APP ID", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
+                "APPOINTMENT", "STORE NAME", "SERVICE TYPE", "PET NAME", "DATE", "STATUS"
             }
         ));
         jScrollPane1.setViewportView(AppSumTableCRUD);
@@ -286,6 +286,12 @@ public class UpdateAppointment extends javax.swing.JPanel {
         if (confirm == JOptionPane.YES_OPTION) {
             // Assuming the table model starts with the appointment ID
             int appointmentId = (int) AppSumTableCRUD.getValueAt(selectedRowIndex, 0);
+            String appointmentStatus = (String) AppSumTableCRUD.getValueAt(selectedRowIndex,5);
+            if ("CANCELLED".equals(appointmentStatus)|| "COMPLETED".equals(appointmentStatus)) {
+            JOptionPane.showMessageDialog(this, "This appointment cannot be cancelled.", "Cancellation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            
             
             // Call the controller to delete the appointment
             AppointmentController.deleteAppointment(appointmentId);
