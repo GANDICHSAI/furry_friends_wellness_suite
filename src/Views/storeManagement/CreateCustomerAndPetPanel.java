@@ -103,11 +103,13 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         smCatRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         smCatRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         smCatRadioButton.setText("CAT");
+        smCatRadioButton.setActionCommand("CAT");
 
         smTypeButtonGroup.add(smDogRadioButton);
         smDogRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         smDogRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         smDogRadioButton.setText("DOG");
+        smDogRadioButton.setActionCommand("DOG");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,6 +176,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         smGirlRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         smGirlRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         smGirlRadioButton.setText("GIRL");
+        smGirlRadioButton.setActionCommand("GIRL");
         smGirlRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smGirlRadioButtonActionPerformed(evt);
@@ -184,6 +187,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         smBoyRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         smBoyRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         smBoyRadioButton.setText("BOY");
+        smBoyRadioButton.setActionCommand("BOY");
 
         smSaveCustomerButton.setText("SAVE");
         smSaveCustomerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -334,6 +338,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         pet.setPetName(smPetNameTextField.getText());
         pet.setType(smTypeButtonGroup.getSelection().getActionCommand());
         pet.setGender(smGenderButtonGroup.getSelection().getActionCommand());
+        System.out.println(smGenderButtonGroup.getSelection().getActionCommand());
         pet.setWeight(Float.parseFloat(smPetWeightTextField.getText()));
         pet.setAge(Integer.parseInt(smPetAgeTextField.getText()));
         pet.setColor(smPetColTextField.getText());
