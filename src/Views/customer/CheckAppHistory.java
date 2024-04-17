@@ -33,7 +33,11 @@ public class CheckAppHistory extends javax.swing.JPanel {
         this.customer = customer;
         populateAppointment();
 }
-
+    /**
+    * This method populates the `jTable1` with a list of appointments for a specific customer.
+    * 
+    * @param customer The customer object for whom appointments need to be retrieved.
+    */
     private void populateAppointment() {
         ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();

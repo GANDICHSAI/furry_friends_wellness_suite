@@ -265,7 +265,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
             String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
             String petGender = girlRadioButton.isSelected() ? "Girl" : "Boy";
 
-            //String petGender = buttonGroup2.getSelection().getActionCommand();
+
 
             int petAge = Integer.parseInt(petAgeTextField.getText());
             String petColor = petColTextField.getText();
@@ -276,7 +276,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
             {
                 
                 
-                    //pet object
+                //pet object
               
                 this.pet = new Pet();
                 pet.setCustomerId(appointment.getCustomerId());
@@ -287,8 +287,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
                 pet.setColor(petColor);
                 pet.setWeight(petWeight);
 
-                //Debug Log to check Pet details
-    //            System.out.println("Pet details: " + this.pet);
+
 
                 int petId = PetController.addPet(pet);
 
@@ -296,7 +295,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
                     // Set the generated pet ID and pet name into the appointment object
                     appointment.setPetId(petId);
 
-                    // insert pet into pet DB
 
                     // Continue to the next screen to select service
                     SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
@@ -329,15 +327,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
                 }
         
         
-        
-        //pet info
-        
-        
-
-//        SelectService selectServiceObj = new SelectService(bottomPanel,customer);
-//        bottomPanel.add(selectServiceObj);
-//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//        layout.next(bottomPanel);
+    
     }//GEN-LAST:event_saveToSelectServiceButton1ActionPerformed
 
     private void backToStoreSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToStoreSelectionButtonActionPerformed

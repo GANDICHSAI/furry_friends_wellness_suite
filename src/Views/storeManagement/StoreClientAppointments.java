@@ -72,7 +72,7 @@ public class StoreClientAppointments extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(smAppointmentsTable);
 
-        smBackToHomeButton.setText("LOGOUT");
+        smBackToHomeButton.setText("BACK TO EMPLOYEE MENU");
         smBackToHomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smBackToHomeButtonActionPerformed(evt);
@@ -94,29 +94,25 @@ public class StoreClientAppointments extends javax.swing.JPanel {
                 .addContainerGap(78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(smBackToHomeButton))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(249, 249, 249)))
-                        .addGap(28, 28, 28))
+                        .addComponent(jButton1)
+                        .addGap(277, 277, 277))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(smBackToHomeButton)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(163, 163, 163))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(smBackToHomeButton)))
+                .addGap(30, 30, 30)
+                .addComponent(smBackToHomeButton)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -149,11 +145,15 @@ public class StoreClientAppointments extends javax.swing.JPanel {
     private void smBackToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToHomeButtonActionPerformed
         // TODO add your handling code here:
 
-        StoreManagementLogin storeManagementLogin = new StoreManagementLogin(bottomPanel,appointments);
-        bottomPanel.add(storeManagementLogin);
+        StoreEmployeeLandingPage storeEmployeeLandingPageObj = new StoreEmployeeLandingPage(bottomPanel,storeEmployee);
+        bottomPanel.add(storeEmployeeLandingPageObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToHomeButtonActionPerformed
+    
+    /**
+    * This method populates the `smAppointmentsTable` with a list of appointments for the currently logged-in store employee's store.
+    */
     public void populateTable() {
         int storeId = storeEmployee.getStoreID();
 

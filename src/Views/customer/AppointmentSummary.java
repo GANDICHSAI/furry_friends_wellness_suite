@@ -71,6 +71,9 @@ public class AppointmentSummary extends javax.swing.JPanel {
 //        
     }
     
+    /**
+    * This method sends a confirmation email to the customer for a booked appointment.
+    */
     private void sendConfirmationEmail() {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String date = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "not specified";

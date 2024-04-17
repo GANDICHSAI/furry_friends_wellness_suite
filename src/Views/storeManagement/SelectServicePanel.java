@@ -154,7 +154,9 @@ public class SelectServicePanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_smBackToProfileCreationButtonActionPerformed
-
+    /**
+    * This method populates the `smServiceTable` with a list of all store services retrieved from the system.
+    */
     public void populateTable() {
         try {
             this.storeServicesList = StoreServicesController.getAllStoreServices();

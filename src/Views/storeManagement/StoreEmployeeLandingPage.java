@@ -4,12 +4,9 @@
  */
 package Views.storeManagement;
 
+import Models.Appointment;
 import Models.StoreEmployee;
-import Utilities.SystemAdminController;
-import static Views.storeManagement.StoreManagementLogin.authenticate;
 import java.awt.CardLayout;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -24,6 +21,7 @@ public class StoreEmployeeLandingPage extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     StoreEmployee storeEmployee;
+    Appointment appointment;
     public StoreEmployeeLandingPage(JPanel bottomPanel, StoreEmployee storeEmployee) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -39,10 +37,12 @@ public class StoreEmployeeLandingPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         manageCustInfoButton = new javax.swing.JButton();
         beginServiceButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -71,6 +71,13 @@ public class StoreEmployeeLandingPage extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("LOGOUT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,12 +96,17 @@ public class StoreEmployeeLandingPage extends javax.swing.JPanel {
                         .addGap(181, 181, 181))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(beginServiceButton)
-                        .addGap(227, 227, 227))))
+                        .addGap(227, 227, 227))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(25, 25, 25)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
@@ -102,19 +114,24 @@ public class StoreEmployeeLandingPage extends javax.swing.JPanel {
                 .addComponent(beginServiceButton)
                 .addGap(44, 44, 44)
                 .addComponent(manageCustInfoButton)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageCustInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCustInfoButtonActionPerformed
         // TODO add your handling code here:
+        
+        ManageCustomerPanel manageCustomerPanelObj = new ManageCustomerPanel(bottomPanel,storeEmployee);
+        bottomPanel.add(manageCustomerPanelObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_manageCustInfoButtonActionPerformed
 
     private void beginServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginServiceButtonActionPerformed
             
         
-        StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel, storeEmployee);
-        bottomPanel.add(storeClientAppointmentObj);
+        StoreClientAppointments storeClientAppointmentsObj = new StoreClientAppointments(bottomPanel, storeEmployee);
+        bottomPanel.add(storeClientAppointmentsObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
 
@@ -122,9 +139,22 @@ public class StoreEmployeeLandingPage extends javax.swing.JPanel {
         
     }//GEN-LAST:event_beginServiceButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        StoreManagementLogin storeEmployeeLoginObj = new StoreManagementLogin(bottomPanel, appointment);
+        
+        bottomPanel.add(storeEmployeeLoginObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton beginServiceButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton manageCustInfoButton;

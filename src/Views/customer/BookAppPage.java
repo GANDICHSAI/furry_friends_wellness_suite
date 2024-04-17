@@ -357,6 +357,10 @@ public class BookAppPage extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_confirmCustEmailTextFieldActionPerformed
+    
+    /**
+    * This method clears the text fields used for customer data input.
+    */
     private void clearFields() {
 
         custFirstNameTextField.setText("");

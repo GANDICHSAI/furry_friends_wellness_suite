@@ -26,7 +26,12 @@ public class CreateCredentials extends javax.swing.JPanel {
     String valueSelected = "Client Information Manager";
 
     AccountCreator accCreator = new AccountCreator();
-
+    
+    /**
+    * This constructor initializes the components of the `CreateCredentials` class and sets up the logic for the credentials type dropdown.
+    * 
+    * @param bottomPanel A reference to a JPanel object likely used for layout purposes.
+    */
     public CreateCredentials(JPanel bottomPanel) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -49,7 +54,10 @@ public class CreateCredentials extends javax.swing.JPanel {
             }
         });
     }
-
+    
+    /**
+    * This method populates the `storeDropdown1` with a list of store names retrieved from the system.
+    */
     private void populateStoreDropdown() {
         // Clear existing items in the dropdown
         storeDropdown1.removeAllItems();

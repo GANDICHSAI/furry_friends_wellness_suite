@@ -36,6 +36,9 @@ public class ManageStoreServices extends javax.swing.JPanel {
         populateTable();
     }
     
+    /**
+    * This method clears the text fields and potentially resets other fields used for service data management.
+    */
     private void clearFields() {
         
         nameInput.setText("");
@@ -46,6 +49,10 @@ public class ManageStoreServices extends javax.swing.JPanel {
         selectedSS = null;
         editingSS = null;
     }
+    
+    /**
+    * This method populates the `jTable1` with a list of all store services retrieved from the system.
+    */
     public void populateTable() {
         try {
             

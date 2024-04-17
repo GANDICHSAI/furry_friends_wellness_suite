@@ -35,6 +35,9 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         
     }
     
+    /**
+    * This method clears the text fields and potentially resets other fields used for store employee data management.
+    */
     private void clearFields() {
         
         nameInput.setText("");
@@ -46,6 +49,9 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         editingSE = null;
     }
     
+    /**
+    * This method populates the `jTable1` with a list of all store employees retrieved from the system.
+    */
     public void populateTable() {
         try {
             
@@ -334,7 +340,11 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_deleteStoreEmpBtnActionPerformed
-     private void populateStoreDropdown() {
+    
+    /**
+    * This method populates the `storeDropdown` with a list of store names retrieved from the system.
+    */
+    private void populateStoreDropdown() {
     // Clear existing items in the dropdown
         storeDropdown.removeAllItems();
 

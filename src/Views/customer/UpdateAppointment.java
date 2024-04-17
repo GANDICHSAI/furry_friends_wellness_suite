@@ -161,7 +161,12 @@ public class UpdateAppointment extends javax.swing.JPanel {
                 .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    /**
+    * This method populates the `AppSumTableCRUD` (assuming it's a JTable) with a list of appointments for a specific customer.
+    * 
+    * @param customer The customer object for whom appointments need to be retrieved.
+    */
     private void populateAppointmentTable() {
         ArrayList<Appointment> appointments = AppointmentController.getAppointmentListByCustomerId(customer.getCustomerID());
         this.allAppointments = appointments;
@@ -172,13 +177,12 @@ public class UpdateAppointment extends javax.swing.JPanel {
 
             model.addRow(new Object[]{
                 app.getAppointmentId(),
-                //                    app.getCustomerId(),
                 app.getStoreName(),
                 app.getServiceName(),
                 app.getPetName(),
                 app.getDate().toString(),
                 app.getStatus()
-//                    app.getRating()
+
             });
         }
     }

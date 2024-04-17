@@ -253,6 +253,10 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_jButton6ActionPerformed
+    
+    /**
+    * This method clears the text fields and potentially resets other fields used for system admin data management.
+    */
     private void clearFields() {
         
         systemAdminNameField.setText("");
@@ -263,6 +267,10 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         selectedSA = null;
         editingSA = null;
     }
+    
+    /**
+    * This method populates the `systemAdminTable` with a list of all system admins retrieved from the system.
+    */
     public void populateTable() {
         try {
             

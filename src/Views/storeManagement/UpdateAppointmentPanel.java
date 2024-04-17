@@ -225,28 +225,12 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select an appointment to cancel.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-//    public void populateTable() {
-//        int storeId = storeEmployee.getStoreID();
-//
-//        try {
-//            this.storeAppointmentList = AppointmentController.getAppointmentsByStoreId(storeId);
-//
-//            DefaultTableModel tableModel = (DefaultTableModel) smAppointmentsTable.getModel();
-//            tableModel.setRowCount(0);
-//            for (Appointment appointment : storeAppointmentList) {
-//                String petName = PetController.getPetNameByPetId(appointment.getPetId());
-//                String serviceName = StoreServicesController.getServiceNameById(appointment.getServiceId());
-//
-//                String[] appointmentData = {String.valueOf(appointment.getAppointmentId()), appointment.getStoreName(), petName, serviceName, String.valueOf(appointment.getDate()), appointment.getStatus()};
-//                tableModel.addRow(appointmentData);
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage());
-//        }
-//    }
 
+    /**
+    * This method populates the `updateAppointmentTable` with a list of appointments retrieved using a join operation (likely combining multiple tables).
+    */
     public void populateTable() {
-//        int storeId = storeEmployee.getStoreID();
+
 
         try {
             this.storeAppointmentList = AppointmentController.getAppointmentsByJoin();
@@ -270,10 +254,7 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
 
-//        StoreManagementLogin storeManagementLogin = new StoreManagementLogin(bottomPanel);
-//        bottomPanel.add(storeManagementLogin);
-//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//        layout.next(bottomPanel);
+
     }//GEN-LAST:event_storeEmployeeLogoutButtonActionPerformed
 
     private void editAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAppointmentActionPerformed
@@ -281,10 +262,7 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = updateAppointmentTable.getSelectedRow();
         if (selectedRowIndex >= 0) {
-            // get all appointments for the customer
-            //ArrayList<Appointment> appointments = AppointmentController.getAppointmentsByCustomerId(customer.getCustomerID());
 
-            //selected appointment row index = the index of appointment in returned arraylist
             Appointment selectedAppointment = storeAppointmentList.get(selectedRowIndex);
 
             // Store the selectedAppointment for use when saving later

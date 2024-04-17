@@ -34,6 +34,9 @@ public final class ManageStores extends javax.swing.JPanel {
         populateTable();
     }
     
+    /**
+    * This method clears the text fields and potentially resets other fields used for store data management.
+    */
     private void clearFields() {
         
         storeNameInput.setText("");
@@ -44,6 +47,9 @@ public final class ManageStores extends javax.swing.JPanel {
         editingStore = null;
     }
     
+    /**
+    * This method populates the `jTable1` with a list of all stores retrieved from the system.
+    */
     public void populateTable() {
         try {
             

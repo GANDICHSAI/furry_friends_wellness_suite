@@ -34,6 +34,9 @@ public final class ManageCIM extends javax.swing.JPanel {
         
     }
     
+    /**
+    * This method clears the text fields and potentially resets other fields used for customer data management.
+    */
     private void clearFields() {
         
         nameInput.setText("");
@@ -44,7 +47,9 @@ public final class ManageCIM extends javax.swing.JPanel {
         selectedCIM = null;
         editingCIM = null;
     }
-    
+    /**
+    * This method populates the `jTable1` with a list of all Client Information Managers (CIMs) retrieved from the system.
+    */
     public void populateTable() {
         try {
             

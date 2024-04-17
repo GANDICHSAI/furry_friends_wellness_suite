@@ -5,9 +5,12 @@
 package Views.storeManagement;
 
 import Models.Customer;
+import Models.StoreEmployee;
 import Utilities.CustomerController;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,10 +26,13 @@ public final class ManageCustomerPanel extends javax.swing.JPanel {
      private ArrayList<Customer> customers;
      private Customer editingCust; 
      private Customer selectedCust;
-    
-    public ManageCustomerPanel() {
+     JPanel bottomPanel;
+     StoreEmployee storeEmployee;
+    public ManageCustomerPanel(JPanel bottomPanel,StoreEmployee storeEmployee) {
         initComponents();
         populateTable();
+        this.bottomPanel = bottomPanel;
+        this.storeEmployee = storeEmployee;
     }
     
      private void clearFields() {
@@ -38,7 +44,9 @@ public final class ManageCustomerPanel extends javax.swing.JPanel {
         
         
     }
-    
+     /**
+    * This method populates the `jTable1` with a list of all customers retrieved from the system.
+    */
      public void populateTable() {
         try {
             
@@ -270,9 +278,9 @@ public final class ManageCustomerPanel extends javax.swing.JPanel {
                         .addComponent(editCIMBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deleteCIMBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
+                        .addGap(34, 34, 34))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -282,6 +290,11 @@ public final class ManageCustomerPanel extends javax.swing.JPanel {
 
     private void backToMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBtnActionPerformed
         // TODO add your handling code here:
+        
+        StoreEmployeeLandingPage storeEmployeeLandingPageObj = new StoreEmployeeLandingPage(bottomPanel,storeEmployee);
+        bottomPanel.add(storeEmployeeLandingPageObj);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
 
     }//GEN-LAST:event_backToMenuBtnActionPerformed
 

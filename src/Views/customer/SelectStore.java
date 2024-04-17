@@ -142,7 +142,10 @@ public class SelectStore extends javax.swing.JPanel {
                 .addContainerGap(68, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+    * This method populates the `storeTable` with a list of all stores retrieved from the system.
+    */
     private void populateStores() {
         DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
         model.setRowCount(0);
@@ -190,13 +193,6 @@ public class SelectStore extends javax.swing.JPanel {
         }
         
         
-        
-        //create new appointment object 
-        //Appointment appointment = new Appointment();
-        
-        
-        //set store name into appointment
-        
                
         
     }//GEN-LAST:event_nextToPetButtonActionPerformed
@@ -214,15 +210,15 @@ public class SelectStore extends javax.swing.JPanel {
         // TODO add your handling code here:
         String postalCode = postalCodeTextField.getText();
     
-    // Clear the existing table data
-    DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
-    model.setRowCount(0);
-    
-    // Check if the postal code field is not empty or just the placeholder text
-    if(postalCode != null && !postalCode.trim().isEmpty() && !postalCode.equals("POSTAL CODE")) {
-        // Use StoreController to get the list of stores by postal code
-        StoreController storeController = new StoreController();
-        ArrayList<Store> stores = storeController.searchByPostalCode(postalCode);
+        // Clear the existing table data
+        DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
+        model.setRowCount(0);
+
+        // Check if the postal code field is not empty or just the placeholder text
+        if(postalCode != null && !postalCode.trim().isEmpty() && !postalCode.equals("POSTAL CODE")) {
+            // Use StoreController to get the list of stores by postal code
+            StoreController storeController = new StoreController();
+            ArrayList<Store> stores = storeController.searchByPostalCode(postalCode);
         
         // Update the store table with the results
         for(Store store : stores) {

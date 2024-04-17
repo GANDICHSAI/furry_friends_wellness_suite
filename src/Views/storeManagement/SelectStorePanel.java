@@ -177,7 +177,9 @@ public class SelectStorePanel extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+    * This method populates the `storeTable` with a list of all stores retrieved from the system.
+    */
     private void populateStores() {
         DefaultTableModel model = (DefaultTableModel) storeTable.getModel();
         model.setRowCount(0);

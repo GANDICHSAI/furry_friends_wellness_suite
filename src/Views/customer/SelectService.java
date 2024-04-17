@@ -155,32 +155,7 @@ public class SelectService extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    //debug method, plz ignore
-    public static String formatAppointmentDetails(Appointment appointment) {
-        if (appointment == null) return "Appointment is null";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
-        appointment.setStatus("PENDING");
-        
-        return "Appointment Details: {" +
-               "Appointment ID: " + appointment.getAppointmentId() +
-               ", Customer ID: " + appointment.getCustomerId() +
-               ", Store Name: '" + appointment.getStoreName() + '\'' +
-               ", Service ID: " + appointment.getServiceId() +
-               ", Pet ID: " + appointment.getPetId() +
-               ", Date: " + formattedDate +
-               ", Status: '" + appointment.getStatus() + '\'' +
-//               ", Rating: " + appointment.getRating() +
-               "}";
-    }
-    public static Boolean checkSelectedDate(Date selectedDate,Date currentDate) {
-        
-        if (selectedDate != null && !selectedDate.before(currentDate)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         
@@ -193,14 +168,10 @@ public class SelectService extends javax.swing.JPanel {
             String formattedNewDate = outputFormat.format(appointmentDate.getDate());
             String formattedCurrentDate = outputFormat.format(currentDate);
             
-//            System.out.println(appointmentDate.getDate().before(currentDate));
             if(selectedRow<0 && (appointmentDate.getDate() == null||formattedNewDate.compareTo(formattedCurrentDate)<0)){
                 throw new IllegalArgumentException("Please select a service and choose appropriate date to book appointment");
             }
-            
-//            if(selectedRow<0 && true){
-//                    throw new IllegalArgumentException("Please choose date correctly");
-//                }
+
             
             if (selectedRow != -1) {
 
@@ -229,23 +200,11 @@ public class SelectService extends javax.swing.JPanel {
 
                 
                if (this.pet == null) {
-                System.out.println("Error: Pet object is null.");
                 
                 throw new IllegalArgumentException("Pet details are missing.");
                 
-//                return; // Don't proceed further since pet is null
                 }
 
-                System.out.println("Navigating to Appointment Summary with Pet: " + pet.getPetName());
-
-
-                //AppointmentController.addAppointment(appointment);
-
-                //debugging
-                System.out.println("Selected Row: " + selectedRow);
-                System.out.println("Service ID: " + serviceId);
-                System.out.println("Date: " + appointmentDate.getDate());
-                System.out.println(formatAppointmentDetails(appointment));
 
                 // Navigate to the Appointment Summary page
                 AppointmentSummary appointmentSummaryObj = new AppointmentSummary(bottomPanel, customer, appointment, service, pet);
@@ -254,17 +213,10 @@ public class SelectService extends javax.swing.JPanel {
                 layout.show(bottomPanel, "AppointmentSummary");
             } else {
                 
+                // If no service is selected, show an error message
                 throw new IllegalArgumentException("Please select a service to continue.");
-            // If no service is selected, show an error message
-       
             }
-            
-            
-        
-//        AppointmentSummary appointmentSummaryObj= new AppointmentSummary(bottomPanel,customer,appointment);
-//        bottomPanel.add(appointmentSummaryObj);
-//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//        layout.next(bottomPanel);
+           
             
         }
         
@@ -278,6 +230,9 @@ public class SelectService extends javax.swing.JPanel {
        
     }//GEN-LAST:event_saveAndViewSummaryButtonActionPerformed
     
+    /**
+    * This method populates the `ServiceTable` with a list of all store services retrieved from the system.
+    */
     public void populateTable(){
         try{
             
