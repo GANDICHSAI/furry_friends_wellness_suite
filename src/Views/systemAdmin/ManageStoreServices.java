@@ -272,7 +272,12 @@ public class ManageStoreServices extends javax.swing.JPanel {
         try {
             if (editingSS == null) {
                  throw new IllegalArgumentException("no-select");
-            } else {
+            } 
+            
+            if(nameInput.getText().isEmpty()||nameInput.getText()==null||priceInput.getText() == null|priceInput.getText().isEmpty()){
+                throw new IllegalArgumentException("no-data");
+            }
+            else {
                 StoreService newSS = new StoreService();
                 
                 newSS.setServiceName(nameInput.getText());
@@ -296,6 +301,10 @@ public class ManageStoreServices extends javax.swing.JPanel {
             
             if (e.getMessage().equals("no-select")) {
                 JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if(e.getMessage().equals("no-data")){
+                JOptionPane.showMessageDialog(this,"Please fill out new store services","Data Updation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         

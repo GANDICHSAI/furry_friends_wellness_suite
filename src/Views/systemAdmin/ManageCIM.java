@@ -344,17 +344,25 @@ public final class ManageCIM extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         try {
+            
+            char[] password = passwordInput.getPassword();
+                
+            String passwordString = new String(password);
+            
+            
             if (editingCIM == null) {
                  throw new IllegalArgumentException("no-select");
-            } else {
+            }
+            if(nameInput.getText().isEmpty()||nameInput.getText()==null||emailInput.getText() == null||emailInput.getText().isEmpty()||passwordString.isEmpty()){
+                throw new IllegalArgumentException("no-data");
+            }
+            else {
                 ClientInformationManager newCIM = new ClientInformationManager();
                 
                 newCIM.setCIMName(nameInput.getText());
                 newCIM.setCIMEmail(emailInput.getText());
                 
-                char[] password = passwordInput.getPassword();
                 
-                String passwordString = new String(password);
                 newCIM.setCIMPassword(passwordString);
                 
                 if (editingCIM.getCIMName().equals(newCIM.getCIMName()) && editingCIM.getCIMEmail().equals(newCIM.getCIMEmail())) {
@@ -375,6 +383,10 @@ public final class ManageCIM extends javax.swing.JPanel {
             
             if (e.getMessage().equals("no-select")) {
                 JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if(e.getMessage().equals("no-data")){
+                JOptionPane.showMessageDialog(this,"Please fill out new Client Information Manager Details","Data Updation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed

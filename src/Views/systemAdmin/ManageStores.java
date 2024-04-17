@@ -300,7 +300,11 @@ public final class ManageStores extends javax.swing.JPanel {
         try {
             if (editingStore == null) {
                  throw new IllegalArgumentException("no-select");
-            } else {
+            } 
+            if(storeNameInput.getText().isEmpty()||storeNameInput.getText()==null||storePostalInput.getText() == null|storePostalInput.getText().isEmpty()){
+                throw new IllegalArgumentException("no-data");
+            }
+            else {
                 Store newStore = new Store();
                 
                 newStore.setStoreName(storeNameInput.getText());
@@ -324,6 +328,10 @@ public final class ManageStores extends javax.swing.JPanel {
             
             if (e.getMessage().equals("no-select")) {
                 JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if(e.getMessage().equals("no-data")){
+                JOptionPane.showMessageDialog(this,"Please fill out new stores","Data Updation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed

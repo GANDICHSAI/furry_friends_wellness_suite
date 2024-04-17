@@ -269,7 +269,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                         .addComponent(deleteStoreEmpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(saveChangesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -370,9 +370,18 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         try {
+            
+            char[] password = passwordInput.getPassword();
+                
+            String passwordString = new String(password);
+                
             if (editingSE == null) {
                  throw new IllegalArgumentException("no-select");
-            } else {
+            }
+            
+            if(nameInput.getText().isEmpty()||nameInput.getText()==null||emailInput.getText() == null|emailInput.getText().isEmpty()||storeDropdown.getSelectedItem().toString().isEmpty()||passwordString.isEmpty()){
+                throw new IllegalArgumentException("no-data");
+            }else {
  
                 
                 StoreEmployee newSE = new StoreEmployee();
@@ -382,9 +391,7 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
                 newSE.setStoreID(SystemAdminController.getStoreIdByName((String) storeDropdown.getSelectedItem()));
    
                 
-                char[] password = passwordInput.getPassword();
                 
-                String passwordString = new String(password);
                 
                 newSE.setstoreEmployeePassword(passwordString);
                 
@@ -410,6 +417,10 @@ public class ManageStoreEmployee extends javax.swing.JPanel {
             
             if (e.getMessage().equals("no-select")) {
                 JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if(e.getMessage().equals("no-data")){
+                JOptionPane.showMessageDialog(this,"Please fill out new store employee details","Data Updation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed
