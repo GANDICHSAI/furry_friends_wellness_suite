@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/EmailSender.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/StoreController.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/PetController.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/CIMController.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/customer/SelectService.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/AdminMenu.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/CustomerController.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/AppointmentController.java</file>
-            <file>file:/D:/Code/furry_friends_wellness_suite/src/Utilities/CredentialsChecker.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/storeManagement/StoreClientAppointments.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/ManageCIM.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/storeManagement/SelectServicePanel.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/systemAdmin/CreateCredentials.java</file>
+            <file>file:/D:/Code/furry_friends_wellness_suite/src/Views/storeManagement/UpdateAppointmentPanel.java</file>
         </group>
     </open-files>
 </project-private>
