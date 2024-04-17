@@ -54,7 +54,7 @@
                               <Component id="firstNameInput" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
                               <Component id="passwordInput" alignment="1" min="-2" pref="174" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="lastNameInput1" min="-2" pref="174" max="-2" attributes="0"/>
+                          <Component id="lastNameInput" min="-2" pref="174" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="212" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -104,7 +104,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lastNameInput1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="lastNameInput" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -176,7 +176,6 @@
     <Component class="javax.swing.JButton" name="editCIMBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Edit Customer"/>
-        <Property name="actionCommand" type="java.lang.String" value="Edit Customer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editCIMBtnActionPerformed"/>
@@ -185,7 +184,6 @@
     <Component class="javax.swing.JButton" name="deleteCIMBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete Customer"/>
-        <Property name="actionCommand" type="java.lang.String" value="Delete Customer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCIMBtnActionPerformed"/>
@@ -205,10 +203,10 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="firstNameInputKeyPressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="lastNameInput1">
+    <Component class="javax.swing.JTextField" name="lastNameInput">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lastNameInput1ActionPerformed"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="lastNameInput1KeyPressed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lastNameInputActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="lastNameInputKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="emailInput">

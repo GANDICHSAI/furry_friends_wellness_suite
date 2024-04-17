@@ -87,8 +87,31 @@ public class CustomerController {
 
         return customers;
     }
+    
+    public static void editCustomer(Customer oldCustomer, Customer newCustomer) {
+    String query = "UPDATE Customer SET first_name=?, last_name=?, email=?, password=? WHERE cust_id=?";
 
-    public void deleteCustomerCascade(Customer customer) {
+    try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+
+        stmt.setString(1, newCustomer.getFirstName());
+        stmt.setString(2, newCustomer.getLastName());
+        stmt.setString(3, newCustomer.getEmail());
+        stmt.setString(4, newCustomer.getPassword());
+        stmt.setInt(5, oldCustomer.getCustomerID());
+
+        int rowsUpdated = stmt.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("Customer updated successfully.");
+        } else {
+            System.out.println("Failed to update Customer.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+    public static void deleteCustomerCascade(Customer customer) {
         String deleteCustomerQuery = "DELETE FROM Customer WHERE cust_id=?";
         String deletePetsQuery = "DELETE FROM Pet WHERE customer_id=?";
         String deleteAppointmentsQuery = "DELETE FROM Appointment WHERE cust_id=?";

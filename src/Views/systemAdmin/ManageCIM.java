@@ -342,7 +342,6 @@ public final class ManageCIM extends javax.swing.JPanel {
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         // TODO add your handling code here:
-
         try {
             if (editingCIM == null) {
                  throw new IllegalArgumentException("no-select");

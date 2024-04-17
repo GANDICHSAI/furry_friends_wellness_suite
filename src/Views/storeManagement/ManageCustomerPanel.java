@@ -7,22 +7,26 @@ package Views.storeManagement;
 import Models.Customer;
 import Utilities.CustomerController;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hanee
  */
-public class ManageCustomerPanel extends javax.swing.JPanel {
+public final class ManageCustomerPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageCustomerPanel
      */
     
      private ArrayList<Customer> customers;
+     private Customer editingCust; 
+     private Customer selectedCust;
     
     public ManageCustomerPanel() {
         initComponents();
+        populateTable();
     }
     
      private void clearFields() {
@@ -72,7 +76,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         deleteCIMBtn = new javax.swing.JButton();
         saveChangesBtn = new javax.swing.JButton();
         firstNameInput = new javax.swing.JTextField();
-        lastNameInput1 = new javax.swing.JTextField();
+        lastNameInput = new javax.swing.JTextField();
         emailInput = new javax.swing.JTextField();
         passwordInput = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
@@ -114,7 +118,6 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         });
 
         editCIMBtn.setText("Edit Customer");
-        editCIMBtn.setActionCommand("Edit Customer");
         editCIMBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editCIMBtnActionPerformed(evt);
@@ -122,7 +125,6 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
         });
 
         deleteCIMBtn.setText("Delete Customer");
-        deleteCIMBtn.setActionCommand("Delete Customer");
         deleteCIMBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCIMBtnActionPerformed(evt);
@@ -147,14 +149,14 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
             }
         });
 
-        lastNameInput1.addActionListener(new java.awt.event.ActionListener() {
+        lastNameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastNameInput1ActionPerformed(evt);
+                lastNameInputActionPerformed(evt);
             }
         });
-        lastNameInput1.addKeyListener(new java.awt.event.KeyAdapter() {
+        lastNameInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                lastNameInput1KeyPressed(evt);
+                lastNameInputKeyPressed(evt);
             }
         });
 
@@ -218,7 +220,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
                                 .addComponent(emailInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(firstNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(passwordInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lastNameInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lastNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +259,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(lastNameInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lastNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(17, 17, 17)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
@@ -284,17 +286,81 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backToMenuBtnActionPerformed
 
     private void editCIMBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCIMBtnActionPerformed
-      
+      try {
+            int selectedRowIndex = jTable1.getSelectedRow();
+            if (selectedRowIndex < 0) {
+                throw new IllegalArgumentException("Please select a user you want to edit the data for!");
+            } else {
+                editingCust = customers.get(selectedRowIndex);
+                idValue.setText((String) Integer.toString(editingCust.getCustomerID()));
+                firstNameInput.setText(editingCust.getFirstName());
+                lastNameInput.setText(editingCust.getLastName());
+                passwordInput.setText(editingCust.getPassword());
+                emailInput.setText(editingCust.getEmail());
+            }
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editCIMBtnActionPerformed
 
     private void deleteCIMBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCIMBtnActionPerformed
         // TODO add your handling code here:
-
+        
+      try {
+          int selectedRowIndex = jTable1.getSelectedRow();
+          if(selectedRowIndex < 0){
+              throw new IllegalArgumentException("Please select a user to delete!");
+          } else {
+               DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+               selectedCust = customers.get(selectedRowIndex);
+               CustomerController.deleteCustomerCascade(selectedCust);
+               clearFields();
+                populateTable();
+                JOptionPane.showMessageDialog(null, "Customer succesfully deleted!", "Successfully Deleted", JOptionPane.INFORMATION_MESSAGE);
+              
+          }
+      } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_deleteCIMBtnActionPerformed
 
     private void saveChangesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesBtnActionPerformed
         // TODO add your handling code here:
-
+        
+        try {
+            if (editingCust == null) {
+                 throw new IllegalArgumentException("no-select");
+            } else {
+                Customer newCustomer = new Customer();
+                
+                newCustomer.setFirstName(firstNameInput.getText());
+                newCustomer.setLastName(lastNameInput.getText());
+                newCustomer.setEmail(emailInput.getText());
+                
+                char[] password = passwordInput.getPassword();
+                
+                String passwordString = new String(password);
+                newCustomer.setPassword(passwordString);
+                
+                if (editingCust.getFirstName().equals(newCustomer.getFirstName()) && editingCust.getLastName().equals(newCustomer.getLastName()) && editingCust.getEmail().equals(newCustomer.getEmail()) &&  editingCust.getPassword().equals(newCustomer.getPassword()) ) {
+                    throw new IllegalArgumentException("no-edit");
+                } else {
+                    CustomerController.editCustomer(editingCust, newCustomer);
+                    clearFields();
+                    populateTable();
+                    JOptionPane.showMessageDialog(null, "User succesfully updated!", "Successfully Updated", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+            }
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals("no-edit")) {
+                JOptionPane.showMessageDialog(this, "Please make some changes to the user you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (e.getMessage().equals("no-select")) {
+                JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
         
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
@@ -318,13 +384,13 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
        
     }//GEN-LAST:event_firstNameInputKeyPressed
 
-    private void lastNameInput1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameInput1ActionPerformed
+    private void lastNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameInput1ActionPerformed
+    }//GEN-LAST:event_lastNameInputActionPerformed
 
-    private void lastNameInput1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameInput1KeyPressed
+    private void lastNameInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameInputKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lastNameInput1KeyPressed
+    }//GEN-LAST:event_lastNameInputKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -341,7 +407,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField lastNameInput1;
+    private javax.swing.JTextField lastNameInput;
     private javax.swing.JPasswordField passwordInput;
     private javax.swing.JButton saveChangesBtn;
     private javax.swing.JScrollPane table;
