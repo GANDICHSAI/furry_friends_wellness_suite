@@ -295,7 +295,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
                 if(petId != -1) {
                     // Set the generated pet ID and pet name into the appointment object
                     appointment.setPetId(petId);
-                    appointment.setCimId(0);
 
                     // insert pet into pet DB
 

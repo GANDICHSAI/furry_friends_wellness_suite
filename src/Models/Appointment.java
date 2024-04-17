@@ -9,26 +9,10 @@ public class Appointment {
     private int serviceId;
     private String serviceName;
     private String petName;
-
-
     private int petId;
-
-    public int getCimId() {
-        return cimId;
-    }
-
-    public void setCimId(int cimId) {
-        this.cimId = cimId;
-    }
-    private int cimId;
     private Date date;
     private String status;
-
-    
-    private int storeId;
-
-    
-
+    private int storeId;    
     public Appointment() {
     }
         
