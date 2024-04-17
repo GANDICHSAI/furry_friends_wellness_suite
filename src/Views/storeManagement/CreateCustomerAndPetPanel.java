@@ -41,7 +41,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         this.appointment = appointment;
         this.customer = customer;
         this.pet = pet;
-//        this.storeEmployee = storeEmployee;
 
     }
 
@@ -345,30 +344,9 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_smCustomerLastNameTextFieldActionPerformed
     
-//    private Customer getCustomerByEmail(String email){
-//        this.customers = CustomerController.getAllCustomers();
-//        
-//        for (Customer cust: customers){
-//
-//                    if (cust.getEmail().equals(email)){
-//
-//
-//                        auth = true;
-//                        
-//                        return cust;
-//                        
-//                    }
-//                    if (!auth){
-//                        throw new IllegalArgumentException("Customer not found");
-//                    }
-//
-//
-//                }
-//    }
+
     private void smSavePetToSelectServiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSavePetToSelectServiceButtonActionPerformed
         // TODO add your handling code here:
-//        Pet pet = new Pet();
-
         try{
             
             char [] passwordChars = smCustomerPasswordField.getPassword();
@@ -398,8 +376,6 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
             int custId = CustomerController.addCustomer(customer);
 
 
-    //        Customer customerObj = getCustomerByEmail(smCustomerEmailTextField.getText());
-
 
             pet.setPetName(smPetNameTextField.getText());
             pet.setType(smTypeButtonGroup.getSelection().getActionCommand());
@@ -410,15 +386,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
             appointment.setCustomerId(custId);
             pet.setCustomerId(appointment.getCustomerId());
             int petId = PetController.addPet(pet);
-    //        int custId = CustomerController.addCustomer(customer);
 
-    //        int storeId = storeEmployee.getStoreID();
-
-    //        appointment = new Appointment();
-
-    //        String storeName = StoreController.getStoreNameById(storeId);
-    //        appointment.setStoreId(storeEmployee.getStoreID());
-    //        appointment.setStoreName(storeName);
             appointment.setPetId(petId);
             appointment.setPetName(smPetNameTextField.getText());
 

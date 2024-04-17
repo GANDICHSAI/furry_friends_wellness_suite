@@ -181,7 +181,9 @@ public class ClientAppointments extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    /**
+    * This method populates the `smAppointmentsTable` with appointment data.
+    */
     public void populateTable() {
 //        int storeId = storeEmployee.getStoreID();
 

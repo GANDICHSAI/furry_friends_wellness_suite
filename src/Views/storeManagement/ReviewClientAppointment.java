@@ -39,7 +39,11 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         this.pet = pet;
         populateTable();
     }
-
+    
+    
+    /**
+    * This method sends a confirmation email to the customer for their appointment.
+    */
     private void sendConfirmationEmail() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "not specified";
@@ -197,13 +201,14 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToHomeButtonActionPerformed
-
+    /**
+    * This method populates the `smReviewAppointmentTable` with data from a single appointment object (`appointment`).
+    */
     public void populateTable() {
         try {
             DefaultTableModel tableModel = (DefaultTableModel) smReviewAppointmentTable.getModel();
             tableModel.setRowCount(0);
-//            Date currentDate = new Date();
-//            appointment.setDate(currentDate);
+
             appointment.setStatus("PENDING");
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

@@ -16,12 +16,11 @@ import javax.swing.JPanel;
  */
 public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form clientInformationManager
-     */
+
     JPanel bottomPanel;
-//    StoreEmployee storeEmployee;
+
     Customer customer;
+
     Appointment appointment;
 
 
@@ -32,8 +31,6 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
         this.appointment = appointment;
         this.customer = customer;
    
-
-//        this.storeEmployee = storeEmployee;
     }
 
     /**
@@ -124,7 +121,6 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
 
     private void smNewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smNewAppointmentActionPerformed
         // TODO add your handling code here:
-//        System.out.println(storeEmployee);
 
         SelectStorePanel selectStorePanelObj = new SelectStorePanel(bottomPanel,appointment,customer);
         bottomPanel.add(selectStorePanelObj);
