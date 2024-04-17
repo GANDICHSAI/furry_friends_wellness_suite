@@ -16,6 +16,12 @@ import Models.SystemAdmin;
 public class StoreController {
 
 
+    /**
+     * Searches for stores by the provided postal code and returns a list of stores that match.
+     *
+     * @param postalCode The postal code to search for.
+     * @return A list of {@code Store} objects that match the postal code.
+     */
     public ArrayList<Store> searchByPostalCode(String postalCode) {
     /**
      * Searches for stores by the provided postal code.
@@ -51,6 +57,12 @@ public class StoreController {
         return stores;
     }
     
+    /**
+     * Inserts a new store into the database.
+     *
+     * @param store The {@code Store} object to be added.
+     */
+    
     public static void addNewStore(Store store) {
         String query = "INSERT INTO Store (store_name, store_postal_code) VALUES (?, ?)";
 
@@ -70,6 +82,11 @@ public class StoreController {
         }
     }
 
+    /**
+     * Retrieves all stores from the database.
+     *
+     * @return An ArrayList of {@code Store} objects, each representing a store.
+     */
     public static ArrayList<Store> getAllStores() {
         ArrayList<Store> stores = new ArrayList<>();
         String query = "SELECT * FROM Store";
@@ -93,7 +110,12 @@ public class StoreController {
     }
     
     
-    
+    /**
+     * Retrieves the name of a store based on its ID.
+     *
+     * @param storeId The ID of the store to find.
+     * @return The name of the store, or null if no store is found.
+     */
     
     public static String getStoreNameById(int storeId) {
         String storeName = null;
@@ -111,6 +133,14 @@ public class StoreController {
         }
         return storeName;
     }
+    
+    /**
+     * Retrieves the ID of a store based on its name.
+     *
+     * @param storeName The name of the store to find.
+     * @return The ID of the store, or 0 if no store is found.
+     */
+    
     
     public static int getStoreIDByName(String storeName) {
         int storeId = 0;

@@ -17,10 +17,28 @@ import java.util.ArrayList;
  *
  * @author yihan
  */
+
+/**
+ * The {@code PetController} class provides static methods to manage {@code Pet} objects
+ * within the database. It includes methods to add new pets, retrieve pets by customer ID,
+ * and get a pet's name by its ID. This class uses JDBC to connect to the database and 
+ * perform SQL queries.
+ */
 public class PetController {
+    
+    /**
+     * Private constructor to prevent instantiation of the utility class.
+     */
 
     private PetController() {
     }
+    
+    /**
+     * Inserts a new pet into the database and returns the auto-generated pet ID.
+     *
+     * @param pet The {@code Pet} object to be added to the database.
+     * @return The auto-generated ID for the new pet, or -1 if the insertion fails.
+     */
 
     public static int addPet(Pet pet) {
         //add to database
@@ -53,6 +71,13 @@ public class PetController {
         return generatedId;
     }
 
+    /**
+     * Retrieves all pets owned by a specific customer from the database.
+     *
+     * @param customerId The customer ID to filter pets by.
+     * @return An {@code ArrayList} of {@code Pet} objects, each representing a pet owned by the customer.
+     */
+    
     public static ArrayList<Pet> getPetsByCustomerId(int customerId) {
         ArrayList<Pet> pets = new ArrayList<>();
 
@@ -81,6 +106,13 @@ public class PetController {
 
         return pets;
     }
+    
+    /**
+     * Retrieves the name of a pet based on its ID.
+     *
+     * @param petId The ID of the pet to find the name of.
+     * @return The name of the pet, or {@code null} if no pet is found with the given ID.
+     */
 
     public static String getPetNameByPetId(int petId) {
         String petName = null;

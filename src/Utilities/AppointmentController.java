@@ -14,9 +14,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+/**
+ * The {@code AppointmentController} class manages CRUD (Create, Read, Update, Delete)
+ * operations for {@code Appointment} objects in the database. This class provides static
+ * methods to add, retrieve, and update appointments, ensuring encapsulation of SQL handling.
+ * 
+ * This class cannot be instantiated (private constructor) and should be used statically.
+ */
 /**
  *
  * @author yihan
+ * @author A
+ * @author haneesh
+ * @author Chaitanya
  */
 public class AppointmentController {
 
@@ -28,6 +39,11 @@ public class AppointmentController {
 
     public static void addAppointment(Appointment appointment) {
         //add to database
+    /**
+     * Adds an appointment to the database.
+     *
+     * @param appointment The {@code Appointment} object to add.
+     */
         String query = "INSERT INTO Appointment(cust_id,store_name,service_id,store_id,pet_id,date,status) VALUES(?,?,?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             java.util.Date utilDate = appointment.getDate();
@@ -51,7 +67,11 @@ public class AppointmentController {
             e.printStackTrace();
         }
     }
-
+/**
+     * Retrieves all appointments from the database.
+     *
+     * @return An {@code ArrayList} of {@code Appointment} objects.
+     */
     public static ArrayList<Appointment> getAllAppointments() {
 //        return list of users from db
         ArrayList<Appointment> appointments = new ArrayList<>();
@@ -79,7 +99,12 @@ public class AppointmentController {
 
         return appointments;
     }
-
+/**
+     * Retrieves all appointments for a specific customer from the database.
+     *
+     * @param customerId The customer ID to filter appointments.
+     * @return An {@code ArrayList} of {@code Appointment} filtered by customer ID.
+     */
     public static ArrayList<Appointment> getAppointmentsByCustomerId(int customerId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
@@ -108,7 +133,13 @@ public class AppointmentController {
 
         return appointments;
     }
-
+    
+/**
+     * Retrieves all appointments for a specific store from the database.
+     *
+     * @param storeId The store ID to filter appointments.
+     * @return An {@code ArrayList} of {@code Appointment} filtered by store ID.
+     */
     public static ArrayList<Appointment> getAppointmentsByStoreId(int storeId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 

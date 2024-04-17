@@ -17,6 +17,14 @@ import java.sql.PreparedStatement;
  *
  * @author chait
  */
+
+/**
+ * The {@code StoreServicesController} class provides static methods to manage {@code StoreService} objects
+ * within the database. It offers functionalities to add new store services, retrieve all store services,
+ * and get a service's name by its ID. This class uses JDBC to connect to the database and perform SQL queries.
+ */
+
+
 public class StoreServicesController {
 
     /**
@@ -56,6 +64,13 @@ public class StoreServicesController {
         return storeServicesList;
     }
     
+    /**
+     * Inserts a new store service into the database.
+     *
+     * @param storeService The {@code StoreService} object to be added.
+     */
+    
+    
     public static void addNewStoreService(StoreService storeService) {
         String query = "INSERT INTO Store_Service (service_name, service_price) VALUES (?, ?)";
 
@@ -74,6 +89,14 @@ public class StoreServicesController {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Retrieves the name of a store service based on its ID.
+     *
+     * @param serviceId The ID of the store service to find.
+     * @return The name of the store service, or null if no service is found with the given ID.
+     */
+    
 
     public static String getServiceNameById(int serviceId) {
         String serviceName = null;

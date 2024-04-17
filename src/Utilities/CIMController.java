@@ -18,7 +18,20 @@ import java.util.ArrayList;
  *
  * @author chait
  */
+
+/**
+ * The {@code CIMController} class provides static methods to interact with the
+ * Client Information Managers (CIM) stored in the database. It includes methods
+ * to retrieve a list of all CIM records.
+ */
 public class CIMController {
+    /**
+     * Retrieves all Client Information Manager (CIM) records from the database and
+     * returns them as a list.
+     * 
+     * @return An {@code ArrayList} of {@code ClientInformationManager} objects, each representing
+     *         a CIM record.
+     */
     
     public static ArrayList<ClientInformationManager> getAllCIM() {
 //        return list of users from db
