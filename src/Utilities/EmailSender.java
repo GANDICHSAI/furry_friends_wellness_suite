@@ -14,10 +14,25 @@ import javax.mail.internet.*;
  *
  * @author hanee
  */
+
+
+/**
+ * The {@code EmailSender} class provides a static method to send emails using the SMTP protocol
+ * with Gmail's email servers. This utility class handles the configuration and sending of email messages.
+ */
 public class EmailSender {
     
      private static final String USERNAME = "crazycuber123@gmail.com";
     private static final String PASSWORD = "lumv uiig jzcf wvnz";
+    
+    /**
+     * Sends an email to the specified recipient with the provided subject and body content.
+     *
+     * @param recipient The email address of the recipient.
+     * @param subject The subject line of the email.
+     * @param body The main content of the email.
+     * @throws MessagingException If there is an error during the composition or sending of the email.
+     */
 
      public static void sendEmail(String recipient, String subject, String body) throws MessagingException {
         Properties props = new Properties();

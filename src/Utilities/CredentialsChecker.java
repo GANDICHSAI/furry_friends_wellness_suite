@@ -16,7 +16,19 @@ import java.util.ArrayList;
  *
  * @author hanee
  */
+/**
+ * The {@code CredentialsChecker} class provides static methods to check the existence
+ * of various user accounts in the database by their email addresses. It includes methods
+ * to verify accounts for Client Information Managers (CIMs), Store Employees, System
+ * Administrators, and Customers.
+ */
 public class CredentialsChecker {
+    /**
+     * Checks if a Client Information Manager (CIM) account exists for a given email.
+     *
+     * @param email The email address to check in the CIM database.
+     * @return {@code true} if the account exists, {@code false} otherwise.
+     */
 
     public static Boolean checkCimExist(String email) {
         String query = "SELECT COUNT(*) FROM Client_Information_Manager WHERE email = ?";
@@ -35,6 +47,12 @@ public class CredentialsChecker {
         }
         return false;
     }
+    /**
+     * Checks if a Store Employee account exists for a given email.
+     *
+     * @param email The email address to check in the Store Employee database.
+     * @return {@code true} if the account exists, {@code false} otherwise.
+     */
     
     public static Boolean checkStoreEmployee(String email) {
         String query = "SELECT COUNT(*) FROM Store_Employee WHERE email = ?";
@@ -54,6 +72,12 @@ public class CredentialsChecker {
         return false;
     }
     
+    /**
+     * Checks if a System Administrator account exists for a given email.
+     *
+     * @param email The email address to check in the System Administrator database.
+     * @return {@code true} if the account exists, {@code false} otherwise.
+     */
      public static Boolean checkSysAdmin(String email) {
         String query = "SELECT COUNT(*) FROM System_Admin WHERE email = ?";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -72,6 +96,12 @@ public class CredentialsChecker {
         return false;
     }
      
+     /**
+     * Checks if a Customer account exists for a given email.
+     *
+     * @param email The email address to check in the Customer database.
+     * @return {@code true} if the account exists, {@code false} otherwise.
+     */
      public static Boolean checkCustomer(String email) {
         String query = "SELECT COUNT(*) FROM Customer WHERE email = ?";
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD()); PreparedStatement stmt = conn.prepareStatement(query)) {

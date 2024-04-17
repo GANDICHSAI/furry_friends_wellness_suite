@@ -21,6 +21,14 @@ import java.util.ArrayList;
  *
  * @author hanee
  */
+
+/**
+ * The {@code SystemAdminController} class provides static methods to manage database operations for
+ * various system entities including stores, store services, system administrators, store employees,
+ * and client information managers. This class encapsulates all CRUD operations for these entities,
+ * facilitating easy data management through its comprehensive API.
+ */
+
 public class SystemAdminController {
     /**
      * Privatized constructor so as to not allow object creation
@@ -29,6 +37,11 @@ public class SystemAdminController {
     }
 
 //     Store CRUD
+    /**
+     * Retrieves the names of all stores from the database.
+     *
+     * @return A list of all store names.
+     */
     public static ArrayList<String> getAllStoreNames() {
         ArrayList<String> storeNames = new ArrayList<>();
 
@@ -47,6 +60,11 @@ public class SystemAdminController {
     }
     
 
+    /**
+     * Retrieves all stores from the database.
+     *
+     * @return A list of {@code Store} objects, each representing a store.
+     */
     public static ArrayList<Store> getAllStores() {
         ArrayList<Store> allStores = new ArrayList<>();
 
@@ -70,6 +88,12 @@ public class SystemAdminController {
         return allStores;
     }
     
+    
+    /**
+     * Adds a new store to the database.
+     *
+     * @param store The {@code Store} object to add.
+     */
     public static ArrayList<StoreService> getAllStoreServices() {
         ArrayList<StoreService> storeServiceList= new ArrayList<>();
 
@@ -92,6 +116,9 @@ public class SystemAdminController {
 
         return storeServiceList;
     }
+    
+    
+    
     
     public static ArrayList<SystemAdmin> getAllSystemAdmins() {
         ArrayList<SystemAdmin> systemAdminList= new ArrayList<>();
@@ -138,6 +165,12 @@ public class SystemAdminController {
         return defaultSystemAdminList;
     }
 
+    /**
+     * Retrieves the ID of a store by its name.
+     *
+     * @param storeName The name of the store.
+     * @return The ID of the store or -1 if not found.
+     */
     public static int getStoreIdByName(String storeName) {
         int storeId = -1; // Default value if not found
 
@@ -157,6 +190,11 @@ public class SystemAdminController {
         return storeId;
     }
 
+    /**
+     * Adds a new store to the database.
+     *
+     * @param store The {@code Store} object to add.
+     */
     public static void addStore(Store store) {
         String query = "INSERT INTO Store (store_name, store_postal_code) VALUES (?, ?)";
 
