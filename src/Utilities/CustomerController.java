@@ -13,6 +13,17 @@ import java.util.ArrayList;
  * Database Connector class for interacting with database
  *
  * @author akshatr
+/**
+ * The {@code CustomerController} class provides static methods to manage {@code Customer} 
+ * objects within the database. It includes methods to add a new customer and retrieve all 
+ * customers. This class uses JDBC to connect to the database and perform SQL queries.
+ */
+/**
+ * Database Connector class for interacting with database
+ * @author hanee
+ * @author A
+ * @author chait
+ * @author yihan
  */
 public class CustomerController {
 

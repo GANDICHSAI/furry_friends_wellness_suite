@@ -3,7 +3,55 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/EmailSender.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/SelectService.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/ManageStoreServices.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/SystemAdmin.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/Authenticatable.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/ClientAppointmentChoosePanel.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/Admin.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/ManageStores.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/ClientAppointments.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/StoreManagementLogin.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/ManageCIM.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/CheckAppHistory.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/PetController.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Facade/StoreManager.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/ManageSystemAdmin.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Facade/SystemAdministrator.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/Appointment.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/MainPage.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/SystemAdminController.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/StoreEmployee.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/AppointmentController.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/Customer.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/CreatePetProfile.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/CustomerController.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/CIMController.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/AdminMenu.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/SelectStorePanel.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/CustomerLandingPage.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/Pet.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/BookAppPage.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/Store.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/UpdateAppointment.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Facade/CIM.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/Creds.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/UpdateAppointmentPanel.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/ManageStoreEmployee.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/SelectServicePanel.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Facade/AccountCreator.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/systemAdmin/CreateCredentials.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/StoreServicesController.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/CreateCustomerAndPetPanel.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Facade/Account.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/AppointmentSummary.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/StoreClientAppointments.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/customer/SelectStore.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/ClientInformationManager.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Models/StoreService.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Views/storeManagement/ReviewClientAppointment.java</file>
+            <file>file:/C:/Users/chait/OneDrive/Documents/NetBeansProjects/FFWS/src/Utilities/StoreController.java</file>
         </group>
     </open-files>
 </project-private>
