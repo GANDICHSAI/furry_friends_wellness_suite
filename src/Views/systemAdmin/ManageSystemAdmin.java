@@ -317,14 +317,21 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         try {
+            
+            char[] passwordChars = systemAdminPasswordField.getPassword();
+            String password = new String(passwordChars);
             if (editingSA == null) {
                  throw new IllegalArgumentException("no-select");
-            } else {
+            } 
+            if(systemAdminNameField.getText().isEmpty()||systemAdminNameField.getText()==null||systemAdminEmailField.getText() == null||systemAdminEmailField.getText().isEmpty()||password.isEmpty()){
+                throw new IllegalArgumentException("no-data");
+            }
+            else {
                 SystemAdmin newSA = new SystemAdmin();
                 
                 newSA.setAdminEmail(systemAdminNameField.getText());
                 newSA.setAdminName(systemAdminEmailField.getText());
-                newSA.setAdminPassword(systemAdminPasswordField.getText());
+                newSA.setAdminPassword(password);
                 
                 
                 if (editingSA.getAdminName().equals(newSA.getAdminName()) && 
@@ -347,6 +354,10 @@ public class ManageSystemAdmin extends javax.swing.JPanel {
             
             if (e.getMessage().equals("no-select")) {
                 JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if(e.getMessage().equals("no-data")){
+                JOptionPane.showMessageDialog(this,"Please fill out new system admin creds","Data Updation Error",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_saveChangesButtonActionPerformed
