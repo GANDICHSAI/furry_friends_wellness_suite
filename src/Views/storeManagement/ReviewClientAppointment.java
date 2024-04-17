@@ -172,10 +172,19 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
     private void submitAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAppointmentActionPerformed
         // TODO add your handling code here:                          
         try {
-            AppointmentController.addAppointment(appointment);
+                
+                int selectedRowIndex = smReviewAppointmentTable.getSelectedRow();
+
+        if (selectedRowIndex != -1) {
+             AppointmentController.addAppointment(appointment);
             JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
 
             sendConfirmationEmail();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select the appointment to complete the booking!", "Booking error", JOptionPane.ERROR_MESSAGE);
+        }
+            
+           
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

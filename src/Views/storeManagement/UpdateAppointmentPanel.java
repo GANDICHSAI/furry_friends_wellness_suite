@@ -188,6 +188,17 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         int selectedRowIndex = updateAppointmentTable.getSelectedRow();
+        
+        if(updateAppointmentTable.getValueAt(selectedRowIndex, 6).equals("CANCELLED")){
+            JOptionPane.showMessageDialog(this, "This appointment is already cancelled!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(updateAppointmentTable.getValueAt(selectedRowIndex, 6).equals("COMPLETED")){
+            JOptionPane.showMessageDialog(this, "This appointment is completed! You cannot cancel this appintment!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (selectedRowIndex >= 0) {
             // Confirm deletion
             int confirm = JOptionPane.showConfirmDialog(
@@ -292,7 +303,16 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
         try {
             int selectedRowIndex = updateAppointmentTable.getSelectedRow();
 
-            Date currentDate = Calendar.getInstance().getTime();
+            Date currentDate = new Date();
+
+            // Get the date from the JDateChooser
+            Date selectedDate = newAppointmentDate.getDate();
+
+            if (selectedDate.before(currentDate)) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid date!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             if (selectedRowIndex < 0) {
                 throw new IllegalArgumentException("Please select an appointment to edit.");
             }
