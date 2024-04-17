@@ -6,11 +6,21 @@ package Facade;
 
 import Utilities.EmailSender;
 import javax.mail.MessagingException;
+/**
+ * The {@code AccountCreator} class facilitates the creation of various user accounts
+ * including CIM (Client Information Manager), store manager, and system administrator accounts.
+ * It automates the account creation process and sends an email to the user with account details.
+ */
 
 /**
  *
  * @author hanee
  */
+
+/**
+     * Constructs a new instance of {@code AccountCreator}.
+     * Initializes three types of accounts: CIM, Store Manager, and System Administrator.
+     */
 public class AccountCreator {
     private Account cim;
     private Account storeManager;
@@ -22,6 +32,15 @@ public class AccountCreator {
         this.systemAdministrator = new SystemAdministrator();
     }
     
+    /**
+     * Creates a new CIM account with specified email, password, and name.
+     * Sends an email to the user with the account details.
+     *
+     * @param email The email address for the account.
+     * @param password The password for the account.
+     * @param name The name of the account holder.
+     * @throws MessagingException If there is a failure in sending the email.
+     */
     public void createCIMAccount(String email, String password, String name) {
         cim.createAccount(email, password, name);
         
@@ -38,6 +57,16 @@ public class AccountCreator {
 
     }
 
+    /**
+     * Creates a new store manager account with specified email, password, name, and store name.
+     * Sends an email to the user with the account details.
+     *
+     * @param email The email address for the account.
+     * @param password The password for the account.
+     * @param name The name of the account holder.
+     * @param storeName The name of the store the manager will manage.
+     * @throws MessagingException If there is a failure in sending the email.
+     */
     public void createStoreManagerAccount(String email, String password, String name, String storeName) {
         storeManager = new StoreManager(storeName);
         storeManager.createAccount(email, password, name);
@@ -53,7 +82,15 @@ public class AccountCreator {
             e.printStackTrace();
         }
     }
-
+/**
+     * Creates a new system administrator account with specified email, password, and name.
+     * Sends an email to the user with the account details.
+     *
+     * @param email The email address for the account.
+     * @param password The password for the account.
+     * @param name The name of the account holder.
+     * @throws MessagingException If there is a failure in sending the email.
+     */
     public void createSystemAdminAccount(String email, String password, String name) {
         systemAdministrator.createAccount(email, password, name);
         
