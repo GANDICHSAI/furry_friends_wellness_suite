@@ -55,7 +55,7 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("WELCOME STORE EMPLOYEE");
+        jLabel1.setText("WELCOME CLIENT INFO MANAGER");
 
         smNewAppointment.setText(" CREATE A NEW APPOINTMENT");
         smNewAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +90,7 @@ public class ClientAppointmentChoosePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(317, Short.MAX_VALUE)
+                .addContainerGap(247, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
