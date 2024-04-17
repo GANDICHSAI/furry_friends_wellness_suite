@@ -178,12 +178,22 @@ public class StoreClientAppointments extends javax.swing.JPanel {
 
         if (selectedRowIndex != -1) {
             String appointmentId = (String) smAppointmentsTable.getValueAt(selectedRowIndex, 0);
+            
+            if(smAppointmentsTable.getValueAt(selectedRowIndex, 5).equals("COMPLETED")){
+                    JOptionPane.showMessageDialog(this, "You cannot cancel an appointed which is already completed!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
+            
+            if(smAppointmentsTable.getValueAt(selectedRowIndex, 5).equals("CANCELLED")){
+                JOptionPane.showMessageDialog(this, "You cannot cancel an appointed which is cancelled!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
 
             AppointmentController.updateAppointmentStatus(appointmentId, "COMPLETED");
 
             smAppointmentsTable.setValueAt("COMPLETED", selectedRowIndex, 5);
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a row.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select an appointment.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

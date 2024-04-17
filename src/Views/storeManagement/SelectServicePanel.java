@@ -13,6 +13,7 @@ import Models.StoreService;
 import Utilities.StoreServicesController;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -148,7 +149,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
     private void smBackToProfileCreationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smBackToProfileCreationButtonActionPerformed
         // TODO add your handling code here:
 
-        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(bottomPanel,appointment,customer,pet );
+        CreateCustomerAndPetPanel newAppointment = new CreateCustomerAndPetPanel(bottomPanel, appointment, customer, pet);
         bottomPanel.add(newAppointment);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -173,17 +174,33 @@ public class SelectServicePanel extends javax.swing.JPanel {
     private void saveAndViewSummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAndViewSummaryButtonActionPerformed
         // TODO add your handling code here:
         int selectedRow = smServiceTable.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a service.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Date selectedDate = appointmentDateChooser.getDate();
+        // Get today's date
+        Date currentDate = new Date();
+
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Please choose date before completing appointment", "Date selection Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            if (selectedDate.before(currentDate)) {
+                JOptionPane.showMessageDialog(this, "Please select a valid date.", "Date selection Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            appointment.setDate(appointmentDateChooser.getDate());
+        }
+
         int serviceId = Integer.parseInt((String) smServiceTable.getValueAt(selectedRow, 0));
         appointment.setServiceId(serviceId);
         String serviceName = (String) smServiceTable.getValueAt(selectedRow, 1);
         appointment.setServiceName(serviceName);
-        if (appointmentDateChooser.getDate() == null) {
-            throw new IllegalArgumentException("Please choose date before completing appointment");
-        } else {
-            appointment.setDate(appointmentDateChooser.getDate());
-        }
 
-        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel, appointment,customer,pet);
+        ReviewClientAppointment reviewClientAppointmentObj = new ReviewClientAppointment(bottomPanel, appointment, customer, pet);
         bottomPanel.add(reviewClientAppointmentObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
