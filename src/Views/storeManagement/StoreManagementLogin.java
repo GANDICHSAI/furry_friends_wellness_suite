@@ -215,8 +215,11 @@ public class StoreManagementLogin extends javax.swing.JPanel {
 
                             if (authenticatedEmployee != null) {
 
-                                StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel, authenticatedEmployee);
-                                bottomPanel.add(storeClientAppointmentObj);
+                                //StoreClientAppointments storeClientAppointmentObj = new StoreClientAppointments(bottomPanel, authenticatedEmployee);
+                                //bottomPanel.add(storeClientAppointmentObj);
+                                StoreEmployeeLandingPage storeEmployeeLpObj = new StoreEmployeeLandingPage(bottomPanel, authenticatedEmployee);
+                                bottomPanel.add(storeEmployeeLpObj);
+                                
                                 CardLayout layout = (CardLayout) bottomPanel.getLayout();
                                 layout.next(bottomPanel);
 
