@@ -21,6 +21,13 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
+//    public CustomerLandingPage(JPanel bottomPanel,Customer customer,Appointment appointment) {
+//        initComponents();
+//        this.bottomPanel = bottomPanel;
+//        this.customer = customer;
+//        this.appointment = appointment;
+//    }
+    
     public CustomerLandingPage(JPanel bottomPanel,Customer customer,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;
@@ -139,8 +146,8 @@ public class CustomerLandingPage extends javax.swing.JPanel {
 
     private void bookAppButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookAppButtonActionPerformed
         // TODO add your handling code here:
-        
-        SelectStore selectStoreObj= new SelectStore(bottomPanel,customer,appointment);
+//        this.customer= customer;
+        SelectStore selectStoreObj= new SelectStore(bottomPanel,customer, new Appointment());
         bottomPanel.add(selectStoreObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

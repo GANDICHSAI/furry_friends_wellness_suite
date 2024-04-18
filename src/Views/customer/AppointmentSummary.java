@@ -54,7 +54,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
     private void fetchAndPopulateAppointmentDetails() {
         DefaultTableModel model = (DefaultTableModel) viewAppLabel.getModel();
         model.setRowCount(0); // Clear existing data
-
+        appointment.setStatus("PENDING");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = (appointment.getDate() != null) ? sdf.format(appointment.getDate()) : "No Date Set";
 
@@ -207,6 +207,7 @@ public class AppointmentSummary extends javax.swing.JPanel {
             if (selectedRowIndex < 0) {
                 throw new IllegalArgumentException("Please select an appointment to complete booking an appointment.");
             }
+            
             AppointmentController.addAppointment(appointment);
             JOptionPane.showMessageDialog(null, "BOOKING COMPLETE!");
             

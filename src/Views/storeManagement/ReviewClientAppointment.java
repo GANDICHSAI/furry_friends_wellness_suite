@@ -196,8 +196,8 @@ public class ReviewClientAppointment extends javax.swing.JPanel {
 
     private void backToHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToHomeButtonActionPerformed
         // TODO add your handling code here:
-        StoreManagementLogin storeManagementLogin = new StoreManagementLogin(bottomPanel, appointment);
-        bottomPanel.add(storeManagementLogin);
+        ClientAppointmentChoosePanel clientAppointmentChoosePanelObj = new ClientAppointmentChoosePanel(bottomPanel, appointment);
+        bottomPanel.add(clientAppointmentChoosePanelObj);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToHomeButtonActionPerformed

@@ -35,6 +35,8 @@ public class BookAppPage extends javax.swing.JPanel {
         this.bottomPanel = bottomPanel;
         this.appointment = appointment;
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -312,7 +314,9 @@ public class BookAppPage extends javax.swing.JPanel {
                     if (cust.getEmail().equals(email) && cust.getPassword().equals(password)) {
 
                         auth = true;
-                        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel, cust, new Appointment());
+//                        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel, cust, new Appointment());
+                        CustomerLandingPage customerLandingPageObj = new CustomerLandingPage(bottomPanel, cust,appointment);
+
                         bottomPanel.add(customerLandingPageObj);
                         CardLayout layout = (CardLayout) bottomPanel.getLayout();
                         layout.next(bottomPanel);

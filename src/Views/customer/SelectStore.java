@@ -164,11 +164,6 @@ public class SelectStore extends javax.swing.JPanel {
         
         try{
             int selectedRowIndex = storeTable.getSelectedRow();
-            
-            
-            System.out.println(selectedRowIndex);
-            
-
 
             if (selectedRowIndex<0){
                 throw new IllegalArgumentException("Select any one store");
@@ -182,7 +177,7 @@ public class SelectStore extends javax.swing.JPanel {
                 
                 String storeName = (String) storeTable.getValueAt(selectedRowIndex, 1);
                 int storeId = (int)storeTable.getValueAt(selectedRowIndex, 0);
-
+                System.out.println("Customer Object"+customer);
                 appointment.setCustomerId(customer.getCustomerID());
                 appointment.setStoreName(storeName);
                 appointment.setStoreId(storeId);

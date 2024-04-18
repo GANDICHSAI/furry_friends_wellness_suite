@@ -88,6 +88,11 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
                 smPetNameTextFieldActionPerformed(evt);
             }
         });
+        smPetNameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smPetNameTextFieldKeyPressed(evt);
+            }
+        });
 
         smPetColTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -153,6 +158,11 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
         smCustomerEmailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smCustomerEmailTextFieldActionPerformed(evt);
+            }
+        });
+        smCustomerEmailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                smCustomerEmailTextFieldKeyPressed(evt);
             }
         });
 
@@ -547,6 +557,52 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_smPetColTextFieldKeyPressed
+
+    private void smPetNameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smPetNameTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try{
+             
+             if (smPetNameTextField.getText().matches("^[a-zA-Z ]+$")){
+                 
+                 smPetNameTextField.setForeground(Color.black);
+
+            }
+            
+            else{
+                throw new Exception();
+            }
+                        
+        }
+        catch(Exception e){
+            
+            smPetNameTextField.setForeground(Color.red);
+
+        }
+    
+        
+        
+    }//GEN-LAST:event_smPetNameTextFieldKeyPressed
+
+    private void smCustomerEmailTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_smCustomerEmailTextFieldKeyPressed
+        // TODO add your handling code here:
+        
+        try {
+
+            if (smCustomerEmailTextField.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+
+                smCustomerEmailTextField.setForeground(Color.black);
+
+            } else {
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+
+            smCustomerEmailTextField.setForeground(Color.red);
+
+        }
+    }//GEN-LAST:event_smCustomerEmailTextFieldKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
