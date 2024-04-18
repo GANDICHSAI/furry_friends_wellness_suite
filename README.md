@@ -16,7 +16,7 @@ Furry friends wellness suite is a JAVA Swing application designed for both custo
 ![Slide3](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/abd4d57a-7d4c-426d-809b-a5a125beac57)
 ![Slide4](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/19856626-f950-44bc-b7f8-36faf144fa9a)
 ![Slide5](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/9557039f-fc61-4819-a425-d275801ec491)
-![Slide6](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/4420abc8-ca69-4508-90a6-ca670cd65612)
+![Furry Friends Wellness Suite Introduction](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/5fa18ab0-59bf-4eb3-91e7-bae91e861e67)
 ![Slide9](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/332a327a-cd9e-4e52-a039-12f677b9a76f)
 ![Furry Friends Wellness Suite -0417](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/ac13d59e-3b1f-4b23-8ea4-4dad865a5503)
 ![Slide11](https://github.com/GANDICHSAI/furry_friends_wellness_suite/assets/157151106/18118ebb-c10f-4a5f-9b8b-8ada298b8b5c)
