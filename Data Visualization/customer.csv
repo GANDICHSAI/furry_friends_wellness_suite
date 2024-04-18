@@ -1,0 +1,7 @@
+cust_id,first_name,last_name,email,password
+1001,a1,a1,nosila1005@gmail.com,123
+1002,John,Doe,john.doe@example.com,password123
+1003,Jane,Smith,jane.smith@example.com,password123
+1004,Alice,Johnson,alice.johnson@example.com,password123
+1005,Bob,Brown,bob.brown@example.com,password123
+1006,Carol,Davis,carol.davis@example.com,password123
