@@ -9,19 +9,6 @@ public class Customer {
     private String email;
     private String password;
 
-//    public Customer(int customerID, String firstName, String lastName, String email, String password) {
-//        this.customerID = customerID;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.email = email;lic Customer(int customerID, String firstName, String lastName, String email, String password) {
-//        this.customerID = customerID;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.email = email;
-//        this.password = password;
-//    }
-//        this.password = password;
-//    }
     /**
      * Gets the customer ID.
      *

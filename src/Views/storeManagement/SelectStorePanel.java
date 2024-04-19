@@ -239,10 +239,6 @@ public class SelectStorePanel extends javax.swing.JPanel {
                 CardLayout layout = (CardLayout) bottomPanel.getLayout();
                 layout.next(bottomPanel);
 
-//                CreateCustomerAndPetPanel createCustomerAndPetPanelObj= new CreateCustomerAndPetPanel(bottomPanel,customer,appointment,pet);
-//                bottomPanel.add(createCustomerAndPetPanelObj);
-//                CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//                layout.next(bottomPanel);
 
                 String storeName = (String) storeTable.getValueAt(selectedRowIndex, 1);
                 int storeId = (int)storeTable.getValueAt(selectedRowIndex, 0);
@@ -256,10 +252,7 @@ public class SelectStorePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Selection Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        //create new appointment object
-        //Appointment appointment = new Appointment();
 
-        //set store name into appointment
 
     }//GEN-LAST:event_nextToPetButtonActionPerformed
 

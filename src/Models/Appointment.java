@@ -41,9 +41,7 @@ public class Appointment {
         this.status = status;
     }
     
-//    public Appointment(int appointmentId, int customerId, String storeName, int serviceId, int petId, Date date, String status) {
-//    this(appointmentId, customerId, storeName, serviceId, petId, date, status, -1); // -1 means rating is empty
-//}
+
     /**
      * Gets the appointment ID.
      *

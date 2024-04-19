@@ -120,13 +120,11 @@ public class CustomerController {
 
     public static void deleteCustomerCascade(Customer customer) {
         String deleteCustomerQuery = "DELETE FROM Customer WHERE cust_id=?";
-//        String deletePetsQuery = "DELETE FROM Pet WHERE customer_id=?";
-//        String deleteAppointmentsQuery = "DELETE FROM Appointment WHERE cust_id=?";
+
 
          try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
              PreparedStatement deleteCustomerStmt = conn.prepareStatement(deleteCustomerQuery);
-//             PreparedStatement deletePetsStmt = conn.prepareStatement(deletePetsQuery);
-//             PreparedStatement deleteAppointmentsStmt = conn.prepareStatement(deleteAppointmentsQuery);
+
 
                 conn.setAutoCommit(false); // Start transaction
 
@@ -134,13 +132,7 @@ public class CustomerController {
                 deleteCustomerStmt.setInt(1, customer.getCustomerID());
                 int rowsDeletedCustomer = deleteCustomerStmt.executeUpdate();
 
-                // Delete Pets
-    //            deletePetsStmt.setInt(1, customer.getCustomerID());
-    //            int rowsDeletedPets = deletePetsStmt.executeUpdate();
-    //
-    //            // Delete Appointments
-    //            deleteAppointmentsStmt.setInt(1, customer.getCustomerID());
-    //            int rowsDeletedAppointments = deleteAppointmentsStmt.executeUpdate();
+
 
                 if (rowsDeletedCustomer > 0) {
                     System.out.println("Customer, pets, and appointments deleted successfully.");

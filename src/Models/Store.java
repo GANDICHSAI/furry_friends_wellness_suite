@@ -8,11 +8,6 @@ public class Store {
     private String storeName;
     private String postalCode;
 
-//    public Store(int storeId, String storeName, String postalCode) {
-//        this.storeId = storeId;
-//        this.storeName = storeName;
-//        this.postalCode = postalCode;
-//    }
 
     /**
      * Gets the ID of the store.

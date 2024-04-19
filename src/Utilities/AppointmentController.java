@@ -179,13 +179,13 @@ public class AppointmentController {
         try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, storeId);
-//            stmt.setInt(2, storeId);
+
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Appointment appointment = new Appointment();
                 appointment.setAppointmentId(rs.getInt("Appointment.app_id"));
-//                appointment.setCustomerId(rs.getInt("cust_id"));
+
                 appointment.setStoreName(rs.getString("Appointment.store_name"));
                 appointment.setServiceName(rs.getString("Store_Service.service_name"));
                 appointment.setPetName(rs.getString("Pet.pet_name"));
@@ -263,13 +263,6 @@ public class AppointmentController {
     public static ArrayList<Appointment> getAppointmentListByCustomerId(int customerId) {
         ArrayList<Appointment> appointments = new ArrayList<>();
 
-//        String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, " +
-//                        "a.date, a.status, a.rating " +
-//                        "FROM Appointment a " +
-//                        "JOIN Store s ON a.store_id = s.store_id " +
-//                        "JOIN Store_Service sv ON a.service_id = sv.store_serv_id " +
-//                        "JOIN Pet p ON a.pet_id = p.pet_id " +
-//                        "WHERE a.cust_id = ?";
         String query = "SELECT a.app_id, s.store_name, sv.service_name, p.pet_name, "
                 + "a.date, a.status, a.cust_id "
                 + "FROM Appointment a "
@@ -296,21 +289,11 @@ public class AppointmentController {
                 selectedAppointment.setServiceName(rs.getString("sv.service_name"));
                 selectedAppointment.setPetName(rs.getString("p.pet_name"));
 
-                //java.util.Date utilDate = selectedAppointment.getDate();
-                //java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 selectedAppointment.setDate(rs.getDate("a.date"));
                 selectedAppointment.setStatus(rs.getString("a.status"));
                 selectedAppointment.setCustomerId(rs.getInt("a.cust_id"));
 
-//                        selectedAppointment.setRating(rs.getInt("rating"));
-                // Print the retrieved data
-//                        System.out.println("Store Name: " + storeName);
-//                        System.out.println("Service Name: " + serviceName);
-//                        System.out.println("Pet Name: " + petName);
-//                        System.out.println("Date: " + date);
-//                        System.out.println("Status: " + status);
-//                        System.out.println("Rating: " + rating);
-//                        System.out.println("-----------------------------------");
+
                 //add to column
                 appointments.add(selectedAppointment);
             }
@@ -322,56 +305,7 @@ public class AppointmentController {
         return appointments;
     }
 
-//    public static Appointment getAppointmentById(int appointmentId) {
-//    String query = "SELECT * FROM Appointment WHERE app_id = ?";
-//    Appointment appointment = null;
-//
-//    try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD());
-//         PreparedStatement stmt = conn.prepareStatement(query)) {
-//
-//        stmt.setInt(1, appointmentId);
-//        ResultSet rs = stmt.executeQuery();
-//
-//        if (rs.next()) {
-//            appointment = new Appointment();
-//            appointment.setAppointmentId(rs.getInt("app_id"));
-//            appointment.setCustomerId(rs.getInt("cust_id"));
-//            appointment.setStoreName(rs.getString("store_name"));
-//            appointment.setServiceId(rs.getInt("service_id"));
-//            appointment.setPetId(rs.getInt("pet_id"));
-//            appointment.setDate(rs.getDate("date"));
-//            appointment.setStatus(rs.getString("status"));
-//            appointment.setRating(rs.getInt("rating"));
-//        }
-//
-//    } catch (SQLException e) {
-//        e.printStackTrace();
-//    }
-//    return appointment;
-//}
-//    public static void editAppointment(Appointment oldAppointment, Appointment newAppointment) {
-//        String query = "UPDATE Appointment SET cust_id=?, store_name=?, service_id=?, pet_id=?, date=?, status=?, rating=? WHERE app_id=?";
-//        try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
-//            PreparedStatement stmt = conn.prepareStatement(query);
-//            
-//            // Set the parameters for the new values
-//            stmt.setInt(1, newAppointment.getCustomerId());
-//            stmt.setString(2, newAppointment.getStoreName());
-//            stmt.setInt(3, newAppointment.getServiceId());
-//            stmt.setInt(4, newAppointment.getPetId());
-//            stmt.setDate(5, new java.sql.Date(newAppointment.getDate().getTime()));
-//            stmt.setString(6, newAppointment.getStatus());
-//            stmt.setInt(7, newAppointment.getRating());
-//            
-//            // Set the parameter for the appointment ID we are updating
-//            stmt.setInt(8, oldAppointment.getAppointmentId());
-//            
-//            int rowsAffected = stmt.executeUpdate();
-//            System.out.println("Updated " + rowsAffected + " appointment(s).");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
     public static void updateAppointmentStatus(String appointmentId, String status) {
         String sql = "UPDATE Appointment SET status = ? WHERE app_id = ?";
 

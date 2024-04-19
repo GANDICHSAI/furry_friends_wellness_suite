@@ -212,8 +212,7 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
                 // Call the controller to delete the appointment
                 AppointmentController.deleteAppointment(appointmentId);
 
-                // Remove the row from the table model
-                //((DefaultTableModel) AppSumTableCRUD.getModel()).removeRow(selectedRowIndex);
+
                 populateTable();
                 new Date().getDay();
 

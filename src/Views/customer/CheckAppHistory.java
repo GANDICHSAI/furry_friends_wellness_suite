@@ -55,7 +55,7 @@ public class CheckAppHistory extends javax.swing.JPanel {
                     app.getPetName(),
                     app.getDate().toString(),
                     app.getStatus()
-//                    app.getRating()
+
             });
         }
     }

@@ -21,13 +21,7 @@ public class CustomerLandingPage extends javax.swing.JPanel {
     JPanel bottomPanel;
     Customer customer;
     Appointment appointment;
-//    public CustomerLandingPage(JPanel bottomPanel,Customer customer,Appointment appointment) {
-//        initComponents();
-//        this.bottomPanel = bottomPanel;
-//        this.customer = customer;
-//        this.appointment = appointment;
-//    }
-    
+
     public CustomerLandingPage(JPanel bottomPanel,Customer customer,Appointment appointment) {
         initComponents();
         this.bottomPanel = bottomPanel;

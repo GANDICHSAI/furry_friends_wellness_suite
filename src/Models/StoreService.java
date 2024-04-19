@@ -72,12 +72,5 @@ public class StoreService {
         this.servicePrice = servicePrice;
     }
     
-//    public StoreService serviceSelection(int storeServiceID, String serviceName, String servicePrice) {
-//        StoreService storeService = new StoreService();
-//        storeService.setStoreServiceID(storeServiceID);
-//        storeService.setServiceName(serviceName);
-//        storeService.setServicePrice(servicePrice);
-//        return storeService;
-//    }
 
 }
