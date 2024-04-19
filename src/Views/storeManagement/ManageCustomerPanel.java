@@ -38,6 +38,7 @@ public final class ManageCustomerPanel extends javax.swing.JPanel {
      private void clearFields() {
         
         firstNameInput.setText("");
+        lastNameInput.setText("");
         emailInput.setText("");
         passwordInput.setText("");
         idValue.setText("");

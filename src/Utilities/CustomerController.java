@@ -120,35 +120,35 @@ public class CustomerController {
 
     public static void deleteCustomerCascade(Customer customer) {
         String deleteCustomerQuery = "DELETE FROM Customer WHERE cust_id=?";
-        String deletePetsQuery = "DELETE FROM Pet WHERE customer_id=?";
-        String deleteAppointmentsQuery = "DELETE FROM Appointment WHERE cust_id=?";
+//        String deletePetsQuery = "DELETE FROM Pet WHERE customer_id=?";
+//        String deleteAppointmentsQuery = "DELETE FROM Appointment WHERE cust_id=?";
 
          try (Connection conn = DriverManager.getConnection(Creds.getURL(), Creds.getUSERNAME(), Creds.getPASSWORD())) {
              PreparedStatement deleteCustomerStmt = conn.prepareStatement(deleteCustomerQuery);
-             PreparedStatement deletePetsStmt = conn.prepareStatement(deletePetsQuery);
-             PreparedStatement deleteAppointmentsStmt = conn.prepareStatement(deleteAppointmentsQuery);
+//             PreparedStatement deletePetsStmt = conn.prepareStatement(deletePetsQuery);
+//             PreparedStatement deleteAppointmentsStmt = conn.prepareStatement(deleteAppointmentsQuery);
 
-            conn.setAutoCommit(false); // Start transaction
+                conn.setAutoCommit(false); // Start transaction
 
-            // Delete Customer
-            deleteCustomerStmt.setInt(1, customer.getCustomerID());
-            int rowsDeletedCustomer = deleteCustomerStmt.executeUpdate();
+                // Delete Customer
+                deleteCustomerStmt.setInt(1, customer.getCustomerID());
+                int rowsDeletedCustomer = deleteCustomerStmt.executeUpdate();
 
-            // Delete Pets
-            deletePetsStmt.setInt(1, customer.getCustomerID());
-            int rowsDeletedPets = deletePetsStmt.executeUpdate();
+                // Delete Pets
+    //            deletePetsStmt.setInt(1, customer.getCustomerID());
+    //            int rowsDeletedPets = deletePetsStmt.executeUpdate();
+    //
+    //            // Delete Appointments
+    //            deleteAppointmentsStmt.setInt(1, customer.getCustomerID());
+    //            int rowsDeletedAppointments = deleteAppointmentsStmt.executeUpdate();
 
-            // Delete Appointments
-            deleteAppointmentsStmt.setInt(1, customer.getCustomerID());
-            int rowsDeletedAppointments = deleteAppointmentsStmt.executeUpdate();
-
-            if (rowsDeletedCustomer > 0 || rowsDeletedPets > 0 || rowsDeletedAppointments > 0) {
-                System.out.println("Customer, pets, and appointments deleted successfully.");
-                conn.commit(); // Commit the transaction
-            } else {
-                System.out.println("Customer, pets, and appointments not found or not deleted.");
-                conn.rollback(); // Rollback if nothing was deleted
-            }
+                if (rowsDeletedCustomer > 0) {
+                    System.out.println("Customer, pets, and appointments deleted successfully.");
+                    conn.commit(); // Commit the transaction
+                } else {
+                    System.out.println("Customer, pets, and appointments not found or not deleted.");
+                    conn.rollback(); // Rollback if nothing was deleted
+                }
 
         } catch (SQLException e) {
             e.printStackTrace();

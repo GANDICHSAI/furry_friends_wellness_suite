@@ -169,7 +169,8 @@ public class SelectStore extends javax.swing.JPanel {
                 throw new IllegalArgumentException("Select any one store");
             }
             else{
-
+                
+                
                 CreatePetProfile createPetProfileObj= new CreatePetProfile(bottomPanel,customer,appointment,pet);
                 bottomPanel.add(createPetProfileObj);
                 CardLayout layout = (CardLayout) bottomPanel.getLayout();
@@ -181,6 +182,8 @@ public class SelectStore extends javax.swing.JPanel {
                 appointment.setCustomerId(customer.getCustomerID());
                 appointment.setStoreName(storeName);
                 appointment.setStoreId(storeId);
+                
+                
             }
         }
         catch (IllegalArgumentException e){

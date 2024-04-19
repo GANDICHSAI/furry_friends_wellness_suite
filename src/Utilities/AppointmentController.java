@@ -282,25 +282,25 @@ public class AppointmentController {
             stmt.setInt(1, customerId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int appId = rs.getInt("app_id");
-                String storeName = rs.getString("store_name");
-                String serviceName = rs.getString("service_name");
-                String petName = rs.getString("pet_name");
-                Date date = rs.getDate("date");
-                String status = rs.getString("status");
+                int appId = rs.getInt("a.app_id");
+                String storeName = rs.getString("s.store_name");
+                String serviceName = rs.getString("sv.service_name");
+                String petName = rs.getString("p.pet_name");
+                Date date = rs.getDate("a.date");
+                String status = rs.getString("a.status");
 //                        int rating = rs.getInt("rating");
 
                 Appointment selectedAppointment = new Appointment();
-                selectedAppointment.setAppointmentId(rs.getInt("app_id"));
-                selectedAppointment.setStoreName(rs.getString("store_name"));
-                selectedAppointment.setServiceName(rs.getString("store_name"));
-                selectedAppointment.setPetName(rs.getString("pet_name"));
+                selectedAppointment.setAppointmentId(rs.getInt("a.app_id"));
+                selectedAppointment.setStoreName(rs.getString("s.store_name"));
+                selectedAppointment.setServiceName(rs.getString("sv.service_name"));
+                selectedAppointment.setPetName(rs.getString("p.pet_name"));
 
                 //java.util.Date utilDate = selectedAppointment.getDate();
                 //java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                selectedAppointment.setDate(rs.getDate("date"));
-                selectedAppointment.setStatus(rs.getString("status"));
-                selectedAppointment.setCustomerId(rs.getInt("cust_id"));
+                selectedAppointment.setDate(rs.getDate("a.date"));
+                selectedAppointment.setStatus(rs.getString("a.status"));
+                selectedAppointment.setCustomerId(rs.getInt("a.cust_id"));
 
 //                        selectedAppointment.setRating(rs.getInt("rating"));
                 // Print the retrieved data

@@ -162,8 +162,16 @@ public class StoreManagementLogin extends javax.swing.JPanel {
         String password = new String(passwordChars);
 
         try {
-
-            ArrayList<SystemAdmin> defaultSystemAdmins = SystemAdminController.getDefaultSystemAdmins();
+            
+            if (email.isBlank() || password.isBlank()){
+                
+                throw new IllegalArgumentException("Enter Email and Password to Login");
+                
+            }
+            
+            else{
+                
+                ArrayList<SystemAdmin> defaultSystemAdmins = SystemAdminController.getDefaultSystemAdmins();
 
             Admin adminAuthenticatedEmployee = authenticate(email, password, defaultSystemAdmins);
 
@@ -275,6 +283,10 @@ public class StoreManagementLogin extends javax.swing.JPanel {
 
                 }
             }
+                
+            }
+
+            
         } catch (Exception e) {
 
             JOptionPane.showMessageDialog(this, e.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);

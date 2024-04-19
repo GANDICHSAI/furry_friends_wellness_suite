@@ -280,6 +280,7 @@ public final class ManageStores extends javax.swing.JPanel {
         SystemAdminController.addStore(newStore);
         
        populateTable();
+       JOptionPane.showMessageDialog(null, "Store succesfully Added!", "Successfully Added", JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_addStoreBtnActionPerformed
 
@@ -329,11 +330,11 @@ public final class ManageStores extends javax.swing.JPanel {
             }
         } catch (IllegalArgumentException e) {
             if (e.getMessage().equals("no-edit")) {
-                JOptionPane.showMessageDialog(this, "Please make some changes to the user you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please make some changes to the store you have selected!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
             }
             
             if (e.getMessage().equals("no-select")) {
-                JOptionPane.showMessageDialog(this, "Please make some you selected a user to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please make some you selected a store to edit!", "Data Updation Error", JOptionPane.ERROR_MESSAGE);
             }
             
             if(e.getMessage().equals("no-data")){
@@ -349,7 +350,7 @@ public final class ManageStores extends javax.swing.JPanel {
             int selectedRowIndex = jTable1.getSelectedRow();
             if (selectedRowIndex < 0) {
                 
-                throw new IllegalArgumentException("Please select a user to delete!");
+                throw new IllegalArgumentException("Please select a store to delete!");
                 
             } else {
                 

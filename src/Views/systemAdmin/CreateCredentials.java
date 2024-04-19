@@ -267,7 +267,15 @@ public class CreateCredentials extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backToMenuBtnActionPerformed
+     private void clearFields() {
+        
+        nameInput1.setText("");
+        emailInput1.setText("");
+        passwordInput1.setText("");
 
+        
+        
+    }
     private void createAccountBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountBtn1ActionPerformed
         // TODO add your handling code here:
 
@@ -299,6 +307,7 @@ public class CreateCredentials extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Store Employee Created Successfully", "Successful Account Creation", JOptionPane.INFORMATION_MESSAGE);
 //            account.createSetStoreEmployeeAccount(emailInput1.getText(), passwordString, nameInput1.getText(), storeDropdown1.getSelectedItem().toString());
                 System.out.println("SE");
+                clearFields();
                 return;
             }
             if ("System Admin".equals(valueSelected)) {
@@ -313,7 +322,7 @@ public class CreateCredentials extends javax.swing.JPanel {
 //            account.createAdminAccount(emailInput1.getText(), passwordString, nameInput1.getText());
 
                 System.out.println("SA");
-
+                clearFields();
                 return;
             }
             if ("Client Information Manager".equals(valueSelected)) {
@@ -326,7 +335,7 @@ public class CreateCredentials extends javax.swing.JPanel {
                 accCreator.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
                 JOptionPane.showMessageDialog(this, "Client Information Manager Created Successfully", "Successful Account Creation", JOptionPane.INFORMATION_MESSAGE);
 //            account.createCIMAccount(emailInput1.getText(), passwordString, nameInput1.getText());
-
+                clearFields();
                 System.out.println("CIM");
             }
 

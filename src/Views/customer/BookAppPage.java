@@ -194,10 +194,6 @@ public class BookAppPage extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(185, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -240,7 +236,10 @@ public class BookAppPage extends javax.swing.JPanel {
                         .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(custLogInButton)
-                        .addGap(311, 311, 311))))
+                        .addGap(311, 311, 311))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(261, 261, 261))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +306,7 @@ public class BookAppPage extends javax.swing.JPanel {
             System.out.println(password);
             if (email == null || email.isEmpty() || password.isEmpty()) {
 
-                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
+                throw new IllegalArgumentException("Enter Email and Password to Login");
             } else {
                 for (Customer cust : customers) {
 
@@ -395,7 +394,7 @@ public class BookAppPage extends javax.swing.JPanel {
                     || confirmEmail == null || confirmEmail.isEmpty() || password == null || password.isEmpty()
                     || confirmPassword == null || confirmPassword.isEmpty()) {
 
-                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
+                throw new IllegalArgumentException("Enter your details to complete Furry Friends Membership Registration");
             }
             if (!password.equals(confirmPassword) && !email.equals(confirmEmail)) {
                 throw new IllegalArgumentException("Email and Password are not mathcing");

@@ -59,10 +59,10 @@ public class CreatePetProfile extends javax.swing.JPanel {
         petAgeTextField = new javax.swing.JTextField();
         petColTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        saveToSelectServiceButton1 = new javax.swing.JButton();
         backToStoreSelectionButton = new javax.swing.JButton();
         girlRadioButton = new javax.swing.JRadioButton();
         boyRadioButton = new javax.swing.JRadioButton();
+        saveToSelectServiceButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -136,13 +136,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("AGE");
 
-        saveToSelectServiceButton1.setText("SAVE AND SELECT SERVICE");
-        saveToSelectServiceButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveToSelectServiceButton1ActionPerformed(evt);
-            }
-        });
-
         backToStoreSelectionButton.setText("BACK TO STORE SELECTION");
         backToStoreSelectionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +157,13 @@ public class CreatePetProfile extends javax.swing.JPanel {
         boyRadioButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         boyRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         boyRadioButton.setText("BOY");
+
+        saveToSelectServiceButton2.setText("SAVE AND SELECT SERVICE");
+        saveToSelectServiceButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToSelectServiceButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -213,7 +213,7 @@ public class CreatePetProfile extends javax.swing.JPanel {
                 .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
                 .addGap(258, 258, 258)
-                .addComponent(saveToSelectServiceButton1)
+                .addComponent(saveToSelectServiceButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -250,85 +250,11 @@ public class CreatePetProfile extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(petColTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
-                .addGap(50, 50, 50)
-                .addComponent(saveToSelectServiceButton1)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(saveToSelectServiceButton2)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void saveToSelectServiceButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        try{
-            
-            String petName = petNameTextField.getText();
-            String petType = catRadioButton.isSelected() ? "Cat" : "Dog";
-            String petGender = girlRadioButton.isSelected() ? "Girl" : "Boy";
-
-
-
-            int petAge = Integer.parseInt(petAgeTextField.getText());
-            String petColor = petColTextField.getText();
-            float petWeight = Float.parseFloat(petWeightTextField.getText());
-
-
-            if(!petName.isEmpty() && !petType.isEmpty() && !petGender.isEmpty() && petAge > 0 && !petColor.isEmpty() && petWeight > 0)
-            {
-                
-                
-                //pet object
-              
-                this.pet = new Pet();
-                pet.setCustomerId(appointment.getCustomerId());
-                pet.setPetName(petName);
-                pet.setType(petType);
-                pet.setGender(petGender);
-                pet.setAge(petAge);
-                pet.setColor(petColor);
-                pet.setWeight(petWeight);
-
-
-
-                int petId = PetController.addPet(pet);
-
-                if(petId != -1) {
-                    // Set the generated pet ID and pet name into the appointment object
-                    appointment.setPetId(petId);
-
-
-                    // Continue to the next screen to select service
-                    SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
-                    bottomPanel.add(selectServiceObj);
-                    CardLayout layout = (CardLayout) bottomPanel.getLayout();
-                    layout.next(bottomPanel);
-                }
-//}
-            else {
-                // Handle the error case
-        
-                throw new IllegalArgumentException("Failed to save pet information. Please try again.");
-        
-            }
-       
-        }
-            else{
-                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
-            }
-        } catch (Exception e){
-                if(e.getMessage().equals("Please Fill out the form before submitting the details")){
-                
-                JOptionPane.showMessageDialog(this,e.getMessage(),"Incomplete Form Submission Error",JOptionPane.ERROR_MESSAGE);
-                
-            }
-            
-            else{
-                JOptionPane.showMessageDialog(this,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-            }
-                }
-        
-        
-    
-    }//GEN-LAST:event_saveToSelectServiceButton1ActionPerformed
 
     private void backToStoreSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToStoreSelectionButtonActionPerformed
         // TODO add your handling code here:
@@ -449,6 +375,72 @@ public class CreatePetProfile extends javax.swing.JPanel {
         
     }//GEN-LAST:event_petColTextFieldKeyPressed
 
+    private void saveToSelectServiceButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToSelectServiceButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            
+            if (petNameTextField.getText()== null||petNameTextField.getText().isEmpty()||petAgeTextField.getText()==null||
+                petAgeTextField.getText().isEmpty()||petColTextField.getText()==null||petColTextField.getText().isEmpty()||
+                petWeightTextField.getText() == null||petWeightTextField.getText().isEmpty())
+            {
+                
+
+                throw new IllegalArgumentException("Enter Pet Details to book an appointment with us");
+                
+            
+            }
+        
+            else{
+                
+
+                    this.pet = new Pet();
+                    pet.setCustomerId(appointment.getCustomerId());
+                    pet.setPetName(petNameTextField.getText());
+                    pet.setType(catRadioButton.isSelected() ? "Cat" : "Dog");
+                    pet.setGender(girlRadioButton.isSelected() ? "Girl" : "Boy");
+                    pet.setAge(Integer.parseInt(petAgeTextField.getText()));
+                    pet.setColor( petColTextField.getText());
+                    pet.setWeight(Float.parseFloat(petWeightTextField.getText()));
+                    
+                    int petId = PetController.addPet(pet);
+
+                    if(petId != -1) {
+                        // Set the generated pet ID and pet name into the appointment object
+                        appointment.setPetId(petId);
+
+
+                        // Continue to the next screen to select service
+                        SelectService selectServiceObj = new SelectService(bottomPanel, customer, appointment, pet);
+                        bottomPanel.add(selectServiceObj);
+                        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+                        layout.next(bottomPanel);
+                    }
+
+                    else {
+                        // Handle the error case
+
+                        throw new IllegalArgumentException("Failed to save pet information. Please try again.");
+
+                    }
+            }
+            
+            
+            
+        }
+        
+        catch (IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+
+
+
+            
+            
+    }//GEN-LAST:event_saveToSelectServiceButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToStoreSelectionButton;
@@ -469,6 +461,6 @@ public class CreatePetProfile extends javax.swing.JPanel {
     private javax.swing.JTextField petNameTextField;
     private javax.swing.JLabel petTitleLabel;
     private javax.swing.JTextField petWeightTextField;
-    private javax.swing.JButton saveToSelectServiceButton1;
+    private javax.swing.JButton saveToSelectServiceButton2;
     // End of variables declaration//GEN-END:variables
 }

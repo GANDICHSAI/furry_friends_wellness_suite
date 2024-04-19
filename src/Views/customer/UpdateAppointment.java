@@ -19,8 +19,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author A
- */
-public class UpdateAppointment extends javax.swing.JPanel {
+ */public class UpdateAppointment extends javax.swing.JPanel {
 
     /**
      * Creates new form UpdateAppointment

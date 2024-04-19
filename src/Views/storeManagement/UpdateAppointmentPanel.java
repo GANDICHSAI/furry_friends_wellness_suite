@@ -189,18 +189,16 @@ public class UpdateAppointmentPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = updateAppointmentTable.getSelectedRow();
         
-        if(updateAppointmentTable.getValueAt(selectedRowIndex, 6).equals("CANCELLED")){
-            JOptionPane.showMessageDialog(this, "This appointment is already cancelled!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        if(updateAppointmentTable.getValueAt(selectedRowIndex, 6).equals("COMPLETED")){
-            JOptionPane.showMessageDialog(this, "This appointment is completed! You cannot cancel this appintment!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         
         if (selectedRowIndex >= 0) {
             // Confirm deletion
+            
+            String appointmentStatus = (String) updateAppointmentTable.getValueAt(selectedRowIndex, 6);
+
+            if ("CANCELLED".equals(appointmentStatus.toUpperCase()) || "COMPLETED".equals(appointmentStatus.toUpperCase())) {
+                JOptionPane.showMessageDialog(this, "This appointment cannot be cancelled.", "Cancellation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             int confirm = JOptionPane.showConfirmDialog(
                     this,
                     "Are you sure you want to cancel the selected appointment?",

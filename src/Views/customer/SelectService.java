@@ -165,12 +165,12 @@ public class SelectService extends javax.swing.JPanel {
             int selectedRow = ServiceTable.getSelectedRow();
             Date currentDate = Calendar.getInstance().getTime();
             SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedNewDate = outputFormat.format(appointmentDate.getDate());
-            String formattedCurrentDate = outputFormat.format(currentDate);
+
             
-            if(selectedRow<0 && (appointmentDate.getDate() == null||formattedNewDate.compareTo(formattedCurrentDate)<0)){
-                throw new IllegalArgumentException("Please select a service and choose appropriate date to book appointment");
-            }
+            
+            if(appointmentDate.getDate() == null&&selectedRow<0){
+                    throw new IllegalArgumentException("Please select a service and choose appropriate date to book appointment");
+                }
 
             
             if (selectedRow != -1) {
@@ -189,6 +189,9 @@ public class SelectService extends javax.swing.JPanel {
                 if(appointmentDate.getDate() == null){
                     throw new IllegalArgumentException("Please choose date to book appointment");
                 }
+                
+                String formattedNewDate = outputFormat.format(appointmentDate.getDate());
+                String formattedCurrentDate = outputFormat.format(currentDate);
                 
                 if(formattedNewDate.compareTo(formattedCurrentDate)<0){
                     throw new IllegalArgumentException("Please choose apropriate date");
@@ -214,6 +217,8 @@ public class SelectService extends javax.swing.JPanel {
             } else {
                 
                 // If no service is selected, show an error message
+                
+                
                 throw new IllegalArgumentException("Please select a service to continue.");
             }
            
@@ -223,6 +228,7 @@ public class SelectService extends javax.swing.JPanel {
         catch(Exception e){
             
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
 
 
         }

@@ -369,7 +369,7 @@ public class CreateCustomerAndPetPanel extends javax.swing.JPanel {
                     smGenderButtonGroup.getSelection().getActionCommand().isEmpty()
                     ){
                 
-                throw new IllegalArgumentException("Please Fill out the form before submitting the details");
+                throw new IllegalArgumentException("Provide details to proceed with the appointment");
             }
             
             this.customer = new Customer();

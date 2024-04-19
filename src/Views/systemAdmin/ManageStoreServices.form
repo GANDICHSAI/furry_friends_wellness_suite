@@ -49,7 +49,7 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="priceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -57,18 +57,25 @@
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="idValue" min="-2" max="-2" attributes="0"/>
-                      <Component id="nameInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Component id="priceInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="idValue" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="addServiceTypeBtn1" min="-2" pref="184" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="nameInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                              <Component id="priceInput" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="deleteServiceTypeBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="editServiceTypeBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="saveChangesBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="deleteServiceTypeBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="editServiceTypeBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="addServiceTypeBtn1" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
-                      <Component id="saveChangesBtn" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -84,23 +91,21 @@
                   <Component id="table" min="-2" pref="250" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="addServiceTypeBtn1" min="-2" pref="38" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                          <Component id="deleteServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="editServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="saveChangesBtn" min="-2" pref="39" max="-2" attributes="0"/>
-                          <EmptySpace pref="10" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="idValue" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="addServiceTypeBtn1" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="nameInput" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -110,9 +115,16 @@
                               <Component id="priceInput" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="priceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="deleteServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="editServiceTypeBtn" min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="saveChangesBtn" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

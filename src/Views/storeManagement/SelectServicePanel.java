@@ -178,7 +178,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
         int selectedRow = smServiceTable.getSelectedRow();
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a service.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a service.", "Warning", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -191,7 +191,7 @@ public class SelectServicePanel extends javax.swing.JPanel {
             return;
         } else {
             if (selectedDate.before(currentDate)) {
-                JOptionPane.showMessageDialog(this, "Please select a valid date.", "Date selection Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please select appropriate date.", "Date selection Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             appointment.setDate(appointmentDateChooser.getDate());
